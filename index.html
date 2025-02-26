@@ -5,41 +5,100 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gerar PDF</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+        .date-group {
+            display: flex;
+            justify-content: space-between;
+        }
+        .date-group input {
+            width: 32%;
+        }
+        button {
+            margin-top: 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+
 </head>
 <body>
 
-    <form id="formDados">
+    <div class="container">
+        <form id="formDados">
+            <label for="numero_tco">Nº TCO:</label>
+            <input type="text" id="numero_tco" value="0038" required>
+            <label for="naturezaa">Naturezaa:</label>
+            <input type="text" id="naturezaa" value="Lesão corporal Leve" required>
+            
+            <div class="date-group">
+                <label for="dia">Dia:</label>
+                <input type="text" id="dia" value= "26" required>
+                
+                <label for="mes">Mês:</label>
+                <input type="text" id="mes" value="02" required>
+                
+                <label for="ano">Ano:</label>
+                <input type="text" id="ano" value="2025" required>
+            </div>
+            
+            <label for="cidade">Cidade:</label>
+            <input type="text" id="cidade" value= "DENISE" required>
+            
+            <label for="quartel">Quartel:</label>
+            <input type="text" id="quartel" value="NPM-DENISE" required>
+            
+            <label for="nome_completo">Nome Completo do condutor:</label>
+            <input type="text" id="nome_completo" value="GUSTAVO ROBERT DE OLIVEIRA" required>
+            
+            <label for="posto_grad">Posto/Grad:</label>
+            <input type="text" id="posto_grad" value="CB-PM" required>
+            
+            <label for="rg">RG:</label>
+            <input type="text" id="rg" value="885.812" required>
+            
+            <button type="button" onclick="gerarPDF()">Gerar PDF</button>
+        </form>
+    </div>
 
-        
-        <label for="numero_tco">Nº TCO:</label>
-        <input type="text" id="numero_tco" required><br>
-
-        <label for="dia">Dia:</label>
-        <input type="text" id="dia" required><br>
-
-        <label for="mes">Mês:</label>
-        <input type="text" id="mes" required><br>
-
-        <label for="ano">Ano:</label>
-        <input type="text" id="ano" required><br>
-
-        <label for="cidade">Cidade:</label>
-        <input type="text" id="cidade" required><br>
-
-        <label for="quartel">Quartel:</label>
-        <input type="text" id="quartel" required><br>
-
-        <label for="nome_completo">Nome Completo:</label>
-        <input type="text" id="nome_completo" required><br>
-
-        <label for="posto_grad">Posto/Grad:</label>
-        <input type="text" id="posto_grad" required><br>
-
-        <label for="rg">RG:</label>
-        <input type="text" id="rg" required><br>
-
-        <button type="button" onclick="gerarPDF()">Gerar PDF</button>
-    </form>
 
     <script>
         const numerosPorExtenso = {
@@ -62,7 +121,8 @@
         function gerarPDF() {
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
-
+            const numero_tco = parseInt(document.getElementById('numero_tco').value);
+            const naturezaa = document.getElementById('naturezaa').value;
             const dia = parseInt(document.getElementById('dia').value);
             const mes = parseInt(document.getElementById('mes').value);
             const ano = document.getElementById('ano').value;
@@ -83,8 +143,8 @@
                 doc.text("ESTADO DE MATO GROSSO", 105, 30, { align: "center" });
                 doc.text("POLÍCIA MILITAR", 105, 35, { align: "center" });
 
-                let numeroTCO = "TCO/CR07/2025.0038";
-                doc.text("TERMO CIRCUNSTANCIADO DE OCORRÊNCIA Nº " + numeroTCO, 105, 42, { align: "center" });
+                let numeroTCO = numero_tco
+                doc.text("TERMO CIRCUNSTANCIADO DE OCORRÊNCIA Nº TCO/CR07/"+ quartel +"/"+ano+"."+ numero_tco, 105, 42, { align: "center" });
 
                 const diaExtenso = numerosPorExtenso[dia];
                 const mesExtenso = mesesPorExtenso[mes];
@@ -92,16 +152,47 @@
 
                 doc.setFontSize(14);
                 doc.text("AUTUAÇÃO", 105, 100, { align: "center" });
-doc.setFont("helvetica", "normal");
+
+                
+               
+doc.setFont("Times New Roman", "normal");
                 doc.setFontSize(12);
 
+
+
+
+doc.setFont("Times New Roman", "normal");
+doc.setFontSize(12);
+
                 let texto = `Aos ${diaExtenso} dias do mês de ${mesExtenso} do ano de ${anoExtenso}, nesta cidade de ${cidade}, Estado de Mato Grosso, no Quartel do ${quartel}, autuo as peças que adiante se seguem, do que para constar, lavrei este Termo. Eu, ${nome_completo} (${posto_grad}), escrevente, que o lavrei e assino.`;
+
+                
 
                 doc.text(texto, 20, 120, {
                     maxWidth: 170,
                     align: 'justify',
+
+                   
+
                 });
 
+                
+
+    let texto2 =` ${nome_completo} - ${posto_grad} `;
+
+                doc.text(texto2, 100, 200,{ align: "center" });
+                   
+let texto3 = `RG nº ${rg} PMMT`;
+doc.text(texto3, 100, 206,{ align: "center" });
+
+
+//let texto4 =`            NATUREZA = ${naturezaa} `;
+doc.text("NATUREZA: " + naturezaa, 50, 70,{ align: "center" });
+
+doc.setFont("Times New Roman", "normal");
+doc.setFontSize(12);
+
+doc.text("COMANDANTE DE GUPM", 100, 212,{ align: "center" });
                 doc.setFontSize(8);
                 doc.text("_______________________________________________________________________________________________________________", 105, 281, { align: "center" });
                 doc.text("NUCLEO DE POLICIA MILITAR DE DENISE", 105, 285, { align: "center" });
