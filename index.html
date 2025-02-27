@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TCO</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -78,17 +81,28 @@
             
             <div class="date-group">
             <label for="numero_tco">Nº TCO:</label>
-            <input type="text" id="numero_tco" value="0038" required class="width: 10px">
+            <input type="text" id="numero_tco" value="0038" required style="width: 60px";>
+
+            
             
             <label for="artigo">Artigo:</label>
-            <input type="text" id="artigo" value="" required class="width: 10px">
+            <input type="text" id="artigo" value="" required style="width: 250px";>
 
             <label for="naturezaa">Naturezaa:</label>
-            <input type="text" id="naturezaa" value="Lesão corporal Leve" required>
+            <input type="text" id="naturezaa" value="Lesão corporal Leve" required style="width: 660px";>
 
             </div>
            
             <div class="date-group">
+
+                <label for="cidade">Cidade:</label>
+            <select id="cidade" required style="width: 120px";>
+                <option value="Denise-MT">Denise-MT</option>
+                <option value="Barra do Bugres-MT">Barra do Bugres-MT</option>
+                <option value="Nova Olimpia-MT">Nova Olimpia-MT</option>
+                <option value="Porto Estrela-MT">Porto Estrela-MT</option>
+                </select>
+
                 <label for="dia">Dia:</label>
                 <input type="text" id="dia" value= "26" required>
                 
@@ -98,17 +112,21 @@
                 <label for="ano">Ano:</label>
                 <input type="text" id="ano" value="2025" required>
             
-           
+                <label for="data_registro">Data do Registro:</label>
+                <input type="date" id="data_registro" required>
 
-           
-            <label for="cidade">Cidade:</label>
-            <select id="cidade" required>
-                <option value="Denise-MT">Denise-MT</option>
-                <option value="Barra do Bugres-MT">Barra do Bugres-MT</option>
-                <option value="Nova Olimpia-MT">Nova Olimpia-MT</option>
-                <option value="Porto Estrela-MT">Porto Estrela-MT</option>
-                </select>
+                <script>
+                    // Obter a data atual no formato YYYY-MM-DD
+                    const today = new Date().toISOString().split('T')[0];
+                    
+                    // Definir o valor do campo como a data atual
+                    document.getElementById('data_registro').value = today;
+                </script>
+
+            
         
+                <label for="hora_fato">Hr Fato:</label>
+                <input type="text" id="hora_fato" value="00h00min" required>
 
             <label for="quartel">Quartel:</label>
             <select id="quartel" required>
@@ -147,9 +165,36 @@
             </select>
 
             <label for="rg">RGPM:</label>
-            <input type="text" id="rg" value="885.812" required>
+            <input type="text" id="rg" value="885.812" required style="width: 60px";>
 
-        </div>
+            
+            
+            
+            <label for="cep">CEP:</label>
+            <input type="text" id="cep" value="78.380-000" required style="width: 90px";>
+
+
+            <label for="comunicante">COMUNICANTE:</label>
+            <input type="text" id="comunicante" value="" required>
+
+            </div>
+
+            
+            <div class="date-group">
+
+            <label for="endereco">ENDEREÇO:</label>
+            <input type="text" id="endereco" value="endereço do local do fato" required>
+            <label for="local_fato">LOCAL DO FATO:</label>
+            <input type="text" id="local_fato" value="AVENIDA JULIO CAMPOS" required>
+
+            <label for="ponto_referencia">PONTO DE REFERRÊNCIA:</label>
+            <input type="text" id="ponto_referencia" value="Proximo do que ?" required>
+            
+            </div>
+
+            
+
+        
 
             <button type="button" onclick="gerarPDF()">Gerar PDF</button>
         </form>
@@ -212,6 +257,7 @@
             const doc = new jsPDF();
             const numero_tco = parseInt(document.getElementById('numero_tco').value);
             const naturezaa = document.getElementById('naturezaa').value;
+            const artigo = document.getElementById("artigo").value
             const dia = parseInt(document.getElementById('dia').value);
             const mes = parseInt(document.getElementById('mes').value);
             const ano = document.getElementById('ano').value;
@@ -220,12 +266,21 @@
             const nome_completo = document.getElementById('nome_completo').value;
             const posto_grad = document.getElementById('posto_grad').value;
             const rg = document.getElementById('rg').value;
+            const hora_fato = document.getElementById('hora_fato').value;
+            //const data_fato = document.getElementById('data_fato').value;
+            const data_registro = document.getElementById('data_registro').value;
+            const endereco = document.getElementById('endereco').value;
+            const comunicante = document.getElementById('comunicante').value;
+            const ponto_referencia = document.getElementById('ponto_referencia').value;
+            const cep = document.getElementById("cep").value;
+
+
 
 
 
 
 // primeira pagina
-            let paginaAtual = 0;
+            let paginaAtual = 2;
             adicionarCabecalho(doc,"");
             doc.setFont("Times New Roman", "normal");
             doc.setFontSize(12);
@@ -259,10 +314,42 @@
            
            // inicio da segunda pagina
             doc.addPage();
-            paginaAtual++;
+            paginaAtual + 3;
             adicionarCabecalho(doc, paginaAtual);
             doc.text(`Página ${paginaAtual++}`, 180, 10);
-            doc.text("Aqui começa o conteúdo da página 2...", 20, 50, { maxWidth: 170, align: 'justify' });
+            //doc.text("Aqui começa o conteúdo da página 2...", 20, 50, { maxWidth: 170, align: 'justify' });
+           
+            doc.setFontSize(14);
+doc.text("1. DADOS GERAIS:", 30, 80, { maxWidth: 170, align: 'justify' });
+doc.setFontSize(12);
+
+//doc.text("NATUREZA DA OCORRÊNCIA: " + naturezaa, 20, 90, { maxWidth: 170, align: 'justify' });
+// Texto em negrito
+doc.setFont("helvetica", "bold");
+doc.text("NATUREZA DA OCORRÊNCIA: ", 20, 90, { maxWidth: 170, align: 'justify' });
+doc.text("TIPIFICAÇÃO LEGAL: ", 20, 105, { maxWidth: 170, align: 'justify' });
+doc.text("DATA DO FATO: ", 20, 110, { maxWidth: 170, align: 'justify' });
+doc.text("DATA DO REGISTRO:", 130, 110, { maxWidth: 170, align: 'justify' });
+doc.text("HORA DO FATO: ", 20, 115, { maxWidth: 170, align: 'justify' });
+doc.text("ENDEREÇO: ", 20, 120, { maxWidth: 170, align: 'justify' });
+doc.text("CEP:", 130, 125, { maxWidth: 170, align: 'justify' });
+doc.text("MUNICIPIO: ", 20, 125, { maxWidth: 170, align: 'justify' });
+doc.text("PONTO DE REFERRÊNCIA: ", 20, 130, { maxWidth: 170, align: 'justify' });
+// Texto normal (a variável `naturezaa`)
+doc.setFont("helvetica", "normal");
+doc.text(" " + naturezaa, 20 + doc.getTextWidth("NATUREZA DA OCORRÊNCIA: "), 90, { maxWidth: 170, align: 'justify' });
+doc.text(" " + artigo, 20 + doc.getTextWidth("TIPIFICAÇÃO LEGAL: "), 105, { maxWidth: 170, align: 'justify' });
+doc.text(" " + data_registro, 10 + doc.getTextWidth("DATA DO REGISTRO: "), 110, { maxWidth: 170, align: 'justify' });
+doc.text(" " + data_registro, 130 + doc.getTextWidth("DATA DO REGISTRO: "), 110, { maxWidth: 170, align: 'justify' });
+doc.text(" " + hora_fato, 20 + doc.getTextWidth("HORA DO FATO: "), 115, { maxWidth: 170, align: 'justify' });
+doc.text(" " + endereco, 20 + doc.getTextWidth("ENDEREÇO: "), 120, { length:24, maxWidth: 170, align: 'justify' });
+doc.text(" " + cep, 130 + doc.getTextWidth("CEP: "), 125, { length:24, maxWidth: 170, align: 'justify' });
+doc.text(" " + cidade, 20 + doc.getTextWidth("MUNICIPIO: "), 125, { length:24, maxWidth: 170, align: 'justify' });
+doc.text(" " + ponto_referencia, 20 + doc.getTextWidth("PONTO DE REFERRÊNCIA: "), 130, { length:24, maxWidth: 170, align: 'justify' });      
+
+
+
+
             adicionarRodape(doc);
             
             // fim da segundapagina
@@ -273,7 +360,7 @@
             paginaAtual+1;
             adicionarCabecalho(doc, paginaAtual);
             doc.text(`Página ${paginaAtual++}`, 180, 10);
-            doc.text("Aqui começa o conteúdo da página 2...", 20, 50, { maxWidth: 170, align: 'justify' });
+            doc.text("Aqui começa o conteúdo da página 3...", 20, 50, { maxWidth: 170, align: 'justify' });
             adicionarRodape(doc);
 
             // fim da terceira paginA
