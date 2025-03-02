@@ -3,258 +3,224 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TCO</title>
+    <title>TCO - Cadastro</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-        .container {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-        }
-        form {
-            display: flex;
-            flex-direction: column;
-        }
-        label {
-            font-weight: bold;
-            margin-top: 10px;
-        }
-        input {
-            width: 100%;
-            padding: 8px;
-            margin-top: 5px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            font-size: 16px;
-        }
-        .date-group {
-            display: flex;
-            justify-content: space-between;
-        }
-        .date-group input {
-            width: 32%;
-        }
-        button {
-            margin-top: 15px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            padding: 10px;
-            font-size: 16px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
-    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
+<body class="container mt-4">
+    <h1>Cadastro de TCO</h1>
+    <hr>
 
-    
+    <!-- Formulário Dados Gerais -->
+    <h2>1º Dados Gerais</h2>
+    <form id="formDadosGerais">
+        <label for="numero_tco">Nº TCO:</label>
+        <input type="text" id="numero_tco" value="0038" required style="width: 60px";>
 
-    
-    <div class="container">
-        <h1>TCO</h1>
-        <hr>
-        <h1>1º DADOS GERAIS</h1>
-        <form id="formDados">
-            <hr>
-            
-            <label for="conteudo">Sistema de confecção de TCO - Em desenvolvimento...</label>
-            
-            
-
-
-            
-            <div class="date-group">
-            <label for="numero_tco">Nº TCO:</label>
-            <input type="text" id="numero_tco" value="0038" required style="width: 60px";>
-
-            
-            
-            <label for="artigo">Artigo:</label>
-            <input type="text" id="artigo" value="" required style="width: 250px";>
-
-            <label for="naturezaa">Naturezaa:</label>
-            <input type="text" id="naturezaa" value="Lesão corporal Leve" required style="width: 660px";>
-
-            </div>
-           
-            <div class="date-group">
-
-                <label for="cidade">Cidade:</label>
-            <select id="cidade" required style="width: 120px";>
-                <option value="Denise-MT">Denise-MT</option>
-                <option value="Barra do Bugres-MT">Barra do Bugres-MT</option>
-                <option value="Nova Olimpia-MT">Nova Olimpia-MT</option>
-                <option value="Porto Estrela-MT">Porto Estrela-MT</option>
-                </select>
-
-                <label for="dia">Dia:</label>
-                <input type="text" id="dia" value= "26" required>
-                
-                <label for="mes">Mês:</label>
-                <input type="text" id="mes" value="02" required>
-                
-                <label for="ano">Ano:</label>
-                <input type="text" id="ano" value="2025" required>
-            
-                <label for="data_registro">Data do Registro:</label>
-                <input type="date" id="data_registro" required>
-
-                <script>
-                    // Obter a data atual no formato YYYY-MM-DD
-                    const today = new Date().toISOString().split('T')[0];
-                    
-                    // Definir o valor do campo como a data atual
-                    document.getElementById('data_registro').value = today;
-                </script>
-
-            
         
-                <label for="hora_fato">Hr Fato:</label>
-                <input type="text" id="hora_fato" value="00h00min" required>
-
-            <label for="quartel">Quartel:</label>
-            <select id="quartel" required>
-                <option value="NPM DENISE">Nucleo de policia Militar de Denise - MT</option>
-                <option value="12ª CIPM">12ª CIPM de Barra do Bugres - MT</option>
-                <option value="1ª CIPM">1ª CIPM de Nova Olimpia - MT</option>
-                <option value="NPM PORTO ESTRELA">Nucleo de Policia Militar de Porto Estrela-MT</option>
-                </select>
         
-            </div>
+        <label for="artigo">Artigo:</label>
+        <input type="text" id="artigo" value="" required style="width: 250px";>
 
-            <div class="date-group">
-            <label for="nome_completo">Nome Completo do condutor:</label>
-<select id="nome_completo" required>
-    <option value="GUSTAVO ROBERT DE OLIVEIRA">Gustavo Robert de Oliveira</option>
-    <option value="JOÃO SILVA">JOÃO SILVA</option>
-    <option value="MARIA FERREIRA">MARIA FERREIRA</option>
-    <option value="ANTONIO SOUZA">ANTONIO SOUZA</option>
-</select>
-            
+        <label for="naturezaa">Naturezaa:</label>
+        <input type="text" id="naturezaa" value="Lesão corporal Leve" required style="width: 660px";>
 
-            <label for="posto_grad">Posto/Grad:</label>
-            <select id="posto_grad" required>
-                <option value="CEL-PMMT">CEL-PMMT</option>
-                <option value="TEN Cel-PMMT">TEN Cel-PMMT</option>
-                <option value="MAJOR-PMMT">MAJOR-PMMT</option>
-                <option value="CAP-PMMT">CAP-PMMT</option>
-                <option value="TEN-PMMT">TEN-PMMT</option>
-                <option value="SUB TEN-PMMT">SUB TEN-PMMT</option>
-                <option value="1º SGT-PMMT">1º SGT-PMMT</option>
-                <option value="2º SGT-PMMT">2º SGT-PMMT</option>
-                <option value="3º SGT-PMMT">3º SGT-PMMT</option>
-                <option value="CB-PMMT">CB-PMMT</option>
-                <option value="SD-PMMT">SD-PMMT</option>
-            
+        </div>
+       
+        <div class="date-group">
+
+            <label for="cidade">Cidade:</label>
+        <select id="cidade" required style="width: 120px";>
+            <option value="Denise-MT">Denise-MT</option>
+            <option value="Barra do Bugres-MT">Barra do Bugres-MT</option>
+            <option value="Nova Olimpia-MT">Nova Olimpia-MT</option>
+            <option value="Porto Estrela-MT">Porto Estrela-MT</option>
             </select>
 
-            <label for="rg">RGPM:</label>
-            <input type="text" id="rg" value="885.812" required style="width: 60px";>
-
+            <label for="dia">Dia:</label>
+            <input type="text" id="dia" value= "26" required>
             
+            <label for="mes">Mês:</label>
+            <input type="text" id="mes" value="02" required>
             
-            
-            <label for="cep">CEP:</label>
-            <input type="text" id="cep" value="78.380-000" required style="width: 90px";>
+            <label for="ano">Ano:</label>
+            <input type="text" id="ano" value="2025" required>
+        
+            <label for="data_registro">Data do Registro:</label>
+            <input type="date" id="data_registro" required>
 
-
-            <label for="comunicante">COMUNICANTE:</label>
-            <input type="text" id="comunicante" value="" required>
-
-            </div>
-
-            
-            <div class="date-group">
-
-            <label for="endereco">ENDEREÇO:</label>
-            <input type="text" id="endereco" value="endereço do local do fato" required>
-            <label for="local_fato">LOCAL DO FATO:</label>
-            <input type="text" id="local_fato" value="AVENIDA JULIO CAMPOS" required>
-
-            <label for="ponto_referencia">PONTO DE REFERRÊNCIA:</label>
-            <input type="text" id="ponto_referencia" value="Proximo do que ?" required>
-            
-            </div>
-
-            
+            <script>
+                // Obter a data atual no formato YYYY-MM-DD
+                const today = new Date().toISOString().split('T')[0];
+                
+                // Definir o valor do campo como a data atual
+                document.getElementById('data_registro').value = today;
+            </script>
 
         
+    
+            <label for="hora_fato">Hr Fato:</label>
+            <input type="text" id="hora_fato" value="00h00min" required>
 
-            <button type="button" onclick="gerarPDF()">Gerar PDF</button>
-        </form>
-    </div>
+        <label for="quartel">Quartel:</label>
+        <select id="quartel" required>
+            <option value="NPM DENISE">Nucleo de policia Militar de Denise - MT</option>
+            <option value="12ª CIPM">12ª CIPM de Barra do Bugres - MT</option>
+            <option value="1ª CIPM">1ª CIPM de Nova Olimpia - MT</option>
+            <option value="NPM PORTO ESTRELA">Nucleo de Policia Militar de Porto Estrela-MT</option>
+            </select>
+    
+        </div>
+
+        <div class="date-group">
+        <label for="nome_completo">Nome Completo do condutor:</label>
+<select id="nome_completo" required>
+<option value="GUSTAVO ROBERT DE OLIVEIRA">Gustavo Robert de Oliveira</option>
+<option value="JOÃO SILVA">JOÃO SILVA</option>
+<option value="MARIA FERREIRA">MARIA FERREIRA</option>
+<option value="ANTONIO SOUZA">ANTONIO SOUZA</option>
+</select>
+        
+
+        <label for="posto_grad">Posto/Grad:</label>
+        <select id="posto_grad" required>
+            <option value="CEL-PMMT">CEL-PMMT</option>
+            <option value="TEN Cel-PMMT">TEN Cel-PMMT</option>
+            <option value="MAJOR-PMMT">MAJOR-PMMT</option>
+            <option value="CAP-PMMT">CAP-PMMT</option>
+            <option value="TEN-PMMT">TEN-PMMT</option>
+            <option value="SUB TEN-PMMT">SUB TEN-PMMT</option>
+            <option value="1º SGT-PMMT">1º SGT-PMMT</option>
+            <option value="2º SGT-PMMT">2º SGT-PMMT</option>
+            <option value="3º SGT-PMMT">3º SGT-PMMT</option>
+            <option value="CB-PMMT">CB-PMMT</option>
+            <option value="SD-PMMT">SD-PMMT</option>
+        
+        </select>
+
+        <label for="rg">RGPM:</label>
+        <input type="text" id="rg" value="885.812" required style="width: 60px";>
+
+        
+        
+        
+        <label for="cep">CEP:</label>
+        <input type="text" id="cep" value="78.380-000" required style="width: 90px";>
+
+
+        <label for="comunicante">COMUNICANTE:</label>
+        <input type="text" id="comunicante" value="" required>
+
+        </div>
+
+        
+        <div class="date-group">
+
+        <label for="endereco">ENDEREÇO:</label>
+        <input type="text" id="endereco" value="endereço do local do fato" required>
+        <label for="local_fato">LOCAL DO FATO:</label>
+        <input type="text" id="local_fato" value="AVENIDA JULIO CAMPOS" required>
+
+        <label for="ponto_referencia">PONTO DE REFERRÊNCIA:</label>
+        <input type="text" id="ponto_referencia" value="Proximo do que ?" required>
+        
+        </div>
+
+        <hr>
+
+    </form>
+    <hr>
+
+
+
+
+
+    <!-- Cadastro de Autor -->
+    <h2>2º Cadastro de Autor do Fato</h2>
+    <form id="formAutor">
+        <div id="pessoasAutor"></div>
+        <button type="button" class="btn btn-primary mt-3" onclick="adicionarPessoa('Autor')">Adicionar Autor</button>
+    </form>
+    <hr>
+
+    <!-- Cadastro de Vítima -->
+    <h2>3º Cadastro de Vítima / Testemunha</h2>
+    <form id="formVitima">
+        <div id="pessoasVitima"></div>
+        <button type="button" class="btn btn-primary mt-3" onclick="adicionarPessoa('Vitima')">Adicionar Vítima</button>
+        <button type="button" class="btn btn-primary mt-3" onclick="adicionarPessoa('Testemunha')">Adicionar Testemunha</button>
+    <hr>
+
+
+
+    
+
+    <button type="button" class="btn btn-success mt-3" onclick="gerarPDF()">Gerar PDF Completo</button>
+
     <script>
+        let contadorAutor = 1;
+        let contadorVitima = 1;
+        let contadorTestemunha = 1;
 
+        function adicionarPessoa(tipo) {
+            const container = tipo === 'Autor' ? document.getElementById('pessoasAutor') : document.getElementById('pessoasVitima') ; 
+            document.getElementById("testemunha") ;
 
-        const numerosPorExtenso = {
-            1: 'um', 2: 'dois', 3: 'três', 4: 'quatro', 5: 'cinco', 6: 'seis', 7: 'sete', 8: 'oito', 9: 'nove',
-            10: 'dez', 11: 'onze', 12: 'doze', 13: 'treze', 14: 'quatorze', 15: 'quinze', 16: 'dezesseis',
-            17: 'dezessete', 18: 'dezoito', 19: 'dezenove', 20: 'vinte', 21: 'vinte e um', 22: 'vinte e dois',
-            23: 'vinte e três', 24: 'vinte e quatro', 25: 'vinte e cinco', 26: 'vinte e seis', 27: 'vinte e sete',
-            28: 'vinte e oito', 29: 'vinte e nove', 30: 'trinta', 31: 'trinta e um'
-        };
+            const contador = tipo === 'Autor' ? contadorAutor++ : contadorVitima++ ; contadorTestemunha++ ;
 
-        const mesesPorExtenso = {
-            1: 'janeiro', 2: 'fevereiro', 3: 'março', 4: 'abril', 5: 'maio', 6: 'junho', 7: 'julho', 8: 'agosto',
-            9: 'setembro', 10: 'outubro', 11: 'novembro', 12: 'dezembro'
-        };
+            const divPessoa = document.createElement('div');
+            divPessoa.classList.add('pessoa', 'border', 'p-3', 'mb-3');
+            divPessoa.innerHTML = `
+                <h4>${tipo} ${contador}</h4>
+                <label>Nome</label>
+                <input type="text" class="form-control" name="nome_${tipo.toLowerCase()}[]" placeholder="Digite o nome">
+                
+                <label>Nome Social</label>
+                <input type="text" class="form-control" name="nome_social_${tipo.toLowerCase()}[]" placeholder="Digite o nomeSocial">
+                
+                <label>Cpf ou Passaporte</label>
+                <input type="text" class="form-control" name="cpf_passaporte_${tipo.toLowerCase()}[]" placeholder="Digite o CPF ou Passaporte">
+               
+                <label>RG/CNH Nº</label>
+                <input type="text" class="form-control" name="rg_cnh_${tipo.toLowerCase()}[]" placeholder="Digite o RG ou CNH">
 
-        function converterAnoParaExtenso(ano) {
-            return ano.split('').map(num => numerosPorExtenso[parseInt(num)]).join(' ');
+                <label>ÓRGÃO EXPEDITOR</label>
+                <input type="text" class="form-control" name="rg_cnh_orgao_exp_${tipo.toLowerCase()}[]" placeholder="Digite o orgão expeditor">
+                
+                <label>DATA DE EXPEDIÇÃO</label>
+                <input type="text" class="form-control" name="data_expedicao_${tipo.toLowerCase()}[]" placeholder="Digite a data de expedição">
+
+               <label>UF</label>
+                <input type="text" class="form-control" name="data_expedicao_uf_${tipo.toLowerCase()}[]" placeholder="Digite o estado de expedição do documento">
+
+                <label>FILIAÇÃO</label>
+                <input type="text" class="form-control" name="filiacao_${tipo.toLowerCase()}[]" placeholder="Digite a filiação">
+
+                <label>ENDEREÇO</label>
+                <input type="text" class="form-control" name="endereco_${tipo.toLowerCase()}[]" placeholder="Digite o endereço">
+
+                <label>MUNICIPIO</label>
+                <input type="text" class="form-control" name="municipio_${tipo.toLowerCase()}[]" value="DENISE">
+
+                <label>UF</label>
+                <input type="text" class="form-control" name="uf_municipio_${tipo.toLowerCase()}[]" value="MT">
+
+                <label>CEP</label>
+                <input type="text" class="form-control" name="cep_municipio_${tipo.toLowerCase()}[]" value="78.380-000">
+               
+                <button type="button" class="btn btn-danger mt-2" onclick="removerPessoa(this)">Remover</button>`;
+
+            container.appendChild(divPessoa);
         }
 
-
-        
-
-
-
-
-
-        function adicionarCabecalho(doc, paginaAtual) {
-            const img = new Image();
-            img.src = 'https://upload.wikimedia.org/wikipedia/commons/7/7f/Bras%C3%A3o_PMMT.PNG';
-            doc.addImage(img, 'PNG', 93, 5, 20, 20);
-            doc.setFont("helvetica", "bold");
-            doc.setFontSize(10);
-            doc.text("ESTADO DE MATO GROSSO", 103, 30, { align: "center" });
-            doc.text("POLÍCIA MILITAR", 103, 35, { align: "center" });
-            
-            
-            doc.text("TERMO CIRCUNSTANCIADO DE OCORRÊNCIA Nº TCO/CR07/"+ document.getElementById('quartel').value +"/"+document.getElementById('ano').value+"."+ parseInt(document.getElementById('numero_tco').value), 103, 45, { align: "center" });
-            
-
-            
-        }
-        
-        function adicionarRodape(doc) {
-            doc.setFontSize(8);
-            doc.text("_______________________________________________________________________________________________________________", 105, 281, { align: "center" });
-            doc.text("NUCLEO DE POLICIA MILITAR DE DENISE", 105, 285, { align: "center" });
-            doc.text("Rua Piaui - Bairro centro - Denise-MT - CEP 78.380-000", 105, 288, { align: "center" });
-            doc.text("Fone: (65) 98170 0447 | E-mail: npmdenise@pm.mt.gov.br", 105, 291, { align: "center" });
+        function removerPessoa(botao) {
+            botao.parentElement.remove();
         }
 
-        
-        
         function gerarPDF() {
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
+
             const numero_tco = parseInt(document.getElementById('numero_tco').value);
             const naturezaa = document.getElementById('naturezaa').value;
             const artigo = document.getElementById("artigo").value
@@ -275,97 +241,179 @@
             const cep = document.getElementById("cep").value;
 
 
+            const numerosPorExtenso = {
+            1: 'um', 2: 'dois', 3: 'três', 4: 'quatro', 5: 'cinco', 6: 'seis', 7: 'sete', 8: 'oito', 9: 'nove',
+            10: 'dez', 11: 'onze', 12: 'doze', 13: 'treze', 14: 'quatorze', 15: 'quinze', 16: 'dezesseis',
+            17: 'dezessete', 18: 'dezoito', 19: 'dezenove', 20: 'vinte', 21: 'vinte e um', 22: 'vinte e dois',
+            23: 'vinte e três', 24: 'vinte e quatro', 25: 'vinte e cinco', 26: 'vinte e seis', 27: 'vinte e sete',
+            28: 'vinte e oito', 29: 'vinte e nove', 30: 'trinta', 31: 'trinta e um'
+        };
+
+        const mesesPorExtenso = {
+            1: 'janeiro', 2: 'fevereiro', 3: 'março', 4: 'abril', 5: 'maio', 6: 'junho', 7: 'julho', 8: 'agosto',
+            9: 'setembro', 10: 'outubro', 11: 'novembro', 12: 'dezembro'
+        };
+
+        function converterAnoParaExtenso(ano) {
+            return ano.split('').map(num => numerosPorExtenso[parseInt(num)]).join(' ');
+        }
 
 
 
+           
 
-// primeira pagina
-            let paginaAtual = 2;
-            adicionarCabecalho(doc,"");
-            doc.setFont("Times New Roman", "normal");
+            function adicionarCabecalho() {
+                const img = new Image();
+            img.src = 'https://upload.wikimedia.org/wikipedia/commons/7/7f/Bras%C3%A3o_PMMT.PNG';
+            doc.addImage(img, 'PNG', 93, 5, 20, 20);
+            doc.setFont("helvetica", "bold");
+            doc.setFontSize(10);
+            doc.text("ESTADO DE MATO GROSSO", 103, 30, { align: "center" });
+            doc.text("POLÍCIA MILITAR", 103, 35, { align: "center" });
+            doc.text("TERMO CIRCUNSTANCIADO DE OCORRÊNCIA Nº TCO/CR07/" +"/"+document.getElementById('ano').value+"."+ parseInt(document.getElementById('numero_tco').value), 103, 47, { align: "center" });
+            
+                doc.line(10, 38, 200, 38);
+            }
+
+            function adicionarRodape() {
+            doc.setFontSize(8);
+            doc.text("_______________________________________________________________________________________________________________", 105, 281, { align: "center" });
+            doc.text("NUCLEO DE POLICIA MILITAR DE DENISE", 105, 285, { align: "center" });
+            doc.text("Rua Piaui - Bairro centro - Denise-MT - CEP 78.380-000", 105, 288, { align: "center" });
+            doc.text("Fone: (65) 98170 0447 | E-mail: npmdenise@pm.mt.gov.br", 105, 291, { align: "center" });
+        }
+
+            adicionarCabecalho();
+            adicionarRodape()
             doc.setFontSize(12);
+
             
-            //let conteudo = document.getElementById("conteudo").value;
-            //doc.text(conteudo, 20, 50, { maxWidth: 170, align: 'justify' });
-            
+           // doc.text("teste numero de tco",10, y)
+
             doc.text("AUTUAÇÃO", 105, 100, { align: "center" });
 
-            const diaExtenso = numerosPorExtenso[dia];
-                const mesExtenso = mesesPorExtenso[mes];
-                const anoExtenso = converterAnoParaExtenso(ano);
-        
-
-            let texto = `Aos ${diaExtenso} dias do mês de ${mesExtenso} do ano de ${anoExtenso}, nesta cidade de ${cidade}, Estado de Mato Grosso, no Quartel do ${quartel}, autuo as peças que adiante se seguem, do que para constar, lavrei este Termo. Eu, ${nome_completo} (${posto_grad}), escrevente, que o lavrei e assino.`;
-
-                
-
-             doc.text(texto, 20, 120, { maxWidth: 175, align: 'justify'});
-
-             let texto2 =` ${nome_completo} - ${posto_grad} `;
-            doc.text(texto2, 103, 200,{ align: "center" });
-
-            let texto3 = `RG nº ${rg} PMMT`;
-            doc.text(texto3, 103, 206,{ align: "center" });
+const diaExtenso = numerosPorExtenso[dia];
+  const mesExtenso = mesesPorExtenso[mes];
+const anoExtenso = converterAnoParaExtenso(ano);
 
 
-            adicionarRodape(doc);
-            
-           // fim da primeira pagina
-           
-           // inicio da segunda pagina
-            doc.addPage();
-            paginaAtual + 3;
-            adicionarCabecalho(doc, paginaAtual);
-            doc.text(`Página ${paginaAtual++}`, 180, 10);
-            //doc.text("Aqui começa o conteúdo da página 2...", 20, 50, { maxWidth: 170, align: 'justify' });
-           
-            doc.setFontSize(14);
-doc.text("1. DADOS GERAIS:", 30, 80, { maxWidth: 170, align: 'justify' });
-doc.setFontSize(12);
+let texto = `Aos ${diaExtenso} dias do mês de ${mesExtenso} do ano de ${anoExtenso}, nesta cidade de ${cidade}, Estado de Mato Grosso, no Quartel do ${quartel}, autuo as peças que adiante se seguem, do que para constar, lavrei este Termo. Eu, ${nome_completo} (${posto_grad}), escrevente, que o lavrei e assino.`;
 
-//doc.text("NATUREZA DA OCORRÊNCIA: " + naturezaa, 20, 90, { maxWidth: 170, align: 'justify' });
-// Texto em negrito
-doc.setFont("helvetica", "bold");
-doc.text("NATUREZA DA OCORRÊNCIA: ", 20, 90, { maxWidth: 170, align: 'justify' });
-doc.text("TIPIFICAÇÃO LEGAL: ", 20, 105, { maxWidth: 170, align: 'justify' });
-doc.text("DATA DO FATO: ", 20, 110, { maxWidth: 170, align: 'justify' });
-doc.text("DATA DO REGISTRO:", 130, 110, { maxWidth: 170, align: 'justify' });
-doc.text("HORA DO FATO: ", 20, 115, { maxWidth: 170, align: 'justify' });
-doc.text("ENDEREÇO: ", 20, 120, { maxWidth: 170, align: 'justify' });
-doc.text("CEP:", 130, 125, { maxWidth: 170, align: 'justify' });
-doc.text("MUNICIPIO: ", 20, 125, { maxWidth: 170, align: 'justify' });
-doc.text("PONTO DE REFERRÊNCIA: ", 20, 130, { maxWidth: 170, align: 'justify' });
-// Texto normal (a variável `naturezaa`)
+
 doc.setFont("helvetica", "normal");
-doc.text(" " + naturezaa, 20 + doc.getTextWidth("NATUREZA DA OCORRÊNCIA: "), 90, { maxWidth: 170, align: 'justify' });
-doc.text(" " + artigo, 20 + doc.getTextWidth("TIPIFICAÇÃO LEGAL: "), 105, { maxWidth: 170, align: 'justify' });
-doc.text(" " + data_registro, 10 + doc.getTextWidth("DATA DO REGISTRO: "), 110, { maxWidth: 170, align: 'justify' });
-doc.text(" " + data_registro, 130 + doc.getTextWidth("DATA DO REGISTRO: "), 110, { maxWidth: 170, align: 'justify' });
-doc.text(" " + hora_fato, 20 + doc.getTextWidth("HORA DO FATO: "), 115, { maxWidth: 170, align: 'justify' });
-doc.text(" " + endereco, 20 + doc.getTextWidth("ENDEREÇO: "), 120, { length:24, maxWidth: 170, align: 'justify' });
-doc.text(" " + cep, 130 + doc.getTextWidth("CEP: "), 125, { length:24, maxWidth: 170, align: 'justify' });
-doc.text(" " + cidade, 20 + doc.getTextWidth("MUNICIPIO: "), 125, { length:24, maxWidth: 170, align: 'justify' });
-doc.text(" " + ponto_referencia, 20 + doc.getTextWidth("PONTO DE REFERRÊNCIA: "), 130, { length:24, maxWidth: 170, align: 'justify' });      
+doc.text(texto, 20, 120, { maxWidth: 175, align: 'justify'});
+
+
+doc.setFont("helvetica", "bold");
+let texto2 =` ${nome_completo} - ${posto_grad} `;
+doc.text(texto2, 103, 200,{ align: "center" });
+
+let texto3 = `RG nº ${rg} PMMT`;
+doc.text(texto3, 103, 206,{ align: "center" });
 
 
 
 
-            adicionarRodape(doc);
-            
-            // fim da segundapagina
-            
 
-            // inicio da terceira pagina
+
+
+
             doc.addPage();
-            paginaAtual+1;
-            adicionarCabecalho(doc, paginaAtual);
-            doc.text(`Página ${paginaAtual++}`, 180, 10);
-            doc.text("Aqui começa o conteúdo da página 3...", 20, 50, { maxWidth: 170, align: 'justify' });
-            adicionarRodape(doc);
+            adicionarRodape()
+            adicionarCabecalho()
 
-            // fim da terceira paginA
 
-            doc.save("documento.pdf");
+        let y2 = 20; // Posição inicial na página
+       const limitePagina = 270; // Altura máxima antes de adicionar nova página
+
+
+            
+            let y = 60;
+            doc.text("AUTOR DO FATO:", 30, y);
+            y += 10;
+
+
+
+
+            document.getElementsByName("nome_autor[]").forEach((input, index) => {
+    const nomeAutor = input.value;
+    const nomeSocial = document.getElementsByName("nome_social_autor[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const cpfAutor = document.getElementsByName("cpf_passaporte_autor[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const rgcnhAutor = document.getElementsByName("rg_cnh_autor[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const rgcnhorgaoexpAutor = document.getElementsByName("rg_cnh_orgao_exp_autor[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const dataexpedicaoAutor = document.getElementsByName("data_expedicao_autor[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const dataexpedicaoufAutor = document.getElementsByName("data_expedicao_uf_autor[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const filiacaoAutor = document.getElementsByName("filiacao_autor[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const enderecoAutor = document.getElementsByName("endereco_autor[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const municipioAutor = document.getElementsByName("municipio_autor[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const ufmunicipioAutor = document.getElementsByName("uf_municipio_autor[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const cepmunicipioAutor = document.getElementsByName("cep_municipio_autor[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+
+
+
+    doc.setFontSize(8);
+    doc.text(`${index + 1}. NOME: ${nomeAutor}`, 20, y);
+    y += 6;
+    doc.text(`   NOME SOCIAL: ${nomeSocial}`, 20, y);
+    y += 6;
+    doc.text(`   CPF: ${cpfAutor}`, 20, y);
+    y += 6;
+    doc.text(`   RG/CNH: ${rgcnhAutor}`, 20, y);
+    
+    doc.text(`   ORGÃO EXPEDITOR: ${rgcnhorgaoexpAutor}`, 120, y);
+    y += 6;
+    doc.text(`   DATA DE EXPEDIÇÃO: ${dataexpedicaoAutor}`, 20, y);
+    doc.text(`   UF: ${dataexpedicaoAutor}`, 120, y);
+    y += 6;
+    doc.text(`   FILIAÇÃO: ${filiacaoAutor}`, 20, y);
+    y += 6;
+    doc.text(`   ENDEREÇO: ${enderecoAutor}`, 20, y);
+    y += 6;
+    doc.text(`   MUNICIPIO: ${municipioAutor}`, 20, y);
+    doc.text(`   UF: ${ufmunicipioAutor}`, 120, y);
+    doc.text(`   CEP: ${cepmunicipioAutor}`, 140, y);
+
+});
+
+
+            
+            document.getElementsByName("nome_vitima[]").forEach((input, index) => {
+                if (y > 270) {
+            doc.addPage(); // Cria uma nova página
+            adicionarCabecalho()
+            adicionarRodape()
+            y = 60; // Reinicia a posição no topo da nova página
+            doc.text(`${index + 1}. ${input.value}`, 10, y);
+                }
+                
+                doc.text(`${index + 1}. ${input.value}`, 10, y);
+                y += 7;
+            });
+
+            
+
+
+
+            y += 10;
+            doc.text("Testemuna:", 10, y);
+            y += 10;
+            
+            document.getElementsByName("nome_testemunha[]").forEach((input, index) => {
+                if (y > 270) {
+            doc.addPage(); // Cria uma nova página
+            adicionarCabecalho()
+            adicionarRodape()
+            y = 60; // Reinicia a posição no topo da nova página
+            doc.text(`${index + 1}. ${input.value}`, 10, y);
+                }
+                
+                doc.text(`${index + 1}. ${input.value}`, 10, y);
+                y += 7;
+            });
+
+
+
+            doc.save("tco.pdf");
         }
     </script>
 </body>
