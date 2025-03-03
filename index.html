@@ -244,7 +244,7 @@
                
 
            <label>RELATO</label>
-<textarea class="form-control" name="relato_${tipo.toLowerCase()}[]" value="tets" rows="10">O autor dos fatos () , cientificado de seus direitos constitucionais, inclusive o de permanecer calado, declarou Que (declinar o relato do autor dos fatos abreviadamente, fazendo perguntas acerca do fato, porém declinando apenas a resposta antecedida da palavra (Que).... ex: Que realmente abordou a vítima próximo de sua casa; Que não xingou a vítima, apenas disse que suas atitudes era desse tipo de pessoa) Lido e achado conforme. Nada mais disse e nem lhe foi perguntado(a).</textarea>	
+<textarea class="form-control" name="relato_${tipo.toLowerCase()}[]" value="tets" rows="10">O (((autor dos fatos) ou (vitima tal) ou (testemunha tal))), cientificado de seus direitos constitucionais, inclusive o de permanecer calado, declarou Que (declinar o relato dos fatos abreviadamente, fazendo perguntas acerca do fato, porém declinando apenas a resposta antecedida da palavra (Que).... ex: Que realmente abordou a vítima próximo de sua casa; Que não xingou a vítima, apenas disse que suas atitudes era desse tipo de pessoa) Lido e achado conforme. Nada mais disse e nem lhe foi perguntado(a).</textarea>	
 
                 
                 
@@ -363,26 +363,70 @@ doc.text(texto3, 103, 206,{ align: "center" });
 
 
 
+//-------------------------------------------------
+ // inicio da segunda pagina
+ doc.addPage();
+            
+ adicionarCabecalho()
+ adicionarRodape()
+            doc.setFontSize(14);
+doc.text("A- DADOS GERAIS:", 30, 60, { maxWidth: 170, align: 'justify' });
+doc.setFontSize(10);
+
+//doc.text("NATUREZA DA OCORRÊNCIA: " + naturezaa, 20, 90, { maxWidth: 170, align: 'justify' });
+// Texto em negrito
+doc.setFont("helvetica", "bold");
+doc.text("NATUREZA DA OCORRÊNCIA: ", 20, 70, { maxWidth: 170, align: 'justify' });
+doc.text("TIPIFICAÇÃO LEGAL: ", 20, 85, { maxWidth: 170, align: 'justify' });
+doc.text("DATA DO FATO: ", 20, 90, { maxWidth: 170, align: 'justify' });
+doc.text("DATA DO REGISTRO:", 130, 90, { maxWidth: 170, align: 'justify' });
+doc.text("HORA DO FATO: ", 20, 95, { maxWidth: 170, align: 'justify' });
+doc.text("ENDEREÇO: ", 20, 100, { maxWidth: 170, align: 'justify' });
+doc.text("CEP:", 130, 105, { maxWidth: 170, align: 'justify' });
+doc.text("MUNICIPIO: ", 20, 105, { maxWidth: 170, align: 'justify' });
+doc.text("PONTO DE REFERRÊNCIA: ", 20, 110, { maxWidth: 170, align: 'justify' });
+// Texto normal (a variável `naturezaa`)
+doc.setFont("helvetica", "normal");
+doc.text(" " + naturezaa, 20 + doc.getTextWidth("NATUREZA DA OCORRÊNCIA: "), 70, { maxWidth: 170, align: 'justify' });
+doc.text(" " + artigo, 20 + doc.getTextWidth("TIPIFICAÇÃO LEGAL: "), 85, { maxWidth: 170, align: 'justify' });
+doc.text(" " + data_registro, 10 + doc.getTextWidth("DATA DO REGISTRO: "), 90, { maxWidth: 170, align: 'justify' });
+doc.text(" " + data_registro, 130 + doc.getTextWidth("DATA DO REGISTRO: "), 90, { maxWidth: 170, align: 'justify' });
+doc.text(" " + hora_fato, 20 + doc.getTextWidth("HORA DO FATO: "), 95, { maxWidth: 170, align: 'justify' });
+doc.text(" " + endereco, 20 + doc.getTextWidth("ENDEREÇO: "), 100, { length:24, maxWidth: 170, align: 'justify' });
+doc.text(" " + cep, 130 + doc.getTextWidth("CEP: "), 105, { length:24, maxWidth: 170, align: 'justify' });
+doc.text(" " + cidade, 20 + doc.getTextWidth("MUNICIPIO: "), 105, { length:24, maxWidth: 170, align: 'justify' });
+doc.text(" " + ponto_referencia, 20 + doc.getTextWidth("PONTO DE REFERRÊNCIA: "), 110, { length:24, maxWidth: 170, align: 'justify' });      
 
 
 
 
+          
+            // fim da segundapagina
+          //------------------------------------------
 
-            doc.addPage();
-            adicionarRodape()
-            adicionarCabecalho()
+
+
+
+           
 
 
         let y2 = 20; // Posição inicial na página
        const limitePagina = 270; // Altura máxima antes de adicionar nova página
 
 
+
+
+
+       
+
             
-            let y = 60;
-            doc.text("AUTOR DO FATO:", 30, y);
+            let y = 120;
+            doc.setFontSize(14);
+            doc.setFont("helvetica", "bold");
+            doc.text("B- ENVOLVIDOS:", 30, y);
             y += 10;
-
-
+            doc.setFontSize(10);
+            //doc.setFont("helvetica", "bold");
 
 
             document.getElementsByName("nome_autor[]").forEach((input, index) => {
@@ -411,75 +455,164 @@ const naturalidadeufAutor = document.getElementsByName("naturalidadeuf_autor[]")
    const localtrabalhoAutor = document.getElementsByName("local_trabalho_autor[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
    const relatoAutor = document.getElementsByName("relato_autor[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
 
+   function verificapagina() {
+    if (y > 270) {
+            doc.addPage(); // Cria uma nova página
+            adicionarCabecalho()
+            adicionarRodape()
+            doc.setFontSize(10);
+            y = 60; // Reinicia a posição no topo da nova página
+    }
+        }
+    
 
-    doc.setFontSize(10);
-    doc.text(`${index + 1}. NOME: ${nomeAutor}`, 20, y);
+    if (y > 270) {
+            doc.addPage(); // Cria uma nova página
+            adicionarCabecalho()
+            adicionarRodape()
+            doc.setFontSize(10);
+            y = 60; // Reinicia a posição no topo da nova página
+           // doc.setFontSize(10);
+    doc.text(`${index + 1}º) AUTOR DO FATO - NOME: ${nomeAutor}`, 20, y);
+    doc.line(20, y+1, 200, y+1);
+    }
+    verificapagina()
+    doc.text(`${index + 1}º) AUTOR DO FATO - NOME: ${nomeAutor}`, 20, y);   
+    doc.line(20, y+1, 200, y+1);
     y += 6;
+    verificapagina()
     doc.text(`   NOME SOCIAL: ${nomeSocial}`, 20, y);
+    doc.line(20, y+1, 200, y+1);
     y += 6;
+    verificapagina()
     doc.text(`   CPF: ${cpfAutor}`, 20, y);
+    doc.line(20, y+1, 200, y+1);
     y += 6;
+    verificapagina()
     doc.text(`   RG/CNH: ${rgcnhAutor}`, 20, y);
+    doc.line(20, y+1, 200, y+1);
     
     doc.text(`   ORGÃO EXPEDITOR: ${rgcnhorgaoexpAutor}`, 120, y);
+    doc.line(20, y+1, 200, y+1);
     y += 6;
+    verificapagina()
     doc.text(`   DATA DE EXPEDIÇÃO: ${dataexpedicaoAutor}`, 20, y);
+    doc.line(20, y+1, 200, y+1);
     doc.text(`   UF: ${dataexpedicaoAutor}`, 120, y);
+    doc.line(20, y+1, 200, y+1);
     y += 6;
+    verificapagina()
     doc.text(`   FILIAÇÃO: ${filiacaoAutor}`, 20, y);
+    doc.line(20, y+1, 200, y+1);
     y += 6;
+    verificapagina()
     doc.text(`   ENDEREÇO: ${enderecoAutor}`, 20, y);
+    doc.line(20, y+1, 200, y+1);
     y += 6;
+    verificapagina()
     doc.text(`   MUNICIPIO: ${municipioAutor}`, 20, y);
+    doc.line(20, y+1, 200, y+1);
     doc.text(`   UF: ${ufmunicipioAutor}`, 120, y);
+    doc.line(20, y+1, 200, y+1);
     doc.text(`   CEP: ${cepmunicipioAutor}`, 140, y);
+    doc.line(20, y+1, 200, y+1);
     y += 6;
+    verificapagina()
     doc.text(`   PONTO DE REFERÊNCIA: ${pontoreferenciaenderecoAutor}`, 20, y);
+    doc.line(20, y+1, 200, y+1);
     y += 6;
+    verificapagina()
     doc.text(`   TELEFONE: ${telefoneAutor}`, 20, y);
+    doc.line(20, y+1, 200, y+1);
     y += 6;
+    verificapagina()
     doc.text(`   E-MAIL PESSOAL: ${emailAutor}`, 20, y);
+    doc.line(20, y+1, 200, y+1);
     y += 6;
+    verificapagina()
     doc.text(`   ESTADO CIVIL: ${estadocivillAutor}`, 20, y);
+    doc.line(20, y+1, 200, y+1);
     y += 6;
+    verificapagina()
     doc.text(`   NACIONALIDADE: ${nacionalidadeAutor}`, 20, y);
+    doc.line(20, y+1, 200, y+1);
     doc.text(`   NATURALIDADE: ${naturalidadeAutor}`, 70, y);
     doc.text(`   UF: ${naturalidadeufAutor}`, 140, y);
     y += 6;
+    verificapagina()
 
 
     doc.text(`   DATA NASC: ${datanasciAutor}`, 20, y)
+    doc.line(20, y+1, 200, y+1);
    doc.text(`   SEXO: ${sexoAutor}`, 70, y);
     y += 6;
+    verificapagina()
    doc.text(`   PROFISSÃO: ${profissaoAutor}`, 20, y);
+   doc.line(20, y+1, 200, y+1);
     y += 6;
+    verificapagina()
+    
    doc.text(`   LOCAL DE TRABALHO: ${profissaoAutor}`, 20, y);
+   doc.line(20, y+1, 200, y+1);
     y += 6;
+    verificapagina()
    //doc.text(`   RELATO DO AUTOR DO FATO: ${relatoAutor}`, 20, y);
     y += 15;
-    doc.line(10, y, 200, y);
+   // doc.line(10, y, 200, y);
     
     
 });
 
 
 
-
-            
-
-
-            
-            document.getElementsByName("nome_vitima[]").forEach((input, index) => {
-                if (y > 270) {
+function verificapagina2() {
+    if (y > 270) {
             doc.addPage(); // Cria uma nova página
             adicionarCabecalho()
             adicionarRodape()
+            doc.setFontSize(10);
             y = 60; // Reinicia a posição no topo da nova página
-            doc.text(`${index + 1}. ${input.value}`, 10, y);
-                }
-                
-                doc.text(`${index + 1}. ${input.value}`, 10, y);
-                y += 7;
+    }
+        }
+
+           
+if (y > 270) {
+            doc.addPage(); // Cria uma nova página
+            adicionarCabecalho()
+            adicionarRodape()
+            doc.setFontSize(10);
+            y = 60; // Reinicia a posição no topo da nova página
+            doc.setFontSize(14);
+doc.text("VITIMA:", 30, y);
+
+}
+doc.setFontSize(14);
+doc.text("VITIMA:", 30, y);
+y += 10;
+doc.setFontSize(10);
+
+            document.getElementsByName("nome_vitima[]").forEach((input, index) => {
+           // doc.text(`${index + 1}. ${input.value}`, 10, y);
+            const nomeVitima = input.value;
+            const nomeSocialVitima = document.getElementsByName("nome_social_vitima[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+               
+
+           verificapagina2()
+            doc.setFontSize(10);
+            
+            
+            doc.text(`${index + 1}º) NOME DA VITIMA: ${nomeVitima}`, 20, y); 
+             doc.line(20, y+1, 200, y+1);
+            y += 6;   
+            verificapagina2()
+           
+            doc.text(`NOME SICIAL DA VITIMA: ${nomeSocialVitima}`, 20, y); 
+             doc.line(20, y+1, 200, y+1);
+            y += 6;   
+            verificapagina2()
+            
+
+
             });
 
             
@@ -495,6 +628,7 @@ const naturalidadeufAutor = document.getElementsByName("naturalidadeuf_autor[]")
             doc.addPage(); // Cria uma nova página
             adicionarCabecalho()
             adicionarRodape()
+            doc.setFontSize(10);
             y = 60; // Reinicia a posição no topo da nova página
             doc.text(`${index + 1}. ${input.value}`, 10, y);
                 }
@@ -503,6 +637,12 @@ const naturalidadeufAutor = document.getElementsByName("naturalidadeuf_autor[]")
                 y += 7;
             });
 
+
+
+
+
+            //const relatoAutorr = document.getElementById('relato_autor').value;
+//doc.text(`   RELATO DO AUTOR DO FATO: ${relatoAutorr}`, 20, y);
 
 
             doc.save("tco.pdf");
