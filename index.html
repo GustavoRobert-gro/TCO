@@ -421,11 +421,11 @@ doc.text(" " + ponto_referencia, 20 + doc.getTextWidth("PONTO DE REFERRÊNCIA: "
        
 
             
-            let y = 120;
+            let y = 140;
             doc.setFontSize(14);
             doc.setFont("helvetica", "bold");
             doc.text("B- ENVOLVIDOS:", 30, y);
-            y += 10;
+            y += 20;
             doc.setFontSize(10);
             //doc.setFont("helvetica", "bold");
 
@@ -498,7 +498,7 @@ const naturalidadeufAutor = document.getElementsByName("naturalidadeuf_autor[]")
     y += 6;
     verificapagina()
     doc.text(`   DATA DE EXPEDIÇÃO: ${dataexpedicaoAutor}`, 20, y);
-    doc.line(20, y+1, 200, y+1);
+    
     doc.text(`   UF: ${dataexpedicaoAutor}`, 120, y);
     doc.line(20, y+1, 200, y+1);
     y += 6;
@@ -512,9 +512,9 @@ const naturalidadeufAutor = document.getElementsByName("naturalidadeuf_autor[]")
     y += 6;
     verificapagina()
     doc.text(`   MUNICIPIO: ${municipioAutor}`, 20, y);
-    doc.line(20, y+1, 200, y+1);
+    
     doc.text(`   UF: ${ufmunicipioAutor}`, 120, y);
-    doc.line(20, y+1, 200, y+1);
+    
     doc.text(`   CEP: ${cepmunicipioAutor}`, 140, y);
     doc.line(20, y+1, 200, y+1);
     y += 6;
@@ -634,7 +634,7 @@ const naturalidadeufVitima = document.getElementsByName("naturalidadeuf_vitima[]
     y += 6;
     verificapagina2()
     doc.text(`   DATA DE EXPEDIÇÃO: ${dataexpedicaoVitima}`, 20, y);
-    doc.line(20, y+1, 200, y+1);
+    
     doc.text(`   UF: ${dataexpedicaoufVitima}`, 120, y);
     doc.line(20, y+1, 200, y+1);
     y += 6;
@@ -648,9 +648,9 @@ const naturalidadeufVitima = document.getElementsByName("naturalidadeuf_vitima[]
     y += 6;
     verificapagina2()
     doc.text(`   MUNICIPIO: ${municipioVitima}`, 20, y);
-    doc.line(20, y+1, 200, y+1);
+    
     doc.text(`   UF: ${ufmunicipioVitima}`, 120, y);
-    doc.line(20, y+1, 200, y+1);
+    
     doc.text(`   CEP: ${cepmunicipioVitima}`, 140, y);
     doc.line(20, y+1, 200, y+1);
     y += 6;
@@ -767,7 +767,7 @@ const naturalidadeufTestemunha = document.getElementsByName("naturalidadeuf_test
     doc.line(20, y+1, 200, y+1);
     
     doc.text(`   ORGÃO EXPEDITOR: ${rgcnhorgaoexpTestemunha}`, 120, y);
-    doc.line(20, y+1, 200, y+1);
+   
     y += 6;
     verificapagina3()
     doc.text(`   DATA DE EXPEDIÇÃO: ${dataexpedicaoTestemunha}`, 20, y);
@@ -785,9 +785,9 @@ const naturalidadeufTestemunha = document.getElementsByName("naturalidadeuf_test
     y += 6;
     verificapagina3()
     doc.text(`   MUNICIPIO: ${municipioTestemunha}`, 20, y);
-    doc.line(20, y+1, 200, y+1);
+    
     doc.text(`   UF: ${ufmunicipioTestemunha}`, 120, y);
-    doc.line(20, y+1, 200, y+1);
+   
     doc.text(`   CEP: ${cepmunicipioTestemunha}`, 140, y);
     doc.line(20, y+1, 200, y+1);
     y += 6;
