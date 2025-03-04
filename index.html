@@ -852,7 +852,7 @@ const naturalidadeufTestemunha = document.getElementsByName("naturalidadeuf_test
 
             
             function verificapagina4() {
-    if (y > 270) {
+    if (y > 260) {
             doc.addPage(); // Cria uma nova página
             adicionarCabecalho()
             adicionarRodape()
@@ -860,24 +860,57 @@ const naturalidadeufTestemunha = document.getElementsByName("naturalidadeuf_test
             y = 60; // Reinicia a posição no topo da nova página
     }
         }
-verificapagina4
-
+verificapagina4()
 
 doc.setFont("helvetica", "bold");
             doc.text("C- HISTORICO:", 30, y);
             y += 20;
             doc.setFontSize(10);
-           doc.text("em desenvolvimento",20,y)
+            verificapagina4()
+
+document.getElementsByName("nome_vitima[]").forEach((input, index) => {
+                const nomeAAutor = input.value;
+            const relatoAutorcorreto = document.getElementsByName("relato_vitima[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+
+          
+          let textoRelatoAutor = relatoAutorcorreto 
+          
+          const linhas = doc.splitTextToSize(textoRelatoAutor, 175);
+          // Número de linhas geradas
+const numeroDeLinhas = linhas.length;
+const numeroDeLinhasmultiplcado = linhas.length * 6;
+
+          verificapagina4()
+          
+
+          if (y + numeroDeLinhasmultiplcado + 15 > 270) {
+            doc.addPage(); // Cria uma nova página
+            adicionarCabecalho()
+            adicionarRodape()
+            doc.setFontSize(10);
+            y = 60; // Reinicia a posição no topo da nova página
+    }
 
 
+          doc.setFont("helvetica", "bold");
+          doc.text(`   ${index + 1}º) Relato da vitima: ${nomeAAutor}`, 30, y); 
+             doc.line(10, y+1, 200, y+1);
+             
+            y += 15;
+             verificapagina4()
+doc.setFont("helvetica", "normal");
+doc.text(textoRelatoAutor, 20, y, { maxWidth: 175, align: 'justify'});
+
+y += numeroDeLinhas * 7;
+verificapagina4()
+           
+            
+
+
+});
 
            
-        
-
-       
-
-
-
+      
             //const relatoAutorr = document.getElementById('relato_autor').value;
 //doc.text(`   RELATO DO AUTOR DO FATO: ${relatoAutorr}`, 20, y);
 
