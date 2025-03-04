@@ -127,7 +127,18 @@
         </div>
 
         <hr>
+       
+        <label for="relato_policial_correto">RELATO DO POLICIAL:</label>
+        <textarea  class="form-control" id="relato_policial_correto" value="tets" rows="10">
+        Às _________h do dia _________, fomos solicitados por ____________________(relatar nome do solicitante/copom) ou deparamos com (relatar a situação), informando que (relatar a situação informada ou detectada), e em decorrência do fato dei voz de prisão a _______________, (informar outras providências adotadas, tais como: condução de vítimas ao hospital ao Conselho tutelar ou outras repartições), conduzindo os envolvidos para _________________(a Central de Operações da Polícia Militar/UPM) para adoção das providências legais.
+        </textarea>
+    
+        
+        
 
+
+
+                
     </form>
     <hr>
 
@@ -833,12 +844,37 @@ const naturalidadeufTestemunha = document.getElementsByName("naturalidadeuf_test
    //doc.text(`   RELATO DO AUTOR DO FATO: ${relatoTestemunha}`, 20, y);
     y += 15;
 
-
-
+    verificapagina3()
 
             });
 
 
+
+            
+            function verificapagina4() {
+    if (y > 270) {
+            doc.addPage(); // Cria uma nova página
+            adicionarCabecalho()
+            adicionarRodape()
+            doc.setFontSize(10);
+            y = 60; // Reinicia a posição no topo da nova página
+    }
+        }
+verificapagina4
+
+
+doc.setFont("helvetica", "bold");
+            doc.text("C- HISTORICO:", 30, y);
+            y += 20;
+            doc.setFontSize(10);
+           doc.text("em desenvolvimento",20,y)
+
+
+
+           
+        
+
+       
 
 
 
