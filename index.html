@@ -327,7 +327,8 @@
 
             function adicionarRodape() {
             doc.setFontSize(8);
-            doc.text("_______________________________________________________________________________________________________________", 105, 281, { align: "center" });
+            //doc.text("_______________________________________________________________________________________________________________", 105, 281, { align: "center" });
+            doc.line(10, 281, 200, 281);
             doc.text("NUCLEO DE POLICIA MILITAR DE DENISE", 105, 285, { align: "center" });
             doc.text("Rua Piaui - Bairro centro - Denise-MT - CEP 78.380-000", 105, 288, { align: "center" });
             doc.text("Fone: (65) 98170 0447 | E-mail: npmdenise@pm.mt.gov.br", 105, 291, { align: "center" });
@@ -473,12 +474,12 @@ const naturalidadeufAutor = document.getElementsByName("naturalidadeuf_autor[]")
             doc.setFontSize(10);
             y = 60; // Reinicia a posição no topo da nova página
            // doc.setFontSize(10);
-    doc.text(`${index + 1}º) AUTOR DO FATO - NOME: ${nomeAutor}`, 20, y);
-    doc.line(20, y+1, 200, y+1);
+    doc.text(`${index + 1}º) AUTOR DO FATO: ${nomeAutor}`, 20, y);
+    doc.line(10, y+1, 200, y+1);
     }
     verificapagina()
-    doc.text(`${index + 1}º) AUTOR DO FATO - NOME: ${nomeAutor}`, 20, y);   
-    doc.line(20, y+1, 200, y+1);
+    doc.text(`${index + 1}º) AUTOR DO FATO: ${nomeAutor}`, 20, y);   
+    doc.line(10, y+1, 200, y+1);
     y += 6;
     verificapagina()
     doc.text(`   NOME SOCIAL: ${nomeSocial}`, 20, y);
@@ -576,19 +577,6 @@ function verificapagina2() {
         }
 
            
-if (y > 270) {
-            doc.addPage(); // Cria uma nova página
-            adicionarCabecalho()
-            adicionarRodape()
-            doc.setFontSize(10);
-            y = 60; // Reinicia a posição no topo da nova página
-            doc.setFontSize(14);
-doc.text("VITIMA:", 30, y);
-
-}
-doc.setFontSize(14);
-doc.text("VITIMA:", 30, y);
-y += 10;
 doc.setFontSize(10);
 
             document.getElementsByName("nome_vitima[]").forEach((input, index) => {
@@ -623,12 +611,12 @@ const naturalidadeufVitima = document.getElementsByName("naturalidadeuf_vitima[]
             doc.setFontSize(10);
             
             
-            doc.text(`   ${index + 1}º) NOME DA VITIMA: ${nomeVitima}`, 20, y); 
-             doc.line(20, y+1, 200, y+1);
+            doc.text(`   ${index + 1}º) VITIMA: ${nomeVitima}`, 20, y); 
+             doc.line(10, y+1, 200, y+1);
             y += 6;   
             verificapagina2()
            
-            doc.text(`   NOME SOCIAL DA VITIMA: ${nomeSocialVitima}`, 20, y); 
+            doc.text(`   NOME SOCIAL: ${nomeSocialVitima}`, 20, y); 
              doc.line(20, y+1, 200, y+1);
             y += 6;   
             verificapagina2()
@@ -725,9 +713,6 @@ const naturalidadeufVitima = document.getElementsByName("naturalidadeuf_vitima[]
         }
 
 
-            doc.setFontSize(14);
-doc.text("TESTEMUNHA:", 30, y);
-y += 10;
 doc.setFontSize(10);
             
             document.getElementsByName("nome_testemunha[]").forEach((input, index) => {
@@ -763,12 +748,12 @@ const naturalidadeufTestemunha = document.getElementsByName("naturalidadeuf_test
             doc.setFontSize(10);
             
             
-            doc.text(`   ${index + 1}º) NOME DA TESTEMUNHA: ${nomeTestemunha}`, 20, y); 
-             doc.line(20, y+1, 200, y+1);
+            doc.text(`   ${index + 1}º) TESTEMUNHA: ${nomeTestemunha}`, 20, y); 
+             doc.line(10, y+1, 200, y+1);
             y += 6;   
             verificapagina3()
            
-            doc.text(`   NOME SOCIAL DA TESTEMUNHA: ${nomeSocialTestemunha}`, 20, y); 
+            doc.text(`   NOME SOCIAL: ${nomeSocialTestemunha}`, 20, y); 
              doc.line(20, y+1, 200, y+1);
             y += 6;   
             verificapagina3()
