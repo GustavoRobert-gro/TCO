@@ -897,7 +897,7 @@ const numeroDeLinhasmultiplcado = linhas.length * 6;
 
 
           doc.setFont("helvetica", "bold");
-          doc.text(`   ${index + 1}º) Relato da vitima: ${nomeAAutor}`, 30, y); 
+          doc.text(`    Relato da vitima (${index + 1}º): ${nomeAAutor}`, 100, y, { align: "center" }); 
              doc.line(10, y+1, 200, y+1);
              
             y += 15;
@@ -954,7 +954,7 @@ const numeroDeLinhasmultiplcado2 = linhas2.length * 6;
 
 
           doc.setFont("helvetica", "bold");
-          doc.text(`   ${index + 1}º) Relato da testemunha: ${nomeTTestemunha}`, 30, y); 
+          doc.text(`    Relato da testemunha (${index + 1}º): ${nomeTTestemunha}`, 100, y, { align: "center" }); 
              doc.line(10, y+1, 200, y+1);
              
             y += 15;
@@ -1009,7 +1009,7 @@ const numeroDeLinhasmultiplcado3 = linhas3.length * 6;
 
 
           doc.setFont("helvetica", "bold");
-          doc.text(`   ${index + 1}º) Relato do Autor do fato: ${nomeAAutor}`, 30, y); 
+          doc.text(`   Relato do Autor do fato (${index + 1}º) : ${nomeAAutor}`, 100, y, { align: "center" }); 
              doc.line(10, y+1, 200, y+1);
              
             y += 15;
@@ -1026,6 +1026,62 @@ verificapagina6()
 
 
   
+
+
+      //-------------------------------------------------------
+      function verificapagina7() {
+    if (y > 260) {
+            doc.addPage(); // Cria uma nova página
+            adicionarCabecalho()
+            adicionarRodape()
+            doc.setFontSize(10);
+            y = 60; // Reinicia a posição no topo da nova página
+    }
+        }
+verificapagina7()
+
+
+
+            const relatoCondutorCorreto = document.getElementById("relato_policial_correto").value;
+          const nomeCondutor = document.getElementById("nome_completo").value
+          
+          let textoRelatoCondutor = relatoCondutorCorreto
+          
+          const linhas4 = doc.splitTextToSize(textoRelatoCondutor, 175);
+          // Número de linhas geradas
+const numeroDeLinhas4 = linhas4.length;
+const numeroDeLinhasmultiplcado4 = linhas4.length * 6;
+
+          verificapagina7()
+          
+
+          if (y + numeroDeLinhasmultiplcado4 + 15 > 270) {
+            doc.addPage(); // Cria uma nova página
+            adicionarCabecalho()
+            adicionarRodape()
+            doc.setFontSize(10);
+            y = 60; // Reinicia a posição no topo da nova página
+    }
+
+
+          doc.setFont("helvetica", "bold");
+          doc.text(`Relato do Condutor da ocorrência: ${nomeCondutor}`, 100, y, { align: "center" });
+             doc.line(10, y+1, 200, y+1);
+             
+            y += 15;
+             verificapagina7()
+doc.setFont("helvetica", "normal");
+doc.text(textoRelatoCondutor, 20, y, { maxWidth: 175, align: 'justify'});
+
+y += numeroDeLinhas4 * 7;
+verificapagina7()
+               
+
+
+
+
+
+
       
             //const relatoAutorr = document.getElementById('relato_autor').value;
 //doc.text(`   RELATO DO AUTOR DO FATO: ${relatoAutorr}`, 20, y);
