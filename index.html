@@ -595,22 +595,118 @@ doc.setFontSize(10);
            // doc.text(`${index + 1}. ${input.value}`, 10, y);
             const nomeVitima = input.value;
             const nomeSocialVitima = document.getElementsByName("nome_social_vitima[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
-               
+            const cpfVitima = document.getElementsByName("cpf_passaporte_vitima[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const rgcnhVitima = document.getElementsByName("rg_cnh_vitima[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const rgcnhorgaoexpVitima = document.getElementsByName("rg_cnh_orgao_exp_vitima[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const dataexpedicaoVitima = document.getElementsByName("data_expedicao_vitima[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const dataexpedicaoufVitima = document.getElementsByName("data_expedicao_uf_vitima[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const filiacaoVitima = document.getElementsByName("filiacao_vitima[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const enderecoVitima = document.getElementsByName("endereco_vitima[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const municipioVitima = document.getElementsByName("municipio_vitima[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const ufmunicipioVitima = document.getElementsByName("uf_municipio_vitima[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const cepmunicipioVitima = document.getElementsByName("cep_municipio_vitima[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const pontoreferenciaenderecoVitima = document.getElementsByName("ponto_referencia_endereco_vitima[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const telefoneVitima = document.getElementsByName("telefone_vitima[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const emailVitima = document.getElementsByName("e-mail_vitima[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const sexoVitima = document.getElementsByName("sexo_vitima[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const estadocivilVitima = document.getElementsByName("estado_civil_vitima[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const nacionalidadeVitima = document.getElementsByName("nacionalidade_vitima[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+const naturalidadeVitima = document.getElementsByName("naturalidade_vitima[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+const naturalidadeufVitima = document.getElementsByName("naturalidadeuf_vitima[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const datanasciVitima = document.getElementsByName("datanascimento_vitima[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+   const profissaoVitima = document.getElementsByName("profissao_vitima[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+   const localtrabalhoVitima = document.getElementsByName("local_trabalho_vitima[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+   const relatoVitima = document.getElementsByName("relato_vitima[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+
 
            verificapagina2()
             doc.setFontSize(10);
             
             
-            doc.text(`${index + 1}º) NOME DA VITIMA: ${nomeVitima}`, 20, y); 
+            doc.text(`   ${index + 1}º) NOME DA VITIMA: ${nomeVitima}`, 20, y); 
              doc.line(20, y+1, 200, y+1);
             y += 6;   
             verificapagina2()
            
-            doc.text(`NOME SICIAL DA VITIMA: ${nomeSocialVitima}`, 20, y); 
+            doc.text(`   NOME SOCIAL DA VITIMA: ${nomeSocialVitima}`, 20, y); 
              doc.line(20, y+1, 200, y+1);
             y += 6;   
             verificapagina2()
             
+            
+    doc.text(`   CPF: ${cpfVitima}`, 20, y);
+    doc.line(20, y+1, 200, y+1);
+    y += 6;
+    verificapagina2()
+    doc.text(`   RG/CNH: ${rgcnhVitima}`, 20, y);
+    doc.line(20, y+1, 200, y+1);
+    
+    doc.text(`   ORGÃO EXPEDITOR: ${rgcnhorgaoexpVitima}`, 120, y);
+    doc.line(20, y+1, 200, y+1);
+    y += 6;
+    verificapagina2()
+    doc.text(`   DATA DE EXPEDIÇÃO: ${dataexpedicaoVitima}`, 20, y);
+    doc.line(20, y+1, 200, y+1);
+    doc.text(`   UF: ${dataexpedicaoufVitima}`, 120, y);
+    doc.line(20, y+1, 200, y+1);
+    y += 6;
+    verificapagina2()
+    doc.text(`   FILIAÇÃO: ${filiacaoVitima}`, 20, y);
+    doc.line(20, y+1, 200, y+1);
+    y += 6;
+    verificapagina2()
+    doc.text(`   ENDEREÇO: ${enderecoVitima}`, 20, y);
+    doc.line(20, y+1, 200, y+1);
+    y += 6;
+    verificapagina2()
+    doc.text(`   MUNICIPIO: ${municipioVitima}`, 20, y);
+    doc.line(20, y+1, 200, y+1);
+    doc.text(`   UF: ${ufmunicipioVitima}`, 120, y);
+    doc.line(20, y+1, 200, y+1);
+    doc.text(`   CEP: ${cepmunicipioVitima}`, 140, y);
+    doc.line(20, y+1, 200, y+1);
+    y += 6;
+    verificapagina2()
+    doc.text(`   PONTO DE REFERÊNCIA: ${pontoreferenciaenderecoVitima}`, 20, y);
+    doc.line(20, y+1, 200, y+1);
+    y += 6;
+    verificapagina2()
+    doc.text(`   TELEFONE: ${telefoneVitima}`, 20, y);
+    doc.line(20, y+1, 200, y+1);
+    y += 6;
+    verificapagina2()
+    doc.text(`   E-MAIL PESSOAL: ${emailVitima}`, 20, y);
+    doc.line(20, y+1, 200, y+1);
+    y += 6;
+    verificapagina2()
+    doc.text(`   ESTADO CIVIL: ${estadocivilVitima}`, 20, y);
+    doc.line(20, y+1, 200, y+1);
+    y += 6;
+    verificapagina2()
+    doc.text(`   NACIONALIDADE: ${nacionalidadeVitima}`, 20, y);
+    doc.line(20, y+1, 200, y+1);
+    doc.text(`   NATURALIDADE: ${naturalidadeVitima}`, 70, y);
+    doc.text(`   UF: ${naturalidadeufVitima}`, 140, y);
+    y += 6;
+    verificapagina2()
+
+
+    doc.text(`   DATA NASC: ${datanasciVitima}`, 20, y)
+    doc.line(20, y+1, 200, y+1);
+   doc.text(`   SEXO: ${sexoVitima}`, 70, y);
+    y += 6;
+    verificapagina2()
+   doc.text(`   PROFISSÃO: ${profissaoVitima}`, 20, y);
+   doc.line(20, y+1, 200, y+1);
+    y += 6;
+    verificapagina2()
+    
+   doc.text(`   LOCAL DE TRABALHO: ${profissaoVitima}`, 20, y);
+   doc.line(20, y+1, 200, y+1);
+    y += 6;
+    verificapagina2()
+   //doc.text(`   RELATO DO AUTOR DO FATO: ${relatoAutor}`, 20, y);
+    y += 15;
 
 
             });
@@ -618,23 +714,143 @@ doc.setFontSize(10);
             
 
 
-
-            y += 10;
-            doc.text("Testemuna:", 10, y);
-            y += 10;
-            
-            document.getElementsByName("nome_testemunha[]").forEach((input, index) => {
-                if (y > 270) {
+            function verificapagina3() {
+    if (y > 270) {
             doc.addPage(); // Cria uma nova página
             adicionarCabecalho()
             adicionarRodape()
             doc.setFontSize(10);
             y = 60; // Reinicia a posição no topo da nova página
-            doc.text(`${index + 1}. ${input.value}`, 10, y);
-                }
-                
-                doc.text(`${index + 1}. ${input.value}`, 10, y);
-                y += 7;
+    }
+        }
+
+
+            doc.setFontSize(14);
+doc.text("TESTEMUNHA:", 30, y);
+y += 10;
+doc.setFontSize(10);
+            
+            document.getElementsByName("nome_testemunha[]").forEach((input, index) => {
+                const nomeTestemunha = input.value;
+            const nomeSocialTestemunha = document.getElementsByName("nome_social_testemunha[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+            const cpfTestemunha = document.getElementsByName("cpf_passaporte_testemunha[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const rgcnhTestemunha = document.getElementsByName("rg_cnh_testemunha[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const rgcnhorgaoexpTestemunha = document.getElementsByName("rg_cnh_orgao_exp_testemunha[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const dataexpedicaoTestemunha = document.getElementsByName("data_expedicao_testemunha[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const dataexpedicaoufTestemunha = document.getElementsByName("data_expedicao_uf_testemunha[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const filiacaoTestemunha = document.getElementsByName("filiacao_testemunha[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const enderecoTestemunha = document.getElementsByName("endereco_testemunha[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const municipioTestemunha = document.getElementsByName("municipio_testemunha[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const ufmunicipioTestemunha = document.getElementsByName("uf_municipio_testemunha[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const cepmunicipioTestemunha = document.getElementsByName("cep_municipio_testemunha[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const pontoreferenciaenderecoTestemunha = document.getElementsByName("ponto_referencia_endereco_testemunha[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const telefoneTestemunha = document.getElementsByName("telefone_testemunha[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const emailTestemunha = document.getElementsByName("e-mail_testemunha[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const sexoTestemunha = document.getElementsByName("sexo_testemunha[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const estadocivilTestemunha = document.getElementsByName("estado_civil_testemunha[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const nacionalidadeTestemunha = document.getElementsByName("nacionalidade_testemunha[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+const naturalidadeTestemunha = document.getElementsByName("naturalidade_testemunha[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+const naturalidadeufTestemunha = document.getElementsByName("naturalidadeuf_testemunha[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const datanasciTestemunha = document.getElementsByName("datanascimento_testemunha[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+   const profissaoTestemunha = document.getElementsByName("profissao_testemunha[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+   const localtrabalhoTestemunha = document.getElementsByName("local_trabalho_testemunha[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+   const relatoTestemunha = document.getElementsByName("relato_testemunha[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+
+
+
+
+   verificapagina3()
+            doc.setFontSize(10);
+            
+            
+            doc.text(`   ${index + 1}º) NOME DA TESTEMUNHA: ${nomeTestemunha}`, 20, y); 
+             doc.line(20, y+1, 200, y+1);
+            y += 6;   
+            verificapagina3()
+           
+            doc.text(`   NOME SOCIAL DA TESTEMUNHA: ${nomeSocialTestemunha}`, 20, y); 
+             doc.line(20, y+1, 200, y+1);
+            y += 6;   
+            verificapagina3()
+            
+            
+    doc.text(`   CPF: ${cpfTestemunha}`, 20, y);
+    doc.line(20, y+1, 200, y+1);
+    y += 6;
+    verificapagina3()
+    doc.text(`   RG/CNH: ${rgcnhTestemunha}`, 20, y);
+    doc.line(20, y+1, 200, y+1);
+    
+    doc.text(`   ORGÃO EXPEDITOR: ${rgcnhorgaoexpTestemunha}`, 120, y);
+    doc.line(20, y+1, 200, y+1);
+    y += 6;
+    verificapagina3()
+    doc.text(`   DATA DE EXPEDIÇÃO: ${dataexpedicaoTestemunha}`, 20, y);
+    doc.line(20, y+1, 200, y+1);
+    doc.text(`   UF: ${dataexpedicaoufTestemunha}`, 120, y);
+    doc.line(20, y+1, 200, y+1);
+    y += 6;
+    verificapagina3()
+    doc.text(`   FILIAÇÃO: ${filiacaoTestemunha}`, 20, y);
+    doc.line(20, y+1, 200, y+1);
+    y += 6;
+    verificapagina3()
+    doc.text(`   ENDEREÇO: ${enderecoTestemunha}`, 20, y);
+    doc.line(20, y+1, 200, y+1);
+    y += 6;
+    verificapagina3()
+    doc.text(`   MUNICIPIO: ${municipioTestemunha}`, 20, y);
+    doc.line(20, y+1, 200, y+1);
+    doc.text(`   UF: ${ufmunicipioTestemunha}`, 120, y);
+    doc.line(20, y+1, 200, y+1);
+    doc.text(`   CEP: ${cepmunicipioTestemunha}`, 140, y);
+    doc.line(20, y+1, 200, y+1);
+    y += 6;
+    verificapagina3()
+    doc.text(`   PONTO DE REFERÊNCIA: ${pontoreferenciaenderecoTestemunha}`, 20, y);
+    doc.line(20, y+1, 200, y+1);
+    y += 6;
+    verificapagina3()
+    doc.text(`   TELEFONE: ${telefoneTestemunha}`, 20, y);
+    doc.line(20, y+1, 200, y+1);
+    y += 6;
+    verificapagina3()
+    doc.text(`   E-MAIL PESSOAL: ${emailTestemunha}`, 20, y);
+    doc.line(20, y+1, 200, y+1);
+    y += 6;
+    verificapagina3()
+    doc.text(`   ESTADO CIVIL: ${estadocivilTestemunha}`, 20, y);
+    doc.line(20, y+1, 200, y+1);
+    y += 6;
+    verificapagina3()
+    doc.text(`   NACIONALIDADE: ${nacionalidadeTestemunha}`, 20, y);
+    doc.line(20, y+1, 200, y+1);
+    doc.text(`   NATURALIDADE: ${naturalidadeTestemunha}`, 70, y);
+    doc.text(`   UF: ${naturalidadeufTestemunha}`, 140, y);
+    y += 6;
+    verificapagina3()
+
+
+    doc.text(`   DATA NASC: ${datanasciTestemunha}`, 20, y)
+    doc.line(20, y+1, 200, y+1);
+   doc.text(`   SEXO: ${sexoTestemunha}`, 70, y);
+    y += 6;
+    verificapagina3()
+   doc.text(`   PROFISSÃO: ${profissaoTestemunha}`, 20, y);
+   doc.line(20, y+1, 200, y+1);
+    y += 6;
+    verificapagina3()
+    
+   doc.text(`   LOCAL DE TRABALHO: ${profissaoTestemunha}`, 20, y);
+   doc.line(20, y+1, 200, y+1);
+    y += 6;
+    verificapagina3()
+   //doc.text(`   RELATO DO AUTOR DO FATO: ${relatoTestemunha}`, 20, y);
+    y += 15;
+
+
+
+
             });
 
 
