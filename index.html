@@ -8,7 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body class="container mt-4">
-    <h1>Cadastro de TCO</h1>
+    <h1>TERMO CIRCUNSTANCIADO DE OCORRÊNCIA - EM DESENVOLVIMENTO</h1>
     <hr>
 
     <!-- Formulário Dados Gerais -->
@@ -178,6 +178,7 @@
 
         <label for="posto_grad">Posto/Grad:</label>
         <select id="posto_grad" required>
+            <option value="" disabled selected>Selecione uma opção</option>
             <option value="CEL-PMMT">CEL-PMMT</option>
             <option value="TEN Cel-PMMT">TEN Cel-PMMT</option>
             <option value="MAJOR-PMMT">MAJOR-PMMT</option>
@@ -441,12 +442,40 @@
             }
 
             function adicionarRodape() {
-            doc.setFontSize(8);
+                
+
+                doc.setFontSize(8);
             //doc.text("_______________________________________________________________________________________________________________", 105, 281, { align: "center" });
             doc.line(10, 281, 200, 281);
+           
+            if (cidade === "Denise-MT") {
             doc.text("NUCLEO DE POLICIA MILITAR DE DENISE", 105, 285, { align: "center" });
             doc.text("Rua Piaui - Bairro centro - Denise-MT - CEP 78.380-000", 105, 288, { align: "center" });
             doc.text("Fone: (65) 98170 0447 | E-mail: npmdenise@pm.mt.gov.br", 105, 291, { align: "center" });
+            }
+            if (cidade === "Nova Olimpia-MT") {
+            doc.text("1ª COMPANHIA INDEPENDENTE DE NOVA OLIMPIA", 105, 285, { align: "center" });
+            doc.text("Rua  - Bairro centro - Nova Olimpia-MT - CEP 78.380-000", 105, 288, { align: "center" });
+            doc.text("Fone: (65) 98170 0447 | E-mail: @pm.mt.gov.br", 105, 291, { align: "center" });
+            }
+            if (cidade === "Barra do Bugres-MT") {
+            doc.text("12ª COMPANHIA INDEPENDENTE DE BARRA DO BUGRES", 105, 285, { align: "center" });
+            doc.text("Rua  - Bairro centro - Barra do Bugres-MT - CEP 78.380-000", 105, 288, { align: "center" });
+            doc.text("Fone: (65) 98170 0447 | E-mail: @pm.mt.gov.br", 105, 291, { align: "center" });
+            }
+            if (cidade === "Porto Estrela-MT") {
+            doc.text("NUCLEO DE POLICIA MILITAR DE PORTO ESTRELA", 105, 285, { align: "center" });
+            doc.text("Rua  - Bairro centro - Barra do Bugres-MT - CEP 78.380-000", 105, 288, { align: "center" });
+            doc.text("Fone: (65) 98170 0447 | E-mail: @pm.mt.gov.br", 105, 291, { align: "center" });
+            }
+            if (cidade === "Tangara da serra-MT") {
+            doc.text("19º BATALÃO DE POLICIA MILITAR DE TANGARA DA SERRA", 105, 285, { align: "center" });
+            doc.text("Rua  - Bairro centro - Barra do Bugres-MT - CEP 78.380-000", 105, 288, { align: "center" });
+            doc.text("Fone: (65) 98170 0447 | E-mail: @pm.mt.gov.br", 105, 291, { align: "center" });
+            }
+
+
+
         }
 
             adicionarCabecalho();
