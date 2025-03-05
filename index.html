@@ -19,18 +19,76 @@
         <input type="text" id="numero_tco" value="0038" required style="width: 70px";>
 
         
-        
-        <label for="artigo">Artigo:</label>
-        <input type="text" id="artigo" value="310" required style="width: 120px";>
-
-        <label for="lei">Lei:</label>
-        <input type="text" id="lei" value="" required style="width: 550px";>
+           <!--inicio do preenchimento automatico-->
+           <label for="naturezaa">Natureza:</label>
+<select id="naturezaa" required style="width: 800px;">
+    <option value="" disabled selected>Selecione uma opção</option>
+    <option value="Lesão Corporal Leve">Lesão Corporal Leve</option>
+    <option value="Difamação">Difamação</option>
+    <option value="Injúria">Injúria</option>
+    <option value="Ameaça">Ameaça</option>
+    <option value="Violação de Domicílio">Violação de Domicílio</option>
+    <option value="Dano Simples">Dano Simples</option>
+    <option value="Introdução ou Abandono de Animais">Introdução ou Abandono de Animais</option>
+    <option value="Descumprimento de Legítima Defesa">Descumprimento de Legítima Defesa</option>
+    <option value="Resistência sem Violência">Resistência sem Violência</option>
+    <option value="Desacato">Desacato</option>
+    <option value="Contrabando de Pequeno Valor">Contrabando de Pequeno Valor</option>
+    <option value="Dirigir Sob Influência de Álcool">Dirigir Sob Influência de Álcool</option>
+    <option value="Fuga de Local de Acidente">Fuga de Local de Acidente</option>
+    <option value="Uso de Documento Falso no Trânsito">Uso de Documento Falso no Trânsito</option>
+    <option value="Entrega de direção de veículo automotor a pessoa não habilitada ou sem condições de conduzir o veículo com segurança">Entrega de direção de veículo automotor a pessoa não habilitada ou sem condições de conduzir o veículo com segurança</option>
+    <option value="Direção não habilitada de veículo automotor, gerando perigo">Direção não habilitada de veículo automotor, gerando perigo</option>
+    <option value="Tráfego em velocidade incompatível com a segurança no trânsito">Tráfego em velocidade incompatível com a segurança no trânsito</option>
+</select>
         </div>
 
-        <label for="naturezaa">Naturezaa:</label>
-        <input type="text" id="naturezaa" value="" required style="width: 800px";>
+<label for="artigo">Artigo:</label>
+<input type="text" id="artigo" required style="width: 120px;" readonly>
 
+<label for="lei">Lei:</label>
+<input type="text" id="lei" required style="width: 550px;" readonly>
+
+<script>
+  // Crimes de menor potencial ofensivo (pena máxima até 2 anos) incluindo crimes de trânsito
+  const naturezas = {
+    "Lesão Corporal Leve": { artigo: "129", lei: "Código Penal - Decreto-Lei nº 2.848/40" },
+    "Difamação": { artigo: "139", lei: "Código Penal - Decreto-Lei nº 2.848/40" },
+    "Injúria": { artigo: "140", lei: "Código Penal - Decreto-Lei nº 2.848/40" },
+    "Ameaça": { artigo: "147", lei: "Código Penal - Decreto-Lei nº 2.848/40" },
+    "Violação de Domicílio": { artigo: "150", lei: "Código Penal - Decreto-Lei nº 2.848/40" },
+    "Dano Simples": { artigo: "163", lei: "Código Penal - Decreto-Lei nº 2.848/40" },
+    "Introdução ou Abandono de Animais": { artigo: "164", lei: "Código Penal - Decreto-Lei nº 2.848/40" },
+    "Descumprimento de Legítima Defesa": { artigo: "182", lei: "Código Penal - Decreto-Lei nº 2.848/40" },
+    "Resistência sem Violência": { artigo: "329", lei: "Código Penal - Decreto-Lei nº 2.848/40" },
+    "Desacato": { artigo: "331", lei: "Código Penal - Decreto-Lei nº 2.848/40" },
+    "Contrabando de Pequeno Valor": { artigo: "334-A", lei: "Código Penal - Decreto-Lei nº 2.848/40" },
+    "Dirigir Sob Influência de Álcool": { artigo: "306", lei: "Código de Trânsito Brasileiro - Lei nº 9.503/1997" },
+    "Fuga de Local de Acidente": { artigo: "307", lei: "Código de Trânsito Brasileiro - Lei nº 9.503/1997" },
+    "Uso de Documento Falso no Trânsito": { artigo: "171", lei: "Código de Trânsito Brasileiro - Lei nº 9.503/1997" },
     
+    "Entrega de direção de veículo automotor a pessoa não habilitada ou sem condições de conduzir o veículo com segurança": { artigo: "310", lei: "Código de Trânsito Brasileiro - Lei nº 9.503/1997" },
+
+    "Direção não habilitada de veículo automotor, gerando perigo": { artigo: "309", lei: "Código de Trânsito Brasileiro - Lei nº 9.503/1997" },
+    "Tráfego em velocidade incompatível com a segurança no trânsito": { artigo: "311", lei: "Código de Trânsito Brasileiro - Lei nº 9.503/1997" }
+  };
+
+  // Atualizar os campos ao selecionar uma opção
+  document.getElementById("naturezaa").addEventListener("change", function() {
+    let valorSelecionado = this.value;
+    
+    if (naturezas[valorSelecionado]) {
+      document.getElementById("artigo").value = naturezas[valorSelecionado].artigo;
+      document.getElementById("lei").value = naturezas[valorSelecionado].lei;
+    } else {
+      document.getElementById("artigo").value = "";
+      document.getElementById("lei").value = "";
+    }
+  });
+</script>
+
+
+    <!--fim do preenchimento automatico-->
        
         <div class="date-group">
 
@@ -40,13 +98,25 @@
             <option value="Barra do Bugres-MT">Barra do Bugres-MT</option>
             <option value="Nova Olimpia-MT">Nova Olimpia-MT</option>
             <option value="Porto Estrela-MT">Porto Estrela-MT</option>
+            <option value="Tangara da serra-MT">Tangara da serra-MT</option>
+            <option value="Campo Novo dos Parecis-MT">Campo Novo dos Parecis-MT</option>
+            <option value="Brasnorte-MT">Brasnorte-MT</option>
+            <option value="Sapezal-MT">Sapezal-MT</option>
             </select>
 
             <label for="dia">Dia:</label>
-            <input type="text" id="dia" value= "26" required style="width: 40px";>
+            <input type="text" id="dia" required style="width: 40px";>
+
+            <script>
+                document.getElementById("dia").value = new Date().getDate();
+              </script>
             
             <label for="mes">Mês:</label>
-            <input type="text" id="mes" value="02" required style="width: 40px";>
+            <input type="text" id="mes" required style="width: 40px";>
+
+            <script>
+                document.getElementById("mes").value = new Date().getMonth() + 1;
+              </script>
             
             <label for="ano">Ano:</label>
             <input type="text" id="ano" value="2025" required style="width: 80px";>
@@ -64,8 +134,26 @@
 
         
     
+            
             <label for="hora_fato">Hr Fato:</label>
-            <input type="text" id="hora_fato" value="00h00min" required>
+            <input type="text" id="hora_fato" required>
+            
+            <script>
+              function formatarHoraAtual() {
+                let agora = new Date();
+                let horas = agora.getHours().toString().padStart(2, "0");
+                let minutos = agora.getMinutes().toString().padStart(2, "0");
+                
+                return `${horas}h${minutos}min`;
+              }
+            
+              document.getElementById("hora_fato").value = formatarHoraAtual();
+            </script>
+            
+
+
+
+
         </div>
 
         <label for="quartel">Quartel:</label>
@@ -375,7 +463,7 @@ const diaExtenso = numerosPorExtenso[dia];
 const anoExtenso = converterAnoParaExtenso(ano);
 
 
-let texto = `Aos ${diaExtenso} dias do mês de ${mesExtenso} do ano de ${anoExtenso}, nesta cidade de ${cidade}, Estado de Mato Grosso, no Quartel do ${quartel}, autuo as peças que adiante se seguem, do que para constar, lavrei este Termo. Eu, ${nome_completo} (${posto_grad}), escrevente, que o lavrei e assino.`;
+let texto = `Aos ${diaExtenso} dias do mês de ${mesExtenso} do ano de dois mil e vinte e cinco, nesta cidade de ${cidade}, Estado de Mato Grosso, no Quartel do ${quartel}, autuo as peças que adiante se seguem, do que para constar, lavrei este Termo. Eu, ${nome_completo} (${posto_grad}), escrevente, que o lavrei e assino.`;
 
 
 doc.setFont("helvetica", "normal");
