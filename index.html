@@ -848,7 +848,68 @@ const naturalidadeufTestemunha = document.getElementsByName("naturalidadeuf_test
 
             });
 
-           
+                 //-------------------------------------------------------
+      function verificapagina7() {
+    if (y > 260) {
+            doc.addPage(); // Cria uma nova página
+            adicionarCabecalho()
+            adicionarRodape()
+            doc.setFontSize(10);
+            y = 60; // Reinicia a posição no topo da nova página
+    }
+        }
+verificapagina7()
+
+doc.setFont("helvetica", "bold");
+doc.setFontSize(14);
+            doc.text("C- HISTORICO:", 30, y);
+            y += 20;
+            doc.setFontSize(10);
+            verificapagina4()
+
+
+            const relatoCondutorCorreto = document.getElementById("relato_policial_correto").value;
+          const nomeCondutor = document.getElementById("nome_completo").value
+          const rgPM = document.getElementById("rg").value
+          
+          let textoRelatoCondutor = relatoCondutorCorreto
+          
+          const linhas4 = doc.splitTextToSize(textoRelatoCondutor, 175);
+          // Número de linhas geradas
+const numeroDeLinhas4 = linhas4.length;
+const numeroDeLinhasmultiplcado4 = linhas4.length * 6;
+
+          verificapagina7()
+          
+
+          if (y + numeroDeLinhasmultiplcado4 + 15 > 270) {
+            doc.addPage(); // Cria uma nova página
+            adicionarCabecalho()
+            adicionarRodape()
+            doc.setFontSize(10);
+            y = 60; // Reinicia a posição no topo da nova página
+    }
+
+
+          doc.setFont("helvetica", "bold");
+          doc.text(`Relato do Condutor da ocorrência: ${nomeCondutor} `, 100, y, { align: "center" });
+             doc.line(10, y+1, 200, y+1);
+             
+            y += 15;
+             verificapagina7()
+doc.setFont("helvetica", "normal");
+doc.text(textoRelatoCondutor, 20, y, { maxWidth: 175, align: 'justify'});
+
+y += numeroDeLinhas4 * 7;
+y += 10;
+doc.text(`__________________________________________________`, 100, y-4, { align: "center" });
+doc.text(`   ${nomeCondutor}- ${posto_grad}`, 100, y, { align: "center" });
+y += 5;
+doc.text(`  RGPM: ${rgPM}`, 100, y, { align: "center" });
+y += 10;
+verificapagina7()
+               
+
 
            
 
@@ -865,21 +926,15 @@ const naturalidadeufTestemunha = document.getElementsByName("naturalidadeuf_test
         }
 verificapagina4()
 
-doc.setFont("helvetica", "bold");
-doc.setFontSize(14);
-            doc.text("C- HISTORICO:", 30, y);
-            y += 20;
-            doc.setFontSize(10);
-            verificapagina4()
 
 document.getElementsByName("nome_vitima[]").forEach((input, index) => {
-                const nomeAAutor = input.value;
-            const relatoAutorcorreto = document.getElementsByName("relato_vitima[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
-
+                const nomeVVitima = input.value;
+            const relatoVitimacorreto = document.getElementsByName("relato_vitima[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+const cpfVVitima = document.getElementsByName("cpf_passaporte_vitima[]")[index]?.value || "N/A"; // Se não houver nome social,
           
-          let textoRelatoAutor = relatoAutorcorreto 
+          let textoRelatoVitima = relatoVitimacorreto 
           
-          const linhas = doc.splitTextToSize(textoRelatoAutor, 175);
+          const linhas = doc.splitTextToSize(textoRelatoVitima, 175);
           // Número de linhas geradas
 const numeroDeLinhas = linhas.length;
 const numeroDeLinhasmultiplcado = linhas.length * 6;
@@ -887,7 +942,7 @@ const numeroDeLinhasmultiplcado = linhas.length * 6;
           verificapagina4()
           
 
-          if (y + numeroDeLinhasmultiplcado + 15 > 270) {
+          if (y + numeroDeLinhasmultiplcado + 15 + 15> 270) {
             doc.addPage(); // Cria uma nova página
             adicionarCabecalho()
             adicionarRodape()
@@ -897,15 +952,25 @@ const numeroDeLinhasmultiplcado = linhas.length * 6;
 
 
           doc.setFont("helvetica", "bold");
-          doc.text(`    Relato da vitima (${index + 1}º): ${nomeAAutor}`, 100, y, { align: "center" }); 
+          doc.text(`    Relato da vitima (${index + 1}): ${nomeVVitima}`, 100, y, { align: "center" }); 
              doc.line(10, y+1, 200, y+1);
              
             y += 15;
              verificapagina4()
 doc.setFont("helvetica", "normal");
-doc.text(textoRelatoAutor, 20, y, { maxWidth: 175, align: 'justify'});
+doc.text(textoRelatoVitima, 20, y, { maxWidth: 175, align: 'justify'});
+
+
 
 y += numeroDeLinhas * 7;
+
+
+y += 10;
+doc.text(`__________________________________________________`, 100, y-4, { align: "center" });
+doc.text(`   ${nomeVVitima}`, 100, y, { align: "center" });
+y += 5;
+doc.text(`  CPF: ${cpfVVitima}`, 100, y, { align: "center" });
+y += 10;
 verificapagina4()
                
 
@@ -932,7 +997,7 @@ verificapagina5()
 document.getElementsByName("nome_testemunha[]").forEach((input, index) => {
                 const nomeTTestemunha = input.value;
             const relatoTestemunhaCorreto = document.getElementsByName("relato_testemunha[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
-
+const cpfTTestemunha = document.getElementsByName("cpf_passaporte_testemunha[]")[index]?.value || "N/A"; // Se não houver nom
           
           let textoRelatoTestemunha = relatoTestemunhaCorreto 
           
@@ -944,7 +1009,7 @@ const numeroDeLinhasmultiplcado2 = linhas2.length * 6;
           verificapagina5()
           
 
-          if (y + numeroDeLinhasmultiplcado2 + 15 > 270) {
+          if (y + numeroDeLinhasmultiplcado2 + 15 + 15 > 270) {
             doc.addPage(); // Cria uma nova página
             adicionarCabecalho()
             adicionarRodape()
@@ -954,7 +1019,7 @@ const numeroDeLinhasmultiplcado2 = linhas2.length * 6;
 
 
           doc.setFont("helvetica", "bold");
-          doc.text(`    Relato da testemunha (${index + 1}º): ${nomeTTestemunha}`, 100, y, { align: "center" }); 
+          doc.text(`    Relato da testemunha (${index + 1}): ${nomeTTestemunha}`, 100, y, { align: "center" }); 
              doc.line(10, y+1, 200, y+1);
              
             y += 15;
@@ -962,7 +1027,17 @@ const numeroDeLinhasmultiplcado2 = linhas2.length * 6;
 doc.setFont("helvetica", "normal");
 doc.text(textoRelatoTestemunha, 20, y, { maxWidth: 175, align: 'justify'});
 
+
+
 y += numeroDeLinhas2 * 7;
+
+
+y += 10;
+doc.text(`__________________________________________________`, 100, y-4, { align: "center" });
+doc.text(`   ${nomeTTestemunha}`, 100, y, { align: "center" });
+y += 5;
+doc.text(`  CPF: ${cpfTTestemunha}`, 100, y, { align: "center" });
+y += 10;
 verificapagina5()
                
 
@@ -987,7 +1062,7 @@ verificapagina6()
 document.getElementsByName("nome_autor[]").forEach((input, index) => {
                 const nomeAAutor = input.value;
             const relatoAutorCorreto = document.getElementsByName("relato_autor[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
-
+const cpfAutor = document.getElementsByName("cpf_passaporte_autor[]")[index]?.value || "N/A"; // Se não houver nome social, 
           
           let textoRelatoAutor = relatoAutorCorreto 
           
@@ -999,7 +1074,7 @@ const numeroDeLinhasmultiplcado3 = linhas3.length * 6;
           verificapagina6()
           
 
-          if (y + numeroDeLinhasmultiplcado3 + 15 > 270) {
+          if (y + numeroDeLinhasmultiplcado3 + 15 +15 > 270) {
             doc.addPage(); // Cria uma nova página
             adicionarCabecalho()
             adicionarRodape()
@@ -1009,7 +1084,7 @@ const numeroDeLinhasmultiplcado3 = linhas3.length * 6;
 
 
           doc.setFont("helvetica", "bold");
-          doc.text(`   Relato do Autor do fato (${index + 1}º) : ${nomeAAutor}`, 100, y, { align: "center" }); 
+          doc.text(`   Relato do Autor do fato (${index + 1}) : ${nomeAAutor}`, 100, y, { align: "center" }); 
              doc.line(10, y+1, 200, y+1);
              
             y += 15;
@@ -1017,7 +1092,16 @@ const numeroDeLinhasmultiplcado3 = linhas3.length * 6;
 doc.setFont("helvetica", "normal");
 doc.text(textoRelatoAutor, 20, y, { maxWidth: 175, align: 'justify'});
 
+
+
 y += numeroDeLinhas3 * 7;
+
+y += 10;
+doc.text(`__________________________________________________`, 100, y-4, { align: "center" });
+doc.text(`   ${nomeAAutor}`, 100, y, { align: "center" });
+y += 5;
+doc.text(`  CPF: ${cpfAutor}`, 100, y, { align: "center" });
+y += 10;
 verificapagina6()
                
 
@@ -1028,54 +1112,6 @@ verificapagina6()
   
 
 
-      //-------------------------------------------------------
-      function verificapagina7() {
-    if (y > 260) {
-            doc.addPage(); // Cria uma nova página
-            adicionarCabecalho()
-            adicionarRodape()
-            doc.setFontSize(10);
-            y = 60; // Reinicia a posição no topo da nova página
-    }
-        }
-verificapagina7()
-
-
-
-            const relatoCondutorCorreto = document.getElementById("relato_policial_correto").value;
-          const nomeCondutor = document.getElementById("nome_completo").value
-          
-          let textoRelatoCondutor = relatoCondutorCorreto
-          
-          const linhas4 = doc.splitTextToSize(textoRelatoCondutor, 175);
-          // Número de linhas geradas
-const numeroDeLinhas4 = linhas4.length;
-const numeroDeLinhasmultiplcado4 = linhas4.length * 6;
-
-          verificapagina7()
-          
-
-          if (y + numeroDeLinhasmultiplcado4 + 15 > 270) {
-            doc.addPage(); // Cria uma nova página
-            adicionarCabecalho()
-            adicionarRodape()
-            doc.setFontSize(10);
-            y = 60; // Reinicia a posição no topo da nova página
-    }
-
-
-          doc.setFont("helvetica", "bold");
-          doc.text(`Relato do Condutor da ocorrência: ${nomeCondutor}`, 100, y, { align: "center" });
-             doc.line(10, y+1, 200, y+1);
-             
-            y += 15;
-             verificapagina7()
-doc.setFont("helvetica", "normal");
-doc.text(textoRelatoCondutor, 20, y, { maxWidth: 175, align: 'justify'});
-
-y += numeroDeLinhas4 * 7;
-verificapagina7()
-               
 
 
 
