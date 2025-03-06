@@ -187,13 +187,14 @@
             <option value="NPM PORTO ESTRELA">Nucleo de Policia Militar de Porto Estrela-MT</option>
             </select>
     
-        
+        <!--quadro de componentes da gupm-->
 
         <div class="date-group">
-        <label for="nome_completo">Nome Completo do condutor:</label>
+        <label for="nome_completo">Nome Completo do CONDUTOR:</label>
 <select id="nome_completo" required>
-<option value="GUSTAVO ROBERT DE OLIVEIRA">Gustavo Robert de Oliveira</option>
-<option value="JOÃO SILVA">JOÃO SILVA</option>
+    <option value="" disabled selected>Selecione uma opção</option>
+    <option value="GUSTAVO ROBERT DE OLIVEIRA">Gustavo Robert de Oliveira</option>
+    <option value="DOUGLAS BEZERRA DE OLIVEIRA">Douglas Bezerra de Oliveira</option>
 <option value="MARIA FERREIRA">MARIA FERREIRA</option>
 <option value="ANTONIO SOUZA">ANTONIO SOUZA</option>
 </select>
@@ -219,23 +220,65 @@
         <label for="rg">RGPM:</label>
         <input type="text" id="rg" value="885.812" required style="width: 120px";>
 
+    </div>
         
+ <!--quadro de componentes da gupm-->
+
+
+     <div class="date-group">
+        <label for="nome_completo_componente2">Nome Componente da GUSV:</label>
+<select id="nome_completo_componente2" required>
+    <option value="" disabled selected>Selecione uma opção</option>
+<option value="GUSTAVO ROBERT DE OLIVEIRA">Gustavo Robert de Oliveira</option>
+<option value="DOUGLAS BEZERRA DE OLIVEIRA">Douglas Bezerra de Oliveira</option>
+<option value="MARIA FERREIRA">MARIA FERREIRA</option>
+<option value="ANTONIO SOUZA">ANTONIO SOUZA</option>
+</select>
         
+
+        <label for="posto_grad_componente2">Posto/Grad:</label>
+        <select id="posto_grad_componente2" required>
+            <option value="" disabled selected>Selecione uma opção</option>
+            <option value="CEL-PMMT">CEL-PMMT</option>
+            <option value="TEN Cel-PMMT">TEN Cel-PMMT</option>
+            <option value="MAJOR-PMMT">MAJOR-PMMT</option>
+            <option value="CAP-PMMT">CAP-PMMT</option>
+            <option value="TEN-PMMT">TEN-PMMT</option>
+            <option value="SUB TEN-PMMT">SUB TEN-PMMT</option>
+            <option value="1º SGT-PMMT">1º SGT-PMMT</option>
+            <option value="2º SGT-PMMT">2º SGT-PMMT</option>
+            <option value="3º SGT-PMMT">3º SGT-PMMT</option>
+            <option value="CB-PMMT">CB-PMMT</option>
+            <option value="SD-PMMT">SD-PMMT</option>
         
+        </select>
+
+        <label for="rg_componente2">RGPM:</label>
+        <input type="text" id="rg_componente2" value="885.812" required style="width: 120px";>
+
+    </div>
+       
+
+
+
+               <!--quadro de componentes da gupm-->
+
+
+
+    <div class="date-group">
         <label for="cep">CEP:</label>
         <input type="text" id="cep" value="78.380-000" required style="width: 90px";>
 
-        </div>
-
         
 
         
 
         
-        <div class="date-group">
+
+        
 
         <label for="endereco">ENDEREÇO:</label>
-        <input type="text" id="endereco" value="endereço do local do fato" required style="width: 800px";>
+        <input type="text" id="endereco" value="endereço do local do fato" required style="width: 700px";>
         </div>
 
         <div class="date-group"></div>
@@ -419,8 +462,15 @@
             const cidade = document.getElementById('cidade').value;
             const quartel = document.getElementById('quartel').value;
             const nome_completo = document.getElementById('nome_completo').value;
+            const nome_completo_componente2 = document.getElementById('nome_completo_componente2').value;
+           
+           
             const posto_grad = document.getElementById('posto_grad').value;
+            const posto_grad_componente2 = document.getElementById('posto_grad_componente2').value;
+
             const rg = document.getElementById('rg').value;
+            const rg_componente2 = document.getElementById('rg_componente2').value;
+
             const hora_fato = document.getElementById('hora_fato').value;
             //const data_fato = document.getElementById('data_fato').value;
             const data_registro = document.getElementById('data_registro').value;
@@ -1062,7 +1112,14 @@ const numeroDeLinhasmultiplcado4 = linhas4.length * 6;
             y += 15;
              verificapagina7()
 doc.setFont("helvetica", "normal");
-doc.text(textoRelatoCondutor, 20, y, { maxWidth: 175, align: 'justify'});
+//doc.text(textoRelatoCondutor, 20, y, { maxWidth: 175, align: 'justify'});
+
+const textoFormatado = doc.splitTextToSize(textoRelatoCondutor, 175);
+doc.text(textoFormatado, 20, y);
+
+
+
+
 
 y += numeroDeLinhas4 * 7;
 y += 10;
@@ -1289,21 +1346,94 @@ y = 60
             doc.text(`  CONCLUSÃO POLICIAL`, 100, y, { align: "center" });
             doc.setFontSize(10);
 y += 20
-            let textoconclusaopolicial = `Diante das circunstâncias e de tudo o que foi relatado, resta acrescentar que o autor infringiu o artigo n.º ${artigoo} da ${lei}, Nada mais havendo a tratar, deu-se por findo o presente termo circunstanciado de ocorrência que vai devidamente assinado por uma testemunha (se houver), pelo autor e por mim, condutor da ocorrência, que o digitei.                                                                                                                                                                                                                                                              E pelo fato do autor ter se comprometido a comparecer ao Juizado Especial Criminal da Comarca de ______/MT, este foi liberado sem lesões corporais, após a assinatura do termo de compromisso.`;
+            let textoconclusaopolicial = `Diante das circunstâncias e de tudo o que foi relatado, resta acrescentar que o autor infringiu o artigo n.º ${artigoo} da ${lei}, Nada mais havendo a tratar, deu-se por findo o presente termo circunstanciado de ocorrência que vai devidamente assinado por uma testemunha (se houver), pelo autor e por mim, condutor da ocorrência, que o digitei.  E pelo fato do autor ter se comprometido a comparecer ao Juizado Especial Criminal da Comarca de Barra do Bugres - MT, este foi liberado sem lesões corporais, após a assinatura do termo de compromisso.`;
 
             
 
 
 doc.setFont("helvetica", "normal");
 doc.text(textoconclusaopolicial, 20, y, { maxWidth: 175, align: 'justify'});
-
-doc.text("Em Desenvolvimento...", 20, y + 80, { maxWidth: 175, align: 'justify'});
+doc.setFont("helvetica", "bold");
+doc.text("D- PROVIDÊNCIAS ADOTADAS", 30, y + 40, { maxWidth: 175, align: 'justify'});
       
+y += 40
+
+y += 10
+
+doc.line(20, y-3, 200, y-3);
+doc.text("PROVIDÊNCIAS:", 20, y, { maxWidth: 175, align: 'justify'});
+y += 20
+doc.line(20, y-3, 200, y-3);
+doc.text("DOC/ANEXOS:", 20, y , { maxWidth: 175, align: 'justify'});
+y += 20
+doc.line(20, y-3, 200, y-3);
+doc.text("DESCRIÇÃO DOS OBJETOS/ DOCUMENTOS APREENDIDOS:", 20, y , { maxWidth: 175, align: 'justify'});
+y += 20
+doc.line(20, y-3, 200, y-3);
+
+
             //const relatoAutorr = document.getElementById('relato_autor').value;
 //doc.text(`   RELATO DO AUTOR DO FATO: ${relatoAutorr}`, 20, y);
+doc.line(20, 127, 20, y-3);
+
+doc.line(200, 127, 200, y-3);
+    
+y += 10
+doc.text("E- IDENTIFICAÇÃO DA GUARNIÇÃO", 30, y , { maxWidth: 175, align: 'justify'});
+y += 10
+
+doc.line(20, y-3, 200, y-3);
+doc.text(posto_grad + " - " + nomeCondutor + "- RGPM: " + rgPM, 30, y+2 , { maxWidth: 175, align: 'justify'});
+y += 7
+doc.line(20, y-3, 200, y-3);
+//doc.text("SD PMMT - DOUGLAS BEZERRA DE OLIVEIRA - RGPM: 887.192", 30, y+2 , { maxWidth: 175, align: 'justify'});
+doc.text(posto_grad_componente2 + " - " + nome_completo_componente2 + "- RGPM: " + rg_componente2, 30, y+2 , { maxWidth: 175, align: 'justify'});
+y += 7
+doc.line(20, y-3, 200, y-3);
+
+y += 7    
+doc.line(20, y-3, 200, y-3);
+y += 7  
+doc.line(20, y-3, 200, y-3);
+y += 7 
 
 
-            doc.save("tco.pdf");
+//aqui começa a pagina anexo
+doc.addPage(); // Cria uma nova página
+
+adicionarCabecalho()
+adicionarRodape()
+y += 7 
+//doc.text("Referência: Termo Circunstanciado de Ocorrência de nº ___/UPM/ANO", 30, y , { maxWidth: 175, align: 'justify'});
+
+doc.setFontSize(12);
+doc.setFont("helvetica", "bold");
+doc.text("Referência: Termo Circunstanciado de Ocorrência de Nº TCO/CR07/" +"/"+document.getElementById('ano').value+"."+ parseInt(document.getElementById('numero_tco').value), 100, 70, { align: "center" });
+
+
+//doc.text("ANEXOS"), 100, 90, { align: "center"});
+
+
+
+
+doc.text("ANEXOS:", 90, 90 , { maxWidth: 175, align: 'justify'});
+doc.line(20, 95, 180, 95);
+doc.line(20, 270, 180, 270);
+
+
+
+
+
+//aqui começa a pagina DO TERMO DE COMPROMISSO
+doc.addPage(); // Cria uma nova página
+
+adicionarCabecalho()
+adicionarRodape()
+y += 7 
+
+
+
+doc.save("tco.pdf");
         }
     </script>
 
