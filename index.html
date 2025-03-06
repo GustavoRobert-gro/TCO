@@ -23,6 +23,7 @@
            <label for="naturezaa">Natureza:</label>
 <select id="naturezaa" required style="width: 800px;">
     <option value="" disabled selected>Selecione uma opção</option>
+    <option value="Ameaça">Ameaça</option>
     <option value="Lesão Corporal Leve">Lesão Corporal Leve</option>
     <option value="Difamação">Difamação</option>
     <option value="Injúria">Injúria</option>
@@ -40,6 +41,13 @@
     <option value="Entrega de direção de veículo automotor a pessoa não habilitada ou sem condições de conduzir o veículo com segurança">Entrega de direção de veículo automotor a pessoa não habilitada ou sem condições de conduzir o veículo com segurança</option>
     <option value="Direção não habilitada de veículo automotor, gerando perigo">Direção não habilitada de veículo automotor, gerando perigo</option>
     <option value="Tráfego em velocidade incompatível com a segurança no trânsito">Tráfego em velocidade incompatível com a segurança no trânsito</option>
+
+    <option value="Quem adquirir, guardar, tiver em depósito, transportar ou trouxer consigo, para consumo pessoal, drogas sem autorização ou em desacordo com determinação legal ou regulamentar">Quem adquirir, guardar, tiver em depósito, transportar ou trouxer consigo, para consumo pessoal, drogas sem autorização ou em desacordo com determinação legal ou regulamentar</option>
+
+    <option value="Às mesmas medidas submete-se quem, para seu consumo pessoal, semeia, cultiva ou colhe plantas destinadas à preparação de pequena quantidade de substância ou produto capaz de causar dependência física ou psíquica.">Às mesmas medidas submete-se quem, para seu consumo pessoal, semeia, cultiva ou colhe plantas destinadas à preparação de pequena quantidade de substância ou produto capaz de causar dependência física ou psíquica.</option>
+
+    <option value="Oferecer droga, eventualmente e sem objetivo de lucro, a pessoa de seu relacionamento, para juntos a consumirem">Oferecer droga, eventualmente e sem objetivo de lucro, a pessoa de seu relacionamento, para juntos a consumirem</option>
+
 </select>
         </div>
 
@@ -52,6 +60,10 @@
 <script>
   // Crimes de menor potencial ofensivo (pena máxima até 2 anos) incluindo crimes de trânsito
   const naturezas = {
+    "Ameaça": { artigo: "147", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Violação de domicílio": { artigo: "150,caput", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+
+
     "Lesão Corporal Leve": { artigo: "129", lei: "Código Penal - Decreto-Lei nº 2.848/40" },
     "Difamação": { artigo: "139", lei: "Código Penal - Decreto-Lei nº 2.848/40" },
     "Injúria": { artigo: "140", lei: "Código Penal - Decreto-Lei nº 2.848/40" },
@@ -70,7 +82,18 @@
     "Entrega de direção de veículo automotor a pessoa não habilitada ou sem condições de conduzir o veículo com segurança": { artigo: "310", lei: "Código de Trânsito Brasileiro - Lei nº 9.503/1997" },
 
     "Direção não habilitada de veículo automotor, gerando perigo": { artigo: "309", lei: "Código de Trânsito Brasileiro - Lei nº 9.503/1997" },
-    "Tráfego em velocidade incompatível com a segurança no trânsito": { artigo: "311", lei: "Código de Trânsito Brasileiro - Lei nº 9.503/1997" }
+    "Tráfego em velocidade incompatível com a segurança no trânsito": { artigo: "311", lei: "Código de Trânsito Brasileiro - Lei nº 9.503/1997" },
+"Quem adquirir, guardar, tiver em depósito, transportar ou trouxer consigo, para consumo pessoal, drogas sem autorização ou em desacordo com determinação legal ou regulamentar": { artigo: "28, § 1º", lei: "Lei de Drogas (Lei nº 11.343, de 23 de agosto de 2006)" },
+
+"Às mesmas medidas submete-se quem, para seu consumo pessoal, semeia, cultiva ou colhe plantas destinadas à preparação de pequena quantidade de substância ou produto capaz de causar dependência física ou psíquica.": { artigo: "28, caput", lei: "Lei de Drogas (Lei nº 11.343, de 23 de agosto de 2006)" },
+
+"Oferecer droga, eventualmente e sem objetivo de lucro, a pessoa de seu relacionamento, para juntos a consumirem": { artigo: "Art. 33. § 3°", lei: "Lei de Drogas (Lei nº 11.343, de 23 de agosto de 2006)" },
+
+"Perturbação do trabalho ou sossego alheios": { artigo: "42", lei: "Lei das Contravenções Penais(Decreto-Lei 3.688, de 3 de outubro de 1941)" },
+    
+
+
+
   };
 
   // Atualizar os campos ao selecionar uma opção
