@@ -1460,8 +1460,12 @@ doc.text(`__________________________________________________`, 100, y-4, { align
 doc.text(`   ${nomeAutor}`, 100, y, { align: "center" });
 y += 5;
 doc.text(`  CPF: ${cpfAutor}`, 100, y, { align: "center" });
-y += 10;
+y += 30;
 
+doc.setFont("helvetica", "bold");
+doc.text("POLICIAL MILITAR", 20, y, { maxWidth: 175, align: 'justify'});
+y += 7;
+doc.text(posto_grad + " - " + nome_completo + " - RGPM " + rg, 20, y, { maxWidth: 175, align: 'justify'});
 //doc.text(`TERMO DE COMPROMISSO DE COMPARECIMENTO`, 100, y, { align: "center" });
 y += 40
 
