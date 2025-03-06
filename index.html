@@ -787,7 +787,7 @@ const naturalidadeufAutor = document.getElementsByName("naturalidadeuf_autor[]")
    // doc.line(10, y, 200, y);
     
     
-});
+
 
 
 
@@ -1436,7 +1436,7 @@ doc.text(`TERMO DE COMPROMISSO DE COMPARECIMENTO`, 100, y, { align: "center" });
 doc.setFontSize(10);
 
 y += 20 
-let textoTermodecompromissso = `Por este instrumento, eu GUSTAVO ROEBRT DE OLIVEIRA, assumo, nos termos do parágrafo único do Art. 69 da Lei nº 9.099/95, o compromisso de comparecer no Juizado Especial Criminal, em virtude dos fatos registrados no Termo Circunstanciado de Ocorrência acima referenciado, conforme notificado abaixo.                Fico ciente de que a concordância em comparecer ao Juizado Especial Criminal, não implica confissão de qualquer natureza, admissão de culpa ou anuência às declarações da parte contrária e o não comparecimento no dia e hora ajustados neste termo sujeitará às medidas previstas na Lei nº 9.099/95. Fico ciente também que deverei comparecer acompanhado de advogado e que na ausência deste será nomeado um defensor público.
+let textoTermodecompromissso = `Por este instrumento, eu ${nomeAutor}, assumo, nos termos do parágrafo único do Art. 69 da Lei nº 9.099/95, o compromisso de comparecer no Juizado Especial Criminal, em virtude dos fatos registrados no Termo Circunstanciado de Ocorrência acima referenciado, conforme notificado abaixo.                Fico ciente de que a concordância em comparecer ao Juizado Especial Criminal, não implica confissão de qualquer natureza, admissão de culpa ou anuência às declarações da parte contrária e o não comparecimento no dia e hora ajustados neste termo sujeitará às medidas previstas na Lei nº 9.099/95. Fico ciente também que deverei comparecer acompanhado de advogado e que na ausência deste será nomeado um defensor público.
 `;
 
 
@@ -1444,16 +1444,62 @@ let textoTermodecompromissso = `Por este instrumento, eu GUSTAVO ROEBRT DE OLIVE
 doc.setFont("helvetica", "normal");
 doc.text(textoTermodecompromissso, 20, y, { maxWidth: 175, align: 'justify'});
 
-//doc.text(`TERMO DE COMPROMISSO DE COMPARECIMENTO`, 100, y, { align: "center" });
-y += 40
+
+y += 40;
 
 let textTermodecompromissoContinuacao = `Notifico Vossa Senhoria para comparecer no Fórum da Comarca de Barra do Bugres, situado Av. Dep. Hitler Sansão, 1129, na Secretaria ou entrar em contato no Balcão Virtual do Núcleo de Justiça Digital dos Juizados Especiais pelo Whatsapp (65) 99688-0622 ou pelo QR Code:`;
 
 doc.setFont("helvetica", "bold");
 doc.text(textTermodecompromissoContinuacao, 20, y, { maxWidth: 175, align: 'justify'});
 
+///função qrcdoe
+
+
+y += 40;
+doc.text(`__________________________________________________`, 100, y-4, { align: "center" });
+doc.text(`   ${nomeAutor}`, 100, y, { align: "center" });
+y += 5;
+doc.text(`  CPF: ${cpfAutor}`, 100, y, { align: "center" });
+y += 10;
+
+//doc.text(`TERMO DE COMPROMISSO DE COMPARECIMENTO`, 100, y, { align: "center" });
+y += 40
+
+
+
+// aqui começa o termo de encerramento e remessa
+
+doc.addPage(); // Cria uma nova página
+
+adicionarCabecalho()
+adicionarRodape()
+y = 80 
+doc.setFont("helvetica", "bold");
+doc.setFontSize(12);
+doc.text(`TERMO DE ENCERRAMENTO E REMESSA`, 100, y, { align: "center" });
+doc.setFont("helvetica", "normal");
+doc.setFontSize(12);
+
+let textTermodeencerramento = `Aos ${diaExtenso} dias do mês de ${mesExtenso} do ano de dois mil e vinte e cinco, por determinação da Autoridade Policial Militar, dou por encerrado a lavratura do presente Termo Circunstanciado de Ocorrência n° - ${numero_tco}/CRO7/2025, contendo x laudas paginadas e rubricadas, em desfavor do senhor ${nomeAutor}, para as providências de remessa dos autos para apreciação do Núcleo de Resoluções de Conflitos e Justiça Restaurativa, da Vara do Juizado Especial da Comarca de Barra do Bugres-MT, a quem compete deliberar sobre o suposto delito.`;
+
+
+y += 30
+doc.setFont("helvetica", "normal");
+doc.text(textTermodeencerramento, 20, y, { maxWidth: 175, align: 'justify'});
+y += 60
+doc.text("Quartel em " + cidade +", "+ dia + " de "+ mesExtenso + " 2025.", 20, y, { maxWidth: 175, align: 'justify'});
+
+y += 70;
+doc.text(`__________________________________________________`, 100, y-4, { align: "center" });
+doc.text(`   ${nomeCondutor}- ${posto_grad}`, 100, y, { align: "center" });
+y += 5;
+doc.text(`  RGPM: ${rgPM}`, 100, y, { align: "center" });
+y += 10;
+
 doc.save("tco.pdf");
-        }
+});
+
+}
     </script>
 
 </body>
