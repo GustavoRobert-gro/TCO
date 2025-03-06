@@ -490,7 +490,7 @@
 const diaExtenso = numerosPorExtenso[dia];
   const mesExtenso = mesesPorExtenso[mes];
 const anoExtenso = converterAnoParaExtenso(ano);
-
+doc.setFontSize(10);
 
 let texto = `Aos ${diaExtenso} dias do mês de ${mesExtenso} do ano de dois mil e vinte e cinco, nesta cidade de ${cidade}, Estado de Mato Grosso, no Quartel do ${quartel}, autuo as peças que adiante se seguem, do que para constar, lavrei este Termo. Eu, ${nome_completo} (${posto_grad}), escrevente, que o lavrei e assino.`;
 
@@ -620,6 +620,12 @@ const naturalidadeufAutor = document.getElementsByName("naturalidadeuf_autor[]")
             doc.setFontSize(10);
             y = 60; // Reinicia a posição no topo da nova página
            // doc.setFontSize(10);
+
+
+
+
+
+           
     doc.text(`${index + 1}º) AUTOR DO FATO: ${nomeAutor}`, 20, y);
     doc.line(10, y+1, 200, y+1);
     }
