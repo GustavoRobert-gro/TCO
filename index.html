@@ -195,7 +195,7 @@
     <option value="" disabled selected>Selecione uma opção</option>
     <option value="GUSTAVO ROBERT DE OLIVEIRA">Gustavo Robert de Oliveira</option>
     <option value="DOUGLAS BEZERRA DE OLIVEIRA">Douglas Bezerra de Oliveira</option>
-<option value="MARIA FERREIRA">MARIA FERREIRA</option>
+<option value="EDSON BRUNO MARTINS LOBO">EDSON BRUNO MARTINS LOBO</option>
 <option value="ANTONIO SOUZA">ANTONIO SOUZA</option>
 </select>
         
@@ -922,7 +922,7 @@ const naturalidadeufVitima = document.getElementsByName("naturalidadeuf_vitima[]
     y += 15;
 
 
-            });
+            
 
             
 
@@ -1469,8 +1469,30 @@ doc.text(posto_grad + " - " + nome_completo + " - RGPM " + rg, 20, y, { maxWidth
 //doc.text(`TERMO DE COMPROMISSO DE COMPARECIMENTO`, 100, y, { align: "center" });
 y += 40
 
+// AQUI COMEÇA O TERMO DE MANIFESTAÇÃO DA VITIMA
+// a
 
+doc.addPage(); // Cria uma nova página
 
+adicionarCabecalho()
+adicionarRodape()
+y = 80 
+doc.setFont("helvetica", "bold");
+doc.setFontSize(12);
+doc.text(`TERMO DE MANIFESTAÇÃO DA VITIMA`, 100, y, { align: "center" });
+doc.setFont("helvetica", "normal");
+doc.setFontSize(12);
+
+y += 20
+
+doc.text("Eu, " + nomeVitima +", por este instrumento, manifesto o meu interesse:", 20, y, { maxWidth: 175, align: 'justify'});
+y += 10
+
+doc.line(20, y-3, 180, y-3);
+doc.line(20, y-3, 20, y+57);
+y += 30
+doc.line(20, y-3, 180, y-3);
+doc.line(180, y-27, 180, y+57);
 // aqui começa o termo de encerramento e remessa
 
 doc.addPage(); // Cria uma nova página
@@ -1502,7 +1524,7 @@ y += 10;
 
 doc.save("tco.pdf");
 });
-
+});
 }
     </script>
 
