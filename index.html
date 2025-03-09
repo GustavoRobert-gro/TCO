@@ -195,7 +195,7 @@
     <option value="" disabled selected>Selecione uma opção</option>
     <option value="GUSTAVO ROBERT DE OLIVEIRA">Gustavo Robert de Oliveira</option>
     <option value="DOUGLAS BEZERRA DE OLIVEIRA">Douglas Bezerra de Oliveira</option>
-<option value="EDSON BRUNO MARTINS LOBO">EDSON BRUNO MARTINS LOBO</option>
+<option value="MARIA FERREIRA">MARIA FERREIRA</option>
 <option value="ANTONIO SOUZA">ANTONIO SOUZA</option>
 </select>
         
@@ -333,8 +333,93 @@
     <hr>
 
 
-
     
+    <!DOCTYPE html>
+    <html lang="pt">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Formulário com Minimizar/Maximizar</title>
+        <style>
+            .form-container {
+                display: none; /* Inicialmente escondido */
+                border: 1px solid #ccc;
+                padding: 15px;
+                margin-top: 10px;
+            }
+            .minimized {
+                display: none; /* Esconde o conteúdo do formulário quando minimizado */
+            }
+            .header {
+                cursor: pointer;
+                background-color: #007bff;
+                color: white;
+                padding: 10px;
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+    
+    <button id="toggleButton">Abrir Formulário</button>
+    
+    <div id="formContainer" class="form-container">
+        <div class="header" id="formHeader">Clique para Minimizar/Maximizar</div>
+        <form id="myForm">
+            <label for="name">Nome:</label>
+            <input type="text" id="name" required><br><br>
+            
+            <label for="email">Email:</label>
+            <input type="email" id="email" required><br><br>
+            
+            <label for="message">Mensagem:</label>
+            <textarea id="message" rows="4" required></textarea><br><br>
+            
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
+    
+    <script>
+        // Toggle para abrir e fechar o formulário
+        const toggleButton = document.getElementById('toggleButton');
+        const formContainer = document.getElementById('formContainer');
+        const formHeader = document.getElementById('formHeader');
+    
+        toggleButton.addEventListener('click', () => {
+            if (formContainer.style.display === "none" || formContainer.style.display === "") {
+                formContainer.style.display = "block"; // Mostra o formulário
+            } else {
+                formContainer.style.display = "none"; // Esconde o formulário
+            }
+        });
+    
+        // Minimize and maximize functionality
+        formHeader.addEventListener('click', () => {
+            const form = document.getElementById('myForm');
+            if (form.classList.contains('minimized')) {
+                form.classList.remove('minimized'); // Exibe o formulário
+                formHeader.textContent = "Clique para Minimizar"; // Muda o texto do cabeçalho
+            } else {
+                form.classList.add('minimized'); // Minimiza o formulário
+                formHeader.textContent = "Clique para Maximizar"; // Muda o texto do cabeçalho
+            }
+        });
+    </script>
+    
+    </body>
+    </html>
+    
+
+
+    <h2>Opções de Geração de PDF</h2>
+<div>
+    <!--<label><input type="checkbox" id="paginaDadosGerais"> Não gerar Dados Gerais</label><br
+    <label><input type="checkbox" id="paginaAutor"> Não gerar Cadastro de Autor</label><br>
+    <label><input type="checkbox" id="paginaVitima"> Não gerar Cadastro de Vítima/Testemunha</label><br>
+    <label><input type="checkbox" id="paginaHistorico"> Não gerar Histórico</label><br>
+    <label><input type="checkbox" id="paginaConclusao"> Não gerar Conclusão Policial</label><br>>-->
+    <label><input type="checkbox" id="paginaAnexos"> Não gerar Anexos</label><br>
+</div>
 
     <button type="button" class="btn btn-success mt-3" onclick="gerarPDF()">Gerar PDF Completo</button>
 
@@ -922,7 +1007,7 @@ const naturalidadeufVitima = document.getElementsByName("naturalidadeuf_vitima[]
     y += 15;
 
 
-            
+            });
 
             
 
@@ -1193,13 +1278,63 @@ y += 5;
 doc.text(`  CPF: ${cpfVVitima}`, 100, y, { align: "center" });
 y += 10;
 verificapagina4()
-               
+           
+doc.addPage(); // Cria uma nova página
+
+adicionarCabecalho()
+adicionarRodape()
+y = 80 
+doc.setFont("helvetica", "bold");
+doc.setFontSize(12);
+doc.text(`TERMO DE MANIFESTAÇÃO DA VITIMA`, 100, y, { align: "center" });
+doc.setFont("helvetica", "normal");
+doc.setFontSize(12);
+
+y += 20
+
+
+
+
+//if (nomeVitimaw) {
+    //console.log("A variável é verdadeira e tem valor!");
+    if (typeof nomeVVitima === "undefined") {
+
+} else {doc.text("Eu, " + nomeVVitima +", por este instrumento, manifesto o meu interesse:", 20, y, { maxWidth: 175, align: 'justify'});}
+//} else {
+//}
+y += 10
+
+doc.line(20, y-3, 180, y-3);
+doc.line(20, y-3, 20, y+57);
+y += 30
+doc.line(20, y-3, 180, y-3);
+doc.line(180, y-33, 180, y+27);
+y += 30
+doc.line(20, y-3, 180, y-3);
+
+
+
+
+// fim do manifestação da vitima
+
+
+
+///-----------------------------------------------------------------------------------------------------------------
+
+
+
+
+
 
 
 });
 
 
+doc.addPage(); // Cria uma nova página
 
+adicionarCabecalho()
+adicionarRodape()
+y = 60
 
 
 //-------------------------------------------------------
@@ -1469,30 +1604,13 @@ doc.text(posto_grad + " - " + nome_completo + " - RGPM " + rg, 20, y, { maxWidth
 //doc.text(`TERMO DE COMPROMISSO DE COMPARECIMENTO`, 100, y, { align: "center" });
 y += 40
 
-// AQUI COMEÇA O TERMO DE MANIFESTAÇÃO DA VITIMA
-// a
+///-----------------------------------------------------------------------------------------------------------------
+/// manifestação da vitima
 
-doc.addPage(); // Cria uma nova página
 
-adicionarCabecalho()
-adicionarRodape()
-y = 80 
-doc.setFont("helvetica", "bold");
-doc.setFontSize(12);
-doc.text(`TERMO DE MANIFESTAÇÃO DA VITIMA`, 100, y, { align: "center" });
-doc.setFont("helvetica", "normal");
-doc.setFontSize(12);
 
-y += 20
 
-doc.text("Eu, " + nomeVitima +", por este instrumento, manifesto o meu interesse:", 20, y, { maxWidth: 175, align: 'justify'});
-y += 10
 
-doc.line(20, y-3, 180, y-3);
-doc.line(20, y-3, 20, y+57);
-y += 30
-doc.line(20, y-3, 180, y-3);
-doc.line(180, y-27, 180, y+57);
 // aqui começa o termo de encerramento e remessa
 
 doc.addPage(); // Cria uma nova página
@@ -1524,7 +1642,7 @@ y += 10;
 
 doc.save("tco.pdf");
 });
-});
+
 }
     </script>
 
