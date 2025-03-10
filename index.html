@@ -1205,7 +1205,7 @@ doc.setFont("helvetica", "normal");
 //doc.text(textoRelatoCondutor, 20, y, { maxWidth: 175, align: 'justify'});
 
 const textoFormatado = doc.splitTextToSize(textoRelatoCondutor, 175);
-doc.text(textoFormatado, 20, y);
+doc.text(textoFormatado, 20, y, { maxWidth: 175, align: 'justify'});
 
 
 
@@ -1386,6 +1386,7 @@ const numeroDeLinhasmultiplcado2 = linhas2.length * 6;
             y += 15;
              verificapagina5()
 doc.setFont("helvetica", "normal");
+doc.setFontSize(10);
 doc.text(textoRelatoTestemunha, 20, y, { maxWidth: 175, align: 'justify'});
 
 
@@ -1451,6 +1452,7 @@ const numeroDeLinhasmultiplcado3 = linhas3.length * 6;
             y += 15;
              verificapagina6()
 doc.setFont("helvetica", "normal");
+doc.setFontSize(10);
 doc.text(textoRelatoAutor, 20, y, { maxWidth: 175, align: 'justify'});
 
 
