@@ -1310,16 +1310,50 @@ y += 20
 y += 10
 
 doc.line(20, y-3, 180, y-3);
+
+doc.setFontSize(10)
+doc.line(48, y-3, 48, y+57);
+doc.text("Em exercer o direito de representação ou queixa contra o autor do fato. (fica cientificada que em caso de queixa-crime, a vítima deverá constituir advogado)", 50, y+6, { maxWidth: 120, align: 'justify'});
 doc.line(20, y-3, 20, y+57);
 y += 30
 doc.line(20, y-3, 180, y-3);
+doc.text("Em decidir posteriormente, estando ciente, para os fins previstos no art. 103 do Código Penal e art. 38 Código de Processo Penal que devo exercer o direito de representação ou de queixa, no prazo de 06 (seis) meses, a contar desta data, sendo certo que meu silêncio, acarretará a extinção de punibilidade, na forma do art. 107, inc. IV, do Código Penal.", 50, y+2, { maxWidth: 120, align: 'justify'});
 doc.line(180, y-33, 180, y+27);
 y += 30
 doc.line(20, y-3, 180, y-3);
+y += 10
+doc.setFont("helvetica", "bold");
+doc.text("Notifico Vossa Senhoria para comparecer no Fórum da Comarca de Barra do Bugres, sito a avenida deputado Hitler Sansão nº1129 centro na Secretaria ou entrar em contato no Balcão Virtual do Núcleo de Justiça Digital dos Juizados Especiais pelo Whatsapp (65) 99688-0622 ou pelo QR Code:", 20, y, { maxWidth: 160, align: 'justify'});
+
+y += 25
+//assinatura da vitima
+doc.text(`__________________________________________________`, 100, y-4, { align: "center" });
+doc.text(`   ${nomeVVitima}`, 100, y, { align: "center" });
+y += 5;
+doc.text(`  CPF: ${cpfVVitima}`, 100, y, { align: "center" });
 
 
+y += 10
+doc.text("POLICIAL MILITAR", 30, y , { maxWidth: 175, align: 'justify'});
+y += 10
+
+doc.line(20, y-3, 200, y-3);
+doc.text(posto_grad + " - " + nomeCondutor + "- RGPM: " + rgPM, 30, y+2 , { maxWidth: 175, align: 'justify'});
+y += 7
+doc.line(20, y-3, 200, y-3);
+//doc.text("SD PMMT - DOUGLAS BEZERRA DE OLIVEIRA - RGPM: 887.192", 30, y+2 , { maxWidth: 175, align: 'justify'});
+doc.text(posto_grad_componente2 + " - " + nome_completo_componente2 + "- RGPM: " + rg_componente2, 30, y+2 , { maxWidth: 175, align: 'justify'});
+y += 7
+doc.line(20, y-3, 200, y-3);
+
+y += 7    
+doc.line(20, y-3, 200, y-3);
+y += 7  
+doc.line(20, y-3, 200, y-3);
+y += 7 
 
 
+doc.setFontSize(12)
 // fim do manifestação da vitima
 
 
@@ -1631,7 +1665,7 @@ doc.text(`TERMO DE ENCERRAMENTO E REMESSA`, 100, y, { align: "center" });
 doc.setFont("helvetica", "normal");
 doc.setFontSize(12);
 
-let textTermodeencerramento = `Aos ${diaExtenso} dias do mês de ${mesExtenso} do ano de dois mil e vinte e cinco, por determinação da Autoridade Policial Militar, dou por encerrado a lavratura do presente Termo Circunstanciado de Ocorrência n° - ${numero_tco}/CRO7/2025, contendo x laudas paginadas e rubricadas, em desfavor do senhor ${nomeAutor}, para as providências de remessa dos autos para apreciação do Núcleo de Resoluções de Conflitos e Justiça Restaurativa, da Vara do Juizado Especial da Comarca de Barra do Bugres-MT, a quem compete deliberar sobre o suposto delito.`;
+let textTermodeencerramento = `Aos ${diaExtenso} dias do mês de ${mesExtenso} do ano de dois mil e vinte e cinco, por determinação da Autoridade Policial Militar, dou por encerrado a lavratura do presente Termo Circunstanciado de Ocorrência n° - ${numero_tco}/CRO7/2025, contendo 08 laudas paginadas e rubricadas, em desfavor do senhor ${nomeAutor}, para as providências de remessa dos autos para apreciação do Núcleo de Resoluções de Conflitos e Justiça Restaurativa, da Vara do Juizado Especial da Comarca de Barra do Bugres-MT, a quem compete deliberar sobre o suposto delito.`;
 
 
 y += 30
