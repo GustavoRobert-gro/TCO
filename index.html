@@ -48,6 +48,9 @@
 
     <option value="Oferecer droga, eventualmente e sem objetivo de lucro, a pessoa de seu relacionamento, para juntos a consumirem">Oferecer droga, eventualmente e sem objetivo de lucro, a pessoa de seu relacionamento, para juntos a consumirem</option>
 
+    <option value="Esbulho possessório">Esbulho possessório</option>
+
+
 </select>
         </div>
 
@@ -90,6 +93,8 @@
 "Oferecer droga, eventualmente e sem objetivo de lucro, a pessoa de seu relacionamento, para juntos a consumirem": { artigo: "Art. 33. § 3°", lei: "Lei de Drogas (Lei nº 11.343, de 23 de agosto de 2006)" },
 
 "Perturbação do trabalho ou sossego alheios": { artigo: "42", lei: "Lei das Contravenções Penais(Decreto-Lei 3.688, de 3 de outubro de 1941)" },
+
+"Esbulho possessório": { artigo: "161, §", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
     
 
 
@@ -193,20 +198,10 @@
         <label for="nome_completo">Nome Completo do CONDUTOR:</label>
 <select id="nome_completo" required>
     <option value="" disabled selected>Selecione uma opção</option>
-    <option value="ANGELO MÁRCIO PRADO BRUNO">ANGELO MÁRCIO PRADO BRUNO</option>
-    <option value="SIDNEY BROLEZI DO NASCIMENTO">SIDNEY BROLEZI DO NASCIMENTO</option>
-    <option value="WEBER DE AQUINO DA SILVA">WEBER DE AQUINO DA SILVA</option>
-    <option value="ALLAN CARLOS CAMPOS">ALLAN CARLOS CAMPOS</option>
-    <option value="GUSTAVO ROBERT DE OLIVEIRA">GUSTAVO ROBERT DE OLIVEIRA</option>
-    <option value="JOSIMAR PEREIRA DA COSTA">JOSIMAR PEREIRA DA COSTA</option>
-    <option value="RICARDO DA SILVA SOUZA">RICARDO DA SILVA SOUZA</option>
-    <option value="GUILHERME SOUZA SILVA">GUILHERME SOUZA SILVA</option>
-    <option value="ELEILTON THIAGO SOARES DE OLIVEIRA">ELEILTON THIAGO SOARES DE OLIVEIRA</option>
-    <option value="BRUNA ASSIS CORREIA">BRUNA ASSIS CORREIA</option>
-    <option value="EDSON BRUNO MARTINS LOBO">EDSON BRUNO MARTINS LOBO</option>
-    <option value="ARTHUR VALDIR VINHAS DE QUEIROZ">EDSON BRUNO MARTINS LOBO</option>
-    <option value="DOUGLAS BEZERRA DE OLIVEIRA">DOUGLAS BEZERRA DE OLIVEIRA</option>
-
+    <option value="GUSTAVO ROBERT DE OLIVEIRA">Gustavo Robert de Oliveira</option>
+    <option value="DOUGLAS BEZERRA DE OLIVEIRA">Douglas Bezerra de Oliveira</option>
+<option value="MARIA FERREIRA">MARIA FERREIRA</option>
+<option value="ANTONIO SOUZA">ANTONIO SOUZA</option>
 </select>
         
 
@@ -239,20 +234,10 @@
         <label for="nome_completo_componente2">Nome Componente da GUSV:</label>
 <select id="nome_completo_componente2" required>
     <option value="" disabled selected>Selecione uma opção</option>
-    <option value="" disabled selected>Selecione uma opção</option>
-    <option value="ANGELO MÁRCIO PRADO BRUNO">ANGELO MÁRCIO PRADO BRUNO</option>
-    <option value="SIDNEY BROLEZI DO NASCIMENTO">SIDNEY BROLEZI DO NASCIMENTO</option>
-    <option value="WEBER DE AQUINO DA SILVA">WEBER DE AQUINO DA SILVA</option>
-    <option value="ALLAN CARLOS CAMPOS">ALLAN CARLOS CAMPOS</option>
-    <option value="GUSTAVO ROBERT DE OLIVEIRA">GUSTAVO ROBERT DE OLIVEIRA</option>
-    <option value="JOSIMAR PEREIRA DA COSTA">JOSIMAR PEREIRA DA COSTA</option>
-    <option value="RICARDO DA SILVA SOUZA">RICARDO DA SILVA SOUZA</option>
-    <option value="GUILHERME SOUZA SILVA">GUILHERME SOUZA SILVA</option>
-    <option value="ELEILTON THIAGO SOARES DE OLIVEIRA">ELEILTON THIAGO SOARES DE OLIVEIRA</option>
-    <option value="BRUNA ASSIS CORREIA">BRUNA ASSIS CORREIA</option>
-    <option value="EDSON BRUNO MARTINS LOBO">EDSON BRUNO MARTINS LOBO</option>
-    <option value="ARTHUR VALDIR VINHAS DE QUEIROZ">EDSON BRUNO MARTINS LOBO</option>
-    <option value="DOUGLAS BEZERRA DE OLIVEIRA">DOUGLAS BEZERRA DE OLIVEIRA</option>
+<option value="GUSTAVO ROBERT DE OLIVEIRA">Gustavo Robert de Oliveira</option>
+<option value="DOUGLAS BEZERRA DE OLIVEIRA">Douglas Bezerra de Oliveira</option>
+<option value="MARIA FERREIRA">MARIA FERREIRA</option>
+<option value="ANTONIO SOUZA">ANTONIO SOUZA</option>
 </select>
         
 
@@ -352,6 +337,83 @@
         <button type="button" class="btn btn-primary mt-3" onclick="adicionarPessoa('Testemunha')">Adicionar Testemunha</button>
     <hr>
 
+
+    
+    <!DOCTYPE html>
+    <html lang="pt">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Formulário com Minimizar/Maximizar</title>
+        <style>
+            .form-container {
+                display: none; /* Inicialmente escondido */
+                border: 1px solid #ccc;
+                padding: 15px;
+                margin-top: 10px;
+            }
+            .minimized {
+                display: none; /* Esconde o conteúdo do formulário quando minimizado */
+            }
+            .header {
+                cursor: pointer;
+                background-color: #007bff;
+                color: white;
+                padding: 10px;
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+    
+    <button id="toggleButton">Abrir Formulário</button>
+    
+    <div id="formContainer" class="form-container">
+        <div class="header" id="formHeader">Clique para Minimizar/Maximizar</div>
+        <form id="myForm">
+            <label for="name">Nome:</label>
+            <input type="text" id="name" required><br><br>
+            
+            <label for="email">Email:</label>
+            <input type="email" id="email" required><br><br>
+            
+            <label for="message">Mensagem:</label>
+            <textarea id="message" rows="4" required></textarea><br><br>
+            
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
+    
+    <script>
+        // Toggle para abrir e fechar o formulário
+        const toggleButton = document.getElementById('toggleButton');
+        const formContainer = document.getElementById('formContainer');
+        const formHeader = document.getElementById('formHeader');
+    
+        toggleButton.addEventListener('click', () => {
+            if (formContainer.style.display === "none" || formContainer.style.display === "") {
+                formContainer.style.display = "block"; // Mostra o formulário
+            } else {
+                formContainer.style.display = "none"; // Esconde o formulário
+            }
+        });
+    
+        // Minimize and maximize functionality
+        formHeader.addEventListener('click', () => {
+            const form = document.getElementById('myForm');
+            if (form.classList.contains('minimized')) {
+                form.classList.remove('minimized'); // Exibe o formulário
+                formHeader.textContent = "Clique para Minimizar"; // Muda o texto do cabeçalho
+            } else {
+                form.classList.add('minimized'); // Minimiza o formulário
+                formHeader.textContent = "Clique para Maximizar"; // Muda o texto do cabeçalho
+            }
+        });
+    </script>
+    
+    </body>
+    </html>
+    
 
 
     <h2>Opções de Geração de PDF</h2>
@@ -555,8 +617,8 @@
             doc.text("Fone: (65) 98170 0447 | E-mail: npmdenise@pm.mt.gov.br", 105, 291, { align: "center" });
             }
             if (cidade === "Nova Olimpia-MT") {
-            doc.text("1ª COMPANHIA INDEPENDENTE DE NOVA OLIMPIA", 105, 285, { align: "center" });
-            doc.text("Rua  - Bairro centro - Nova Olimpia-MT - CEP 78.380-000", 105, 288, { align: "center" });
+            doc.text("QUARTEL DA 1ª COMPANHIA INDEPENDENTE DE NOVA OLIMPIA (1ª CIA-PM)", 105, 285, { align: "center" });
+            doc.text("CEP 78.370-000, RUA PARÁ, Nº1062 - W, CENTRO, NOVA OLIMPIA - MT", 105, 288, { align: "center" });
             doc.text("Fone: (65) 98170 0447 | E-mail: @pm.mt.gov.br", 105, 291, { align: "center" });
             }
             if (cidade === "Barra do Bugres-MT") {
@@ -1143,7 +1205,7 @@ doc.setFont("helvetica", "normal");
 //doc.text(textoRelatoCondutor, 20, y, { maxWidth: 175, align: 'justify'});
 
 const textoFormatado = doc.splitTextToSize(textoRelatoCondutor, 175);
-doc.text(textoFormatado, 20, y);
+doc.text(textoFormatado, 20, y, { maxWidth: 175, align: 'justify'});
 
 
 
@@ -1248,16 +1310,50 @@ y += 20
 y += 10
 
 doc.line(20, y-3, 180, y-3);
+
+doc.setFontSize(10)
+doc.line(48, y-3, 48, y+57);
+doc.text("Em exercer o direito de representação ou queixa contra o autor do fato. (fica cientificada que em caso de queixa-crime, a vítima deverá constituir advogado)", 50, y+6, { maxWidth: 120, align: 'justify'});
 doc.line(20, y-3, 20, y+57);
 y += 30
 doc.line(20, y-3, 180, y-3);
+doc.text("Em decidir posteriormente, estando ciente, para os fins previstos no art. 103 do Código Penal e art. 38 Código de Processo Penal que devo exercer o direito de representação ou de queixa, no prazo de 06 (seis) meses, a contar desta data, sendo certo que meu silêncio, acarretará a extinção de punibilidade, na forma do art. 107, inc. IV, do Código Penal.", 50, y+2, { maxWidth: 120, align: 'justify'});
 doc.line(180, y-33, 180, y+27);
 y += 30
 doc.line(20, y-3, 180, y-3);
+y += 10
+doc.setFont("helvetica", "bold");
+doc.text("Notifico Vossa Senhoria para comparecer no Fórum da Comarca de Barra do Bugres, sito a avenida deputado Hitler Sansão nº1129 centro na Secretaria ou entrar em contato no Balcão Virtual do Núcleo de Justiça Digital dos Juizados Especiais pelo Whatsapp (65) 99688-0622 ou pelo QR Code:", 20, y, { maxWidth: 160, align: 'justify'});
+
+y += 25
+//assinatura da vitima
+doc.text(`__________________________________________________`, 100, y-4, { align: "center" });
+doc.text(`   ${nomeVVitima}`, 100, y, { align: "center" });
+y += 5;
+doc.text(`  CPF: ${cpfVVitima}`, 100, y, { align: "center" });
 
 
+y += 10
+doc.text("POLICIAL MILITAR", 30, y , { maxWidth: 175, align: 'justify'});
+y += 10
+
+doc.line(20, y-3, 200, y-3);
+doc.text(posto_grad + " - " + nomeCondutor + "- RGPM: " + rgPM, 30, y+2 , { maxWidth: 175, align: 'justify'});
+y += 7
+doc.line(20, y-3, 200, y-3);
+//doc.text("SD PMMT - DOUGLAS BEZERRA DE OLIVEIRA - RGPM: 887.192", 30, y+2 , { maxWidth: 175, align: 'justify'});
+doc.text(posto_grad_componente2 + " - " + nome_completo_componente2 + "- RGPM: " + rg_componente2, 30, y+2 , { maxWidth: 175, align: 'justify'});
+y += 7
+doc.line(20, y-3, 200, y-3);
+
+y += 7    
+doc.line(20, y-3, 200, y-3);
+y += 7  
+doc.line(20, y-3, 200, y-3);
+y += 7 
 
 
+doc.setFontSize(12)
 // fim do manifestação da vitima
 
 
@@ -1324,6 +1420,7 @@ const numeroDeLinhasmultiplcado2 = linhas2.length * 6;
             y += 15;
              verificapagina5()
 doc.setFont("helvetica", "normal");
+doc.setFontSize(10);
 doc.text(textoRelatoTestemunha, 20, y, { maxWidth: 175, align: 'justify'});
 
 
@@ -1389,6 +1486,7 @@ const numeroDeLinhasmultiplcado3 = linhas3.length * 6;
             y += 15;
              verificapagina6()
 doc.setFont("helvetica", "normal");
+doc.setFontSize(10);
 doc.text(textoRelatoAutor, 20, y, { maxWidth: 175, align: 'justify'});
 
 
@@ -1567,7 +1665,7 @@ doc.text(`TERMO DE ENCERRAMENTO E REMESSA`, 100, y, { align: "center" });
 doc.setFont("helvetica", "normal");
 doc.setFontSize(12);
 
-let textTermodeencerramento = `Aos ${diaExtenso} dias do mês de ${mesExtenso} do ano de dois mil e vinte e cinco, por determinação da Autoridade Policial Militar, dou por encerrado a lavratura do presente Termo Circunstanciado de Ocorrência n° - ${numero_tco}/CRO7/2025, contendo x laudas paginadas e rubricadas, em desfavor do senhor ${nomeAutor}, para as providências de remessa dos autos para apreciação do Núcleo de Resoluções de Conflitos e Justiça Restaurativa, da Vara do Juizado Especial da Comarca de Barra do Bugres-MT, a quem compete deliberar sobre o suposto delito.`;
+let textTermodeencerramento = `Aos ${diaExtenso} dias do mês de ${mesExtenso} do ano de dois mil e vinte e cinco, por determinação da Autoridade Policial Militar, dou por encerrado a lavratura do presente Termo Circunstanciado de Ocorrência n° - ${numero_tco}/CRO7/2025, contendo 08 laudas paginadas e rubricadas, em desfavor do senhor ${nomeAutor}, para as providências de remessa dos autos para apreciação do Núcleo de Resoluções de Conflitos e Justiça Restaurativa, da Vara do Juizado Especial da Comarca de Barra do Bugres-MT, a quem compete deliberar sobre o suposto delito.`;
 
 
 y += 30
