@@ -335,7 +335,7 @@
 
 <div class="date-group">
     <label for="nome_completo_componente4">Nome Componente da GUSV:</label>
-<select id="nome_completo_componente3" required>
+<select id="nome_completo_componente4" required>
 <option value="" disabled selected>Selecione uma opção</option>
 <option value="ANGELO MÁRCIO PRADO BRUNO">ANGELO MÁRCIO PRADO BRUNO</option>
 <option value="SIDNEY BROLEZI DO NASCIMENTO">SIDNEY BROLEZI DO NASCIMENTO</option>
@@ -476,20 +476,15 @@
     </head>
     <body>
     
-    <button id="toggleButton">Abrir Formulário</button>
+    <button id="toggleButton">Termos</button>
     
     <div id="formContainer" class="form-container">
         <div class="header" id="formHeader">Clique para Minimizar/Maximizar</div>
         <form id="myForm">
-            <label for="name">Nome:</label>
+            <label for="name">Nome: Ainda indisponivel...</label>
             <input type="text" id="name" required><br><br>
             
-            <label for="email">Email:</label>
-            <input type="email" id="email" required><br><br>
-            
-            <label for="message">Mensagem:</label>
-            <textarea id="message" rows="4" required></textarea><br><br>
-            
+           
             <button type="submit">Enviar</button>
         </form>
     </div>
@@ -536,7 +531,20 @@
     <label><input type="checkbox" id="paginaAnexos"> Não gerar Anexos</label><br>
 </div>
 
-    <button type="button" class="btn btn-success mt-3" onclick="gerarPDF()">Gerar PDF Completo</button>
+   <!-- <button type="button" class="btn btn-success mt-3" onclick="gerarPDF()">Gerar PDF Completo</button>-->
+
+   <button type="button" class="btn btn-success mt-3" onclick="confirmarGeracaoPDF()">Gerar PDF Completo</button>
+
+   <script>
+   function confirmarGeracaoPDF() {
+       if (confirm("Tem certeza que deseja gerar o PDF completo?\nCertifique-se de ter preenchido todos os campos corretos! \n\nSe ao menos for preenchidos os campos da guarnição e a qualificação do Autor do fato o arquivo sera gerado na pasta download")) {
+           gerarPDF(); // Chama a função apenas se o usuário confirmar
+       }
+   }
+   </script>
+   
+
+    
 
     <script>
         let contadorAutor = 1;
@@ -599,16 +607,17 @@
                 <input type="text" class="form-control" name="e-mail_${tipo.toLowerCase()}[]" placeholder="Digite o e-mail pessoal">
                
                 <label>ESTADO CIVIL</label>
-                <input type="text" class="form-control" name="estado_civil_${tipo.toLowerCase()}[]" placeholder="Digite o estado civil">
-               
+                
+               <input type="text" class="form-control" name="estado_civil_${tipo.toLowerCase()}[]" placeholder="Digite o estado civil">
+
                 <label>NACIONALIDADE</label>
-                <input type="text" class="form-control" name="nacionalidade_${tipo.toLowerCase()}[]" placeholder="Digite o estado civil">
+                <input type="text" class="form-control" name="nacionalidade_${tipo.toLowerCase()}[]" value="BRASILEIRA">
                
                 <label>NATURALIDADE</label>
-                <input type="text" class="form-control" name="naturalidade_${tipo.toLowerCase()}[]" placeholder="Digite a nacionalidade">
+                <input type="text" class="form-control" name="naturalidade_${tipo.toLowerCase()}[]" placeholder="Digite a naturalidade">
                
                 <label>UF</label>
-                <input type="text" class="form-control" name="naturalidadeuf_${tipo.toLowerCase()}[]" placeholder="Digite a naturalidade">
+                <input type="text" class="form-control" name="naturalidadeuf_${tipo.toLowerCase()}[]" placeholder="estado naturalidade">
                
                 <label>DATA NASC:</label>
                 <input type="text" class="form-control" name="datanascimento_${tipo.toLowerCase()}[]" placeholder="Digite a data de nascimento">
@@ -663,13 +672,18 @@
             const quartel = document.getElementById('quartel').value;
             const nome_completo = document.getElementById('nome_completo').value;
             const nome_completo_componente2 = document.getElementById('nome_completo_componente2').value;
-           
+            const nome_completo_componente3 = document.getElementById('nome_completo_componente3').value;
+            const nome_completo_componente4 = document.getElementById('nome_completo_componente4').value;
            
             const posto_grad = document.getElementById('posto_grad').value;
             const posto_grad_componente2 = document.getElementById('posto_grad_componente2').value;
+            const posto_grad_componente3 = document.getElementById('posto_grad_componente3').value;
+            const posto_grad_componente4 = document.getElementById('posto_grad_componente4').value;
 
             const rg = document.getElementById('rg').value;
             const rg_componente2 = document.getElementById('rg_componente2').value;
+            const rg_componente3 = document.getElementById('rg_componente3').value;
+            const rg_componente4 = document.getElementById('rg_componente4').value;
 
             const hora_fato = document.getElementById('hora_fato').value;
             //const data_fato = document.getElementById('data_fato').value;
@@ -769,17 +783,22 @@ let texto = `Aos ${diaExtenso} dias do mês de ${mesExtenso} do ano de dois mil 
 
 
 doc.setFont("helvetica", "normal");
-doc.text(texto, 20, 120, { maxWidth: 175, align: 'justify'});
+doc.text(texto, 20, 120, { maxWidth: 165, align: 'justify'});
 
 
 doc.setFont("helvetica", "bold");
+let texto2ass =` ______________________________________________________________ `;
+doc.text(texto2ass, 103, 195,{ align: "center" });
+
 let texto2 =` ${nome_completo} - ${posto_grad} `;
 doc.text(texto2, 103, 200,{ align: "center" });
 
 let texto3 = `RG nº ${rg} PMMT`;
 doc.text(texto3, 103, 206,{ align: "center" });
+let texto4 = `Comandante de GUPM`;
+doc.text(texto4, 103, 212,{ align: "center" });
 doc.setFontSize(10);
-doc.text("Natureza: "+ naturezaa, 20, 70, { maxWidth: 175, align: 'justify'});
+doc.text("Natureza: "+ naturezaa, 20, 70, { maxWidth: 170, align: 'justify'});
 
 //-------------------------------------------------
  // inicio da segunda pagina
@@ -819,7 +838,7 @@ let natuureza = naturezaa;
 
 
 doc.setFont("helvetica", "normal");
-doc.text(natuureza, 20, 75, { maxWidth: 175, align: 'justify'});
+doc.text(natuureza, 20, 75, { maxWidth: 170, align: 'justify'});
           
             // fim da segundapagina
           //------------------------------------------
@@ -899,87 +918,87 @@ const naturalidadeufAutor = document.getElementsByName("naturalidadeuf_autor[]")
 
 
            
-    doc.text(`${index + 1}º) AUTOR DO FATO: ${nomeAutor}`, 20, y);
-    doc.line(10, y+1, 200, y+1);
+    doc.text(`${index + 1}º) AUTOR DO FATO: ${nomeAutor}`, 10, y);
+    doc.line(8, y+1, 200, y+1);
     }
     verificapagina()
-    doc.text(`${index + 1}º) AUTOR DO FATO: ${nomeAutor}`, 20, y);   
+    doc.text(`${index + 1}º) AUTOR DO FATO: ${nomeAutor}`, 10, y);   
+    doc.line(8, y+1, 200, y+1);
+    y += 6;
+    verificapagina()
+    doc.text(`   NOME SOCIAL: ${nomeSocial}`, 10, y);
     doc.line(10, y+1, 200, y+1);
     y += 6;
     verificapagina()
-    doc.text(`   NOME SOCIAL: ${nomeSocial}`, 20, y);
-    doc.line(20, y+1, 200, y+1);
+    doc.text(`   CPF: ${cpfAutor}`, 10, y);
+    doc.line(10, y+1, 200, y+1);
     y += 6;
     verificapagina()
-    doc.text(`   CPF: ${cpfAutor}`, 20, y);
-    doc.line(20, y+1, 200, y+1);
-    y += 6;
-    verificapagina()
-    doc.text(`   RG/CNH: ${rgcnhAutor}`, 20, y);
-    doc.line(20, y+1, 200, y+1);
+    doc.text(`   RG/CNH: ${rgcnhAutor}`, 10, y);
+    doc.line(10, y+1, 200, y+1);
     
     doc.text(`   ORGÃO EXPEDITOR: ${rgcnhorgaoexpAutor}`, 120, y);
-    doc.line(20, y+1, 200, y+1);
+    doc.line(10, y+1, 200, y+1);
     y += 6;
     verificapagina()
-    doc.text(`   DATA DE EXPEDIÇÃO: ${dataexpedicaoAutor}`, 20, y);
+    doc.text(`   DATA DE EXPEDIÇÃO: ${dataexpedicaoAutor}`, 10, y);
     
     doc.text(`   UF: ${dataexpedicaoAutor}`, 120, y);
-    doc.line(20, y+1, 200, y+1);
+    doc.line(10, y+1, 200, y+1);
     y += 6;
     verificapagina()
-    doc.text(`   FILIAÇÃO: ${filiacaoAutor}`, 20, y);
-    doc.line(20, y+1, 200, y+1);
+    doc.text(`   FILIAÇÃO: ${filiacaoAutor}`, 10, y);
+    doc.line(10, y+1, 200, y+1);
     y += 6;
     verificapagina()
-    doc.text(`   ENDEREÇO: ${enderecoAutor}`, 20, y);
-    doc.line(20, y+1, 200, y+1);
+    doc.text(`   ENDEREÇO: ${enderecoAutor}`, 10, y);
+    doc.line(10, y+1, 200, y+1);
     y += 6;
     verificapagina()
-    doc.text(`   MUNICIPIO: ${municipioAutor}`, 20, y);
+    doc.text(`   MUNICIPIO: ${municipioAutor}`, 10, y);
     
     doc.text(`   UF: ${ufmunicipioAutor}`, 120, y);
     
     doc.text(`   CEP: ${cepmunicipioAutor}`, 140, y);
-    doc.line(20, y+1, 200, y+1);
+    doc.line(10, y+1, 200, y+1);
     y += 6;
     verificapagina()
-    doc.text(`   PONTO DE REFERÊNCIA: ${pontoreferenciaenderecoAutor}`, 20, y);
-    doc.line(20, y+1, 200, y+1);
+    doc.text(`   PONTO DE REFERÊNCIA: ${pontoreferenciaenderecoAutor}`, 10, y);
+    doc.line(10, y+1, 200, y+1);
     y += 6;
     verificapagina()
-    doc.text(`   TELEFONE: ${telefoneAutor}`, 20, y);
-    doc.line(20, y+1, 200, y+1);
+    doc.text(`   TELEFONE: ${telefoneAutor}`, 10, y);
+    doc.line(10, y+1, 200, y+1);
     y += 6;
     verificapagina()
-    doc.text(`   E-MAIL PESSOAL: ${emailAutor}`, 20, y);
-    doc.line(20, y+1, 200, y+1);
+    doc.text(`   E-MAIL PESSOAL: ${emailAutor}`, 10, y);
+    doc.line(10, y+1, 200, y+1);
     y += 6;
     verificapagina()
-    doc.text(`   ESTADO CIVIL: ${estadocivillAutor}`, 20, y);
-    doc.line(20, y+1, 200, y+1);
+    doc.text(`   ESTADO CIVIL: ${estadocivillAutor}`, 10, y);
+    doc.line(10, y+1, 200, y+1);
     y += 6;
     verificapagina()
-    doc.text(`   NACIONALIDADE: ${nacionalidadeAutor}`, 20, y);
-    doc.line(20, y+1, 200, y+1);
-    doc.text(`   NATURALIDADE: ${naturalidadeAutor}`, 70, y);
-    doc.text(`   UF: ${naturalidadeufAutor}`, 140, y);
+    doc.text(`   NACIONALIDADE: ${nacionalidadeAutor}`, 10, y);
+    doc.line(10, y+1, 200, y+1);
+    doc.text(`   NATURALIDADE: ${naturalidadeAutor}`, 80, y);
+    doc.text(`   UF: ${naturalidadeufAutor}`, 180, y);
     y += 6;
     verificapagina()
 
 
-    doc.text(`   DATA NASC: ${datanasciAutor}`, 20, y)
-    doc.line(20, y+1, 200, y+1);
+    doc.text(`   DATA NASC: ${datanasciAutor}`, 10, y)
+    doc.line(10, y+1, 200, y+1);
    doc.text(`   SEXO: ${sexoAutor}`, 70, y);
     y += 6;
     verificapagina()
-   doc.text(`   PROFISSÃO: ${profissaoAutor}`, 20, y);
-   doc.line(20, y+1, 200, y+1);
+   doc.text(`   PROFISSÃO: ${profissaoAutor}`, 10, y);
+   doc.line(10, y+1, 200, y+1);
     y += 6;
     verificapagina()
     
-   doc.text(`   CONDIÇÕES FISICAS: ${localtrabalhoAutor}`, 20, y);
-   doc.line(20, y+1, 200, y+1);
+   doc.text(`   CONDIÇÕES FISICAS: ${localtrabalhoAutor}`, 10, y);
+   doc.line(10, y+1, 200, y+1);
     y += 6;
     verificapagina()
    //doc.text(`   RELATO DO AUTOR DO FATO: ${relatoAutor}`, 20, y);
@@ -1036,86 +1055,86 @@ const naturalidadeufVitima = document.getElementsByName("naturalidadeuf_vitima[]
             doc.setFontSize(10);
             
             
-            doc.text(`   ${index + 1}º) VITIMA: ${nomeVitima}`, 20, y); 
-             doc.line(10, y+1, 200, y+1);
+            doc.text(`   ${index + 1}º) VITIMA: ${nomeVitima}`, 10, y); 
+             doc.line(8, y+1, 200, y+1);
             y += 6;   
             verificapagina2()
            
-            doc.text(`   NOME SOCIAL: ${nomeSocialVitima}`, 20, y); 
-             doc.line(20, y+1, 200, y+1);
+            doc.text(`   NOME SOCIAL: ${nomeSocialVitima}`, 10, y); 
+             doc.line(8, y+1, 200, y+1);
             y += 6;   
             verificapagina2()
             
             
-    doc.text(`   CPF: ${cpfVitima}`, 20, y);
-    doc.line(20, y+1, 200, y+1);
+    doc.text(`   CPF: ${cpfVitima}`, 10, y);
+    doc.line(10, y+1, 200, y+1);
     y += 6;
     verificapagina2()
-    doc.text(`   RG/CNH: ${rgcnhVitima}`, 20, y);
-    doc.line(20, y+1, 200, y+1);
+    doc.text(`   RG/CNH: ${rgcnhVitima}`, 10, y);
+    doc.line(10, y+1, 200, y+1);
     
     doc.text(`   ORGÃO EXPEDITOR: ${rgcnhorgaoexpVitima}`, 120, y);
-    doc.line(20, y+1, 200, y+1);
+    doc.line(10, y+1, 200, y+1);
     y += 6;
     verificapagina2()
-    doc.text(`   DATA DE EXPEDIÇÃO: ${dataexpedicaoVitima}`, 20, y);
+    doc.text(`   DATA DE EXPEDIÇÃO: ${dataexpedicaoVitima}`, 10, y);
     
     doc.text(`   UF: ${dataexpedicaoufVitima}`, 120, y);
-    doc.line(20, y+1, 200, y+1);
+    doc.line(10, y+1, 200, y+1);
     y += 6;
     verificapagina2()
-    doc.text(`   FILIAÇÃO: ${filiacaoVitima}`, 20, y);
-    doc.line(20, y+1, 200, y+1);
+    doc.text(`   FILIAÇÃO: ${filiacaoVitima}`, 10, y);
+    doc.line(10, y+1, 200, y+1);
     y += 6;
     verificapagina2()
-    doc.text(`   ENDEREÇO: ${enderecoVitima}`, 20, y);
-    doc.line(20, y+1, 200, y+1);
+    doc.text(`   ENDEREÇO: ${enderecoVitima}`, 10, y);
+    doc.line(10, y+1, 200, y+1);
     y += 6;
     verificapagina2()
-    doc.text(`   MUNICIPIO: ${municipioVitima}`, 20, y);
+    doc.text(`   MUNICIPIO: ${municipioVitima}`, 10, y);
     
     doc.text(`   UF: ${ufmunicipioVitima}`, 120, y);
     
     doc.text(`   CEP: ${cepmunicipioVitima}`, 140, y);
-    doc.line(20, y+1, 200, y+1);
+    doc.line(10, y+1, 200, y+1);
     y += 6;
     verificapagina2()
-    doc.text(`   PONTO DE REFERÊNCIA: ${pontoreferenciaenderecoVitima}`, 20, y);
-    doc.line(20, y+1, 200, y+1);
+    doc.text(`   PONTO DE REFERÊNCIA: ${pontoreferenciaenderecoVitima}`, 10, y);
+    doc.line(10, y+1, 200, y+1);
     y += 6;
     verificapagina2()
-    doc.text(`   TELEFONE: ${telefoneVitima}`, 20, y);
-    doc.line(20, y+1, 200, y+1);
+    doc.text(`   TELEFONE: ${telefoneVitima}`, 10, y);
+    doc.line(10, y+1, 200, y+1);
     y += 6;
     verificapagina2()
-    doc.text(`   E-MAIL PESSOAL: ${emailVitima}`, 20, y);
-    doc.line(20, y+1, 200, y+1);
+    doc.text(`   E-MAIL PESSOAL: ${emailVitima}`, 10, y);
+    doc.line(10, y+1, 200, y+1);
     y += 6;
     verificapagina2()
-    doc.text(`   ESTADO CIVIL: ${estadocivilVitima}`, 20, y);
-    doc.line(20, y+1, 200, y+1);
+    doc.text(`   ESTADO CIVIL: ${estadocivilVitima}`, 10, y);
+    doc.line(10, y+1, 200, y+1);
     y += 6;
     verificapagina2()
-    doc.text(`   NACIONALIDADE: ${nacionalidadeVitima}`, 20, y);
-    doc.line(20, y+1, 200, y+1);
-    doc.text(`   NATURALIDADE: ${naturalidadeVitima}`, 70, y);
-    doc.text(`   UF: ${naturalidadeufVitima}`, 140, y);
+    doc.text(`   NACIONALIDADE: ${nacionalidadeVitima}`, 10, y);
+    doc.line(10, y+1, 200, y+1);
+    doc.text(`   NATURALIDADE: ${naturalidadeVitima}`, 80, y);
+    doc.text(`   UF: ${naturalidadeufVitima}`, 180, y);
     y += 6;
     verificapagina2()
 
 
-    doc.text(`   DATA NASC: ${datanasciVitima}`, 20, y)
-    doc.line(20, y+1, 200, y+1);
+    doc.text(`   DATA NASC: ${datanasciVitima}`, 10, y)
+    doc.line(10, y+1, 200, y+1);
    doc.text(`   SEXO: ${sexoVitima}`, 70, y);
     y += 6;
     verificapagina2()
-   doc.text(`   PROFISSÃO: ${profissaoVitima}`, 20, y);
-   doc.line(20, y+1, 200, y+1);
+   doc.text(`   PROFISSÃO: ${profissaoVitima}`, 10, y);
+   doc.line(10, y+1, 200, y+1);
     y += 6;
     verificapagina2()
     
-   doc.text(`   LOCAL DE TRABALHO: ${profissaoVitima}`, 20, y);
-   doc.line(20, y+1, 200, y+1);
+   doc.text(`   LOCAL DE TRABALHO: ${profissaoVitima}`, 10, y);
+   doc.line(10, y+1, 200, y+1);
     y += 6;
     verificapagina2()
    //doc.text(`   RELATO DO AUTOR DO FATO: ${relatoAutor}`, 20, y);
@@ -1173,89 +1192,89 @@ const naturalidadeufTestemunha = document.getElementsByName("naturalidadeuf_test
             doc.setFontSize(10);
             
             
-            doc.text(`   ${index + 1}º) TESTEMUNHA: ${nomeTestemunha}`, 20, y); 
-             doc.line(10, y+1, 200, y+1);
+            doc.text(`   ${index + 1}º) TESTEMUNHA: ${nomeTestemunha}`, 10, y); 
+             doc.line(8, y+1, 200, y+1);
             y += 6;   
             verificapagina3()
            
-            doc.text(`   NOME SOCIAL: ${nomeSocialTestemunha}`, 20, y); 
-             doc.line(20, y+1, 200, y+1);
+            doc.text(`   NOME SOCIAL: ${nomeSocialTestemunha}`, 10, y); 
+             doc.line(10, y+1, 200, y+1);
             y += 6;   
             verificapagina3()
             
             
-    doc.text(`   CPF: ${cpfTestemunha}`, 20, y);
-    doc.line(20, y+1, 200, y+1);
+    doc.text(`   CPF: ${cpfTestemunha}`, 10, y);
+    doc.line(10, y+1, 200, y+1);
     y += 6;
     verificapagina3()
-    doc.text(`   RG/CNH: ${rgcnhTestemunha}`, 20, y);
-    doc.line(20, y+1, 200, y+1);
+    doc.text(`   RG/CNH: ${rgcnhTestemunha}`, 10, y);
+    doc.line(10, y+1, 200, y+1);
     
     doc.text(`   ORGÃO EXPEDITOR: ${rgcnhorgaoexpTestemunha}`, 120, y);
    
     y += 6;
     verificapagina3()
-    doc.text(`   DATA DE EXPEDIÇÃO: ${dataexpedicaoTestemunha}`, 20, y);
-    doc.line(20, y+1, 200, y+1);
+    doc.text(`   DATA DE EXPEDIÇÃO: ${dataexpedicaoTestemunha}`, 10, y);
+    doc.line(10, y+1, 200, y+1);
     doc.text(`   UF: ${dataexpedicaoufTestemunha}`, 120, y);
-    doc.line(20, y+1, 200, y+1);
+    doc.line(10, y+1, 200, y+1);
     y += 6;
     verificapagina3()
-    doc.text(`   FILIAÇÃO: ${filiacaoTestemunha}`, 20, y);
-    doc.line(20, y+1, 200, y+1);
+    doc.text(`   FILIAÇÃO: ${filiacaoTestemunha}`, 10, y);
+    doc.line(10, y+1, 200, y+1);
     y += 6;
     verificapagina3()
-    doc.text(`   ENDEREÇO: ${enderecoTestemunha}`, 20, y);
-    doc.line(20, y+1, 200, y+1);
+    doc.text(`   ENDEREÇO: ${enderecoTestemunha}`, 10, y);
+    doc.line(10, y+1, 200, y+1);
     y += 6;
     verificapagina3()
-    doc.text(`   MUNICIPIO: ${municipioTestemunha}`, 20, y);
+    doc.text(`   MUNICIPIO: ${municipioTestemunha}`, 10, y);
     
     doc.text(`   UF: ${ufmunicipioTestemunha}`, 120, y);
    
     doc.text(`   CEP: ${cepmunicipioTestemunha}`, 140, y);
-    doc.line(20, y+1, 200, y+1);
+    doc.line(10, y+1, 200, y+1);
     y += 6;
     verificapagina3()
-    doc.text(`   PONTO DE REFERÊNCIA: ${pontoreferenciaenderecoTestemunha}`, 20, y);
-    doc.line(20, y+1, 200, y+1);
+    doc.text(`   PONTO DE REFERÊNCIA: ${pontoreferenciaenderecoTestemunha}`, 10, y);
+    doc.line(10, y+1, 200, y+1);
     y += 6;
     verificapagina3()
-    doc.text(`   TELEFONE: ${telefoneTestemunha}`, 20, y);
-    doc.line(20, y+1, 200, y+1);
+    doc.text(`   TELEFONE: ${telefoneTestemunha}`, 10, y);
+    doc.line(10, y+1, 200, y+1);
     y += 6;
     verificapagina3()
-    doc.text(`   E-MAIL PESSOAL: ${emailTestemunha}`, 20, y);
-    doc.line(20, y+1, 200, y+1);
+    doc.text(`   E-MAIL PESSOAL: ${emailTestemunha}`, 10, y);
+    doc.line(10, y+1, 200, y+1);
     y += 6;
     verificapagina3()
-    doc.text(`   ESTADO CIVIL: ${estadocivilTestemunha}`, 20, y);
-    doc.line(20, y+1, 200, y+1);
+    doc.text(`   ESTADO CIVIL: ${estadocivilTestemunha}`, 10, y);
+    doc.line(10, y+1, 200, y+1);
     y += 6;
     verificapagina3()
-    doc.text(`   NACIONALIDADE: ${nacionalidadeTestemunha}`, 20, y);
-    doc.line(20, y+1, 200, y+1);
-    doc.text(`   NATURALIDADE: ${naturalidadeTestemunha}`, 70, y);
-    doc.text(`   UF: ${naturalidadeufTestemunha}`, 140, y);
+    doc.text(`   NACIONALIDADE: ${nacionalidadeTestemunha}`, 10, y);
+    doc.line(10, y+1, 200, y+1);
+    doc.text(`   NATURALIDADE: ${naturalidadeTestemunha}`, 80, y);
+    doc.text(`   UF: ${naturalidadeufTestemunha}`, 180, y);
     y += 6;
     verificapagina3()
 
 
-    doc.text(`   DATA NASC: ${datanasciTestemunha}`, 20, y)
-    doc.line(20, y+1, 200, y+1);
+    doc.text(`   DATA NASC: ${datanasciTestemunha}`, 10, y)
+    doc.line(10, y+1, 200, y+1);
    doc.text(`   SEXO: ${sexoTestemunha}`, 70, y);
     y += 6;
     verificapagina3()
-   doc.text(`   PROFISSÃO: ${profissaoTestemunha}`, 20, y);
-   doc.line(20, y+1, 200, y+1);
+   doc.text(`   PROFISSÃO: ${profissaoTestemunha}`, 10, y);
+   doc.line(10, y+1, 200, y+1);
     y += 6;
     verificapagina3()
     
-   doc.text(`   LOCAL DE TRABALHO: ${profissaoTestemunha}`, 20, y);
-   doc.line(20, y+1, 200, y+1);
+   doc.text(`   LOCAL DE TRABALHO: ${profissaoTestemunha}`, 10, y);
+   doc.line(10, y+1, 200, y+1);
     y += 6;
     verificapagina3()
-   //doc.text(`   RELATO DO AUTOR DO FATO: ${relatoTestemunha}`, 20, y);
+   //doc.text(`   RELATO DO AUTOR DO FATO: ${relatoTestemunha}`, 10, y);
     y += 15;
 
     verificapagina3()
@@ -1315,19 +1334,19 @@ doc.setFont("helvetica", "normal");
 //doc.text(textoRelatoCondutor, 20, y, { maxWidth: 175, align: 'justify'});
 
 const textoFormatado = doc.splitTextToSize(textoRelatoCondutor, 175);
-doc.text(textoFormatado, 20, y, { maxWidth: 175, align: 'justify'});
+doc.text(textoFormatado, 20, y, { maxWidth: 170, align: 'justify'});
 
 
 
 
 
-y += numeroDeLinhas4 * 7;
+y += numeroDeLinhas4 * 5;
 y += 10;
 doc.text(`__________________________________________________`, 100, y-4, { align: "center" });
 doc.text(`   ${nomeCondutor}- ${posto_grad}`, 100, y, { align: "center" });
 y += 5;
 doc.text(`  RGPM: ${rgPM}`, 100, y, { align: "center" });
-y += 10;
+y += 30;
 verificapagina7()
                
 
@@ -1355,7 +1374,7 @@ const cpfVVitima = document.getElementsByName("cpf_passaporte_vitima[]")[index]?
           
           let textoRelatoVitima = relatoVitimacorreto 
           
-          const linhas = doc.splitTextToSize(textoRelatoVitima, 175);
+          const linhas = doc.splitTextToSize(textoRelatoVitima, 170);
           // Número de linhas geradas
 const numeroDeLinhas = linhas.length;
 const numeroDeLinhasmultiplcado = linhas.length * 6;
@@ -1379,11 +1398,11 @@ const numeroDeLinhasmultiplcado = linhas.length * 6;
             y += 15;
              verificapagina4()
 doc.setFont("helvetica", "normal");
-doc.text(textoRelatoVitima, 20, y, { maxWidth: 175, align: 'justify'});
+doc.text(textoRelatoVitima, 20, y, { maxWidth: 170, align: 'justify'});
 
 
 
-y += numeroDeLinhas * 7;
+y += numeroDeLinhas * 5;
 
 
 y += 10;
@@ -1414,7 +1433,7 @@ y += 20
     //console.log("A variável é verdadeira e tem valor!");
     if (typeof nomeVVitima === "undefined") {
 
-} else {doc.text("Eu, " + nomeVVitima +", por este instrumento, manifesto o meu interesse:", 20, y, { maxWidth: 175, align: 'justify'});}
+} else {doc.text("Eu, " + nomeVVitima +", por este instrumento, manifesto o meu interesse:", 20, y, { maxWidth: 170, align: 'justify'});}
 //} else {
 //}
 y += 10
@@ -1447,20 +1466,21 @@ y += 10
 doc.text("POLICIAL MILITAR", 30, y , { maxWidth: 175, align: 'justify'});
 y += 10
 
-doc.line(20, y-3, 200, y-3);
+doc.line(20, y-3, 180, y-3);
 doc.text(posto_grad + " - " + nomeCondutor + "- RGPM: " + rgPM, 30, y+2 , { maxWidth: 175, align: 'justify'});
 y += 7
-doc.line(20, y-3, 200, y-3);
+doc.line(20, y-3, 180, y-3);
 //doc.text("SD PMMT - DOUGLAS BEZERRA DE OLIVEIRA - RGPM: 887.192", 30, y+2 , { maxWidth: 175, align: 'justify'});
-doc.text(posto_grad_componente2 + " - " + nome_completo_componente2 + "- RGPM: " + rg_componente2, 30, y+2 , { maxWidth: 175, align: 'justify'});
+//doc.text(posto_grad_componente2 + " - " + nome_completo_componente2 + "- RGPM: " + rg_componente2, 30, y+2 , { maxWidth: 175, align: 'justify'});
 y += 7
-doc.line(20, y-3, 200, y-3);
-
+doc.line(20, y-3, 180, y-3);
+//doc.text(posto_grad_componente3 + " - " + nome_completo_componente3 + "- RGPM: " + rg_componente3, 30, y+2 , { maxWidth: 175, align: 'justify'});
 y += 7    
-doc.line(20, y-3, 200, y-3);
+doc.line(20, y-3, 180, y-3);
+//doc.text(posto_grad_componente4 + " - " + nome_completo_componente4 + "- RGPM: " + rg_componente4, 30, y+2 , { maxWidth: 175, align: 'justify'});
 y += 7  
-doc.line(20, y-3, 200, y-3);
-y += 7 
+doc.line(20, y-3, 180, y-3);
+y += 7  
 
 
 doc.setFontSize(12)
@@ -1506,7 +1526,7 @@ const cpfTTestemunha = document.getElementsByName("cpf_passaporte_testemunha[]")
           
           let textoRelatoTestemunha = relatoTestemunhaCorreto 
           
-          const linhas2 = doc.splitTextToSize(textoRelatoTestemunha, 175);
+          const linhas2 = doc.splitTextToSize(textoRelatoTestemunha, 170);
           // Número de linhas geradas
 const numeroDeLinhas2 = linhas2.length;
 const numeroDeLinhasmultiplcado2 = linhas2.length * 6;
@@ -1522,16 +1542,17 @@ const numeroDeLinhasmultiplcado2 = linhas2.length * 6;
             y = 60; // Reinicia a posição no topo da nova página
     }
 
-
+    doc.setFontSize(10);
           doc.setFont("helvetica", "bold");
           doc.text(`    Relato da testemunha (${index + 1}): ${nomeTTestemunha}`, 100, y, { align: "center" }); 
+          doc.setFontSize(10);
              doc.line(10, y+1, 200, y+1);
              
             y += 15;
              verificapagina5()
 doc.setFont("helvetica", "normal");
 doc.setFontSize(10);
-doc.text(textoRelatoTestemunha, 20, y, { maxWidth: 175, align: 'justify'});
+doc.text(textoRelatoTestemunha, 20, y, { maxWidth: 170, align: 'justify'});
 
 
 
@@ -1543,7 +1564,7 @@ doc.text(`__________________________________________________`, 100, y-4, { align
 doc.text(`   ${nomeTTestemunha}`, 100, y, { align: "center" });
 y += 5;
 doc.text(`  CPF: ${cpfTTestemunha}`, 100, y, { align: "center" });
-y += 10;
+y += 30;
 verificapagina5()
                
 
@@ -1572,7 +1593,7 @@ const cpfAutor = document.getElementsByName("cpf_passaporte_autor[]")[index]?.va
           
           let textoRelatoAutor = relatoAutorCorreto 
           
-          const linhas3 = doc.splitTextToSize(textoRelatoAutor, 175);
+          const linhas3 = doc.splitTextToSize(textoRelatoAutor, 170);
           // Número de linhas geradas
 const numeroDeLinhas3 = linhas3.length;
 const numeroDeLinhasmultiplcado3 = linhas3.length * 6;
@@ -1597,7 +1618,7 @@ const numeroDeLinhasmultiplcado3 = linhas3.length * 6;
              verificapagina6()
 doc.setFont("helvetica", "normal");
 doc.setFontSize(10);
-doc.text(textoRelatoAutor, 20, y, { maxWidth: 175, align: 'justify'});
+doc.text(textoRelatoAutor, 20, y, { maxWidth: 170, align: 'justify'});
 
 
 
@@ -1638,7 +1659,7 @@ y += 20
 
 
 doc.setFont("helvetica", "normal");
-doc.text(textoconclusaopolicial, 20, y, { maxWidth: 175, align: 'justify'});
+doc.text(textoconclusaopolicial, 20, y, { maxWidth: 170, align: 'justify'});
 doc.setFont("helvetica", "bold");
 doc.text("D- PROVIDÊNCIAS ADOTADAS", 30, y + 40, { maxWidth: 175, align: 'justify'});
       
@@ -1646,41 +1667,44 @@ y += 40
 
 y += 10
 
-doc.line(20, y-3, 200, y-3);
+doc.line(20, y-3, 190, y-3);
 doc.text("PROVIDÊNCIAS: CONFECÇÃO DO TERMO CIRCUNSTANCIADO DE OCORRÊNCIA", 20, y, { maxWidth: 160, align: 'justify'});
 y += 20
-doc.line(20, y-3, 200, y-3);
+doc.line(20, y-3, 190, y-3);
 doc.text("DOC/ANEXOS: TERMO DE COMPROMISSO DE COMPARECIMENTO; TERMO DE MANIFESTAÇÃO DA VITIMA", 20, y , { maxWidth: 160, align: 'justify'});
 y += 20
-doc.line(20, y-3, 200, y-3);
+doc.line(20, y-3, 190, y-3);
 doc.text("DESCRIÇÃO DOS OBJETOS/ DOCUMENTOS APREENDIDOS:", 20, y , { maxWidth: 160, align: 'justify'});
 y += 20
-doc.line(20, y-3, 200, y-3);
+doc.line(20, y-3, 190, y-3);
 
 
             //const relatoAutorr = document.getElementById('relato_autor').value;
 //doc.text(`   RELATO DO AUTOR DO FATO: ${relatoAutorr}`, 20, y);
 doc.line(20, 127, 20, y-3);
 
-doc.line(200, 127, 200, y-3);
+doc.line(190, 127, 190, y-3);
     
 y += 10
 doc.text("E- IDENTIFICAÇÃO DA GUARNIÇÃO", 30, y , { maxWidth: 175, align: 'justify'});
 y += 10
 
-doc.line(20, y-3, 200, y-3);
+doc.line(20, y-3, 170, y-3);
 doc.text(posto_grad + " - " + nomeCondutor + "- RGPM: " + rgPM, 30, y+2 , { maxWidth: 175, align: 'justify'});
 y += 7
-doc.line(20, y-3, 200, y-3);
+doc.line(20, y-3, 170, y-3);
 //doc.text("SD PMMT - DOUGLAS BEZERRA DE OLIVEIRA - RGPM: 887.192", 30, y+2 , { maxWidth: 175, align: 'justify'});
 doc.text(posto_grad_componente2 + " - " + nome_completo_componente2 + "- RGPM: " + rg_componente2, 30, y+2 , { maxWidth: 175, align: 'justify'});
 y += 7
-doc.line(20, y-3, 200, y-3);
+doc.line(20, y-3, 170, y-3);
+doc.text(posto_grad_componente3 + " - " + nome_completo_componente3 + "- RGPM: " + rg_componente3, 30, y+2 , { maxWidth: 175, align: 'justify'});
 
 y += 7    
-doc.line(20, y-3, 200, y-3);
+doc.line(20, y-3, 170, y-3);
+doc.text(posto_grad_componente4 + " - " + nome_completo_componente4 + "- RGPM: " + rg_componente4, 30, y+2 , { maxWidth: 175, align: 'justify'});
+
 y += 7  
-doc.line(20, y-3, 200, y-3);
+doc.line(20, y-3, 170, y-3);
 y += 7 
 
 
@@ -1728,7 +1752,7 @@ let textoTermodecompromissso = `Por este instrumento, eu ${nomeAutor}, assumo, n
 
 
 doc.setFont("helvetica", "normal");
-doc.text(textoTermodecompromissso, 20, y, { maxWidth: 175, align: 'justify'});
+doc.text(textoTermodecompromissso, 20, y, { maxWidth: 170, align: 'justify'});
 
 
 y += 40;
@@ -1736,7 +1760,7 @@ y += 40;
 let textTermodecompromissoContinuacao = `Notifico Vossa Senhoria para comparecer no Fórum da Comarca de Barra do Bugres, situado Av. Dep. Hitler Sansão, 1129, na Secretaria ou entrar em contato no Balcão Virtual do Núcleo de Justiça Digital dos Juizados Especiais pelo Whatsapp (65) 99688-0622 ou pelo QR Code:`;
 
 doc.setFont("helvetica", "bold");
-doc.text(textTermodecompromissoContinuacao, 20, y, { maxWidth: 175, align: 'justify'});
+doc.text(textTermodecompromissoContinuacao, 20, y, { maxWidth: 170, align: 'justify'});
 
 ///função qrcdoe
 
@@ -1751,7 +1775,7 @@ y += 30;
 doc.setFont("helvetica", "bold");
 doc.text("POLICIAL MILITAR", 20, y, { maxWidth: 175, align: 'justify'});
 y += 7;
-doc.text(posto_grad + " - " + nome_completo + " - RGPM " + rg, 20, y, { maxWidth: 175, align: 'justify'});
+doc.text(posto_grad + " - " + nome_completo + " - RGPM " + rg, 20, y, { maxWidth: 170, align: 'justify'});
 //doc.text(`TERMO DE COMPROMISSO DE COMPARECIMENTO`, 100, y, { align: "center" });
 y += 40
 
@@ -1773,16 +1797,16 @@ doc.setFont("helvetica", "bold");
 doc.setFontSize(12);
 doc.text(`TERMO DE ENCERRAMENTO E REMESSA`, 100, y, { align: "center" });
 doc.setFont("helvetica", "normal");
-doc.setFontSize(12);
+doc.setFontSize(10);
 
 let textTermodeencerramento = `Aos ${diaExtenso} dias do mês de ${mesExtenso} do ano de dois mil e vinte e cinco, por determinação da Autoridade Policial Militar, dou por encerrado a lavratura do presente Termo Circunstanciado de Ocorrência n° - ${numero_tco}/CRO7/2025, contendo 08 laudas paginadas e rubricadas, em desfavor do senhor ${nomeAutor}, para as providências de remessa dos autos para apreciação do Núcleo de Resoluções de Conflitos e Justiça Restaurativa, da Vara do Juizado Especial da Comarca de Barra do Bugres-MT, a quem compete deliberar sobre o suposto delito.`;
 
 
 y += 30
 doc.setFont("helvetica", "normal");
-doc.text(textTermodeencerramento, 20, y, { maxWidth: 175, align: 'justify'});
+doc.text(textTermodeencerramento, 20, y, { maxWidth: 170, align: 'justify'});
 y += 60
-doc.text("Quartel em " + cidade +", "+ dia + " de "+ mesExtenso + " 2025.", 20, y, { maxWidth: 175, align: 'justify'});
+doc.text("Quartel em " + cidade +", "+ dia + " de "+ mesExtenso + " 2025.", 20, y, { maxWidth: 170, align: 'justify'});
 
 y += 70;
 doc.text(`__________________________________________________`, 100, y-4, { align: "center" });
