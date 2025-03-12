@@ -440,13 +440,22 @@
     <hr>
 
     <!-- Cadastro de Vítima -->
-    <h2>3º Cadastro de Vítima / Testemunha</h2>
+    <h2>3º Cadastro de Vítima</h2>
     <form id="formVitima">
         <div id="pessoasVitima"></div>
         <button type="button" class="btn btn-primary mt-3" onclick="adicionarPessoa('Vitima')">Adicionar Vítima</button>
-        <button type="button" class="btn btn-primary mt-3" onclick="adicionarPessoa('Testemunha')">Adicionar Testemunha</button>
+        
     <hr>
+</form>
 
+ <!-- Cadastro de testemunha -->
+ <h2>3º Cadastro de Testemunha</h2>
+ <form id="formTestemunha">
+     <div id="pessoasTestemunha"></div>
+     
+     <button type="button" class="btn btn-primary mt-3" onclick="adicionarPessoa('Testemunha')">Adicionar Testemunha</button>
+ <hr>
+</form>
 
     
     <!DOCTYPE html>
@@ -486,7 +495,7 @@
             
            
             <button type="submit">Enviar</button>
-        </form>
+        
     </div>
     
     <script>
@@ -547,111 +556,116 @@
     
 
     <script>
-        let contadorAutor = 1;
-        let contadorVitima = 1;
-        let contadorTestemunha = 1;
+    let contadorAutor = 1;
+let contadorVitima = 1;
+let contadorTestemunha = 1;
 
-        function adicionarPessoa(tipo) {
-            const container = tipo === 'Autor' ? document.getElementById('pessoasAutor') : document.getElementById('pessoasVitima') ; 
-            document.getElementById("testemunha") ;
+function adicionarPessoa(tipo) {
+    let container;
+    let contador;
 
-            const contador = tipo === 'Autor' ? contadorAutor++ : contadorVitima++ ; contadorTestemunha++ ;
+    // Define o container e o contador com base no tipo de pessoa
+    if (tipo === 'Autor') {
+        container = document.getElementById('pessoasAutor');
+        contador = contadorAutor;
+        contadorAutor++;
+    } else if (tipo === 'Vitima') {
+        container = document.getElementById('pessoasVitima');
+        contador = contadorVitima;
+        contadorVitima++;
+    } else if (tipo === 'Testemunha') {
+        container = document.getElementById('pessoasTestemunha');
+        contador = contadorTestemunha;
+        contadorTestemunha++;
+    }
 
-            const divPessoa = document.createElement('div');
-            divPessoa.classList.add('pessoa', 'border', 'p-3', 'mb-3');
-            divPessoa.innerHTML = `
-                <h4>${tipo} ${contador}</h4>
-                <label>Nome</label>
-                <input type="text" class="form-control" name="nome_${tipo.toLowerCase()}[]" value="Digite o nome">
-                
-                <label>Nome Social</label>
-                <input type="text" class="form-control" name="nome_social_${tipo.toLowerCase()}[]" placeholder="Digite o nomeSocial">
-                
-                <label>Cpf ou Passaporte</label>
-                <input type="text" class="form-control" name="cpf_passaporte_${tipo.toLowerCase()}[]" placeholder="Digite o CPF ou Passaporte">
-               
-                <label>RG/CNH Nº</label>
-                <input type="text" class="form-control" name="rg_cnh_${tipo.toLowerCase()}[]" placeholder="Digite o RG ou CNH">
+    // Cria o elemento div para a pessoa
+    const divPessoa = document.createElement('div');
+    divPessoa.classList.add('pessoa', 'border', 'p-3', 'mb-3');
+    divPessoa.innerHTML = `
+        <h4>${tipo} ${contador}</h4>
+        <label>Nome</label>
+        <input type="text" class="form-control" name="nome_${tipo.toLowerCase()}[]" value="Digite o nome">
+        
+        <label>Nome Social</label>
+        <input type="text" class="form-control" name="nome_social_${tipo.toLowerCase()}[]" placeholder="Digite o nomeSocial">
+        
+        <label>Cpf ou Passaporte</label>
+        <input type="text" class="form-control" name="cpf_passaporte_${tipo.toLowerCase()}[]" placeholder="Digite o CPF ou Passaporte">
+       
+        <label>RG/CNH Nº</label>
+        <input type="text" class="form-control" name="rg_cnh_${tipo.toLowerCase()}[]" placeholder="Digite o RG ou CNH">
 
-                <label>ÓRGÃO EXPEDITOR</label>
-                <input type="text" class="form-control" name="rg_cnh_orgao_exp_${tipo.toLowerCase()}[]" placeholder="Digite o orgão expeditor">
-                
-                <label>DATA DE EXPEDIÇÃO</label>
-                <input type="text" class="form-control" name="data_expedicao_${tipo.toLowerCase()}[]" placeholder="Digite a data de expedição">
+        <label>ÓRGÃO EXPEDITOR</label>
+        <input type="text" class="form-control" name="rg_cnh_orgao_exp_${tipo.toLowerCase()}[]" placeholder="Digite o orgão expeditor">
+        
+        <label>DATA DE EXPEDIÇÃO</label>
+        <input type="text" class="form-control" name="data_expedicao_${tipo.toLowerCase()}[]" placeholder="Digite a data de expedição">
 
-               <label>UF</label>
-                <input type="text" class="form-control" name="data_expedicao_uf_${tipo.toLowerCase()}[]" placeholder="Digite o estado de expedição do documento">
+       <label>UF</label>
+        <input type="text" class="form-control" name="data_expedicao_uf_${tipo.toLowerCase()}[]" placeholder="Digite o estado de expedição do documento">
 
-                <label>FILIAÇÃO</label>
-                <input type="text" class="form-control" name="filiacao_${tipo.toLowerCase()}[]" placeholder="Digite a filiação">
+        <label>FILIAÇÃO</label>
+        <input type="text" class="form-control" name="filiacao_${tipo.toLowerCase()}[]" placeholder="Digite a filiação">
 
-                <label>ENDEREÇO</label>
-                <input type="text" class="form-control" name="endereco_${tipo.toLowerCase()}[]" placeholder="Digite o endereço">
+        <label>ENDEREÇO</label>
+        <input type="text" class="form-control" name="endereco_${tipo.toLowerCase()}[]" placeholder="Digite o endereço">
 
-                <label>MUNICIPIO</label>
-                <input type="text" class="form-control" name="municipio_${tipo.toLowerCase()}[]" value="DENISE">
+        <label>MUNICIPIO</label>
+        <input type="text" class="form-control" name="municipio_${tipo.toLowerCase()}[]" value="DENISE">
 
-                <label>UF</label>
-                <input type="text" class="form-control" name="uf_municipio_${tipo.toLowerCase()}[]" value="MT">
+        <label>UF</label>
+        <input type="text" class="form-control" name="uf_municipio_${tipo.toLowerCase()}[]" value="MT">
 
-                <label>CEP</label>
-                <input type="text" class="form-control" name="cep_municipio_${tipo.toLowerCase()}[]" value="78.380-000">
+        <label>CEP</label>
+        <input type="text" class="form-control" name="cep_municipio_${tipo.toLowerCase()}[]" value="78.380-000">
 
-                <label>PONTO DE REFERÊNCIA</label>
-                <input type="text" class="form-control" name="ponto_referencia_endereco_${tipo.toLowerCase()}[]" placeholder="Digite um ponto de referência do endereço">
+        <label>PONTO DE REFERÊNCIA</label>
+        <input type="text" class="form-control" name="ponto_referencia_endereco_${tipo.toLowerCase()}[]" placeholder="Digite um ponto de referência do endereço">
 
-                <label>TELEFONE</label>
-                <input type="text" class="form-control" name="telefone_${tipo.toLowerCase()}[]" placeholder="Digite os telefones de contato">
-               
-                <label>E-MAIL PESSOAL</label>
-                <input type="text" class="form-control" name="e-mail_${tipo.toLowerCase()}[]" placeholder="Digite o e-mail pessoal">
-               
-                <label>ESTADO CIVIL</label>
-                
-               <input type="text" class="form-control" name="estado_civil_${tipo.toLowerCase()}[]" placeholder="Digite o estado civil">
+        <label>TELEFONE</label>
+        <input type="text" class="form-control" name="telefone_${tipo.toLowerCase()}[]" placeholder="Digite os telefones de contato">
+       
+        <label>E-MAIL PESSOAL</label>
+        <input type="text" class="form-control" name="e-mail_${tipo.toLowerCase()}[]" placeholder="Digite o e-mail pessoal">
+       
+        <label>ESTADO CIVIL</label>
+       
+       <input type="text" class="form-control" name="estado_civil_${tipo.toLowerCase()}[]" placeholder="Digite o estado civil">
 
-                <label>NACIONALIDADE</label>
-                <input type="text" class="form-control" name="nacionalidade_${tipo.toLowerCase()}[]" value="BRASILEIRA">
-               
-                <label>NATURALIDADE</label>
-                <input type="text" class="form-control" name="naturalidade_${tipo.toLowerCase()}[]" placeholder="Digite a naturalidade">
-               
-                <label>UF</label>
-                <input type="text" class="form-control" name="naturalidadeuf_${tipo.toLowerCase()}[]" placeholder="estado naturalidade">
-               
-                <label>DATA NASC:</label>
-                <input type="text" class="form-control" name="datanascimento_${tipo.toLowerCase()}[]" placeholder="Digite a data de nascimento">
-               
+        <label>NACIONALIDADE</label>
+        <input type="text" class="form-control" name="nacionalidade_${tipo.toLowerCase()}[]" value="BRASILEIRA">
+       
+        <label>NATURALIDADE</label>
+        <input type="text" class="form-control" name="naturalidade_${tipo.toLowerCase()}[]" placeholder="Digite a naturalidade">
+       
+        <label>UF</label>
+        <input type="text" class="form-control" name="naturalidadeuf_${tipo.toLowerCase()}[]" placeholder="estado naturalidade">
+       
+        <label>DATA NASC:</label>
+        <input type="text" class="form-control" name="datanascimento_${tipo.toLowerCase()}[]" placeholder="Digite a data de nascimento">
+       
 
-                <label>SEXO</label>
-                <input type="text" class="form-control" name="sexo_${tipo.toLowerCase()}[]" value="MASCULINO">
-               
-                <label>ATIVIDADE - PROFISSÃO</label>
-                <input type="text" class="form-control" name="profissao_${tipo.toLowerCase()}[]" placeholder="Digite a profissão">
-               
-                <label>CONDIÇÕES FISICAS</label>
-                <input type="text" class="form-control" name="local_trabalho_${tipo.toLowerCase()}[]" value="sem lesão">
-               
+        <label>SEXO</label>
+        <input type="text" class="form-control" name="sexo_${tipo.toLowerCase()}[]" value="MASCULINO">
+       
+        <label>ATIVIDADE - PROFISSÃO</label>
+        <input type="text" class="form-control" name="profissao_${tipo.toLowerCase()}[]" placeholder="Digite a profissão">
+       
+        <label>CONDIÇÕES FISICAS</label>
+        <input type="text" class="form-control" name="local_trabalho_${tipo.toLowerCase()}[]" value="sem lesão">
+       
+<label>${tipo === 'Autor' ? 'RELATO DO AUTOR' : tipo === 'Vitima' ? 'RELATO DA VITIMA' : 'RELATO DA TESTEMUNHA'}</label>
+    
+<textarea class="form-control" name="relato_${tipo.toLowerCase()}[]" rows="10">${tipo === 'Autor' ? 'O autor dos fatos (), cientificado de seus direitos constitucionais, inclusive o de permanecer em silencio, declarou Que... Lido e achado conforme. Nada mais disse e nem lhe foi perguntado(a).' : tipo === 'Vitima' ? 'A vítima ( ) relatou que... Lido e achado conforme. Nada mais disse e nem lhe foi perguntado(a).' : 'A testemunha ( ) compromissada na forma da lei, aos costumes respondeu negativamente se possui algum grau de parentesco ou amizade com as partes), declarou Que.... Lido e achado conforme. Nada mais disse e nem lhe foi perguntado(a). ('}</textarea>
 
-           <label>RELATO</label>
-<textarea class="form-control" name="relato_${tipo.toLowerCase()}[]" value="tets" rows="10">O (((autor dos fatos) ou (vitima tal) ou (testemunha tal))), cientificado de seus direitos constitucionais, inclusive o de permanecer calado, declarou Que (declinar o relato dos fatos abreviadamente, fazendo perguntas acerca do fato, porém declinando apenas a resposta antecedida da palavra (Que).... ex: Que realmente abordou a vítima próximo de sua casa; Que não xingou a vítima, apenas disse que suas atitudes era desse tipo de pessoa) Lido e achado conforme. Nada mais disse e nem lhe foi perguntado(a).</textarea>	
+    
+    <button type="button" class="btn btn-danger mt-2" onclick="removerPessoa(this)">Remover</button>`;
 
-                
-                
-               
-     
+    container.appendChild(divPessoa);
 
-
-
-
-
-
-
-                
-                <button type="button" class="btn btn-danger mt-2" onclick="removerPessoa(this)">Remover</button>`;
-
-            container.appendChild(divPessoa);
-        }
+       
+}
 
         function removerPessoa(botao) {
             botao.parentElement.remove();
@@ -1007,7 +1021,7 @@ const naturalidadeufAutor = document.getElementsByName("naturalidadeuf_autor[]")
     
     
 
-
+});
 
 
 function verificapagina2() {
@@ -1724,6 +1738,11 @@ doc.text("Referência: Termo Circunstanciado de Ocorrência de Nº TCO/CR07/" +"
 //doc.text("ANEXOS"), 100, 90, { align: "center"});
 
 
+document.getElementsByName("nome_autor[]").forEach((input, index) => {
+                const nomeAAAutor = input.value;
+            const relatoAAAutorCorreto = document.getElementsByName("relato_autor[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+const cpfAAAutor = document.getElementsByName("cpf_passaporte_autor[]")[index]?.value || "N/A"; // Se não houver nome social, 
+
 
 
 doc.text("ANEXOS:", 90, 90 , { maxWidth: 175, align: 'justify'});
@@ -1746,7 +1765,7 @@ doc.text(`TERMO DE COMPROMISSO DE COMPARECIMENTO`, 100, y, { align: "center" });
 doc.setFontSize(10);
 
 y += 20 
-let textoTermodecompromissso = `Por este instrumento, eu ${nomeAutor}, assumo, nos termos do parágrafo único do Art. 69 da Lei nº 9.099/95, o compromisso de comparecer no Juizado Especial Criminal, em virtude dos fatos registrados no Termo Circunstanciado de Ocorrência acima referenciado, conforme notificado abaixo.                Fico ciente de que a concordância em comparecer ao Juizado Especial Criminal, não implica confissão de qualquer natureza, admissão de culpa ou anuência às declarações da parte contrária e o não comparecimento no dia e hora ajustados neste termo sujeitará às medidas previstas na Lei nº 9.099/95. Fico ciente também que deverei comparecer acompanhado de advogado e que na ausência deste será nomeado um defensor público.
+let textoTermodecompromissso = `Por este instrumento, eu ${nomeAAAutor}, assumo, nos termos do parágrafo único do Art. 69 da Lei nº 9.099/95, o compromisso de comparecer no Juizado Especial Criminal, em virtude dos fatos registrados no Termo Circunstanciado de Ocorrência acima referenciado, conforme notificado abaixo.                Fico ciente de que a concordância em comparecer ao Juizado Especial Criminal, não implica confissão de qualquer natureza, admissão de culpa ou anuência às declarações da parte contrária e o não comparecimento no dia e hora ajustados neste termo sujeitará às medidas previstas na Lei nº 9.099/95. Fico ciente também que deverei comparecer acompanhado de advogado e que na ausência deste será nomeado um defensor público.
 `;
 
 
@@ -1767,9 +1786,9 @@ doc.text(textTermodecompromissoContinuacao, 20, y, { maxWidth: 170, align: 'just
 
 y += 40;
 doc.text(`__________________________________________________`, 100, y-4, { align: "center" });
-doc.text(`   ${nomeAutor}`, 100, y, { align: "center" });
+doc.text(`   ${nomeAAAutor}`, 100, y, { align: "center" });
 y += 5;
-doc.text(`  CPF: ${cpfAutor}`, 100, y, { align: "center" });
+doc.text(`  CPF: ${cpfAAAutor}`, 100, y, { align: "center" });
 y += 30;
 
 doc.setFont("helvetica", "bold");
@@ -1783,10 +1802,23 @@ y += 40
 /// manifestação da vitima
 
 
+});
 
+let nomesAutores = [];
 
+// Coletando os nomes dos autores
+document.querySelectorAll("input[name='nome_autor[]']").forEach((input) => {
+    const nomeAAAAutor = input.value;
+    if (nomeAAAAutor) {  // Verifica se o campo não está vazio
+        nomesAutores.push(nomeAAAAutor); // Adiciona o nome à lista de autores
+    }
+});
+// Concatenando todos os nomes com vírgula e espaço
+const nomesConcatenados = nomesAutores.join(', ');
 
-// aqui começa o termo de encerramento e remessa
+// Agora o texto de encerramento com todos os nomes concatenados
+const relatoAAAAutorCorreto = document.getElementsByName("relato_autor[]")[0]?.value || "N/A"; // O primeiro relato, caso haja mais, poderá ser ajustado
+const cpfAAAAutor = document.getElementsByName("cpf_passaporte_autor[]")[0]?.value || "N/A"; // O primeiro CPF
 
 doc.addPage(); // Cria uma nova página
 
@@ -1799,7 +1831,7 @@ doc.text(`TERMO DE ENCERRAMENTO E REMESSA`, 100, y, { align: "center" });
 doc.setFont("helvetica", "normal");
 doc.setFontSize(10);
 
-let textTermodeencerramento = `Aos ${diaExtenso} dias do mês de ${mesExtenso} do ano de dois mil e vinte e cinco, por determinação da Autoridade Policial Militar, dou por encerrado a lavratura do presente Termo Circunstanciado de Ocorrência n° - ${numero_tco}/CRO7/2025, contendo 08 laudas paginadas e rubricadas, em desfavor do senhor ${nomeAutor}, para as providências de remessa dos autos para apreciação do Núcleo de Resoluções de Conflitos e Justiça Restaurativa, da Vara do Juizado Especial da Comarca de Barra do Bugres-MT, a quem compete deliberar sobre o suposto delito.`;
+let textTermodeencerramento = `Aos ${diaExtenso} dias do mês de ${mesExtenso} do ano de dois mil e vinte e cinco, por determinação da Autoridade Policial Militar, dou por encerrado a lavratura do presente Termo Circunstanciado de Ocorrência n° - ${numero_tco}/CRO7/2025, contendo 08 laudas paginadas e rubricadas, em desfavor do senhor(a) ${nomesConcatenados}, para as providências de remessa dos autos para apreciação do Núcleo de Resoluções de Conflitos e Justiça Restaurativa, da Vara do Juizado Especial da Comarca de Barra do Bugres-MT, a quem compete deliberar sobre o suposto delito.`;
 
 
 y += 30
@@ -1816,7 +1848,7 @@ doc.text(`  RGPM: ${rgPM}`, 100, y, { align: "center" });
 y += 10;
 
 doc.save("tco.pdf");
-});
+
 
 }
     </script>
