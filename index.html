@@ -1708,14 +1708,17 @@ doc.text(posto_grad + " - " + nomeCondutor + "- RGPM: " + rgPM, 30, y+2 , { maxW
 y += 7
 doc.line(20, y-3, 170, y-3);
 //doc.text("SD PMMT - DOUGLAS BEZERRA DE OLIVEIRA - RGPM: 887.192", 30, y+2 , { maxWidth: 175, align: 'justify'});
-doc.text(posto_grad_componente2 + " - " + nome_completo_componente2 + "- RGPM: " + rg_componente2, 30, y+2 , { maxWidth: 175, align: 'justify'});
+if (nome_completo_componente2) {
+doc.text(posto_grad_componente2 + " - " + nome_completo_componente2 + "- RGPM: " + rg_componente2, 30, y+2 , { maxWidth: 175, align: 'justify'});}
 y += 7
 doc.line(20, y-3, 170, y-3);
-doc.text(posto_grad_componente3 + " - " + nome_completo_componente3 + "- RGPM: " + rg_componente3, 30, y+2 , { maxWidth: 175, align: 'justify'});
+if (nome_completo_componente3) {
+doc.text(posto_grad_componente3 + " - " + nome_completo_componente3 + "- RGPM: " + rg_componente3, 30, y+2 , { maxWidth: 175, align: 'justify'});}
 
 y += 7    
 doc.line(20, y-3, 170, y-3);
-doc.text(posto_grad_componente4 + " - " + nome_completo_componente4 + "- RGPM: " + rg_componente4, 30, y+2 , { maxWidth: 175, align: 'justify'});
+if (nome_completo_componente4) {
+doc.text(posto_grad_componente4 + " - " + nome_completo_componente4 + "- RGPM: " + rg_componente4, 30, y+2 , { maxWidth: 175, align: 'justify'});}
 
 y += 7  
 doc.line(20, y-3, 170, y-3);
