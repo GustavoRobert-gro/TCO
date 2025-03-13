@@ -553,17 +553,169 @@
         </style>
     </head>
     <body>
-    
-    <button id="toggleButton">Termos</button>
+    <button id="toggleButton" class="btn btn-primary mt-3">Material Apreendido</button>
+       <!-- <button type="button" class="btn btn-primary mt-3" onclick="adicionarPessoa('Testemunha')">Adicionar Testemunha</button>-->
     
     <div id="formContainer" class="form-container">
-        <div class="header" id="formHeader">Clique para Minimizar/Maximizar</div>
+        <div class="header" id="formHeader">Atenção todos materiais relacionados Apenas para o AUTOR DO FATO</div>
         <form id="myForm">
-            <label for="name">Nome: Ainda indisponivel...</label>
-            <input type="text" id="name" required><br><br>
+          <label for="tipo">Tipo:</label>
+<select id="tipo" required onchange="atualizarOpcoes()">
+    <option value="">Selecione uma opção</option>
+    <option value="drogas">Drogas</option>
+    <option value="bebidas">Aparelho de som</option>
+    <option value="remedios">Outros</option>
+</select>
+
+<br><br>
+
+<label for="subtipo">Subtipo:</label>
+<select id="subtipo" onchange="verificarDescricao()">
+    <option value="">Selecione um tipo primeiro</option>
+</select>
+
+<label for="quantidade">Quantidade:</label>
+<input type="number" id="quantidade" min="1" placeholder="Quantidade">
+
+<label for="unidade">Unidade:</label>
+<select id="unidade">
+    <option value="">Selecione um subtipo primeiro</option>
+</select>
+
+<!-- Campo de descrição (aparece só para "Diferente de droga") -->
+<div id="descricaoContainer" style="display: none;">
+    <label for="descricao">Descrição:</label>
+    <input type="text" id="descricao" placeholder="Descreva o item">
+</div>
+
+<!-- Campo de observações (sempre visível) -->
+<div>
+    <label for="observacoes">Observações:</label>
+    <input type="text" id="observacoes" placeholder="Informações adicionais">
+</div>
+
+<button type="button" onclick="adicionarItem()">Adicionar</button>
+
+<h3>Itens Selecionados:</h3>
+<ul id="listaSelecionados"></ul>
+
+<script>
+function atualizarOpcoes() {
+    const subtipoSelect = document.getElementById("subtipo");
+    const unidadeSelect = document.getElementById("unidade");
+
+    subtipoSelect.innerHTML = '<option value="">Selecione uma opção</option>'; // Limpa opções anteriores
+    unidadeSelect.innerHTML = '<option value="">Selecione um subtipo primeiro</option>'; // Reseta unidade
+
+    const tipoSelecionado = document.getElementById("tipo").value;
+    
+    // Opções de subtipos por categoria
+    const opcoesSubtipos = {
+        drogas: ["Maconha", "Cocaína", "LSD", "Ecstasy", "Diferente de droga"],
+        bebidas: ["Aparelho de som domestico", "Aparelho de som Portateis", "Aparelho de som Automotivo"],
+        remedios: ["Diversos"]
+    };
+
+    if (opcoesSubtipos[tipoSelecionado]) {
+        opcoesSubtipos[tipoSelecionado].forEach(opcao => {
+            let novaOpcao = document.createElement("option");
+            novaOpcao.value = opcao; // Agora usa o nome exato da opção
+            novaOpcao.textContent = opcao;
+            subtipoSelect.appendChild(novaOpcao);
+        });
+    }
+}
+
+function verificarDescricao() {
+    const unidadeSelect = document.getElementById("unidade");
+    const descricaoContainer = document.getElementById("descricaoContainer");
+    const subtipoSelecionado = document.getElementById("subtipo").value;
+    const tipoSelecionado = document.getElementById("tipo").value;
+
+    unidadeSelect.innerHTML = ""; // Limpa unidades anteriores
+
+    // Unidades disponíveis para cada categoria
+    const unidades = {
+        drogas: ["Papelotes", "Gramas", "Kg"],
+        bebidas: ["Unidade"],
+        remedios: ["Unidade"]
+    };
+
+    if (unidades[tipoSelecionado]) {
+        unidades[tipoSelecionado].forEach(unidade => {
+            let novaOpcao = document.createElement("option");
+            novaOpcao.value = unidade.toLowerCase();
+            novaOpcao.textContent = unidade;
+            unidadeSelect.appendChild(novaOpcao);
+        });
+    }
+
+    // Exibir o campo de descrição apenas se "Diferente de droga" for selecionado
+    if (subtipoSelecionado === "Diferente de droga") {
+        descricaoContainer.style.display = "block";
+    } else {
+        descricaoContainer.style.display = "none";
+    }
+}
+
+function adicionarItem() {
+    const subtipoSelect = document.getElementById("subtipo");
+    const quantidadeInput = document.getElementById("quantidade");
+    const unidadeSelect = document.getElementById("unidade");
+    const descricaoInput = document.getElementById("descricao");
+    const observacoesInput = document.getElementById("observacoes");
+    const lista = document.getElementById("listaSelecionados");
+
+    const subtipoSelecionado = subtipoSelect.options[subtipoSelect.selectedIndex]?.text || "";
+    const quantidade = quantidadeInput.value;
+    const unidade = unidadeSelect.options[unidadeSelect.selectedIndex]?.text || "";
+    const descricao = descricaoInput.value;
+    const observacoes = observacoesInput.value;
+
+    if (subtipoSelecionado && quantidade > 0 && unidade) {
+        let item = document.createElement("li");
+
+        let textoItem = `${subtipoSelecionado} - Quantidade: ${quantidade} ${unidade}`;
+        
+        if (subtipoSelecionado === "Diferente de droga") {
+            if (!descricao) {
+                alert("Por favor, descreva o item diferente de droga.");
+                return;
+            }
+            textoItem += ` (Descrição: ${descricao})`;
+        }
+
+        if (observacoes) {
+            textoItem += ` - Observações: ${observacoes}`;
+        }
+
+        item.textContent = textoItem;
+        lista.appendChild(item);
+
+        // Limpar campos após adicionar
+        quantidadeInput.value = "";
+        unidadeSelect.innerHTML = '<option value="">Selecione um subtipo primeiro</option>';
+        descricaoInput.value = "";
+        observacoesInput.value = "";
+        document.getElementById("descricaoContainer").style.display = "none";
+    } else {
+        alert("Por favor, selecione um subtipo, informe uma quantidade válida e escolha a unidade.");
+    }
+}
+</script>
+
+            
+
+            </select>
+            
+
+
+
+
+            
             
            
-            <button type="submit">Enviar</button>
+            <!--<button type="submit">Enviar</button>-->
         
     </div>
     
@@ -607,6 +759,7 @@
     <label><input type="checkbox" id="paginaHistorico"> Não gerar Histórico</label><br>
     <label><input type="checkbox" id="paginaConclusao"> Não gerar Conclusão Policial</label><br>>-->
     <label><input type="checkbox" id="paginaAnexos"> Não gerar Anexos</label><br>
+    <label><input type="checkbox" id="paginaMaterialApreendido"> Não gerar Material Apreendido</label><br>
 </div>
 
    <!-- <button type="button" class="btn btn-success mt-3" onclick="gerarPDF()">Gerar PDF Completo</button>-->
@@ -1876,6 +2029,190 @@ y += 40
 
 });
 
+
+document.getElementsByName("nome_autor[]").forEach((input, index) => {
+                const nomeAutorDroga = input.value;
+            const relatoAutorDroga = document.getElementsByName("relato_autor[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+const cpfAutorDroga = document.getElementsByName("cpf_passaporte_autor[]")[index]?.value || "N/A"; // Se não houver nome social, 
+
+
+doc.addPage(); // termo de constatação preliminar de drogas
+
+adicionarCabecalho()
+adicionarRodape()
+y = 60 
+doc.setFont("helvetica", "bold");
+doc.setFontSize(12);
+doc.text(`TERMO DE CONSTATAÇÃO PRELIMINAR DE DROGA`, 100, y, { align: "center" });
+doc.setFont("helvetica", "normal");
+doc.setFontSize(10);
+
+y += 10;
+
+let textoPart1 = `Em razão da lavratura deste Termo Circunstanciado de Ocorrência, pelo(s) delito(s) tipificado(s): ${artigo} da lei ${lei}, foi apreendido o material descrito abaixo, em poder do autor ${nomeAutorDroga} já qualificado no TCO-PM.`;
+
+doc.setFont("helvetica", "normal");
+doc.text(textoPart1, 20, y, { maxWidth: 170, align: 'justify'});
+y += 18
+
+let textoPart2 = `Após ciência das implicações legais do encargo assumido, firmou-se o compromisso legal de proceder à análise dos seguintes materiais:`;
+doc.text(textoPart2, 20, y, { maxWidth: 170, align: 'justify'});
+y += 18
+
+let textoPart3 = `______ (porção/ões) de substância vegetal, cor, odor típico, semelhante ao entorpecente conhecido como _____________________________;`;
+doc.text(textoPart3, 20, y, { maxWidth: 170, align: 'justify'});
+y += 12
+
+let textoPart4 = `______ (porção/ões) de substância vegetal, cor, odor típico, semelhante ao entorpecente conhecido como _____________________________;`;
+doc.text(textoPart4, 20, y, { maxWidth: 170, align: 'justify'});
+y += 12
+
+let textoPart5 = `O presente relatório tem por objetivo avaliar se a(s) substância(s) em questão se trata(m) de entorpecente(s), psicotrópica(s), precursora(s) ou outras sob controle especial da Portaria 344/1998 SVS/MS.`;
+doc.text(textoPart5, 20, y, { maxWidth: 170, align: 'justify'});
+y += 12
+
+let textoPart6 = `Para verificação do exposto acima, foi realizada inspeção visual e olfativa do material.`;
+doc.text(textoPart6, 20, y, { maxWidth: 170, align: 'justify'});
+y += 18
+
+let textoPart7 = `${cidade}/MT de ${dia} de ${mesExtenso}, ${ano}.`;
+doc.text(textoPart7, 20, y, { maxWidth: 170, align: 'justify'});
+y += 18
+
+doc.setFont("helvetica", "bold");
+let textoPart8 = `TESTEMUNHA`;
+doc.text(textoPart8, 20, y, { maxWidth: 170, align: 'justify'});
+y += 7
+doc.setFont("helvetica", "normal");
+
+let textoPart9 = `NOME: ____________________________________, ASSINATURA:_______________________`;
+doc.text(textoPart9, 20, y, { maxWidth: 170, align: 'justify'});
+y += 12
+
+
+doc.setFont("helvetica", "bold");
+let textoPart10 = `POLICIAL MILITAR`;
+doc.text(textoPart10, 20, y, { maxWidth: 170, align: 'justify'});
+y += 7
+
+
+
+doc.line(20, y-3, 170, y-3);
+doc.text(posto_grad + " - " + nomeCondutor + "- RGPM: " + rgPM, 20, y+2 , { maxWidth: 175, align: 'justify'});
+y += 7
+doc.line(20, y-3, 170, y-3);
+//doc.text("SD PMMT - DOUGLAS BEZERRA DE OLIVEIRA - RGPM: 887.192", 30, y+2 , { maxWidth: 175, align: 'justify'});
+if (nome_completo_componente2) {
+doc.text(posto_grad_componente2 + " - " + nome_completo_componente2 + "- RGPM: " + rg_componente2, 20, y+2 , { maxWidth: 175, align: 'justify'});}
+y += 7
+doc.line(20, y-3, 170, y-3);
+if (nome_completo_componente3) {
+doc.text(posto_grad_componente3 + " - " + nome_completo_componente3 + "- RGPM: " + rg_componente3, 20, y+2 , { maxWidth: 175, align: 'justify'});}
+
+y += 7    
+doc.line(20, y-3, 170, y-3);
+if (nome_completo_componente4) {
+doc.text(posto_grad_componente4 + " - " + nome_completo_componente4 + "- RGPM: " + rg_componente4, 20, y+2 , { maxWidth: 175, align: 'justify'});}
+y += 7  
+doc.line(20, y-3, 170, y-3);
+y += 7 
+
+doc.setFont("helvetica", "normal");
+
+
+
+});
+
+// FIM DO TERMO PRELIMINAR DE DROGAS
+
+
+
+
+
+
+document.getElementsByName("nome_autor[]").forEach((input, index) => {
+                const nomeAutorApreensao = input.value;
+            const relatoAutorApreensao = document.getElementsByName("relato_autor[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+const cpfAutorApreensao = document.getElementsByName("cpf_passaporte_autor[]")[index]?.value || "N/A"; // Se não houver nome social, 
+const filicaoAutorApreensao = document.getElementsByName("filiacao_autor[]")[index]?.value || "N/A"; // Se não houver nome social, 
+const naturalidadeAutorApreensao = document.getElementsByName("naturalidade_autor[]")[index]?.value || "N/A"; // Se não houver nome social, 
+const rgAutorApreensao = document.getElementsByName("rg_cnh_autor[]")[index]?.value || "N/A"; // Se não houver nome social, 
+
+const enderecoAutorApreensao = document.getElementsByName("endereco_autor[]")[index]?.value || "N/A"; // Se não houver nome social, 
+const municipioAutorApreensao = document.getElementsByName("municipio_autor[]")[index]?.value || "N/A"; // Se não houver nome social, 
+const cepAutorApreensao = document.getElementsByName("cep_municipio_autor[]")[index]?.value || "N/A"; // Se não houver nome social, 
+const telefoneAutorApreensao = document.getElementsByName("telefone_autor[]")[index]?.value || "N/A"; // Se não houver nome social, 
+//const materialAutorApreensao = document.getElementsByName("material_apreendido_autor[]")[index]?.value || "N/A"; // Se não houver nome social, 
+
+
+doc.addPage(); // TERMO DE APREENSAO...
+
+adicionarCabecalho()
+adicionarRodape()
+y = 60
+doc.setFont("helvetica", "bold");
+doc.setFontSize(12);
+doc.text(`TERMO DE APREENSÃO`, 100, y, { align: "center" });
+doc.setFont("helvetica", "normal");
+doc.setFontSize(10);
+y += 20
+
+doc.line(20, y, 185, y);
+doc.text("DATA: " + data_registro, 21, y+4, { maxWidth: 170, align: 'justify'});
+doc.text("HORA: " + hora_fato, 55, y+4, { maxWidth: 170, align: 'justify'});
+doc.text("LOCAL: ", 90, y+4, { maxWidth: 170, align: 'justify'});
+y += 3
+doc.line(20, y+3, 185, y+3);
+doc.text("NOME: " +nomeAutorApreensao, 21, y+7, { maxWidth: 170, align: 'justify'});
+y += 6
+doc.line(20, y+3, 185, y+3);
+doc.text("FILIAÇÃO: " + filicaoAutorApreensao, 21, y+7, { maxWidth: 170, align: 'justify'});
+y += 6
+doc.line(20, y+3, 185, y+3);
+doc.text("NATURALIDADE: " + naturalidadeAutorApreensao, 21, y+7, { maxWidth: 170, align: 'justify'});
+y += 6
+doc.line(20, y+3, 185, y+3);
+doc.text("RG: "+ rgAutorApreensao, 21, y+7, { maxWidth: 170, align: 'justify'});
+doc.text("CPF: "+ cpfAutorApreensao , 60, y+7, { maxWidth: 170, align: 'justify'});
+y += 6
+doc.line(20, y+3, 185, y+3);
+doc.text("ENDEREÇO: "+enderecoAutorApreensao, 21, y+7, { maxWidth: 170, align: 'justify'});
+y += 6
+doc.line(20, y+3, 185, y+3);
+doc.text("MUNICIPIO: "+municipioAutorApreensao, 21, y+7, { maxWidth: 170, align: 'justify'});
+doc.text("UF: ", 120, y+7, { maxWidth: 170, align: 'justify'});
+y += 6
+doc.line(20, y+3, 185, y+3);
+doc.text("CEP: "+ cepAutorApreensao, 21, y+7, { maxWidth: 170, align: 'justify'});
+doc.text("TELEFONE: " + telefoneAutorApreensao, 60, y+7, { maxWidth: 170, align: 'justify'});
+y += 6
+doc.line(20, y+3, 185, y+3);
+doc.text("FICA APREENDIDO O ABAIXO DESCRITO: ", 21, y+7, { maxWidth: 170, align: 'justify'});
+y += 6
+doc.line(20, y+3, 185, y+3);
+doc.text("PROGRAMAR: ", 21, y+7, { maxWidth: 170, align: 'justify'});
+y += 30
+doc.line(20, y+3, 185, y+3);
+doc.text("O presente termo de Apreensão foi lavrado com base no art. 6º, II, do CPP, e Art. 92 da lei 9.099/1995 ", 21, y+7, { maxWidth: 170, align: 'justify'});
+y += 6
+doc.line(20, y+3, 185, y+3);
+
+y += 30
+
+doc.text(`__________________________________________________`, 100, y-4, { align: "center" });
+doc.text(`   ${nomeAutorApreensao}`, 100, y, { align: "center" });
+y += 5;
+doc.text(`  CPF: ${cpfAutorApreensao}`, 100, y, { align: "center" });
+y += 20;
+
+doc.setFont("helvetica", "bold");
+doc.text("POLICIAL MILITAR: ", 20, y, { maxWidth: 170, align: 'justify'});
+doc.text(posto_grad + " - " + nomeCondutor + "- RGPM: " + rgPM, 20, y+10 , { maxWidth: 175, align: 'justify'});
+doc.setFont("helvetica", "normal");
+});
+/// FIM DO TERMO DE APREENSAO
+
+// termo de encerramento e remessa
 let nomesAutores = [];
 
 // Coletando os nomes dos autores
@@ -1892,7 +2229,7 @@ const nomesConcatenados = nomesAutores.join(', ');
 const relatoAAAAutorCorreto = document.getElementsByName("relato_autor[]")[0]?.value || "N/A"; // O primeiro relato, caso haja mais, poderá ser ajustado
 const cpfAAAAutor = document.getElementsByName("cpf_passaporte_autor[]")[0]?.value || "N/A"; // O primeiro CPF
 
-doc.addPage(); // Cria uma nova página
+doc.addPage(); // Cria uma nova página para o termo de encerramento ...
 
 adicionarCabecalho()
 adicionarRodape()
