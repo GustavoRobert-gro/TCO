@@ -114,8 +114,8 @@
     }
   });
 </script>
-
-
+<br>
+<br>
     <!--fim do preenchimento automatico-->
        
         <div class="date-group">
@@ -131,7 +131,7 @@
             <option value="Brasnorte-MT">Brasnorte-MT</option>
             <option value="Sapezal-MT">Sapezal-MT</option>
             </select>
-
+            
             <label for="dia">Dia:</label>
             <input type="text" id="dia" required style="width: 40px";>
 
@@ -179,42 +179,100 @@
             </script>
             
 
-
-
+            <br>
+            <br>
 
         </div>
 
-        <label for="quartel">Quartel:</label>
-        <select id="quartel" required>
-            <option value="NPM DENISE">Nucleo de policia Militar de Denise - MT</option>
-            <option value="12ª CIPM">12ª CIPM de Barra do Bugres - MT</option>
-            <option value="1ª CIPM">1ª CIPM de Nova Olimpia - MT</option>
-            <option value="NPM PORTO ESTRELA">Nucleo de Policia Militar de Porto Estrela-MT</option>
-            </select>
-    
-        <!--quadro de componentes da gupm-->
+    <!-----------------------------------------------------------ESCOLHA DE QUARTEL-->
 
-        <div class="date-group">
-        <label for="nome_completo">Nome Completo do CONDUTOR:</label>
-<select id="nome_completo" required>
-    <option value="" disabled selected>Selecione uma opção</option>
-    <option value="ANGELO MÁRCIO PRADO BRUNO">ANGELO MÁRCIO PRADO BRUNO</option>
-    <option value="SIDNEY BROLEZI DO NASCIMENTO">SIDNEY BROLEZI DO NASCIMENTO</option>
-    <option value="WEBER DE AQUINO DA SILVA">WEBER DE AQUINO DA SILVA</option>
-    <option value="ALLAN CARLOS CAMPOS">ALLAN CARLOS CAMPOS</option>
-    <option value="GUSTAVO ROBERT DE OLIVEIRA">GUSTAVO ROBERT DE OLIVEIRA</option>
-    <option value="JOSIMAR PEREIRA DA COSTA">JOSIMAR PEREIRA DA COSTA</option>
-    <option value="RICARDO DA SILVA SOUZA">RICARDO DA SILVA SOUZA</option>
-    <option value="GUILHERME SOUZA SILVA">GUILHERME SOUZA SILVA</option>
-    <option value="ELEILTON THIAGO SOARES DE OLIVEIRA">ELEILTON THIAGO SOARES DE OLIVEIRA</option>
-    <option value="BRUNA ASSIS CORREIA">BRUNA ASSIS CORREIA</option>
-    <option value="EDSON BRUNO MARTINS LOBO">EDSON BRUNO MARTINS LOBO</option>
-    <option value="ARTHUR VALDIR VINHAS DE QUEIROZ">ARTHUR VALDIR VINHAS DE QUEIROZ</option>
-    <option value="DOUGLAS BEZERRA DE OLIVEIRA">DOUGLAS BEZERRA DE OLIVEIRA</option>
+    <script>
+        function alterarNomeCondutor() {
+            var quartelSelecionado = document.getElementById("quartel").value;
+             // Campos de nome completo
+             var nomeSelects = [
+                document.getElementById("nome_completo"),
+                document.getElementById("nome_completo_componente2"),
+                document.getElementById("nome_completo_componente3"),
+                document.getElementById("nome_completo_componente4")
+            ];
+          // Limpar as opções existentes
+          nomeSelects.forEach(function(nomeSelect) {
+                nomeSelect.innerHTML = "<option value='' disabled selected>Selecione uma opção</option>";
+            });
 
-</select>
-        
+            // Condicional para mudar os nomes com base no quartel selecionado
+            var nomes = [];
+            
+            if (quartelSelecionado === "NPM DENISE") {
+                nomes = [
+                    "ANGELO MÁRCIO PRADO BRUNO",
+                    "SIDNEY BROLEZI DO NASCIMENTO",
+                    "WEBER DE AQUINO DA SILVA",
+                    "ALLAN CARLOS CAMPOS",
+                    "GUSTAVO ROBERT DE OLIVEIRA",
+                    "JOSIMAR PEREIRA DA COSTA",
+                    "RICARDO DA SILVA SOUZA",
+                    "GUILHERME SOUZA SILVA",
+                    "ELEILTON THIAGO SOARES DE OLIVEIRA",
+                    "BRUNA ASSIS CORREIA",
+                    "EDSON BRUNO MARTINS LOBO",
+                    "ARTHUR VALDIR VINHAS DE QUEIROZ",
+                    "DOUGLAS BEZERRA DE OLIVEIRA"
 
+                ];
+            } else if (quartelSelecionado === "12ª CIPM") {
+                nomes = [
+                    "FABIO GLEYSON FONSECA",
+                    "FABIO DOS SANTOS NEGRÃO",
+                    "RICHARD VIEIRA DE FREITAS"
+                ];
+            } else if (quartelSelecionado === "1ª CIPM") {
+                nomes = [
+                    "RICARDO DA SILVA SOUZA",
+                    "GUILHERME SOUZA SILVA",
+                    "ELEILTON THIAGO SOARES DE OLIVEIRA"
+                ];
+            } else if (quartelSelecionado === "NPM PORTO ESTRELA") {
+                nomes = [
+                    "BRUNA ASSIS CORREIA",
+                    "EDSON BRUNO MARTINS LOBO",
+                    "ARTHUR VALDIR VINHAS DE QUEIROZ",
+                    "DOUGLAS BEZERRA DE OLIVEIRA"
+                ];
+            }
+
+            // Adicionar as opções dinamicamente aos selects de nome
+            nomeSelects.forEach(function(nomeSelect) {
+                nomes.forEach(function(nome) {
+                    var option = document.createElement("option");
+                    option.value = nome;
+                    option.textContent = nome;
+                    nomeSelect.appendChild(option);
+                });
+            });
+        }
+    </script>
+</head>
+<body>
+
+    <!-- Campo Quartel -->
+    <label for="quartel">Quartel:</label>
+    <select id="quartel" required onchange="alterarNomeCondutor()">
+        <option value="" disabled selected>Selecione uma opção</option>
+        <option value="NPM DENISE">Nucleo de policia Militar de Denise - MT</option>
+        <option value="12ª CIPM">12ª CIPM de Barra do Bugres - MT</option>
+        <option value="1ª CIPM">1ª CIPM de Nova Olimpia - MT</option>
+        <option value="NPM PORTO ESTRELA">Nucleo de Policia Militar de Porto Estrela-MT</option>
+    </select>
+
+    <br><br>
+
+    <!-- Campo Nome Completo -->
+    <label for="nome_completo">Nome Completo CONDUTOR:</label>
+    <select id="nome_completo" required>
+        <option value="" disabled selected>Selecione uma opção</option>
+    </select>
         <label for="posto_grad">Posto/Grad:</label>
         <select id="posto_grad" required>
             <option value="" disabled selected>Selecione uma opção</option>
@@ -244,21 +302,8 @@
         <label for="nome_completo_componente2">Nome Componente da GUSV:</label>
 <select id="nome_completo_componente2" required>
     <option value="" disabled selected>Selecione uma opção</option>
-    <option value="ANGELO MÁRCIO PRADO BRUNO">ANGELO MÁRCIO PRADO BRUNO</option>
-    <option value="SIDNEY BROLEZI DO NASCIMENTO">SIDNEY BROLEZI DO NASCIMENTO</option>
-    <option value="WEBER DE AQUINO DA SILVA">WEBER DE AQUINO DA SILVA</option>
-    <option value="ALLAN CARLOS CAMPOS">ALLAN CARLOS CAMPOS</option>
-    <option value="GUSTAVO ROBERT DE OLIVEIRA">GUSTAVO ROBERT DE OLIVEIRA</option>
-    <option value="JOSIMAR PEREIRA DA COSTA">JOSIMAR PEREIRA DA COSTA</option>
-    <option value="RICARDO DA SILVA SOUZA">RICARDO DA SILVA SOUZA</option>
-    <option value="GUILHERME SOUZA SILVA">GUILHERME SOUZA SILVA</option>
-    <option value="ELEILTON THIAGO SOARES DE OLIVEIRA">ELEILTON THIAGO SOARES DE OLIVEIRA</option>
-    <option value="BRUNA ASSIS CORREIA">BRUNA ASSIS CORREIA</option>
-    <option value="EDSON BRUNO MARTINS LOBO">EDSON BRUNO MARTINS LOBO</option>
-    <option value="ARTHUR VALDIR VINHAS DE QUEIROZ">ARTHUR VALDIR VINHAS DE QUEIROZ</option>
-    <option value="DOUGLAS BEZERRA DE OLIVEIRA">DOUGLAS BEZERRA DE OLIVEIRA</option>
-    <option value=""></option>
 </select>
+
         
 
         <label for="posto_grad_componente2">Posto/Grad:</label>
@@ -293,20 +338,6 @@
                 <label for="nome_completo_componente3">Nome Componente da GUSV:</label>
         <select id="nome_completo_componente3" required>
             <option value="" disabled selected>Selecione uma opção</option>
-            <option value="ANGELO MÁRCIO PRADO BRUNO">ANGELO MÁRCIO PRADO BRUNO</option>
-            <option value="SIDNEY BROLEZI DO NASCIMENTO">SIDNEY BROLEZI DO NASCIMENTO</option>
-            <option value="WEBER DE AQUINO DA SILVA">WEBER DE AQUINO DA SILVA</option>
-            <option value="ALLAN CARLOS CAMPOS">ALLAN CARLOS CAMPOS</option>
-            <option value="GUSTAVO ROBERT DE OLIVEIRA">GUSTAVO ROBERT DE OLIVEIRA</option>
-            <option value="JOSIMAR PEREIRA DA COSTA">JOSIMAR PEREIRA DA COSTA</option>
-            <option value="RICARDO DA SILVA SOUZA">RICARDO DA SILVA SOUZA</option>
-            <option value="GUILHERME SOUZA SILVA">GUILHERME SOUZA SILVA</option>
-            <option value="ELEILTON THIAGO SOARES DE OLIVEIRA">ELEILTON THIAGO SOARES DE OLIVEIRA</option>
-            <option value="BRUNA ASSIS CORREIA">BRUNA ASSIS CORREIA</option>
-            <option value="EDSON BRUNO MARTINS LOBO">EDSON BRUNO MARTINS LOBO</option>
-            <option value="ARTHUR VALDIR VINHAS DE QUEIROZ">ARTHUR VALDIR VINHAS DE QUEIROZ</option>
-            <option value="DOUGLAS BEZERRA DE OLIVEIRA">DOUGLAS BEZERRA DE OLIVEIRA</option>
-            <option value=""></option>
             
         </select>
                 
@@ -340,20 +371,6 @@
     <label for="nome_completo_componente4">Nome Componente da GUSV:</label>
 <select id="nome_completo_componente4" required>
 <option value="" disabled selected>Selecione uma opção</option>
-<option value="ANGELO MÁRCIO PRADO BRUNO">ANGELO MÁRCIO PRADO BRUNO</option>
-<option value="SIDNEY BROLEZI DO NASCIMENTO">SIDNEY BROLEZI DO NASCIMENTO</option>
-<option value="WEBER DE AQUINO DA SILVA">WEBER DE AQUINO DA SILVA</option>
-<option value="ALLAN CARLOS CAMPOS">ALLAN CARLOS CAMPOS</option>
-<option value="GUSTAVO ROBERT DE OLIVEIRA">GUSTAVO ROBERT DE OLIVEIRA</option>
-<option value="JOSIMAR PEREIRA DA COSTA">JOSIMAR PEREIRA DA COSTA</option>
-<option value="RICARDO DA SILVA SOUZA">RICARDO DA SILVA SOUZA</option>
-<option value="GUILHERME SOUZA SILVA">GUILHERME SOUZA SILVA</option>
-<option value="ELEILTON THIAGO SOARES DE OLIVEIRA">ELEILTON THIAGO SOARES DE OLIVEIRA</option>
-<option value="BRUNA ASSIS CORREIA">BRUNA ASSIS CORREIA</option>
-<option value="EDSON BRUNO MARTINS LOBO">EDSON BRUNO MARTINS LOBO</option>
-<option value="ARTHUR VALDIR VINHAS DE QUEIROZ">ARTHUR VALDIR VINHAS DE QUEIROZ</option>
-<option value="DOUGLAS BEZERRA DE OLIVEIRA">DOUGLAS BEZERRA DE OLIVEIRA</option>
-<option value=""></option>
 </select>
     
 
@@ -418,9 +435,7 @@
         <hr>
        
         <label for="relato_policial_correto">RELATO DO POLICIAL:</label>
-        <textarea  class="form-control" id="relato_policial_correto" value="tets" rows="10">
-        Às h do dia , deparamos com (), e em decorrência do fato dei voz de prisão a autor do fato, conduzindo o mesmo para unidade de policia militar de Denise-MT, para adoção das providências legais.
-        </textarea>
+        <textarea  class="form-control" id="relato_policial_correto" value="tets" rows="10">Às h do dia , deparamos com (), e em decorrência do fato dei voz de prisão a autor do fato, conduzindo o mesmo para unidade de policia militar de Denise-MT, para adoção das providências legais.                                    </textarea>
 
         <!--inicio do reconhecimento de voz-->
         <button type="button" onclick="startVoiceRecognition()">🎤 Falar</button>
@@ -1004,7 +1019,7 @@ function adicionarPessoa(tipo) {
             adicionarCabecalho();
             adicionarRodape()
             doc.setFontSize(12);
-
+            let pageCount = 1; // Contador de páginas
             
            // doc.text("teste numero de tco",10, y)
 
@@ -1039,7 +1054,7 @@ doc.text("Natureza: "+ naturezaa, 20, 70, { maxWidth: 170, align: 'justify'});
 //-------------------------------------------------
  // inicio da segunda pagina
  doc.addPage();
-            
+ pageCount++; // Incrementa contador de páginas   
  adicionarCabecalho()
  adicionarRodape()
             doc.setFontSize(14);
@@ -1089,7 +1104,7 @@ doc.text(natuureza, 20, 75, { maxWidth: 170, align: 'justify'});
        const limitePagina = 270; // Altura máxima antes de adicionar nova página
 
 
-
+       pageCount++; // Incrementa contador de páginas
 
 
        
@@ -1137,6 +1152,8 @@ const naturalidadeufAutor = document.getElementsByName("naturalidadeuf_autor[]")
             adicionarRodape()
             doc.setFontSize(10);
             y = 60; // Reinicia a posição no topo da nova página
+            pageCount++; // Incrementa contador de páginas
+            
     }
         }
     
@@ -1148,6 +1165,7 @@ const naturalidadeufAutor = document.getElementsByName("naturalidadeuf_autor[]")
             doc.setFontSize(10);
             y = 60; // Reinicia a posição no topo da nova página
            // doc.setFontSize(10);
+           pageCount++; // Incrementa contador de páginas
 
 
 
@@ -1253,6 +1271,7 @@ function verificapagina2() {
             adicionarRodape()
             doc.setFontSize(10);
             y = 60; // Reinicia a posição no topo da nova página
+            pageCount++; // Incrementa contador de páginas
     }
         }
 
@@ -1389,6 +1408,7 @@ const naturalidadeufVitima = document.getElementsByName("naturalidadeuf_vitima[]
             adicionarRodape()
             doc.setFontSize(10);
             y = 60; // Reinicia a posição no topo da nova página
+            pageCount++; // Incrementa contador de páginas
     }
         }
 
@@ -1525,6 +1545,7 @@ const naturalidadeufTestemunha = document.getElementsByName("naturalidadeuf_test
             adicionarRodape()
             doc.setFontSize(10);
             y = 60; // Reinicia a posição no topo da nova página
+            pageCount++; // Incrementa contador de páginas
     }
         }
 verificapagina7()
@@ -1598,6 +1619,7 @@ verificapagina7()
             adicionarRodape()
             doc.setFontSize(10);
             y = 60; // Reinicia a posição no topo da nova página
+            pageCount++; // Incrementa contador de páginas
     }
         }
 verificapagina4()
@@ -1624,6 +1646,7 @@ const numeroDeLinhasmultiplcado = linhas.length * 6;
             adicionarRodape()
             doc.setFontSize(10);
             y = 60; // Reinicia a posição no topo da nova página
+            pageCount++; // Incrementa contador de páginas
     }
 
 
@@ -1736,6 +1759,7 @@ doc.setFontSize(12)
 
 
 doc.addPage(); // Cria uma nova página
+pageCount++; // Incrementa contador de páginas
 
 adicionarCabecalho()
 adicionarRodape()
@@ -1750,6 +1774,7 @@ function verificapagina5() {
             adicionarRodape()
             doc.setFontSize(10);
             y = 60; // Reinicia a posição no topo da nova página
+            pageCount++; // Incrementa contador de páginas
     }
         }
 verificapagina5()
@@ -1776,6 +1801,7 @@ const numeroDeLinhasmultiplcado2 = linhas2.length * 6;
             adicionarRodape()
             doc.setFontSize(10);
             y = 60; // Reinicia a posição no topo da nova página
+            pageCount++; // Incrementa contador de páginas
     }
 
     doc.setFontSize(10);
@@ -1817,6 +1843,7 @@ function verificapagina6() {
             adicionarRodape()
             doc.setFontSize(10);
             y = 60; // Reinicia a posição no topo da nova página
+            pageCount++; // Incrementa contador de páginas
     }
         }
 verificapagina6()
@@ -1843,6 +1870,7 @@ const numeroDeLinhasmultiplcado3 = linhas3.length * 6;
             adicionarRodape()
             doc.setFontSize(10);
             y = 60; // Reinicia a posição no topo da nova página
+            pageCount++; // Incrementa contador de páginas
     }
 
 
@@ -1883,6 +1911,7 @@ doc.setFont("helvetica", "normal");
             doc.setFontSize(12);
             const artigoo = document.getElementById("artigo").value
            // const condicoesFisicas = document.getElementById("local_trabalho_autor").value
+           pageCount++; // Incrementa contador de páginas
            
 y = 60    
 
@@ -1949,6 +1978,7 @@ y += 7
 
 //aqui começa a pagina anexo
 doc.addPage(); // Cria uma nova página
+pageCount++; // Incrementa contador de páginas
 
 adicionarCabecalho()
 adicionarRodape()
@@ -1980,7 +2010,7 @@ doc.line(20, 270, 180, 270);
 
 //aqui começa a pagina DO TERMO DE COMPROMISSO
 doc.addPage(); // Cria uma nova página
-
+pageCount++; // Incrementa contador de páginas
 adicionarCabecalho()
 adicionarRodape()
 y = 80 
@@ -1990,8 +2020,7 @@ doc.text(`TERMO DE COMPROMISSO DE COMPARECIMENTO`, 100, y, { align: "center" });
 doc.setFontSize(10);
 
 y += 20 
-let textoTermodecompromissso = `Por este instrumento, eu ${nomeAAAutor}, assumo, nos termos do parágrafo único do Art. 69 da Lei nº 9.099/95, o compromisso de comparecer no Juizado Especial Criminal, em virtude dos fatos registrados no Termo Circunstanciado de Ocorrência acima referenciado, conforme notificado abaixo.                Fico ciente de que a concordância em comparecer ao Juizado Especial Criminal, não implica confissão de qualquer natureza, admissão de culpa ou anuência às declarações da parte contrária e o não comparecimento no dia e hora ajustados neste termo sujeitará às medidas previstas na Lei nº 9.099/95. Fico ciente também que deverei comparecer acompanhado de advogado e que na ausência deste será nomeado um defensor público.
-`;
+let textoTermodecompromissso = `Por este instrumento, eu ${nomeAAAutor}, assumo, nos termos do parágrafo único do Art. 69 da Lei nº 9.099/95, o compromisso de comparecer no Juizado Especial Criminal, em virtude dos fatos registrados no Termo Circunstanciado de Ocorrência acima referenciado, conforme notificado abaixo.                Fico ciente de que a concordância em comparecer ao Juizado Especial Criminal, não implica confissão de qualquer natureza, admissão de culpa ou anuência às declarações da parte contrária e o não comparecimento no dia e hora ajustados neste termo sujeitará às medidas previstas na Lei nº 9.099/95. Fico ciente também que deverei comparecer acompanhado de advogado e que na ausência deste será nomeado um defensor público.                                 `;
 
 
 
@@ -2037,6 +2066,7 @@ const cpfAutorDroga = document.getElementsByName("cpf_passaporte_autor[]")[index
 
 
 doc.addPage(); // termo de constatação preliminar de drogas
+pageCount++; // Incrementa contador de páginas
 
 adicionarCabecalho()
 adicionarRodape()
@@ -2146,6 +2176,7 @@ const telefoneAutorApreensao = document.getElementsByName("telefone_autor[]")[in
 
 
 doc.addPage(); // TERMO DE APREENSAO...
+pageCount++; // Incrementa contador de páginas
 
 adicionarCabecalho()
 adicionarRodape()
@@ -2212,6 +2243,15 @@ doc.setFont("helvetica", "normal");
 });
 /// FIM DO TERMO DE APREENSAO
 
+
+
+
+
+
+        
+
+
+
 // termo de encerramento e remessa
 let nomesAutores = [];
 
@@ -2230,7 +2270,7 @@ const relatoAAAAutorCorreto = document.getElementsByName("relato_autor[]")[0]?.v
 const cpfAAAAutor = document.getElementsByName("cpf_passaporte_autor[]")[0]?.value || "N/A"; // O primeiro CPF
 
 doc.addPage(); // Cria uma nova página para o termo de encerramento ...
-
+pageCount++; // Incrementa contador de páginas
 adicionarCabecalho()
 adicionarRodape()
 y = 80 
@@ -2240,12 +2280,19 @@ doc.text(`TERMO DE ENCERRAMENTO E REMESSA`, 100, y, { align: "center" });
 doc.setFont("helvetica", "normal");
 doc.setFontSize(10);
 
-let textTermodeencerramento = `Aos ${diaExtenso} dias do mês de ${mesExtenso} do ano de dois mil e vinte e cinco, por determinação da Autoridade Policial Militar, dou por encerrado a lavratura do presente Termo Circunstanciado de Ocorrência n° - ${numero_tco}/CRO7/2025, contendo 08 laudas paginadas e rubricadas, em desfavor do senhor(a) ${nomesConcatenados}, para as providências de remessa dos autos para apreciação do Núcleo de Resoluções de Conflitos e Justiça Restaurativa, da Vara do Juizado Especial da Comarca de Barra do Bugres-MT, a quem compete deliberar sobre o suposto delito.`;
+
+
+
+let textTermodeencerramento = `Aos ${diaExtenso} dias do mês de ${mesExtenso} do ano de dois mil e vinte e cinco, por determinação da Autoridade Policial Militar, dou por encerrado a lavratura do presente Termo Circunstanciado de Ocorrência n° - ${numero_tco}/CRO7/2025, contendo ${pageCount} laudas paginadas e rubricadas, em desfavor do senhor(a) ${nomesConcatenados}, para as providências de remessa dos autos para apreciação do Núcleo de Resoluções de Conflitos e Justiça Restaurativa, da Vara do Juizado Especial da Comarca de Barra do Bugres-MT, a quem compete deliberar sobre o suposto delito.`;
 
 
 y += 30
 doc.setFont("helvetica", "normal");
+
+
+
 doc.text(textTermodeencerramento, 20, y, { maxWidth: 170, align: 'justify'});
+
 y += 60
 doc.text("Quartel em " + cidade +", "+ dia + " de "+ mesExtenso + " 2025.", 20, y, { maxWidth: 170, align: 'justify'});
 
