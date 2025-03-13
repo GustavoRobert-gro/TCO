@@ -421,8 +421,73 @@
         <textarea  class="form-control" id="relato_policial_correto" value="tets" rows="10">
         Às _________h do dia _________, fomos solicitados por ____________________(relatar nome do solicitante/copom) ou deparamos com (relatar a situação), informando que (relatar a situação informada ou detectada), e em decorrência do fato dei voz de prisão a _______________, (informar outras providências adotadas, tais como: condução de vítimas ao hospital ao Conselho tutelar ou outras repartições), conduzindo os envolvidos para _________________(a Central de Operações da Polícia Militar/UPM) para adoção das providências legais.
         </textarea>
-    
+
+        <!--inicio do reconhecimento de voz-->
+        <button type="button" onclick="startVoiceRecognition()">🎤 Falar</button>
         
+
+        <script>
+            function inserirNoCursor(input, texto) {
+                let inicio = input.selectionStart;
+                let fim = input.selectionEnd;
+                let valor = input.value;
+                
+                input.value = valor.slice(0, inicio) + texto + valor.slice(fim);
+                input.setSelectionRange(inicio + texto.length, inicio + texto.length);
+                input.focus();
+            }
+    
+            function formatarPontuacao(texto) {
+                return texto
+                    .replace(/\bvírgula\b/gi, ",")
+                    .replace(/\bponto\b/gi, ".")
+                    .replace(/\bponto final\b/gi, ".")
+                    .replace(/\bexclamação\b/gi, "!")
+                    .replace(/\binterrogação\b/gi, "?")
+                    .replace(/\bdois pontos\b/gi, ":")
+                    .replace(/\btrês pontos\b/gi, "...");
+            }
+    
+            function startVoiceRecognition() {
+                const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    
+                if (!SpeechRecognition) {
+                    alert('Reconhecimento de voz não suportado neste navegador');
+                    return;
+                }
+    
+                const recognition = new SpeechRecognition();
+                recognition.lang = 'pt-BR';
+                recognition.continuous = false;
+                recognition.interimResults = false;
+    
+                recognition.start();
+    
+                recognition.onresult = function(event) {
+                    let texto = event.results[0][0].transcript;
+                    texto = formatarPontuacao(texto);
+                    const textarea = document.getElementById('relato_policial_correto');
+                    inserirNoCursor(textarea, texto);
+                };
+    
+                recognition.onerror = function(event) {
+                    alert('Erro ao reconhecer a voz: ' + event.error);
+                };
+    
+                recognition.onend = function() {
+                    console.log('Reconhecimento de voz finalizado');
+                };
+            }
+        </script>
+    
+<!--fim do reconhecimento de voz-->
+
+
+
+
+
+
+
         
 
 
