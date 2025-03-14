@@ -1005,8 +1005,9 @@ function adicionarItem() {
     <label><input type="checkbox" id="paginaVitima"> Não gerar Cadastro de Vítima/Testemunha</label><br>
     <label><input type="checkbox" id="paginaHistorico"> Não gerar Histórico</label><br>
     <label><input type="checkbox" id="paginaConclusao"> Não gerar Conclusão Policial</label><br>>-->
-    <label><input type="checkbox" id="paginaAnexos"> Não gerar Anexos</label><br>
-    <label><input type="checkbox" id="paginaMaterialApreendido"> Não gerar Material Apreendido</label><br>
+    <label><input type="checkbox" id="paginaAnexos"> Gerar Termo Anexos</label><br>
+    <label><input type="checkbox" id="Termo_Apreensão_de_Materias"> Gerar termo de Material Apreendido</label><br>
+    <label><input type="checkbox" id="Termo_Preliminar_de_Drogas"> Gerar termo preliminar de drogas</label><br>
 </div>
 
    <!-- <button type="button" class="btn btn-success mt-3" onclick="gerarPDF()">Gerar PDF Completo</button>-->
@@ -2244,7 +2245,12 @@ y += 7
 doc.line(20, y-3, 170, y-3);
 y += 7 
 
+const omitirMaterialApreendido = document.getElementById("paginaAnexos").checked;
+if (!omitirMaterialApreendido) {
+                // nao gera a pagina anexo
 
+            } else {
+                
 //aqui começa a pagina anexo
 doc.addPage(); // Cria uma nova página
 pageCount++; // Incrementa contador de páginas
@@ -2262,17 +2268,20 @@ doc.text("Referência: Termo Circunstanciado de Ocorrência de Nº TCO/CR07/" +"
 //doc.text("ANEXOS"), 100, 90, { align: "center"});
 
 
-document.getElementsByName("nome_autor[]").forEach((input, index) => {
-                const nomeAAAutor = input.value;
-            const relatoAAAutorCorreto = document.getElementsByName("relato_autor[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
-const cpfAAAutor = document.getElementsByName("cpf_passaporte_autor[]")[index]?.value || "N/A"; // Se não houver nome social, 
-
 
 
 doc.text("ANEXOS:", 90, 90 , { maxWidth: 175, align: 'justify'});
 doc.line(20, 95, 180, 95);
 doc.line(20, 270, 180, 270);
 
+
+            }
+
+
+document.getElementsByName("nome_autor[]").forEach((input, index) => {
+                const nomeAAAutor = input.value;
+            const relatoAAAutorCorreto = document.getElementsByName("relato_autor[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+const cpfAAAutor = document.getElementsByName("cpf_passaporte_autor[]")[index]?.value || "N/A"; // Se não houver nome social, 
 
 
 
@@ -2359,6 +2368,14 @@ document.getElementsByName("nome_autor[]").forEach((input, index) => {
 const cpfAutorDroga = document.getElementsByName("cpf_passaporte_autor[]")[index]?.value || "N/A"; // Se não houver nome social, 
 
 
+
+
+const omitirtermopreliminardedrogas = document.getElementById("Termo_Preliminar_de_Drogas").checked;
+if (!omitirtermopreliminardedrogas) {
+                // nao gera a pagina anexo
+
+            } else {
+
 doc.addPage(); // termo de constatação preliminar de drogas
 pageCount++; // Incrementa contador de páginas
 
@@ -2443,13 +2460,13 @@ y += 7
 
 doc.setFont("helvetica", "normal");
 
-
+            }
 
 });
 
 // FIM DO TERMO PRELIMINAR DE DROGAS
 
-
+        
 
 
 
@@ -2467,6 +2484,12 @@ const municipioAutorApreensao = document.getElementsByName("municipio_autor[]")[
 const cepAutorApreensao = document.getElementsByName("cep_municipio_autor[]")[index]?.value || "N/A"; // Se não houver nome social, 
 const telefoneAutorApreensao = document.getElementsByName("telefone_autor[]")[index]?.value || "N/A"; // Se não houver nome social, 
 //const materialAutorApreensao = document.getElementsByName("material_apreendido_autor[]")[index]?.value || "N/A"; // Se não houver nome social, 
+
+const omitirTermodeapreensao = document.getElementById("Termo_Apreensão_de_Materias").checked;
+// Se NÃO estiver marcado, inclui a seção de Material Apreendido
+if (!omitirTermodeapreensao) {
+                
+            } else {
 
 
 doc.addPage(); // TERMO DE APREENSAO...
@@ -2534,10 +2557,12 @@ doc.setFont("helvetica", "bold");
 doc.text("POLICIAL MILITAR: ", 20, y, { maxWidth: 170, align: 'justify'});
 doc.text(posto_grad + " - " + nomeCondutor + "- RGPM: " + rgPM, 20, y+10 , { maxWidth: 175, align: 'justify'});
 doc.setFont("helvetica", "normal");
+
+            }
 });
 /// FIM DO TERMO DE APREENSAO
 
-
+        
 
 
 
