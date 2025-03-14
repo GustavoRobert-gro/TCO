@@ -6,6 +6,11 @@
     <title>TCO - Cadastro</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+        
 </head>
 <body class="container mt-4">
     <h1>TERMO CIRCUNSTANCIADO DE OCORRÊNCIA - EM DESENVOLVIMENTO</h1>
@@ -1134,10 +1139,25 @@ function adicionarPessoa(tipo) {
         function removerPessoa(botao) {
             botao.parentElement.remove();
         }
+        
 
         function gerarPDF() {
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
+
+
+
+
+            const url = "https://tjmt-teams-apps-balcao-virtual.azurefd.net/meeting-queue/NucleodeJusticaDigitaldosJuizadosEspeciais?data=eyJxdWV1ZUlkIjoiMDYzODc0NTQ2OTYyMDUxMzAxMSIsImFzc3VudG8iOiIiLCJhbmNvcmEiOiJOdWNsZW9kZUp1c3RpY2FEaWdpdGFsZG9zSnVpemFkb3NFc3BlY2lhaXMifQ==";
+
+           
+
+        
+        
+      
+
+
+
 
             const numero_tco = parseInt(document.getElementById('numero_tco').value);
             const naturezaa = document.getElementById('naturezaa').value;
@@ -1941,6 +1961,28 @@ doc.setFont("helvetica", "bold");
 doc.text("Notifico Vossa Senhoria para comparecer no Fórum da Comarca de Barra do Bugres, sito a avenida deputado Hitler Sansão nº1129 centro na Secretaria ou entrar em contato no Balcão Virtual do Núcleo de Justiça Digital dos Juizados Especiais pelo Whatsapp (65) 99688-0622 ou pelo QR Code:", 20, y, { maxWidth: 160, align: 'justify'});
 
 y += 25
+
+
+// Criar o QR Code
+let qrv = new QRious({
+                value: url,
+                size: 80
+            });
+
+            // Adicionar texto ao PDF
+            doc.setFontSize(16);
+            //doc.text("Acesse o link pelo QR Code abaixo:", 20, 20);
+
+            // Adicionar QR Code ao PDF
+            doc.addImage(qrv.toDataURL(), 'PNG', 155, y-16, 40, 40);
+
+          
+            doc.setFontSize(10);
+ 
+           
+      
+///fim da função qr code
+
 //assinatura da vitima
 doc.text(`__________________________________________________`, 100, y-4, { align: "center" });
 doc.text(`   ${nomeVVitima}`, 100, y, { align: "center" });
@@ -2264,12 +2306,37 @@ doc.text(textTermodecompromissoContinuacao, 20, y, { maxWidth: 170, align: 'just
 
 ///função qrcdoe
 
+// Criar o QR Code
+let qr = new QRious({
+                value: url,
+                size: 80
+            });
 
+            // Adicionar texto ao PDF
+            doc.setFontSize(16);
+            //doc.text("Acesse o link pelo QR Code abaixo:", 20, 20);
+
+            // Adicionar QR Code ao PDF
+            doc.addImage(qr.toDataURL(), 'PNG', 155, y+5, 40, 40);
+
+          
+            doc.setFontSize(10);
+ 
+           
+      
+///fim da função qr code
+
+
+    
+     
 y += 40;
 doc.text(`__________________________________________________`, 100, y-4, { align: "center" });
 doc.text(`   ${nomeAAAutor}`, 100, y, { align: "center" });
 y += 5;
 doc.text(`  CPF: ${cpfAAAutor}`, 100, y, { align: "center" });
+
+
+
 y += 30;
 
 doc.setFont("helvetica", "bold");
@@ -2531,6 +2598,7 @@ doc.text(`  RGPM: ${rgPM}`, 100, y, { align: "center" });
 y += 10;
 
 doc.save("tco.pdf");
+  
 
 
 }
