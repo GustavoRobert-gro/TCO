@@ -227,7 +227,7 @@
                     "DOUGLAS BEZERRA DE OLIVEIRA"
 
                 ];
-            } else if (quartelSelecionado === "12ª CIPM") {
+            } else if (quartelSelecionado === "12ª CIPM BARRA DO BUGRES") {
                 nomes = [
                     "ROGÉRIO SÁVIO DA SILVA",
 "ALEXANDRE APARECIDO DE ASSIS ",
@@ -250,7 +250,7 @@
 "ARTHUR GABRIEL DA SILVA SIQUEIRA"
 
                 ];
-            } else if (quartelSelecionado === "1ª CIPM") {
+            } else if (quartelSelecionado === "1ª CIPM NOVA OLIMPIA") {
                 nomes = [
                     "JAIR DOS SANTOS SILVA",
 "ROGÉRIO TIAGO GONÇALVES VASQUES",
@@ -480,8 +480,8 @@
     <select id="quartel" required onchange="alterarNomeCondutor()">
         <option value="" disabled selected>Selecione uma opção</option>
         <option value="NPM DENISE">Nucleo de policia Militar de Denise - MT</option>
-        <option value="12ª CIPM">12ª CIPM de Barra do Bugres - MT</option>
-        <option value="1ª CIPM">1ª CIPM de Nova Olimpia - MT</option>
+        <option value="12ª CIPM BARRA DO BUGRES">12ª CIPM de Barra do Bugres - MT</option>
+        <option value="1ª CIPM NOVA OLIMPIA">1ª CIPM Nova Olimpia</option>
         <option value="NPM PORTO ESTRELA">Nucleo de Policia Militar de Porto Estrela-MT</option>
 
         <option value="19º BPM TGA">19º BPM TGA</option>
@@ -997,6 +997,134 @@ function adicionarItem() {
     
 
 
+
+
+    <!--inicio do anexo de fotos-->
+
+    
+   
+        <h2>Upload de Imagens para Termo de Anexo (Máx: 4 imagens) Em desenvolvimento...</h2>
+        
+        <input type="file" id="imagemInput" accept="image/*" multiple>
+        <button onclick="adicionarImagens()">Adicionar Imagens</button>
+        <button onclick="limparImagens()">Limpar Imagens</button>
+        <!--<button onclick="gerarPDF23()">Gerar Termo de Anexo</button>-->
+    
+        <p id="mensagemErro" style="color: red;"></p>
+        <div id="listaImagens"></div>
+    
+        <script>
+            let imagensSelecionadas = [];
+    
+            function adicionarImagens() {
+                const input = document.getElementById("imagemInput");
+                const lista = document.getElementById("listaImagens");
+                const mensagemErro = document.getElementById("mensagemErro");
+    
+                if (input.files.length + imagensSelecionadas.length > 4) {
+                    mensagemErro.textContent = "Você pode adicionar no máximo 4 imagens!";
+                    return;
+                } else {
+                    mensagemErro.textContent = "";
+                }
+    
+                for (let i = 0; i < input.files.length; i++) {
+                    let file = input.files[i];
+    
+                    let reader = new FileReader();
+                    reader.readAsDataURL(file);
+    
+                    reader.onload = function(event) {
+                        imagensSelecionadas.push(event.target.result);
+                        atualizarListaImagens();
+                    };
+                }
+            }
+    
+            function atualizarListaImagens() {
+                const lista = document.getElementById("listaImagens");
+                lista.innerHTML = "";
+    
+                imagensSelecionadas.forEach((imagem, index) => {
+                    let div = document.createElement("div");
+                    div.style.marginBottom = "10px";
+                    div.innerHTML = `<img src="${imagem}" width="100" height="60"> 
+                                     <button onclick="removerImagem(${index})">Remover</button>`;
+                    lista.appendChild(div);
+                });
+            }
+    
+            function removerImagem(index) {
+                imagensSelecionadas.splice(index, 1);
+                atualizarListaImagens();
+            }
+    
+            function limparImagens() {
+                imagensSelecionadas = [];
+                atualizarListaImagens();
+            }
+    
+            function gerarPDF23() {
+            if (imagensSelecionadas.length === 0) {
+                alert("Adicione pelo menos uma imagem antes de gerar o PDF!");
+                return;
+            }
+
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF("p", "mm", "a4");
+
+            const largura = 90;
+            const altura = 90;
+            const espacamentoX = 10;
+            const espacamentoY = 60;
+            
+            let x = espacamentoX;
+            let y = espacamentoY;
+            //doc.setPage(5);  // Mudar para a Página 6
+            for (let i = 0; i < imagensSelecionadas.length; i++) {
+                doc.addImage(imagensSelecionadas[i], "JPEG", x, y, largura, altura);
+
+                // Define a posição da próxima imagem
+                if (i % 2 === 0) {
+                    x = 110; // Move para a direita
+                } else {
+                    x = espacamentoX; // Volta para a esquerda
+                    y += altura + 10; // Move para baixo
+                }
+            }
+
+            // Salva o PDF
+
+
+
+
+
+
+
+            doc.save("termo_com_imagens.pdf");
+        }
+    </script>
+
+
+                   </script>
+    
+    </body>
+    </html>
+    
+
+
+
+
+
+
+
+<!--fim do anexo de fotos-->
+
+
+
+
+
+
     <h2>6º Opções de Geração de PDF</h2>
     
 <div>
@@ -1144,7 +1272,8 @@ function adicionarPessoa(tipo) {
 
         function gerarPDF() {
             const { jsPDF } = window.jspdf;
-            const doc = new jsPDF();
+            //const doc = new jsPDF();
+            const doc = new jsPDF("p", "mm", "a4");
 
 
 
@@ -1234,17 +1363,17 @@ function adicionarPessoa(tipo) {
             //doc.text("_______________________________________________________________________________________________________________", 105, 281, { align: "center" });
             doc.line(10, 281, 200, 281);
            
-            if (cidade === "Denise-MT") {
+            if (quartel === "NPM DENISE") {
             doc.text("NUCLEO DE POLICIA MILITAR DE DENISE", 105, 285, { align: "center" });
             doc.text("Rua Piaui - Bairro centro - Denise-MT - CEP 78.380-000", 105, 288, { align: "center" });
             doc.text("Fone: (65) 98170 0447 | E-mail: npmdenise@pm.mt.gov.br", 105, 291, { align: "center" });
             }
-            if (cidade === "Nova Olimpia-MT") {
+            if (quartel === "1ª CIPM NOVA OLIMPIA") {
             doc.text("QUARTEL DA 1ª COMPANHIA INDEPENDENTE DE NOVA OLIMPIA (1ª CIA-PM)", 105, 285, { align: "center" });
             doc.text("CEP 78.370-000, RUA PARÁ, Nº1062 - W, CENTRO, NOVA OLIMPIA - MT", 105, 288, { align: "center" });
             doc.text("Fone: (65) 98170 0447 | E-mail: @pm.mt.gov.br", 105, 291, { align: "center" });
             }
-            if (cidade === "Barra do Bugres-MT") {
+            if (quartel === "12ª CIPM BARRA DO BUGRES") {
             doc.text("12ª COMPANHIA INDEPENDENTE DE BARRA DO BUGRES", 105, 285, { align: "center" });
             doc.text("Rua  - Bairro centro - Barra do Bugres-MT - CEP 78.380-000", 105, 288, { align: "center" });
             doc.text("Fone: (65) 98170 0447 | E-mail: @pm.mt.gov.br", 105, 291, { align: "center" });
@@ -2274,6 +2403,11 @@ doc.text("ANEXOS:", 90, 90 , { maxWidth: 175, align: 'justify'});
 doc.line(20, 95, 180, 95);
 doc.line(20, 270, 180, 270);
 
+
+window.onload = function() {
+    gerarPDF23(); // Função que você deseja executar automaticamente
+};
+               
 
             }
 
