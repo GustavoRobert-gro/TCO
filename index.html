@@ -29,7 +29,7 @@
 <select id="naturezaa" required style="width: 800px;">
     <option value="" disabled selected>Selecione uma opção</option>
     <option value="Ameaça">Ameaça</option>
-    <option value="Lesão Corporal Leve">Lesão Corporal Leve</option>
+    <option value="Lesão corporal culposa">Lesão corporal culposa</option>
     <option value="Difamação">Difamação</option>
     <option value="Injúria">Injúria</option>
     <option value="Ameaça">Ameaça</option>
@@ -54,6 +54,7 @@
     <option value="Oferecer droga, eventualmente e sem objetivo de lucro, a pessoa de seu relacionamento, para juntos a consumirem">Oferecer droga, eventualmente e sem objetivo de lucro, a pessoa de seu relacionamento, para juntos a consumirem</option>
 
     <option value="Esbulho possessório">Esbulho possessório</option>
+    <option value="Perturbação do trabalho ou sossego alheios">Perturbação do trabalho ou sossego alheios</option>
 
 
 </select>
@@ -72,7 +73,7 @@
 "Violação de domicílio": { artigo: "150,caput", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
 
 
-    "Lesão Corporal Leve": { artigo: "129", lei: "Código Penal - Decreto-Lei nº 2.848/40" },
+    "Lesão corporal culposa": { artigo: "129", lei: "Código Penal - Decreto-Lei nº 2.848/40" },
     "Difamação": { artigo: "139", lei: "Código Penal - Decreto-Lei nº 2.848/40" },
     "Injúria": { artigo: "140", lei: "Código Penal - Decreto-Lei nº 2.848/40" },
     "Ameaça": { artigo: "147", lei: "Código Penal - Decreto-Lei nº 2.848/40" },
@@ -101,7 +102,8 @@
 
 "Esbulho possessório": { artigo: "161, §", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
     
-
+"Perturbação do trabalho ou sossego alheios": { artigo: "42", lei: "Lei das Contravenções Penais(Decreto-Lei 3.688, de 3 de outubro de 1941)" },
+    
 
 
   };
@@ -291,7 +293,7 @@
 
                 ];
 
-            } else if (quartelSelecionado === "19º BPM TGA") {
+            } else if (quartelSelecionado === "19º BPM - TANGARA") {
                 nomes = [
                     "EDUARDO HENRIQUE SOUZA LANA",
 "EVERSON BRITO FORTES",
@@ -484,7 +486,7 @@
         <option value="1ª CIPM NOVA OLIMPIA">1ª CIPM Nova Olimpia</option>
         <option value="NPM PORTO ESTRELA">Nucleo de Policia Militar de Porto Estrela-MT</option>
 
-        <option value="19º BPM TGA">19º BPM TGA</option>
+        <option value="19º BPM - TANGARA">19º BPM - TANGARA</option>
         <option value="CR07 SEDE">COMANDO REGIONAL 07</option>
         <option value="6ª Cia PM Sapezal">6ª Cia PM Sapezal</option>
         <option value="16ª CIPM Campo Novo do Parecis">16ª CIPM Campo Novo do Parecis</option>
@@ -689,6 +691,7 @@
                     .replace(/\binterrogação\b/gi, "?")
                     .replace(/\bdois pontos\b/gi, ":")
                     .replace(/\btrês pontos\b/gi, "...");
+                   // .replace(/\bautor do fato\b/gi, "Autor do fato:"+naturezaa);
             }
     
             function startVoiceRecognition() {
@@ -798,158 +801,193 @@
     <body>
 
         <h2>5º Material Apreendido</h2>
-    <button id="toggleButton" class="btn btn-primary mt-3">Material Apreendido</button>
-    <hr>
-       <!-- <button type="button" class="btn btn-primary mt-3" onclick="adicionarPessoa('Testemunha')">Adicionar Testemunha</button>-->
-    
-    <div id="formContainer" class="form-container">
-        <div class="header" id="formHeader">Atenção todos materiais relacionados Apenas para o AUTOR DO FATO</div>
-        <form id="myForm">
-          <label for="tipo">Tipo:</label>
-<select id="tipo" required onchange="atualizarOpcoes()">
-    <option value="">Selecione uma opção</option>
-    <option value="drogas">Drogas</option>
-    <option value="bebidas">Aparelho de som</option>
-    <option value="remedios">Outros</option>
-</select>
-
-<br><br>
-
-<label for="subtipo">Subtipo:</label>
-<select id="subtipo" onchange="verificarDescricao()">
-    <option value="">Selecione um tipo primeiro</option>
-</select>
-
-<label for="quantidade">Quantidade:</label>
-<input type="number" id="quantidade" min="1" placeholder="Quantidade">
-
-<label for="unidade">Unidade:</label>
-<select id="unidade">
-    <option value="">Selecione um subtipo primeiro</option>
-</select>
-
-<!-- Campo de descrição (aparece só para "Diferente de droga") -->
-<div id="descricaoContainer" style="display: none;">
-    <label for="descricao">Descrição:</label>
-    <input type="text" id="descricao" placeholder="Descreva o item">
-</div>
-
-<!-- Campo de observações (sempre visível) -->
-<div>
-    <label for="observacoes">Observações:</label>
-    <input type="text" id="observacoes" placeholder="Informações adicionais">
-</div>
-
-<button type="button" onclick="adicionarItem()">Adicionar</button>
-
-<h3>Itens Selecionados:</h3>
-<ul id="listaSelecionados"></ul>
-
-<script>
-function atualizarOpcoes() {
-    const subtipoSelect = document.getElementById("subtipo");
-    const unidadeSelect = document.getElementById("unidade");
-
-    subtipoSelect.innerHTML = '<option value="">Selecione uma opção</option>'; // Limpa opções anteriores
-    unidadeSelect.innerHTML = '<option value="">Selecione um subtipo primeiro</option>'; // Reseta unidade
-
-    const tipoSelecionado = document.getElementById("tipo").value;
-    
-    // Opções de subtipos por categoria
-    const opcoesSubtipos = {
-        drogas: ["Maconha", "Cocaína", "LSD", "Ecstasy", "Diferente de droga"],
-        bebidas: ["Aparelho de som domestico", "Aparelho de som Portateis", "Aparelho de som Automotivo"],
-        remedios: ["Diversos"]
-    };
-
-    if (opcoesSubtipos[tipoSelecionado]) {
-        opcoesSubtipos[tipoSelecionado].forEach(opcao => {
-            let novaOpcao = document.createElement("option");
-            novaOpcao.value = opcao; // Agora usa o nome exato da opção
-            novaOpcao.textContent = opcao;
-            subtipoSelect.appendChild(novaOpcao);
-        });
-    }
-}
-
-function verificarDescricao() {
-    const unidadeSelect = document.getElementById("unidade");
-    const descricaoContainer = document.getElementById("descricaoContainer");
-    const subtipoSelecionado = document.getElementById("subtipo").value;
-    const tipoSelecionado = document.getElementById("tipo").value;
-
-    unidadeSelect.innerHTML = ""; // Limpa unidades anteriores
-
-    // Unidades disponíveis para cada categoria
-    const unidades = {
-        drogas: ["Papelotes", "Gramas", "Kg"],
-        bebidas: ["Unidade"],
-        remedios: ["Unidade"]
-    };
-
-    if (unidades[tipoSelecionado]) {
-        unidades[tipoSelecionado].forEach(unidade => {
-            let novaOpcao = document.createElement("option");
-            novaOpcao.value = unidade.toLowerCase();
-            novaOpcao.textContent = unidade;
-            unidadeSelect.appendChild(novaOpcao);
-        });
-    }
-
-    // Exibir o campo de descrição apenas se "Diferente de droga" for selecionado
-    if (subtipoSelecionado === "Diferente de droga") {
-        descricaoContainer.style.display = "block";
-    } else {
-        descricaoContainer.style.display = "none";
-    }
-}
-
-function adicionarItem() {
-    const subtipoSelect = document.getElementById("subtipo");
-    const quantidadeInput = document.getElementById("quantidade");
-    const unidadeSelect = document.getElementById("unidade");
-    const descricaoInput = document.getElementById("descricao");
-    const observacoesInput = document.getElementById("observacoes");
-    const lista = document.getElementById("listaSelecionados");
-
-    const subtipoSelecionado = subtipoSelect.options[subtipoSelect.selectedIndex]?.text || "";
-    const quantidade = quantidadeInput.value;
-    const unidade = unidadeSelect.options[unidadeSelect.selectedIndex]?.text || "";
-    const descricao = descricaoInput.value;
-    const observacoes = observacoesInput.value;
-
-    if (subtipoSelecionado && quantidade > 0 && unidade) {
-        let item = document.createElement("li");
-
-        let textoItem = `${subtipoSelecionado} - Quantidade: ${quantidade} ${unidade}`;
+        <button id="toggleButton" class="btn btn-primary mt-3">Material Apreendido</button>
+        <hr>
         
-        if (subtipoSelecionado === "Diferente de droga") {
-            if (!descricao) {
-                alert("Por favor, descreva o item diferente de droga.");
-                return;
+        <div id="formContainer" class="form-container">
+            <div class="header" id="formHeader">Atenção todos materiais relacionados Apenas para o AUTOR DO FATO</div>
+            <form id="myForm">
+                <label for="tipo">Tipo:</label>
+                <select id="tipo" required onchange="atualizarOpcoes()">
+                    <option value="">Selecione uma opção</option>
+                    <option value="drogas">Drogas</option>
+                    <option value="bebidas">Aparelho de som</option>
+                    <option value="remedios">Outros</option>
+                </select>
+        
+                <br><br>
+        
+                <label for="subtipo">Subtipo:</label>
+                <select id="subtipo" onchange="verificarDescricao()">
+                    <option value="">Selecione um tipo primeiro</option>
+                </select>
+        
+                <label for="quantidade">Quantidade:</label>
+                <input type="number" id="quantidade" min="1" placeholder="Quantidade">
+        
+                <label for="unidade">Unidade:</label>
+                <select id="unidade">
+                    <option value="">Selecione um subtipo primeiro</option>
+                </select>
+        
+                <!-- Campo de descrição (aparece só para "Diferente de droga") -->
+                <div id="descricaoContainer" style="display: none;">
+                    <label for="descricao">Descrição:</label>
+                    <input type="text" id="descricao" placeholder="Descreva o item">
+                </div>
+        
+                <!-- Campo de observações (sempre visível) -->
+                <div>
+                    <label for="observacoes">Observações:</label>
+                    <input type="text" id="observacoes" placeholder="Informações adicionais">
+                </div>
+        
+                <button type="button" onclick="adicionarItem()">Adicionar</button>
+        
+                <h3>Itens Selecionados:</h3>
+                <ul id="listaSelecionados"></ul>
+        
+                <!-- Botão para gerar o PDF -->
+                <button type="button" onclick="gerarPDF24()">Gerar PDF DO MATERIAL APREENDIDO</button>
+            </form>
+        </div>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+        
+        <script>
+        function atualizarOpcoes() {
+            const subtipoSelect = document.getElementById("subtipo");
+            const unidadeSelect = document.getElementById("unidade");
+        
+            subtipoSelect.innerHTML = '<option value="">Selecione uma opção</option>'; // Limpa opções anteriores
+            unidadeSelect.innerHTML = '<option value="">Selecione um subtipo primeiro</option>'; // Reseta unidade
+        
+            const tipoSelecionado = document.getElementById("tipo").value;
+            
+            // Opções de subtipos por categoria
+            const opcoesSubtipos = {
+                drogas: ["Maconha", "Cocaína", "LSD", "Ecstasy", "Diferente de droga"],
+                bebidas: ["Aparelho de som domestico", "Aparelho de som Portateis", "Aparelho de som Automotivo"],
+                remedios: ["Diversos"]
+            };
+        
+            if (opcoesSubtipos[tipoSelecionado]) {
+                opcoesSubtipos[tipoSelecionado].forEach(opcao => {
+                    let novaOpcao = document.createElement("option");
+                    novaOpcao.value = opcao; // Agora usa o nome exato da opção
+                    novaOpcao.textContent = opcao;
+                    subtipoSelect.appendChild(novaOpcao);
+                });
             }
-            textoItem += ` (Descrição: ${descricao})`;
+        }
+        
+        function verificarDescricao() {
+            const unidadeSelect = document.getElementById("unidade");
+            const descricaoContainer = document.getElementById("descricaoContainer");
+            const subtipoSelecionado = document.getElementById("subtipo").value;
+            const tipoSelecionado = document.getElementById("tipo").value;
+        
+            unidadeSelect.innerHTML = ""; // Limpa unidades anteriores
+        
+            // Unidades disponíveis para cada categoria
+            const unidades = {
+                drogas: ["Papelotes", "Gramas", "Kg"],
+                bebidas: ["Unidade"],
+                remedios: ["Unidade"]
+            };
+        
+            if (unidades[tipoSelecionado]) {
+                unidades[tipoSelecionado].forEach(unidade => {
+                    let novaOpcao = document.createElement("option");
+                    novaOpcao.value = unidade.toLowerCase();
+                    novaOpcao.textContent = unidade;
+                    unidadeSelect.appendChild(novaOpcao);
+                });
+            }
+        
+            // Exibir o campo de descrição apenas se "Diferente de droga" for selecionado
+            if (subtipoSelecionado === "Diferente de droga") {
+                descricaoContainer.style.display = "block";
+            } else {
+                descricaoContainer.style.display = "none";
+            }
+        }
+        
+        function adicionarItem() {
+            const subtipoSelect = document.getElementById("subtipo");
+            const quantidadeInput = document.getElementById("quantidade");
+            const unidadeSelect = document.getElementById("unidade");
+            const descricaoInput = document.getElementById("descricao");
+            const observacoesInput = document.getElementById("observacoes");
+            const lista = document.getElementById("listaSelecionados");
+        
+            const subtipoSelecionado = subtipoSelect.options[subtipoSelect.selectedIndex]?.text || "";
+            const quantidade = quantidadeInput.value;
+            const unidade = unidadeSelect.options[unidadeSelect.selectedIndex]?.text || "";
+            const descricao = descricaoInput.value;
+            const observacoes = observacoesInput.value;
+        
+            if (subtipoSelecionado && quantidade > 0 && unidade) {
+                let item = document.createElement("li");
+        
+                let textoItem = `${subtipoSelecionado} - Quantidade: ${quantidade} ${unidade}`;
+                
+                if (subtipoSelecionado === "Diferente de droga") {
+                    if (!descricao) {
+                        alert("Por favor, descreva o item diferente de droga.");
+                        return;
+                    }
+                    textoItem += ` (Descrição: ${descricao})`;
+                }
+        
+                if (observacoes) {
+                    textoItem += ` - Observações: ${observacoes}`;
+                }
+        
+                item.textContent = textoItem;
+                lista.appendChild(item);
+        
+                // Limpar campos após adicionar
+                quantidadeInput.value = "";
+                unidadeSelect.innerHTML = '<option value="">Selecione um subtipo primeiro</option>';
+                descricaoInput.value = "";
+                observacoesInput.value = "";
+                document.getElementById("descricaoContainer").style.display = "none";
+            } else {
+                alert("Por favor, selecione um subtipo, informe uma quantidade válida e escolha a unidade.");
+            }
+        }
+        
+        function gerarPDF24() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+        
+            let items = [];
+            const listaItems = document.getElementById("listaSelecionados").getElementsByTagName("li");
+            
+            // Extrair os itens da lista
+            for (let i = 0; i < listaItems.length; i++) {
+                items.push(listaItems[i].textContent);
+            }
+            doc.setFontSize(10);
+            // Adicionando os itens ao PDF
+            doc.text("Itens Apreendidos:", 10, 10);
+            let y = 60;
+            items.forEach((item, index) => {
+                doc.text(`${index + 1}. ${item}`, 10, y);
+                y += 10;
+            });
+        
+
+           // gerarPDF24(doc);
+
+            // Gerar o PDF
+            doc.save("itens_apreendidos.pdf");
         }
 
-        if (observacoes) {
-            textoItem += ` - Observações: ${observacoes}`;
-        }
-
-        item.textContent = textoItem;
-        lista.appendChild(item);
-
-        // Limpar campos após adicionar
-        quantidadeInput.value = "";
-        unidadeSelect.innerHTML = '<option value="">Selecione um subtipo primeiro</option>';
-        descricaoInput.value = "";
-        observacoesInput.value = "";
-        document.getElementById("descricaoContainer").style.display = "none";
-    } else {
-        alert("Por favor, selecione um subtipo, informe uma quantidade válida e escolha a unidade.");
-    }
-}
-</script>
-
+        
+        </script>
+        
             
 
             </select>
@@ -1001,14 +1039,14 @@ function adicionarItem() {
 
     <!--inicio do anexo de fotos-->
 
-    
+    <hr>
    
-        <h2>Upload de Imagens para Termo de Anexo (Máx: 4 imagens) Em desenvolvimento...</h2>
+        <h2>6º Upload de Imagens para Termo de Anexo (Máx: 4 imagens) Em desenvolvimento...</h2>
         
         <input type="file" id="imagemInput" accept="image/*" multiple>
         <button onclick="adicionarImagens()">Adicionar Imagens</button>
         <button onclick="limparImagens()">Limpar Imagens</button>
-        <!--<button onclick="gerarPDF23()">Gerar Termo de Anexo</button>-->
+        <button onclick="gerarPDF23()">Gerar Termo de Anexo</button>
     
         <p id="mensagemErro" style="color: red;"></p>
         <div id="listaImagens"></div>
@@ -1116,7 +1154,7 @@ function adicionarItem() {
 
 
 
-
+    <hr>
 
 <!--fim do anexo de fotos-->
 
@@ -1125,7 +1163,7 @@ function adicionarItem() {
 
 
 
-    <h2>6º Opções de Geração de PDF</h2>
+    <h2>7º Opções de Geração de PDF</h2>
     
 <div>
     <!--<label><input type="checkbox" id="paginaDadosGerais"> Não gerar Dados Gerais</label><br
@@ -1133,9 +1171,9 @@ function adicionarItem() {
     <label><input type="checkbox" id="paginaVitima"> Não gerar Cadastro de Vítima/Testemunha</label><br>
     <label><input type="checkbox" id="paginaHistorico"> Não gerar Histórico</label><br>
     <label><input type="checkbox" id="paginaConclusao"> Não gerar Conclusão Policial</label><br>>-->
-    <label><input type="checkbox" id="paginaAnexos"> Gerar Termo Anexos</label><br>
-    <label><input type="checkbox" id="Termo_Apreensão_de_Materias"> Gerar termo de Material Apreendido</label><br>
-    <label><input type="checkbox" id="Termo_Preliminar_de_Drogas"> Gerar termo preliminar de drogas</label><br>
+    <label><input type="checkbox" id="paginaAnexos"> Considerar Termo Anexos</label><br>
+    <label><input type="checkbox" id="Termo_Apreensão_de_Materias"> Considerar termo de Material Apreendido</label><br>
+    <label><input type="checkbox" id="Termo_Preliminar_de_Drogas"> Considerar termo preliminar de drogas</label><br>
 </div>
 
    <!-- <button type="button" class="btn btn-success mt-3" onclick="gerarPDF()">Gerar PDF Completo</button>-->
@@ -1378,12 +1416,12 @@ function adicionarPessoa(tipo) {
             doc.text("Rua  - Bairro centro - Barra do Bugres-MT - CEP 78.380-000", 105, 288, { align: "center" });
             doc.text("Fone: (65) 98170 0447 | E-mail: @pm.mt.gov.br", 105, 291, { align: "center" });
             }
-            if (cidade === "Porto Estrela-MT") {
+            if (quartel === "NPM PORTO ESTRELA") {
             doc.text("NUCLEO DE POLICIA MILITAR DE PORTO ESTRELA", 105, 285, { align: "center" });
             doc.text("Rua  - Bairro centro - Barra do Bugres-MT - CEP 78.380-000", 105, 288, { align: "center" });
             doc.text("Fone: (65) 98170 0447 | E-mail: @pm.mt.gov.br", 105, 291, { align: "center" });
             }
-            if (cidade === "Tangara da serra-MT") {
+            if (quartel === "19º BPM - TANGARA") {
             doc.text("19º BATALÃO DE POLICIA MILITAR DE TANGARA DA SERRA", 105, 285, { align: "center" });
             doc.text("Rua  - Bairro centro - Barra do Bugres-MT - CEP 78.380-000", 105, 288, { align: "center" });
             doc.text("Fone: (65) 98170 0447 | E-mail: @pm.mt.gov.br", 105, 291, { align: "center" });
@@ -2524,6 +2562,10 @@ doc.setFontSize(10);
 
 y += 10;
 
+
+
+
+
 let textoPart1 = `Em razão da lavratura deste Termo Circunstanciado de Ocorrência, pelo(s) delito(s) tipificado(s): ${artigo} da lei ${lei}, foi apreendido o material descrito abaixo, em poder do autor ${nomeAutorDroga} já qualificado no TCO-PM.`;
 
 doc.setFont("helvetica", "normal");
@@ -2696,14 +2738,20 @@ doc.setFont("helvetica", "normal");
 });
 /// FIM DO TERMO DE APREENSAO
 
+        //Lesão corporal culposa - aqui tenho que criar o termo de solicitação de exame com condição que somente quando for lesao corporal 
+if (naturezaa === "Lesão corporal culposa"){
+    doc.addPage(); // Cria uma nova página para o termo de encerramento ...
+pageCount++; // Incrementa contador de páginas
+adicionarCabecalho()
+adicionarRodape()
+y = 60
+doc.text(`TERMO DE SOLICITAÇÃO DE EXAME, EM DESENVOLVIMENTO`, 100, y, { align: "center" });
+}
+
+
         
 
-
-
-
-        
-
-
+//// fim do termo de exame pericia
 
 // termo de encerramento e remessa
 let nomesAutores = [];
@@ -2756,12 +2804,120 @@ y += 5;
 doc.text(`  RGPM: ${rgPM}`, 100, y, { align: "center" });
 y += 10;
 
+
+
+gerarPDF24(doc);
+
 doc.save("tco.pdf");
-  
 
 
+ 
+        
 }
+
+
+
     </script>
+    <hr>
+    <hr>
+    <hr>
+    <hr>
+    <h2> COMBINAÇÃO DE ARQUIVOS: TCO, Material Apreendido e Drogas.</h2>
+    <hr>
+    <hr>
+ <!DOCTYPE html>
+ <html lang="pt-br">
+ <head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Juntar PDFs e Manipular Páginas</title>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+ </head>
+ <body>
+ 
+ <h2>Selecione 2 ou 3 arquivos PDF para juntar</h2>
+ 
+ <input type="file" id="file1" accept=".pdf" />
+ <input type="file" id="file2" accept=".pdf" />
+ <input type="file" id="file3" accept=".pdf" />
+ <br><br>
+ <button onclick="combinePDFs()">Juntar PDFs</button>
+ 
+ <script>
+   async function combinePDFs() {
+     // Coleta os arquivos selecionados e filtra os que não foram escolhidos
+     const fileInputs = [
+       document.getElementById('file1').files[0],
+       document.getElementById('file2').files[0],
+       document.getElementById('file3').files[0]
+     ];
+     const files = fileInputs.filter(file => file != null);
+ 
+     if (files.length < 2) {
+       alert("Selecione pelo menos dois arquivos PDF.");
+       return;
+     }
+ 
+     // Carrega os arquivos selecionados
+     const pdfBytesList = await Promise.all(files.map(file => file.arrayBuffer()));
+     const { PDFDocument, StandardFonts } = PDFLib;
+     const newPdf = await PDFDocument.create();
+ 
+     // Carrega o primeiro PDF
+     const pdfDoc1 = await PDFDocument.load(pdfBytesList[0]);
+     const numPages1 = pdfDoc1.getPages().length;
+ 
+     // Copia todas as páginas do primeiro PDF, exceto a última
+     const pages1Indices = pdfDoc1.getPages().map((_, i) => i).filter(i => i < numPages1 - 1);
+     const pages1 = await newPdf.copyPages(pdfDoc1, pages1Indices);
+     
+     // Copia a última página do primeiro PDF
+     const lastPage1 = await newPdf.copyPages(pdfDoc1, [numPages1 - 1]);
+ 
+     // Adiciona as páginas do primeiro arquivo, exceto a última
+     pages1.forEach(page => newPdf.addPage(page));
+ 
+     // Se houver 2 arquivos, adiciona as páginas do segundo PDF
+     if (files.length === 2) {
+       const pdfDoc2 = await PDFDocument.load(pdfBytesList[1]);
+       const pages2 = await newPdf.copyPages(pdfDoc2, pdfDoc2.getPages().map((_, i) => i));
+       pages2.forEach(page => newPdf.addPage(page));
+     }
+     // Se houver 3 arquivos, adiciona as páginas do segundo e terceiro PDFs
+     else if (files.length === 3) {
+       const pdfDoc2 = await PDFDocument.load(pdfBytesList[1]);
+       const pdfDoc3 = await PDFDocument.load(pdfBytesList[2]);
+       
+       const pages2 = await newPdf.copyPages(pdfDoc2, pdfDoc2.getPages().map((_, i) => i));
+       pages2.forEach(page => newPdf.addPage(page));
+       
+       const pages3 = await newPdf.copyPages(pdfDoc3, pdfDoc3.getPages().map((_, i) => i));
+       pages3.forEach(page => newPdf.addPage(page));
+     }
+ 
+     // Adiciona a última página do primeiro arquivo no final
+     newPdf.addPage(lastPage1[0]);
+ 
+     // Contabiliza o número total de páginas
+     const totalPages = newPdf.getPages().length;
+     console.log(`Total de páginas no documento combinado: ${totalPages}`);
+ 
+    
+ 
+     // Salva o novo PDF
+     const newPdfBytes = await newPdf.save();
+     const link = document.createElement('a');
+     link.href = URL.createObjectURL(new Blob([newPdfBytes], { type: 'application/pdf' }));
+     link.download = 'TCO.COMPLETO.pdf';
+     link.click();
+ 
+     alert(`Documento combinado com sucesso! Total de páginas: ${totalPages}`);
+   }
+ </script>
+  
+    </body>
+    </html>
+    
 
 </body>
 
