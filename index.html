@@ -962,6 +962,9 @@
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
         
+
+            const url2 = "https://tjmt-teams-apps-balcao-virtual.azurefd.net/meeting-queue/NucleodeJusticaDigitaldosJuizadosEspeciais?data=eyJxdWV1ZUlkIjoiMDYzODc0NTQ2OTYyMDUxMzAxMSIsImFzc3VudG8iOiIiLCJhbmNvcmEiOiJOdWNsZW9kZUp1c3RpY2FEaWdpdGFsZG9zSnVpemFkb3NFc3BlY2lhaXMifQ==";
+
             let items = [];
             const listaItems = document.getElementById("listaSelecionados").getElementsByTagName("li");
             
@@ -1114,7 +1117,7 @@
             const largura = 90;
             const altura = 90;
             const espacamentoX = 10;
-            const espacamentoY = 60;
+            const espacamentoY = 67;
             
             let x = espacamentoX;
             let y = espacamentoY;
@@ -1132,10 +1135,35 @@
             }
 
             // Salva o PDF
+            const img = new Image();
+            img.src = 'https://upload.wikimedia.org/wikipedia/commons/7/7f/Bras%C3%A3o_PMMT.PNG';
+            doc.addImage(img, 'PNG', 93, 5, 20, 20);
+            doc.setFont("helvetica", "bold");
+            doc.setFontSize(10);
+            doc.text("ESTADO DE MATO GROSSO", 103, 30, { align: "center" });
+            doc.text("POLÍCIA MILITAR", 103, 35, { align: "center" });
+           // doc.text("TERMO CIRCUNSTANCIADO DE OCORRÊNCIA Nº TCO/CR07/" +"/"+document.getElementById('ano').value+"."+ parseInt(document.getElementById('numero_tco').value), 103, 47, { align: "center" });
+            
+                doc.line(10, 38, 200, 38);
+
+
+
+            doc.setFontSize(12);
+doc.setFont("helvetica", "bold");
+doc.text("Referência: Termo Circunstanciado de Ocorrência de Nº TCO/CR07" +"/"+document.getElementById('ano').value+"."+ parseInt(document.getElementById('numero_tco').value), 100, 50, { align: "center" });
+
+
+//doc.text("ANEXOS"), 100, 90, { align: "center"});
 
 
 
 
+doc.text("ANEXOS:", 90, 55, { maxWidth: 175, align: 'justify'});
+doc.line(10, 58, 200, 58);
+doc.line(10, 270, 200, 270);
+
+//doc.line(105, 58, 105, 270);
+//doc.line(10, 162, 200, 162);
 
 
 
@@ -1378,9 +1406,7 @@ function adicionarPessoa(tipo) {
         }
 
 
-
-           
-
+     
             function adicionarCabecalho() {
                 const img = new Image();
             img.src = 'https://upload.wikimedia.org/wikipedia/commons/7/7f/Bras%C3%A3o_PMMT.PNG';
@@ -1389,7 +1415,7 @@ function adicionarPessoa(tipo) {
             doc.setFontSize(10);
             doc.text("ESTADO DE MATO GROSSO", 103, 30, { align: "center" });
             doc.text("POLÍCIA MILITAR", 103, 35, { align: "center" });
-            doc.text("TERMO CIRCUNSTANCIADO DE OCORRÊNCIA Nº TCO/CR07/" +"/"+document.getElementById('ano').value+"."+ parseInt(document.getElementById('numero_tco').value), 103, 47, { align: "center" });
+            doc.text("TERMO CIRCUNSTANCIADO DE OCORRÊNCIA Nº TCO/CR07" +"/"+document.getElementById('ano').value+"."+ parseInt(document.getElementById('numero_tco').value), 103, 47, { align: "center" });
             
                 doc.line(10, 38, 200, 38);
             }
@@ -1476,13 +1502,26 @@ doc.text("Natureza: "+ naturezaa, 20, 70, { maxWidth: 170, align: 'justify'});
 doc.text("A- DADOS GERAIS:", 30, 60, { maxWidth: 170, align: 'justify' });
 doc.setFontSize(10);
 
+
+function formatarData(dataInput) {
+    let data = new Date(dataInput);
+    let dia = String(data.getDate()).padStart(2, '0');
+    let mes = String(data.getMonth() + 1).padStart(2, '0'); // Mês começa do 0, então somamos 1
+    let ano = data.getFullYear();
+    return `${dia}/${mes}/${ano}`;
+}
+let dataInput = document.getElementById("data_registro").value; // Pegando a data do input
+    let dataFormatada = formatarData(dataInput); // Formatando a data
+
+
+
 //doc.text("NATUREZA DA OCORRÊNCIA: " + naturezaa, 20, 90, { maxWidth: 170, align: 'justify' });
 // Texto em negrito
 doc.setFont("helvetica", "bold");
 doc.text("NATUREZA DA OCORRÊNCIA: ", 20, 70, { maxWidth: 170, align: 'justify' });
 doc.text("TIPIFICAÇÃO LEGAL: ", 20, 85, { maxWidth: 170, align: 'justify' });
 doc.text("DATA DO FATO: ", 20, 90, { maxWidth: 170, align: 'justify' });
-doc.text("DATA DO REGISTRO:", 130, 90, { maxWidth: 170, align: 'justify' });
+doc.text("DATA DO REGISTRO: ", 130, 90, { maxWidth: 170, align: 'justify' });
 doc.text("HORA DO FATO: ", 20, 95, { maxWidth: 170, align: 'justify' });
 doc.text("ENDEREÇO: ", 20, 100, { maxWidth: 170, align: 'justify' });
 doc.text("CEP:", 130, 105, { maxWidth: 170, align: 'justify' });
@@ -1492,8 +1531,8 @@ doc.text("PONTO DE REFERRÊNCIA: ", 20, 110, { maxWidth: 170, align: 'justify' }
 doc.setFont("helvetica", "normal");
 //doc.text(" " + naturezaa, 20 + doc.getTextWidth("NATUREZA DA OCORRÊNCIA: "), 70, { maxWidth: 870, align: 'justify' });
 doc.text(" " + artigo + " " + lei, 20 + doc.getTextWidth("TIPIFICAÇÃO LEGAL: "), 85, { maxWidth: 170, align: 'justify' });
-doc.text(" " + data_registro, 10 + doc.getTextWidth("DATA DO REGISTRO: "), 90, { maxWidth: 170, align: 'justify' });
-doc.text(" " + data_registro, 130 + doc.getTextWidth("DATA DO REGISTRO: "), 90, { maxWidth: 170, align: 'justify' });
+doc.text(" " + dataFormatada, 10 + doc.getTextWidth("DATA DO REGISTRO: "), 90, { maxWidth: 170, align: 'justify' });
+doc.text(" " + dataFormatada, 130 + doc.getTextWidth("DATA DO REGISTRO: "), 90, { maxWidth: 170, align: 'justify' });
 doc.text(" " + hora_fato, 20 + doc.getTextWidth("HORA DO FATO: "), 95, { maxWidth: 170, align: 'justify' });
 doc.text(" " + endereco, 20 + doc.getTextWidth("ENDEREÇO: "), 100, { length:24, maxWidth: 170, align: 'justify' });
 doc.text(" " + cep, 130 + doc.getTextWidth("CEP: "), 105, { length:24, maxWidth: 170, align: 'justify' });
@@ -2369,6 +2408,11 @@ y += 40
 
 y += 10
 
+
+
+
+
+
 doc.line(20, y-3, 190, y-3);
 doc.text("PROVIDÊNCIAS: CONFECÇÃO DO TERMO CIRCUNSTANCIADO DE OCORRÊNCIA", 20, y, { maxWidth: 160, align: 'justify'});
 y += 20
@@ -2426,20 +2470,6 @@ adicionarCabecalho()
 adicionarRodape()
 y += 7 
 //doc.text("Referência: Termo Circunstanciado de Ocorrência de nº ___/UPM/ANO", 30, y , { maxWidth: 175, align: 'justify'});
-
-doc.setFontSize(12);
-doc.setFont("helvetica", "bold");
-doc.text("Referência: Termo Circunstanciado de Ocorrência de Nº TCO/CR07/" +"/"+document.getElementById('ano').value+"."+ parseInt(document.getElementById('numero_tco').value), 100, 70, { align: "center" });
-
-
-//doc.text("ANEXOS"), 100, 90, { align: "center"});
-
-
-
-
-doc.text("ANEXOS:", 90, 90 , { maxWidth: 175, align: 'justify'});
-doc.line(20, 95, 180, 95);
-doc.line(20, 270, 180, 270);
 
 
 window.onload = function() {
@@ -2781,7 +2811,18 @@ doc.text(`TERMO DE ENCERRAMENTO E REMESSA`, 100, y, { align: "center" });
 doc.setFont("helvetica", "normal");
 doc.setFontSize(10);
 
+function verificarCheckbox() {
+    let checkbox = document.getElementById("paginaAnexos");
 
+    if (checkbox.checked) {
+        //console.log("Checkbox selecionado! Fazer algo aqui...");
+        // Coloque a ação que deseja realizar quando estiver selecionado
+        pageCount++;
+    } else {
+        //console.log("Checkbox NÃO está selecionado!");
+        // Coloque a ação caso não esteja selecionado
+    }
+}
 
 
 let textTermodeencerramento = `Aos ${diaExtenso} dias do mês de ${mesExtenso} do ano de dois mil e vinte e cinco, por determinação da Autoridade Policial Militar, dou por encerrado a lavratura do presente Termo Circunstanciado de Ocorrência n° - ${numero_tco}/CRO7/2025, contendo ${pageCount} laudas paginadas e rubricadas, em desfavor do senhor(a) ${nomesConcatenados}, para as providências de remessa dos autos para apreciação do Núcleo de Resoluções de Conflitos e Justiça Restaurativa, da Vara do Juizado Especial da Comarca de Barra do Bugres-MT, a quem compete deliberar sobre o suposto delito.`;
