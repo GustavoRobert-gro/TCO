@@ -71,6 +71,17 @@
 
 let textoDrogas = [];
 let textoOutros = [];
+//let Autor01doFatoGlobal = [];
+let Autor02doFatoGlobal = [];
+let Autor03doFatoGlobal = [];
+let Autor04doFatoGlobal = [];
+let Vitima01Global = [];
+let Vitima02Global = [];
+let Vitima03Global = [];
+let Vitima04Global = [];
+
+
+
   // Crimes de menor potencial ofensivo (pena máxima até 2 anos) incluindo crimes de trânsito
   const naturezas = {
     "Ameaça": { artigo: "147", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
@@ -852,7 +863,10 @@ let textoOutros = [];
                 <ul id="listaSelecionados"></ul>
         
                 <!-- Botão para gerar o PDF -->
-                <button type="button" onclick="gerarPDF24()">Gerar PDF DO MATERIAL APREENDIDO</button>
+                <!--<button type="button" onclick="gerarPDF24()">CONFIRMA</button> -->
+                <button type="button" onclick="gerarPDF24()">CONFIRMAR</button>
+<span id="confirmacao" style="margin-left: 10px;"></span>
+                
             </form>
         </div>
         
@@ -949,7 +963,8 @@ let textoOutros = [];
                 }
         
                 item.textContent = textoItem;
-
+                document.getElementById("confirmacao").innerHTML = "Falta a confirmação X";
+                document.getElementById("confirmacao").style.color = "red";
                 textoOutros = [];  // Zera o array criando um novo vazio de materiais apreendido
                 textoDrogas = [];  // Zera o array criando um novo vazio de drogas apreendida
 
@@ -1005,17 +1020,28 @@ function gerarPDF24() {
 // Armazenando os itens de drogas em uma variável global
 if (itemsDrogas.length > 0) {
     itemsDrogas.forEach((item, index) => {
-        textoDrogas.push(`${index + 1}. ${item.slice(0, -7)}`);
+        textoDrogas.push(`( ${index + 1}. ${item.slice(0, -7)})`);
     });
 }
 
 // Armazenando os itens outros em uma variável global
 itemsOutros.forEach((item, index) => {
-    textoOutros.push(`${index + 1}. ${item.slice(0, -7)}`);
+    textoOutros.push(`( ${index + 1}. ${item.slice(0, -7)})`);
     
 });
     // Gerar o PDF
     //doc.save("itens_apreendidos.pdf");
+
+
+     // Atualiza o texto ao lado do botão com um ícone de check verde
+     document.getElementById("confirmacao").innerHTML = "Confirmado! ✔️";
+    document.getElementById("confirmacao").style.color = "green";
+
+    
+
+
+document.getElementById("Termo_Apreensão_de_Materias").checked = true;
+    
 }
 
 
@@ -1199,7 +1225,7 @@ doc.line(10, 270, 200, 270);
 
 //doc.line(105, 58, 105, 270);
 //doc.line(10, 162, 200, 162);
-
+document.getElementById("paginaAnexos").checked = true;
 
 
             doc.save("termo_com_imagens.pdf");
@@ -1236,6 +1262,9 @@ doc.line(10, 270, 200, 270);
     <label><input type="checkbox" id="paginaConclusao"> Não gerar Conclusão Policial</label><br>>-->
     <label><input type="checkbox" id="paginaAnexos"> Considerar Termo Anexos</label><br>
     <label><input type="checkbox" id="Termo_Apreensão_de_Materias"> Considerar termo de Material Apreendido</label><br>
+
+
+    
     <label><input type="checkbox" id="Termo_Preliminar_de_Drogas"> Considerar termo preliminar de drogas</label><br>
 </div>
 
@@ -1247,6 +1276,7 @@ doc.line(10, 270, 200, 270);
    function confirmarGeracaoPDF() {
        if (confirm("Tem certeza que deseja gerar o PDF completo?\nCertifique-se de ter preenchido todos os campos corretos! \n\nSe ao menos for preenchidos os campos da guarnição e a qualificação do Autor do fato o arquivo sera gerado na pasta download")) {
            gerarPDF(); // Chama a função apenas se o usuário confirmar
+           
        }
    }
    </script>
@@ -1526,6 +1556,9 @@ let texto4 = `Comandante de GUPM`;
 doc.text(texto4, 103, 212,{ align: "center" });
 doc.setFontSize(10);
 doc.text("Natureza: "+ naturezaa, 20, 70, { maxWidth: 170, align: 'justify'});
+doc.text("Autor do Fato: ", 20, 80, { maxWidth: 170, align: 'justify'});
+
+
 
 //-------------------------------------------------
  // inicio da segunda pagina
@@ -1633,6 +1666,8 @@ const naturalidadeufAutor = document.getElementsByName("naturalidadeuf_autor[]")
    const profissaoAutor = document.getElementsByName("profissao_autor[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
    const localtrabalhoAutor = document.getElementsByName("local_trabalho_autor[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
    const relatoAutor = document.getElementsByName("relato_autor[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+
+let Autor01doFatoGlobal = nomeAutor
 
    function verificapagina() {
     if (y > 270) {
@@ -2450,13 +2485,13 @@ y += 10
 
 doc.line(20, y-3, 190, y-3);
 doc.text("PROVIDÊNCIAS: CONFECÇÃO DO TERMO CIRCUNSTANCIADO DE OCORRÊNCIA", 20, y, { maxWidth: 160, align: 'justify'});
-y += 20
+y += 15
 doc.line(20, y-3, 190, y-3);
 doc.text("DOC/ANEXOS: TERMO DE COMPROMISSO DE COMPARECIMENTO; TERMO DE MANIFESTAÇÃO DA VITIMA", 20, y , { maxWidth: 160, align: 'justify'});
-y += 20
+y += 15
 doc.line(20, y-3, 190, y-3);
-doc.text("DESCRIÇÃO DOS OBJETOS/ DOCUMENTOS APREENDIDOS:", 20, y , { maxWidth: 160, align: 'justify'});
-y += 20
+doc.text("DESCRIÇÃO DOS OBJETOS/ DOCUMENTOS APREENDIDOS: "+ textoOutros, 20, y , { maxWidth: 160, align: 'justify'});
+y += 30
 doc.line(20, y-3, 190, y-3);
 
 
@@ -2498,7 +2533,7 @@ if (!omitirMaterialApreendido) {
             } else {
                 
 //aqui começa a pagina anexo
-doc.addPage(); // Cria uma nova página
+//doc.addPage(); // Cria uma nova página
 pageCount++; // Incrementa contador de páginas
 
 adicionarCabecalho()
@@ -2783,7 +2818,7 @@ doc.line(20, y+3, 185, y+3);
 doc.text("FICA APREENDIDO O ABAIXO DESCRITO: ", 21, y+7, { maxWidth: 170, align: 'justify'});
 y += 6
 doc.line(20, y+3, 185, y+3);
-doc.text(""+textoOutros, 21, y+7, { maxWidth: 170, align: 'justify'});
+doc.text(""+textoOutros, 21, y+7, { maxWidth: 160, align: 'justify'});
 y += 30
 doc.line(20, y+3, 185, y+3);
 doc.text("O presente termo de Apreensão foi lavrado com base no art. 6º, II, do CPP, e Art. 92 da lei 9.099/1995 ", 21, y+7, { maxWidth: 170, align: 'justify'});
