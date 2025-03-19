@@ -67,6 +67,10 @@
 <input type="text" id="lei" required style="width: 550px;" readonly>
 
 <script>
+       // Declaração das variáveis globais para armazenar os textos DE MATERIAIS APREENDIDOS
+
+let textoDrogas = [];
+let textoOutros = [];
   // Crimes de menor potencial ofensivo (pena máxima até 2 anos) incluindo crimes de trânsito
   const naturezas = {
     "Ameaça": { artigo: "147", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
@@ -945,6 +949,19 @@
                 }
         
                 item.textContent = textoItem;
+
+                textoOutros = [];  // Zera o array criando um novo vazio de materiais apreendido
+                textoDrogas = [];  // Zera o array criando um novo vazio de drogas apreendida
+
+ // Criar botão de remover
+ let botaoRemover = document.createElement("button");
+    botaoRemover.textContent = " Remover";
+    botaoRemover.style.marginLeft = "10px";
+    botaoRemover.onclick = function () {
+        lista.removeChild(item);
+    };
+    item.appendChild(botaoRemover);
+
                 lista.appendChild(item);
         
                 // Limpar campos após adicionar
@@ -958,36 +975,54 @@
             }
         }
         
-        function gerarPDF24() {
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF();
+
         
+function gerarPDF24() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
 
-            const url2 = "https://tjmt-teams-apps-balcao-virtual.azurefd.net/meeting-queue/NucleodeJusticaDigitaldosJuizadosEspeciais?data=eyJxdWV1ZUlkIjoiMDYzODc0NTQ2OTYyMDUxMzAxMSIsImFzc3VudG8iOiIiLCJhbmNvcmEiOiJOdWNsZW9kZUp1c3RpY2FEaWdpdGFsZG9zSnVpemFkb3NFc3BlY2lhaXMifQ==";
-
-            let items = [];
-            const listaItems = document.getElementById("listaSelecionados").getElementsByTagName("li");
-            
-            // Extrair os itens da lista
-            for (let i = 0; i < listaItems.length; i++) {
-                items.push(listaItems[i].textContent);
-            }
-            doc.setFontSize(10);
-            // Adicionando os itens ao PDF
-            doc.text("Itens Apreendidos:", 10, 10);
-            let y = 60;
-            items.forEach((item, index) => {
-                doc.text(`${index + 1}. ${item}`, 10, y);
-                y += 10;
-            });
-        
-
-           // gerarPDF24(doc);
-
-            // Gerar o PDF
-            doc.save("itens_apreendidos.pdf");
+    let itemsDrogas = [];
+    let itemsOutros = [];
+    const listaItems = document.getElementById("listaSelecionados").getElementsByTagName("li");
+    
+    // Separar os itens por categoria
+    for (let i = 0; i < listaItems.length; i++) {
+        let itemText = listaItems[i].textContent;
+        if (itemText.includes("Maconha") || itemText.includes("Cocaína") || itemText.includes("LSD") || itemText.includes("Ecstasy") || itemText.includes("Diferente de droga")) {
+            itemsDrogas.push(itemText);
         }
+        itemsOutros.push(itemText);
+    }
 
+    // Se não houver itens apreendidos, continuar com o resto do código sem gerar PDF
+    if (itemsOutros.length === 0) {
+        console.log("Nenhum material apreendido. Continuando com os outros processos...");
+        return; // Sai da função sem gerar o PDF
+    }
+
+
+
+// Armazenando os itens de drogas em uma variável global
+if (itemsDrogas.length > 0) {
+    itemsDrogas.forEach((item, index) => {
+        textoDrogas.push(`${index + 1}. ${item.slice(0, -7)}`);
+    });
+}
+
+// Armazenando os itens outros em uma variável global
+itemsOutros.forEach((item, index) => {
+    textoOutros.push(`${index + 1}. ${item.slice(0, -7)}`);
+    
+});
+    // Gerar o PDF
+    //doc.save("itens_apreendidos.pdf");
+}
+
+
+
+
+
+ 
         
         </script>
         
@@ -2697,6 +2732,10 @@ if (!omitirTermodeapreensao) {
                 
             } else {
 
+//---------------
+
+                //---------------------
+
 
 doc.addPage(); // TERMO DE APREENSAO...
 pageCount++; // Incrementa contador de páginas
@@ -2744,7 +2783,7 @@ doc.line(20, y+3, 185, y+3);
 doc.text("FICA APREENDIDO O ABAIXO DESCRITO: ", 21, y+7, { maxWidth: 170, align: 'justify'});
 y += 6
 doc.line(20, y+3, 185, y+3);
-doc.text("PROGRAMAR: ", 21, y+7, { maxWidth: 170, align: 'justify'});
+doc.text(""+textoOutros, 21, y+7, { maxWidth: 170, align: 'justify'});
 y += 30
 doc.line(20, y+3, 185, y+3);
 doc.text("O presente termo de Apreensão foi lavrado com base no art. 6º, II, do CPP, e Art. 92 da lei 9.099/1995 ", 21, y+7, { maxWidth: 170, align: 'justify'});
