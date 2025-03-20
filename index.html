@@ -845,7 +845,7 @@ let Vitima04Global = [];
                     <option value="">Selecione um subtipo primeiro</option>
                 </select>
         
-                <!-- Campo de descrição (aparece só para "Diferente de droga") -->
+                <!-- Campo de descrição (aparece só para "Outro tipo de droga") -->
                 <div id="descricaoContainer" style="display: none;">
                     <label for="descricao">Descrição:</label>
                     <input type="text" id="descricao" placeholder="Descreva o item">
@@ -884,7 +884,7 @@ let Vitima04Global = [];
             
             // Opções de subtipos por categoria
             const opcoesSubtipos = {
-                drogas: ["Maconha", "Cocaína", "LSD", "Ecstasy", "Diferente de droga"],
+                drogas: ["Maconha", "Cocaína", "LSD", "Ecstasy", "Outro tipo de droga"],
                 bebidas: ["Aparelho de som domestico", "Aparelho de som Portateis", "Aparelho de som Automotivo"],
                 remedios: ["Diversos"]
             };
@@ -923,8 +923,8 @@ let Vitima04Global = [];
                 });
             }
         
-            // Exibir o campo de descrição apenas se "Diferente de droga" for selecionado
-            if (subtipoSelecionado === "Diferente de droga") {
+            // Exibir o campo de descrição apenas se "Outro tipo de droga" for selecionado
+            if (subtipoSelecionado === "Outro tipo de droga") {
                 descricaoContainer.style.display = "block";
             } else {
                 descricaoContainer.style.display = "none";
@@ -950,9 +950,9 @@ let Vitima04Global = [];
         
                 let textoItem = `${subtipoSelecionado} - Quantidade: ${quantidade} ${unidade}`;
                 
-                if (subtipoSelecionado === "Diferente de droga") {
+                if (subtipoSelecionado === "Outro tipo de droga") {
                     if (!descricao) {
-                        alert("Por favor, descreva o item diferente de droga.");
+                        alert("Por favor, descreva o item Outro tipo de droga.");
                         return;
                     }
                     textoItem += ` (Descrição: ${descricao})`;
@@ -1011,7 +1011,7 @@ function gerarPDF24() {
     // Separar os itens por categoria
     for (let i = 0; i < listaItems.length; i++) {
         let itemText = listaItems[i].textContent;
-        if (itemText.includes("Maconha") || itemText.includes("Cocaína") || itemText.includes("LSD") || itemText.includes("Ecstasy") || itemText.includes("Diferente de droga")) {
+        if (itemText.includes("Maconha") || itemText.includes("Cocaína") || itemText.includes("LSD") || itemText.includes("Ecstasy") || itemText.includes("Outro tipo de droga")) {
             itemsDrogas.push(itemText);
         }
         itemsOutros.push(itemText);
@@ -2390,7 +2390,7 @@ doc.text(`   ${nomeTTestemunha}`, 100, y, { align: "center" });
 y += 5;
 doc.text(`  CPF: ${cpfTTestemunha}`, 100, y, { align: "center" });
 y += 30;
-verificapagina5()
+
                
 
 
@@ -2495,16 +2495,49 @@ y += 40
 
 y += 10
 
+//verifica se tem vitima ou nao 
+let textoDocAnexo =[];
+ textoDocAnexo = "DOC/ANEXOS: TERMO DE COMPROMISSO DE COMPARECIMENTO"
 
 
 
+    document.getElementsByName("nome_vitima[]").forEach((input, index) => {
+        const vitimas = document.getElementsByName("nome_vitima[]");
+
+if (vitimas.length > 0) {
+    // Caso não exista vítima, execute outra lógica
+   // console.log("Nenhuma vítima cadastrada, seguir com outra ação.");
+   // textoDocAnexo = "DOC/ANEXOS: TERMO DE COMPROMISSO DE COMPARECIMENTO"
+   textoDocAnexo += "; TERMO DE MANIFESTAÇÃO DA VITIMA"}
+});
+ 
+   
+        
+if (naturezaa === "Lesão corporal culposa"){textoDocAnexo += "; TERMO DE SOLICITAÇÃO DE EXAME PERICIAL"};
+       
+if (document.getElementById("paginaAnexos").checked) {
+    textoDocAnexo += "; TERMO DE ANEXOS";}
+     
+    // Verifica se o checkbox "Termo_Preliminar_de_Drogas" está marcado
+    if (document.getElementById("Termo_Preliminar_de_Drogas").checked) {
+        textoDocAnexo += "; TERMO PRELIMINAR DE DROGAS";
+    }
+        
+    // Verifica se o checkbox "Termo_Apreensao_de_Materiais" está marcado
+    if (document.getElementById("Termo_Apreensão_de_Materias").checked) {
+        textoDocAnexo += "; TERMO DE MATERIAL APREENDIDO";
+    }
+
+    
+
+///~fim da verificação
 
 
 doc.line(20, y-3, 190, y-3);
 doc.text("PROVIDÊNCIAS: CONFECÇÃO DO TERMO CIRCUNSTANCIADO DE OCORRÊNCIA", 20, y, { maxWidth: 160, align: 'justify'});
 y += 15
 doc.line(20, y-3, 190, y-3);
-doc.text("DOC/ANEXOS: TERMO DE COMPROMISSO DE COMPARECIMENTO; TERMO DE MANIFESTAÇÃO DA VITIMA", 20, y , { maxWidth: 160, align: 'justify'});
+doc.text(textoDocAnexo, 20, y , { maxWidth: 160, align: 'justify'});
 y += 15
 doc.line(20, y-3, 190, y-3);
 doc.text("DESCRIÇÃO DOS OBJETOS/ DOCUMENTOS APREENDIDOS: "+ textoOutros, 20, y , { maxWidth: 160, align: 'justify'});
