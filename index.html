@@ -1636,7 +1636,6 @@ doc.text(natuureza, 20, 75, { maxWidth: 170, align: 'justify'});
        const limitePagina = 270; // Altura máxima antes de adicionar nova página
 
 
-       pageCount++; // Incrementa contador de páginas
 
 
        
@@ -2124,7 +2123,14 @@ const numeroDeLinhasmultiplcado4 = linhas4.length * 6;
 doc.setFont("helvetica", "normal");
 //doc.text(textoRelatoCondutor, 20, y, { maxWidth: 175, align: 'justify'});
 
-const textoFormatado = doc.splitTextToSize(textoRelatoCondutor, 175);
+
+
+// Quebrar texto automaticamente para manter formatação no PDF
+const margemEsquerda = 20;
+const larguraTexto = 170; // Ajuste conforme necessário
+const tamanhoFonte = 12;
+const textoFormatado = doc.splitTextToSize(relatoCondutorCorreto, larguraTexto);
+
 doc.text(textoFormatado, 20, y, { maxWidth: 170, align: 'justify'});
 
 
@@ -2199,15 +2205,16 @@ y += numeroDeLinhas * 5;
 
 
 y += 10;
+verificapagina4()
 doc.text(`__________________________________________________`, 100, y-4, { align: "center" });
 doc.text(`   ${nomeVVitima}`, 100, y, { align: "center" });
 y += 5;
 doc.text(`  CPF: ${cpfVVitima}`, 100, y, { align: "center" });
 y += 10;
-verificapagina4()
+
            
 doc.addPage(); // Cria uma nova página
-
+pageCount++; // Incrementa contador de páginas
 adicionarCabecalho()
 adicionarRodape()
 y = 80 
