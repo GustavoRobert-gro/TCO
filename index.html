@@ -13,12 +13,15 @@
         
 </head>
 <body class="container mt-4">
+  
     <h1>TERMO CIRCUNSTANCIADO DE OCORRÊNCIA - EM DESENVOLVIMENTO</h1>
     <hr>
 
     <!-- Formulário Dados Gerais -->
     <h2>1º Dados Gerais</h2>
     <form id="formDadosGerais">
+
+
         <div class="date-group">
         <label for="numero_tco">Nº TCO:</label>
         <input type="text" id="numero_tco" value="0038" required style="width: 70px";>
@@ -742,8 +745,69 @@ let Vitima04Global = [];
         </script>
     
 <!--fim do reconhecimento de voz-->
+    
+<!-- Botão para Reset -->
+<!-- Botão para Reset -->
+<button id="btnReset" onclick="resetarCampos()">Restaurar Valores Originais</button>
 
+<style>
+    /* Estilizando o botão para ficar no lado direito da tela */
+    #btnReset {
+        position: fixed;   /* Fixa o botão na tela */
+        top: 20px;         /* Distância do topo */
+        right: 20px;       /* Distância da direita */
+        padding: 10px 20px; /* Tamanho do botão */
+        font-size: 16px;   /* Tamanho do texto */
+        background-color: red; /* Cor de fundo */
+        color: white;      /* Cor do texto */
+        border: none;      /* Sem borda */
+        cursor: pointer;   /* Cursor de mão ao passar */
+        border-radius: 5px; /* Borda arredondada */
+    }
 
+    /* Adiciona um efeito ao passar o mouse */
+    #btnReset:hover {
+        background-color: darkred;
+    }
+</style>
+
+<script>
+    // Lista de IDs dos campos e seus valores originais
+    const campos = {
+        "numero_tco": "0000",
+        "cidade": "Denise-MT",
+           
+        "endereco": "",
+        "local_fato": "",
+        "ponto_referencia": "",
+        "comunicante": "",
+        "relato_policial_correto": "Às h do dia , deparamos com (), e em decorrência do fato dei voz de prisão a autor do fato, conduzindo o mesmo para unidade de policia militar de Denise-MT, para adoção das providências legais."
+    };
+
+    // 🔹 Carregar os valores salvos ao abrir a página
+    window.onload = function() {
+        Object.keys(campos).forEach(id => {
+            const campo = document.getElementById(id);
+            const valorSalvo = localStorage.getItem(id);
+            campo.value = valorSalvo !== null ? valorSalvo : campos[id];
+        });
+    };
+
+    // 🔹 Salvar automaticamente sempre que o usuário digitar algo
+    Object.keys(campos).forEach(id => {
+        document.getElementById(id).addEventListener("input", function() {
+            localStorage.setItem(id, this.value);
+        });
+    });
+
+    // 🔹 Resetar os campos para os valores originais e limpar o localStorage
+    function resetarCampos() {
+        Object.keys(campos).forEach(id => {
+            document.getElementById(id).value = campos[id];  // Restaurar valor original
+            localStorage.removeItem(id); // Remover do localStorage
+        });
+    }
+</script>
 
 
 
