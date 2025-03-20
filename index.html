@@ -974,6 +974,14 @@ let Vitima04Global = [];
     botaoRemover.style.marginLeft = "10px";
     botaoRemover.onclick = function () {
         lista.removeChild(item);
+
+        document.getElementById("confirmacao").innerHTML = "Falta a confirmação X";
+                document.getElementById("confirmacao").style.color = "red";
+                textoOutros = [];  // Zera o array criando um novo vazio de materiais apreendido
+                textoDrogas = [];  // Zera o array criando um novo vazio de drogas apreendida
+
+
+
     };
     item.appendChild(botaoRemover);
 
@@ -1109,8 +1117,10 @@ document.getElementById("Termo_Apreensão_de_Materias").checked = true;
         
         <input type="file" id="imagemInput" accept="image/*" multiple>
         <button onclick="adicionarImagens()">Adicionar Imagens</button>
-        <button onclick="limparImagens()">Limpar Imagens</button>
-        <button onclick="gerarPDF23()">Gerar Termo de Anexo</button>
+        <!--<button onclick="limparImagens()">Limpar Imagens</button>-->
+        <button onclick="limparImagens()" style="margin-right: 30px;">Limpar Imagens</button>
+        <!--<button onclick="gerarPDF23()">Gerar Termo de Anexo</button>-->
+        <button onclick="gerarPDF23()" style="background-color: rgb(68, 128, 0); color: white; border: none;">Gerar Termo de Anexo</button>
     
         <p id="mensagemErro" style="color: red;"></p>
         <div id="listaImagens"></div>
