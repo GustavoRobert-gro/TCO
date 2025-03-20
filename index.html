@@ -772,6 +772,25 @@ let Vitima04Global = [];
 </style>
 
 <script>
+
+// Função para converter o número do mês para o nome do mês
+function numeroParaExtenso(mesNumero2) {
+    const meses2 = [
+        "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", 
+        "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
+    ];
+
+    return meses2[mesNumero2 - 1]; // Subtrai 1, pois o array começa no índice 0
+}
+
+const horaOcorrido = document.getElementById("hora_fato").value;
+const diaRegistro = document.getElementById("dia").value;
+const AnO = document.getElementById("ano").value;
+// Pegando o valor do mês a partir do campo com id "mes"
+const mEs = document.getElementById("mes").value;
+// Convertendo o número para o nome do mês extenso
+const mesExtenso2 = numeroParaExtenso(parseInt(mEs)); // parseInt 
+
     // Lista de IDs dos campos e seus valores originais
     const campos = {
         "numero_tco": "0000",
@@ -781,7 +800,7 @@ let Vitima04Global = [];
         "local_fato": "",
         "ponto_referencia": "",
         "comunicante": "",
-        "relato_policial_correto": "Às h do dia , deparamos com (), e em decorrência do fato dei voz de prisão a autor do fato, conduzindo o mesmo para unidade de policia militar de Denise-MT, para adoção das providências legais."
+        "relato_policial_correto": `Às ${horaOcorrido} do dia ${diaRegistro} de ${mesExtenso2} de ${AnO} , deparamos com autor do fato, () e em decorrência do fato dei voz de prisão a autor do fato, conduzindo o mesmo para o Nucleo de policia militar de Denise-MT, para adoção das providências legais.`
     };
 
     // 🔹 Carregar os valores salvos ao abrir a página
