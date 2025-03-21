@@ -2876,10 +2876,10 @@ y += 7
 
 //doc.setFont("helvetica", "normal");
 
- }
+ 
 
 
- doc.addPage(); // termo de constatação preliminar de drogas
+ doc.addPage(); // termo de ABUSO
 pageCount++; // Incrementa contador de páginas
 
 adicionarCabecalho()
@@ -2933,7 +2933,7 @@ doc.text(textoo4, 103, 212,{ align: "center" });
 
 
 doc.text("DATA:                    SERVIDOR DA POLITEC:                                         ASSINATURA:", 20, 268, { maxWidth: 170, align: 'justify'});
-
+}
 });
 
 // FIM DO TERMO PRELIMINAR DE DROGAS
@@ -3038,6 +3038,14 @@ doc.setFont("helvetica", "normal");
 });
 /// FIM DO TERMO DE APREENSAO
 
+
+
+document.getElementsByName("nome_vitima[]").forEach((input, index) => {
+           // doc.text(`${index + 1}. ${input.value}`, 10, y);
+            const nomeVitimaExame = input.value;
+            const filiacaoVitimaExame = document.getElementsByName("filiacao_vitima[]")[index]?.value || "N/A";
+
+
         //Lesão corporal culposa - aqui tenho que criar o termo de solicitação de exame com condição que somente quando for lesao corporal 
 if (naturezaa === "Lesão corporal culposa"){
     doc.addPage(); // Cria uma nova página para o termo de encerramento ...
@@ -3045,12 +3053,37 @@ pageCount++; // Incrementa contador de páginas
 adicionarCabecalho()
 adicionarRodape()
 y = 60
-doc.text(`TERMO DE SOLICITAÇÃO DE EXAME, EM DESENVOLVIMENTO`, 100, y, { align: "center" });
+doc.setFont("helvetica", "bold");
+doc.setFontSize(12);
+doc.text(`TERMO DE SOLICITAÇÃO DE EXAME DE LESÃO CORPORAL`, 100, y, { align: "center" });
+doc.setFont("helvetica", "normal");
+doc.setFontSize(10);
+y += 20
+
+
+let textoExamePart1 = `Requisito a POLITEC - Perícia Oficial e Identificação Técnica, nos termos dos artigos 158 e seguintes do Código de Processo Penal e artigo 69 Caput da Lei n.º 9.099/1995, a realização de exame de corpo de delito no (a) Sr. (a) ${nomeVitimaExame},  vítima qualificado no Termo Circunstanciado de Ocorrência nº ${numero_tco}/CR07/${ano}, por ter relatado que foi atacada, onde causou uma lesão corporal. Natureza: ${naturezaa}, ocorrido no dia ${dia} de ${mesExtenso2} de ${ano}, respondendo para tal os seguintes quesitos:\n\nPara tanto, solicito que Vossa Senhoria responda aos quesitos oficiais, conforme abaixo:\n\n      1. Há ofensa à integridade corporal do paciente?\n      2. Qual o instrumento ou meio que produziu a ofensa?\n      3. Resultou incapacidade para as ocupações habituais por mais de 30 (trinta) dias?\n\n\nDESTINO DO LAUDO: Corregedoria da Policia Militar.\n\n\n\n${cidade}, ${dia} de ${mesExtenso2} de ${ano}.`;
+
+doc.setFont("helvetica", "normal");
+doc.text(textoExamePart1, 20, y, { maxWidth: 170});
+y += 33
+
+
+doc.setFont("helvetica", "bold");
+let textoo3ass =` ______________________________________________________________ `;
+doc.text(textoo3ass, 103, 195,{ align: "center" });
+
+let textoo4 =` ${nome_completo} - ${posto_grad} `;
+doc.text(textoo4, 103, 200,{ align: "center" });
+
+let textoo5 = `RG nº ${rg} PMMT`;
+doc.text(textoo5, 103, 206,{ align: "center" });
+let textoo6 = `Comandante de GUPM`;
+doc.text(textoo6, 103, 212,{ align: "center" });
+
+doc.text(`VITIMA: ${nomeVitimaExame}`, 103, 240,{ align: "center" });
+doc.text(`FILIAÇÃO: ${filiacaoVitimaExame}`, 103, 248,{ align: "center" });
 }
-
-
-        
-
+});
 //// fim do termo de exame pericia
 
 // termo de encerramento e remessa
