@@ -1406,91 +1406,112 @@ function adicionarPessoa(tipo) {
         contador = contadorTestemunha;
         contadorTestemunha++;
     }
-
+// Cria a chave base para armazenar no localStorage
+const chaveBase = `${tipo.toLowerCase()}_${contador}`;
     // Cria o elemento div para a pessoa
     const divPessoa = document.createElement('div');
     divPessoa.classList.add('pessoa', 'border', 'p-3', 'mb-3');
     divPessoa.innerHTML = `
         <h4>${tipo} ${contador}</h4>
         <label>Nome</label>
-        <input type="text" class="form-control" name="nome_${tipo.toLowerCase()}[]" value="Digite o nome">
+        
+        <input type="text" class="form-control input-save" name="nome_${tipo.toLowerCase()}[]" data-key="nome_${chaveBase}" value="Digite o nome">
         
         <label>Nome Social</label>
-        <input type="text" class="form-control" name="nome_social_${tipo.toLowerCase()}[]" placeholder="Digite o nomeSocial">
+        <input type="text" class="form-control input-save" name="nome_social_${tipo.toLowerCase()}[]" data-key="nome_social_${chaveBase}" placeholder="Digite o nomeSocial">
         
         <label>Cpf ou Passaporte</label>
-        <input type="text" class="form-control" name="cpf_passaporte_${tipo.toLowerCase()}[]" placeholder="Digite o CPF ou Passaporte">
+        <input type="text" class="form-control input-save" name="cpf_passaporte_${tipo.toLowerCase()}[]" data-key="cpf_passaporte_${chaveBase}" placeholder="Digite o CPF ou Passaporte">
        
         <label>RG/CNH Nº</label>
-        <input type="text" class="form-control" name="rg_cnh_${tipo.toLowerCase()}[]" placeholder="Digite o RG ou CNH">
+        <input type="text" class="form-control input-save" name="rg_cnh_${tipo.toLowerCase()}[]" data-key="rg_cnh_${chaveBase}" placeholder="Digite o RG ou CNH">
 
         <label>ÓRGÃO EXPEDITOR</label>
-        <input type="text" class="form-control" name="rg_cnh_orgao_exp_${tipo.toLowerCase()}[]" placeholder="Digite o orgão expeditor">
+        <input type="text" class="form-control input-save" name="rg_cnh_orgao_exp_${tipo.toLowerCase()}[]" data-key="rg_cnh_orgao_exp_${chaveBase}" placeholder="Digite o orgão expeditor">
         
         <label>DATA DE EXPEDIÇÃO</label>
-        <input type="text" class="form-control" name="data_expedicao_${tipo.toLowerCase()}[]" placeholder="Digite a data de expedição">
+        <input type="text" class="form-control input-save" name="data_expedicao_${tipo.toLowerCase()}[]" data-key="data_expedicao_${chaveBase}" placeholder="Digite a data de expedição">
 
        <label>UF</label>
-        <input type="text" class="form-control" name="data_expedicao_uf_${tipo.toLowerCase()}[]" placeholder="Digite o estado de expedição do documento">
+        <input type="text" class="form-control input-save" name="data_expedicao_uf_${tipo.toLowerCase()}[]" data-key="data_expedicao_uf_${chaveBase}" placeholder="Digite o estado de expedição do documento">
 
         <label>FILIAÇÃO</label>
-        <input type="text" class="form-control" name="filiacao_${tipo.toLowerCase()}[]" placeholder="Digite a filiação">
+        <input type="text" class="form-control input-save" name="filiacao_${tipo.toLowerCase()}[]" data-key="filiacao_${chaveBase}" placeholder="Digite a filiação">
 
         <label>ENDEREÇO</label>
-        <input type="text" class="form-control" name="endereco_${tipo.toLowerCase()}[]" placeholder="Digite o endereço">
+        <input type="text" class="form-control input-save" name="endereco_${tipo.toLowerCase()}[]" data-key="endereco_${chaveBase}" placeholder="Digite o endereço">
 
         <label>MUNICIPIO</label>
-        <input type="text" class="form-control" name="municipio_${tipo.toLowerCase()}[]" value="DENISE">
+        <input type="text" class="form-control input-save" name="municipio_${tipo.toLowerCase()}[]" data-key="municipio_${chaveBase}" value="DENISE">
 
         <label>UF</label>
-        <input type="text" class="form-control" name="uf_municipio_${tipo.toLowerCase()}[]" value="MT">
+        <input type="text" class="form-control input-save" name="uf_municipio_${tipo.toLowerCase()}[]" data-key="uf_municipio_${chaveBase}" value="MT">
 
         <label>CEP</label>
-        <input type="text" class="form-control" name="cep_municipio_${tipo.toLowerCase()}[]" value="78.380-000">
+        <input type="text" class="form-control input-save" name="cep_municipio_${tipo.toLowerCase()}[]" data-key="cep_municipio_${chaveBase}" value="78.380-000">
 
         <label>PONTO DE REFERÊNCIA</label>
-        <input type="text" class="form-control" name="ponto_referencia_endereco_${tipo.toLowerCase()}[]" placeholder="Digite um ponto de referência do endereço">
+        <input type="text" class="form-control input-save" name="ponto_referencia_endereco_${chaveBase}" data-key="ponto_referencia_endereco_${tipo.toLowerCase()}[]" placeholder="Digite um ponto de referência do endereço">
 
         <label>TELEFONE</label>
-        <input type="text" class="form-control" name="telefone_${tipo.toLowerCase()}[]" placeholder="Digite os telefones de contato">
+        <input type="text" class="form-control input-save" name="telefone_${tipo.toLowerCase()}[]" data-key="telefone_${chaveBase}" placeholder="Digite os telefones de contato">
        
         <label>E-MAIL PESSOAL</label>
-        <input type="text" class="form-control" name="e-mail_${tipo.toLowerCase()}[]" placeholder="Digite o e-mail pessoal">
+        <input type="text" class="form-control input-save" name="e-mail_${tipo.toLowerCase()}[]" data-key="e-mail_${chaveBase}" placeholder="Digite o e-mail pessoal">
        
         <label>ESTADO CIVIL</label>
        
-       <input type="text" class="form-control" name="estado_civil_${tipo.toLowerCase()}[]" placeholder="Digite o estado civil">
+       <input type="text" class="form-control input-save" name="estado_civil_${tipo.toLowerCase()}[]" data-key="estado_civil_${chaveBase}" placeholder="Digite o estado civil">
 
         <label>NACIONALIDADE</label>
-        <input type="text" class="form-control" name="nacionalidade_${tipo.toLowerCase()}[]" value="BRASILEIRA">
+        <input type="text" class="form-control input-save" name="nacionalidade_${tipo.toLowerCase()}[]" data-key="nacionalidade_${chaveBase}" value="BRASILEIRA">
        
         <label>NATURALIDADE</label>
-        <input type="text" class="form-control" name="naturalidade_${tipo.toLowerCase()}[]" placeholder="Digite a naturalidade">
+        <input type="text" class="form-control input-save" name="naturalidade_${tipo.toLowerCase()}[]" data-key="naturalidade_${chaveBase}" placeholder="Digite a naturalidade">
        
         <label>UF</label>
-        <input type="text" class="form-control" name="naturalidadeuf_${tipo.toLowerCase()}[]" placeholder="estado naturalidade">
+        <input type="text" class="form-control input-save" name="naturalidadeuf_${tipo.toLowerCase()}[]" data-key="naturalidadeuf_${chaveBase}" placeholder="estado naturalidade">
        
         <label>DATA NASC:</label>
-        <input type="text" class="form-control" name="datanascimento_${tipo.toLowerCase()}[]" placeholder="Digite a data de nascimento">
+        <input type="text" class="form-control input-save" name="datanascimento_${tipo.toLowerCase()}[]" data-key="datanascimento_${chaveBase}" placeholder="Digite a data de nascimento">
        
 
         <label>SEXO</label>
-        <input type="text" class="form-control" name="sexo_${tipo.toLowerCase()}[]" value="MASCULINO">
+        <input type="text" class="form-control input-save" name="sexo_${tipo.toLowerCase()}[]" data-key="sexo_${chaveBase}" value="MASCULINO">
        
         <label>ATIVIDADE - PROFISSÃO</label>
-        <input type="text" class="form-control" name="profissao_${tipo.toLowerCase()}[]" placeholder="Digite a profissão">
+        <input type="text" class="form-control input-save" name="profissao_${tipo.toLowerCase()}[]" data-key="profissao_${chaveBase}" placeholder="Digite a profissão">
        
         <label>CONDIÇÕES FISICAS</label>
-        <input type="text" class="form-control" name="local_trabalho_${tipo.toLowerCase()}[]" value="sem lesão">
+        <input type="text" class="form-control input-save" name="local_trabalho_${tipo.toLowerCase()}[]" data-key="local_trabalho_${chaveBase}" value="sem lesão">
        
 <label>${tipo === 'Autor' ? 'RELATO DO AUTOR' : tipo === 'Vitima' ? 'RELATO DA VITIMA' : 'RELATO DA TESTEMUNHA'}</label>
     
-<textarea class="form-control" name="relato_${tipo.toLowerCase()}[]" rows="10">${tipo === 'Autor' ? 'O autor dos fatos (), cientificado de seus direitos constitucionais, inclusive o de permanecer em silencio, declarou Que... Lido e achado conforme. Nada mais disse e nem lhe foi perguntado(a).' : tipo === 'Vitima' ? 'A vítima ( ) relatou que... Lido e achado conforme. Nada mais disse e nem lhe foi perguntado(a).' : 'A testemunha ( ) compromissada na forma da lei, aos costumes respondeu negativamente se possui algum grau de parentesco ou amizade com as partes), declarou Que.... Lido e achado conforme. Nada mais disse e nem lhe foi perguntado(a). ('}</textarea>
+<textarea class="form-control input-save" name="relato_${tipo.toLowerCase()}[]" data-key="relato_${chaveBase}" rows="10">${tipo === 'Autor' ? 'O autor dos fatos (), cientificado de seus direitos constitucionais, inclusive o de permanecer em silencio, declarou Que... Lido e achado conforme. Nada mais disse e nem lhe foi perguntado(a).' : tipo === 'Vitima' ? 'A vítima ( ) relatou que... Lido e achado conforme. Nada mais disse e nem lhe foi perguntado(a).' : 'A testemunha ( ) compromissada na forma da lei, aos costumes respondeu negativamente se possui algum grau de parentesco ou amizade com as partes), declarou Que.... Lido e achado conforme. Nada mais disse e nem lhe foi perguntado(a). ('}</textarea>
 
     
     <button type="button" class="btn btn-danger mt-2" onclick="removerPessoa(this)">Remover</button>`;
 
     container.appendChild(divPessoa);
+
+
+    // Pega todos os inputs dentro da div e adiciona eventos para salvar no localStorage
+    const inputs = divPessoa.querySelectorAll('.input-save');
+
+inputs.forEach(input => {
+    const key = input.getAttribute('data-key');
+
+    // Se houver um valor salvo no localStorage, preenche o campo
+    if (localStorage.getItem(key)) {
+        input.value = localStorage.getItem(key);
+    }
+
+    // Adiciona evento para salvar no localStorage sempre que o usuário digitar
+    input.addEventListener('input', function () {
+        localStorage.setItem(key, this.value);
+        console.log(`Valor salvo para ${key}:`, this.value);
+    });
+});
 
        
 }
