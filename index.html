@@ -1114,14 +1114,16 @@ function gerarPDF24() {
 
 // Armazenando os itens de drogas em uma variável global
 if (itemsDrogas.length > 0) {
+    document.getElementById("Termo_Preliminar_de_Drogas").checked = true;
+    
     itemsDrogas.forEach((item, index) => {
-        textoDrogas.push(`( ${index + 1}. ${item.slice(0, -7)})`);
+        textoDrogas.push(` [ ${index + 1}º ${item.slice(0, -7)}]`);
     });
-}
+} else {document.getElementById("Termo_Preliminar_de_Drogas").checked = false;}
 
 // Armazenando os itens outros em uma variável global
 itemsOutros.forEach((item, index) => {
-    textoOutros.push(`( ${index + 1}. ${item.slice(0, -7)})`);
+    textoOutros.push(` [ ${index + 1}º ${item.slice(0, -7)}]`);
     
 });
     // Gerar o PDF
@@ -2607,7 +2609,7 @@ if (document.getElementById("paginaAnexos").checked) {
      
     // Verifica se o checkbox "Termo_Preliminar_de_Drogas" está marcado
     if (document.getElementById("Termo_Preliminar_de_Drogas").checked) {
-        textoDocAnexo += "; TERMO PRELIMINAR DE DROGAS";
+        textoDocAnexo += "; TERMO PRELIMINAR DE DROGAS ; REQUISIÇÃO DE EXAME EM DROGAS DE ABUSO";
     }
         
     // Verifica se o checkbox "Termo_Apreensao_de_Materiais" está marcado
@@ -2707,7 +2709,7 @@ doc.text(`TERMO DE COMPROMISSO DE COMPARECIMENTO`, 100, y, { align: "center" });
 doc.setFontSize(10);
 
 y += 20 
-let textoTermodecompromissso = `Por este instrumento, eu ${nomeAAAutor}, assumo, nos termos do parágrafo único do Art. 69 da Lei nº 9.099/95, o compromisso de comparecer no Juizado Especial Criminal, em virtude dos fatos registrados no Termo Circunstanciado de Ocorrência acima referenciado, conforme notificado abaixo.                Fico ciente de que a concordância em comparecer ao Juizado Especial Criminal, não implica confissão de qualquer natureza, admissão de culpa ou anuência às declarações da parte contrária e o não comparecimento no dia e hora ajustados neste termo sujeitará às medidas previstas na Lei nº 9.099/95. Fico ciente também que deverei comparecer acompanhado de advogado e que na ausência deste será nomeado um defensor público.                                 `;
+let textoTermodecompromissso = `Por este instrumento, eu ${nomeAAAutor}, assumo, nos termos do parágrafo único do Art. 69 da Lei nº 9.099/95, o compromisso de comparecer no Juizado Especial Criminal, em virtude dos fatos registrados no Termo Circunstanciado de Ocorrência acima referenciado, conforme notificado abaixo.              Fico ciente de que a concordância em comparecer ao Juizado Especial Criminal, não implica confissão de qualquer natureza, admissão de culpa ou anuência às declarações da parte contrária e o não comparecimento no dia e hora ajustados neste termo sujeitará às medidas previstas na Lei nº 9.099/95. Fico ciente também que deverei comparecer acompanhado de advogado e que na ausência deste será nomeado um defensor público.                                 `;
 
 
 
@@ -2813,13 +2815,14 @@ let textoPart2 = `Após ciência das implicações legais do encargo assumido, f
 doc.text(textoPart2, 20, y, { maxWidth: 170, align: 'justify'});
 y += 18
 
-let textoPart3 = `______ (porção/ões) de substância vegetal, cor, odor típico, semelhante ao entorpecente conhecido como _____________________________;`;
+
+let textoPart3 = `${textoDrogas} de substância vegetal, cor, odor típico, semelhante ao entorpecente enumerado e descrito na frase;`;
 doc.text(textoPart3, 20, y, { maxWidth: 170, align: 'justify'});
 y += 12
 
-let textoPart4 = `______ (porção/ões) de substância vegetal, cor, odor típico, semelhante ao entorpecente conhecido como _____________________________;`;
-doc.text(textoPart4, 20, y, { maxWidth: 170, align: 'justify'});
-y += 12
+//let textoPart4 = `______ (porção/ões) de substância vegetal, cor, odor típico, semelhante ao entorpecente conhecido como _____________________________;`;
+//doc.text(textoPart4, 20, y, { maxWidth: 170, align: 'justify'});
+//y += 12
 
 let textoPart5 = `O presente relatório tem por objetivo avaliar se a(s) substância(s) em questão se trata(m) de entorpecente(s), psicotrópica(s), precursora(s) ou outras sob controle especial da Portaria 344/1998 SVS/MS.`;
 doc.text(textoPart5, 20, y, { maxWidth: 170, align: 'justify'});
@@ -2871,9 +2874,65 @@ y += 7
 doc.line(20, y-3, 170, y-3);
 y += 7 
 
+//doc.setFont("helvetica", "normal");
+
+ }
+
+
+ doc.addPage(); // termo de constatação preliminar de drogas
+pageCount++; // Incrementa contador de páginas
+
+adicionarCabecalho()
+adicionarRodape()
+y = 60 
+doc.setFont("helvetica", "bold");
+doc.setFontSize(12);
+doc.text(`REQUISIÇÃO DE EXAME EM DROGAS DE ABUSO`, 100, y, { align: "center" });
+doc.setFont("helvetica", "normal");
+doc.setFontSize(10);
+
+y += 10;
+
+
+let textoPart11 = `Requisito a POLITEC - Perícia Oficial e Identificação Técnica, nos termos dos artigos 159 e seguintes do Código de Processo Penal, combinado com o Artigo 69, Caput da Lei 9.099/95, combinado com Artigo 48, § 2º e Artigo 50, § 1º da Lei 11343/06, solicito a realização de exame químico na substância análoga a entorpecente apensada, encontrada em posse do (a) Sr.(a) ${nomeAutorDroga}, - autor do fato – qualificado no Termo Circunstanciado de Ocorrência nº ${numero_tco}/CR07/${ano}, de natureza ${naturezaa}, ocorrido no dia ${dia} de ${mesExtenso2} de ${ano}.`;
+
+doc.setFont("helvetica", "normal");
+doc.text(textoPart11, 20, y, { maxWidth: 170, align: 'justify'});
+y += 33
+
+
+
+let textoPart12 = `Apenso: 01 (um) saco plástico, contendo: ${textoDrogas}, de substância análoga ao entorpecente descrito.\n\nPara tanto, solicito a Vossa senhoria, que seja confeccionado o respectivo Laudo definitivo, devendo os peritos responderem aos quesitos oficiais, conforme abaixo:\n\n\n1. Qual a natureza e característica das substâncias enviadas a exame?\n2. Podem as mesmas causar dependência física ou psíquica?\n3. Qual o peso das substâncias enviadas a exame?`;
+
 doc.setFont("helvetica", "normal");
 
-            }
+// Quebrar texto automaticamente para manter formatação no PDF
+const margemEsquerda2 = 20;
+const larguraTexto2 = 170; // Ajuste conforme necessário
+const tamanhoFonte2 = 12;
+const textoFormatado2 = doc.splitTextToSize(textoPart12, larguraTexto);
+
+doc.text(textoFormatado2, 20, y, { maxWidth: 170});
+y += 70
+
+doc.text(`${cidade}, ${dia} de ${mesExtenso2} de ${ano}. `, 20, y, { maxWidth: 170, align: 'justify'});
+
+
+
+doc.setFont("helvetica", "bold");
+let texto3ass =` ______________________________________________________________ `;
+doc.text(texto3ass, 103, 195,{ align: "center" });
+
+let textoo2 =` ${nome_completo} - ${posto_grad} `;
+doc.text(textoo2, 103, 200,{ align: "center" });
+
+let textoo3 = `RG nº ${rg} PMMT`;
+doc.text(textoo3, 103, 206,{ align: "center" });
+let textoo4 = `Comandante de GUPM`;
+doc.text(textoo4, 103, 212,{ align: "center" });
+
+
+doc.text("DATA:                    SERVIDOR DA POLITEC:                                         ASSINATURA:", 20, 268, { maxWidth: 170, align: 'justify'});
 
 });
 
