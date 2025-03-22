@@ -1068,16 +1068,22 @@ let Vitima04Global = [];
     <label for="quartel">Quartel:</label>
     <select id="quartel" required onchange="alterarNomeCondutor()">
         <option value="" disabled selected>Selecione uma opção</option>
-        <option value="NPM DENISE">Nucleo de policia Militar de Denise - MT</option>
-        <option value="12ª CIPM BARRA DO BUGRES">12ª CIPM de Barra do Bugres - MT</option>
-        <option value="1ª CIPM NOVA OLIMPIA">1ª CIPM Nova Olimpia</option>
-        <option value="NPM PORTO ESTRELA">Nucleo de Policia Militar de Porto Estrela-MT</option>
-
-        <option value="19º BPM - TANGARA">19º BPM - TANGARA</option>
         <option value="CR07 SEDE">COMANDO REGIONAL 07</option>
+        <option value="19º BPM - TANGARA">19º BPM - TANGARA</option>        
+        <option value="12ª CIPM BARRA DO BUGRES">12ª CIPM de Barra do Bugres - MT</option>        
+        <option value="1ª CIPM NOVA OLIMPIA">1ª CIPM Nova Olimpia</option>
+        <option value="NPM DENISE">Nucleo de policia Militar de Denise - MT</option>
+        <option value="NPM PORTO ESTRELA">Nucleo de Policia Militar de Porto Estrela-MT</option>
         <option value="6ª Cia PM Sapezal">6ª Cia PM Sapezal</option>
         <option value="16ª CIPM Campo Novo do Parecis">16ª CIPM Campo Novo do Parecis</option>
         <option value="1º Pel PM Brasnorte">1º Pel PM Brasnorte</option>
+       
+
+        
+        
+        
+        
+        
     </select>
 
     <br><br>
@@ -1363,12 +1369,16 @@ const mesExtenso2 = numeroParaExtenso(parseInt(mEs)); // parseInt
     // Lista de IDs dos campos e seus valores originais
     const campos = {
         "numero_tco": "0000",
-        "cidade": "Denise-MT",
+        "cidade": "",
         
         "endereco": "",
         "local_fato": "",
         "ponto_referencia": "",
         "comunicante": "",
+        "nome_completo": "",
+        "rg": "",
+        "posto_grad": "",
+        "nome_completo_componente2": "",
         "relato_policial_correto": `Às ${horaOcorrido} do dia ${diaRegistro} de ${mesExtenso2} de ${AnO} , deparamos com autor do fato, () e em decorrência do fato dei voz de prisão a autor do fato, conduzindo o mesmo para o Nucleo de policia militar de Denise-MT, para adoção das providências legais.`
     };
 
@@ -1394,6 +1404,7 @@ const mesExtenso2 = numeroParaExtenso(parseInt(mEs)); // parseInt
             document.getElementById(id).value = campos[id];  // Restaurar valor original
             localStorage.removeItem(id); // Remover do localStorage
         });
+        localStorage.clear();
     }
 </script>
 
