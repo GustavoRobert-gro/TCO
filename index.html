@@ -2263,9 +2263,10 @@ let texto4 = `Comandante de GUPM`;
 doc.text(texto4, 103, 212,{ align: "center" });
 doc.setFontSize(10);
 doc.text("Natureza: "+ naturezaa, 20, 70, { maxWidth: 170, align: 'justify'});
-doc.text("Autor do Fato: ", 20, 80, { maxWidth: 170, align: 'justify'});
 
+let nomeAutor = document.querySelector('input[name="nome_autor[]"]').value;
 
+doc.text("Autor do Fato: " +nomeAutor, 20, 80, { maxWidth: 170, align: 'justify'});
 
 //-------------------------------------------------
  // inicio da segunda pagina
