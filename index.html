@@ -19,6 +19,12 @@
     <h1>TERMO CIRCUNSTANCIADO DE OCORRÊNCIA - EM DESENVOLVIMENTO</h1>
     <hr>
 
+
+
+
+
+
+    
     <!-- Formulário Dados Gerais -->
     <h2>1º Dados Gerais</h2>
     <form id="formDadosGerais">
@@ -28,38 +34,321 @@
         <label for="numero_tco">Nº TCO:</label>
         <input type="text" id="numero_tco" value="0038" required style="width: 70px";>
 
+
+
+
+
+
+        <style>
+            #container {
+                width: 800px;
+            }
+    
+            #naturezaa {
+                width: 100%;
+                height: 35px;
+            }
+    
+            #search {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 5px;
+            height: 35px;
+        }
+        #suggestions {
+            border: 1px solid #ccc;
+            max-height: 150px;
+            overflow-y: auto;
+            display: none;
+            position: absolute;
+            width: 100%;
+            z-index: 1;
+            background-color: white;
+        }
+
+        
+        </style>
+    
+
+    <label for="search">Buscar Natureza:</label>
+    <input type="text" id="search" placeholder="Digite para filtrar..." required style="width: 400px;">
+        
         
            <!--inicio do preenchimento automatico-->
-           <label for="naturezaa">Natureza:</label>
-<select id="naturezaa" required style="width: 800px;">
+          <!-- <label for="naturezaa">Natureza:</label>-->
+<select id="naturezaa" required style="height: auto;">
     <option value="" disabled selected>Selecione uma opção</option>
-    <option value="Ameaça">Ameaça</option>
-    <option value="Lesão corporal culposa">Lesão corporal culposa</option>
-    <option value="Difamação">Difamação</option>
-    <option value="Injúria">Injúria</option>
-    <option value="Ameaça">Ameaça</option>
-    <option value="Violação de Domicílio">Violação de Domicílio</option>
-    <option value="Dano Simples">Dano Simples</option>
-    <option value="Introdução ou Abandono de Animais">Introdução ou Abandono de Animais</option>
-    <option value="Descumprimento de Legítima Defesa">Descumprimento de Legítima Defesa</option>
-    <option value="Resistência sem Violência">Resistência sem Violência</option>
-    <option value="Desacato">Desacato</option>
-    <option value="Contrabando de Pequeno Valor">Contrabando de Pequeno Valor</option>
-    <option value="Dirigir Sob Influência de Álcool">Dirigir Sob Influência de Álcool</option>
-    <option value="Fuga de Local de Acidente">Fuga de Local de Acidente</option>
-    <option value="Uso de Documento Falso no Trânsito">Uso de Documento Falso no Trânsito</option>
-    <option value="Entrega de direção de veículo automotor a pessoa não habilitada ou sem condições de conduzir o veículo com segurança">Entrega de direção de veículo automotor a pessoa não habilitada ou sem condições de conduzir o veículo com segurança</option>
-    <option value="Direção não habilitada de veículo automotor, gerando perigo">Direção não habilitada de veículo automotor, gerando perigo</option>
-    <option value="Tráfego em velocidade incompatível com a segurança no trânsito">Tráfego em velocidade incompatível com a segurança no trânsito</option>
-
-    <option value="Quem adquirir, guardar, tiver em depósito, transportar ou trouxer consigo, para consumo pessoal, drogas sem autorização ou em desacordo com determinação legal ou regulamentar">Quem adquirir, guardar, tiver em depósito, transportar ou trouxer consigo, para consumo pessoal, drogas sem autorização ou em desacordo com determinação legal ou regulamentar</option>
-
-    <option value="Às mesmas medidas submete-se quem, para seu consumo pessoal, semeia, cultiva ou colhe plantas destinadas à preparação de pequena quantidade de substância ou produto capaz de causar dependência física ou psíquica.">Às mesmas medidas submete-se quem, para seu consumo pessoal, semeia, cultiva ou colhe plantas destinadas à preparação de pequena quantidade de substância ou produto capaz de causar dependência física ou psíquica.</option>
-
-    <option value="Oferecer droga, eventualmente e sem objetivo de lucro, a pessoa de seu relacionamento, para juntos a consumirem">Oferecer droga, eventualmente e sem objetivo de lucro, a pessoa de seu relacionamento, para juntos a consumirem</option>
-
-    <option value="Esbulho possessório">Esbulho possessório</option>
-    <option value="Perturbação do trabalho ou sossego alheios">Perturbação do trabalho ou sossego alheios</option>
+    
+    <option value="Abandono de função">Abandono de função</option>
+<option value="Abandono intelectual de filho">Abandono intelectual de filho</option>
+<option value="Abandono moral de menor">Abandono moral de menor</option>
+<option value="Abuso na prática de aviação">Abuso na prática de aviação</option>
+<option value="Abuso ou maus tratos em animais">Abuso ou maus tratos em animais</option>
+<option value="Advocacia administrativa (aumento de pena)">Advocacia administrativa (aumento de pena)</option>
+<option value="Advocacia administrativa">Advocacia administrativa</option>
+<option value="Afirmação falsa, enganosa ou omissão de informação relevante sobre produtos e serviços ofertados">Afirmação falsa, enganosa ou omissão de informação relevante sobre produtos e serviços ofertados</option>
+<option value="Alteração de limites">Alteração de limites</option>
+<option value="Alteração de local especialmente protegido">Alteração de local especialmente protegido</option>
+<option value="Ameaça">Ameaça</option>
+<option value="Anúncio de meio abortivo">Anúncio de meio abortivo</option>
+<option value="Apologia de crime ou criminoso">Apologia de crime ou criminoso</option>
+<option value="Apropriação de coisa achada">Apropriação de coisa achada</option>
+<option value="Apropriação de coisa havida por erro, caso fortuito ou força da natureza">Apropriação de coisa havida por erro, caso fortuito ou força da natureza</option>
+<option value="Apropriação de tesouro">Apropriação de tesouro</option>
+<option value="Aquisição ou recebimento de produtos vegetais sem verificação de sua extração mediante licença e desacompanhados de documento">Aquisição ou recebimento de produtos vegetais sem verificação de sua extração mediante licença e desacompanhados de documento</option>
+<option value="Arremesso de projétil quando resulta lesão corporal">Arremesso de projétil quando resulta lesão corporal</option>
+<option value="Arremesso de projétil">Arremesso de projétil</option>
+<option value="Arremesso ou colocação perigosa">Arremesso ou colocação perigosa</option>
+<option value="Às mesmas medidas submete-se quem, para seu consumo pessoal, semeia, cultiva ou colhe plantas destinadas à preparação de pequena quantidade de substância ou produto capaz de causar dependência física ou psíquica.">Às mesmas medidas submete-se quem, para seu consumo pessoal, semeia, cultiva ou colhe plantas destinadas à preparação de pequena quantidade de substância ou produto capaz de causar dependência física ou psíquica.</option>
+<option value="Assédio sexual">Assédio sexual</option>
+<option value="Associação secreta">Associação secreta</option>
+<option value="Atentado contra a liberdade de associação">Atentado contra a liberdade de associação</option>
+<option value="Atentado contra a liberdade de contrato de trabalho e boicotagem violenta">Atentado contra a liberdade de contrato de trabalho e boicotagem violenta</option>
+<option value="Atentado contra a liberdade de trabalho">Atentado contra a liberdade de trabalho</option>
+<option value="Atentado culposo contra a segurança de outro meio de transporte">Atentado culposo contra a segurança de outro meio de transporte</option>
+<option value="Atentado culposo contra a segurança de transporte marítimo, fluvial e aéreo">Atentado culposo contra a segurança de transporte marítimo, fluvial e aéreo</option>
+<option value="Atentado doloso contra a segurança de outro meio de transporte">Atentado doloso contra a segurança de outro meio de transporte</option>
+<option value="Ato obsceno">Ato obsceno</option>
+<option value="Autoacusação falsa">Autoacusação falsa</option>
+<option value="Bebidas alcoólicas">Bebidas alcoólicas</option>
+<option value="Caça, perseguição ou apanha de espécime da fauna silvestre sem licença ou em desacordo com a obtida">Caça, perseguição ou apanha de espécime da fauna silvestre sem licença ou em desacordo com a obtida</option>
+<option value="Calúnia">Calúnia</option>
+<option value="Calúnia">Calúnia</option>
+<option value="Calúnia">Calúnia</option>
+<option value="Causação culposa de poluição danosa à saúde humana ou provocadora de mortandade de animais ou de destruição da flora">Causação culposa de poluição danosa à saúde humana ou provocadora de mortandade de animais ou de destruição da flora</option>
+<option value="Ceder prédio para reunião de associação secreta">Ceder prédio para reunião de associação secreta</option>
+<option value="Certidão e atestado ideologicamente falso">Certidão e atestado ideologicamente falso</option>
+<option value="Certidão e atestado materialmente falso">Certidão e atestado materialmente falso</option>
+<option value="Charlatanismo">Charlatanismo</option>
+<option value="com abuso de licença">com abuso de licença</option>
+<option value="com emprego de métodos ou instrumentos capazes de provocar destruição em massa.">com emprego de métodos ou instrumentos capazes de provocar destruição em massa.</option>
+<option value="Comercialização ou uso de motosserra sem licença ou registro">Comercialização ou uso de motosserra sem licença ou registro</option>
+<option value="Comunicação falsa de crime ou contravenção">Comunicação falsa de crime ou contravenção</option>
+<option value="Condescendência criminosa">Condescendência criminosa</option>
+<option value="Condicionamento de atendimento médico-hospitalar emergencial">Condicionamento de atendimento médico-hospitalar emergencial</option>
+<option value="Conhecimento prévio de impedimento matrimonial">Conhecimento prévio de impedimento matrimonial</option>
+<option value="Conspurcação de edificação ou monumento urbano">Conspurcação de edificação ou monumento urbano</option>
+<option value="Conspurcação de monumento ou coisa tombada">Conspurcação de monumento ou coisa tombada</option>
+<option value="Constrangimento físico ou moral na cobrança de dívida do consumidor">Constrangimento físico ou moral na cobrança de dívida do consumidor</option>
+<option value="Constrangimento ilegal">Constrangimento ilegal</option>
+<option value="Construção em solo não edificável ou seu entorno, sem autorização ou em desacordo com a autorização concedida">Construção em solo não edificável ou seu entorno, sem autorização ou em desacordo com a autorização concedida</option>
+<option value="contra espécie rara ou considerada ameaçada de extinção, ainda que somente no local da infração">contra espécie rara ou considerada ameaçada de extinção, ainda que somente no local da infração</option>
+<option value="Contratação de operação de crédito">Contratação de operação de crédito</option>
+<option value="Contratação de operação de crédito">Contratação de operação de crédito</option>
+<option value="Contratação de operação de crédito">Contratação de operação de crédito</option>
+<option value="Corrupção ou poluição culposa de água potável">Corrupção ou poluição culposa de água potável</option>
+<option value="Corrupção passiva">Corrupção passiva</option>
+<option value="Cortar ou transformar em carvão, madeira de lei, assim classificada por ato do poder público, para fins industriais, energéticos ou para outra exploração, econômica ou não, em desacordo com as determinações legais">Cortar ou transformar em carvão, madeira de lei, assim classificada por ato do poder público, para fins industriais, energéticos ou para outra exploração, econômica ou não, em desacordo com as determinações legais</option>
+<option value="Curandeirismo (mediante remuneração - aumento de pena)">Curandeirismo (mediante remuneração - aumento de pena)</option>
+<option value="Curandeirismo">Curandeirismo</option>
+<option value="Curandeirismo">Curandeirismo</option>
+<option value="Curandeirismo">Curandeirismo</option>
+<option value="Curandeirismo">Curandeirismo</option>
+<option value="Dano em coisa de valor artístico, arqueológico ou histórico">Dano em coisa de valor artístico, arqueológico ou histórico</option>
+<option value="Dano simples">Dano simples</option>
+<option value="Deflagração perigosa">Deflagração perigosa</option>
+<option value="Deixar de cumprir, retardar ou frustrar, sem justo motivo, a execução de ordem judicial expedida nas ações em que for parte ou interveniente o idoso">Deixar de cumprir, retardar ou frustrar, sem justo motivo, a execução de ordem judicial expedida nas ações em que for parte ou interveniente o idoso</option>
+<option value="Deixar de observar as cautelas necessárias para impedir que menor de 18 (dezoito) anos ou pessoa portadora de deficiência mental se apodere de arma de fogo que esteja sob sua posse ou que seja de sua propriedade.">Deixar de observar as cautelas necessárias para impedir que menor de 18 (dezoito) anos ou pessoa portadora de deficiência mental se apodere de arma de fogo que esteja sob sua posse ou que seja de sua propriedade.</option>
+<option value="Deixar de prestar assistência ao idoso, quando possível fazê-lo sem risco pessoal, em situação de iminente perigo, ou recusar, retardar ou dificultar sua assistência à saúde, sem justa causa, ou não pedir, nesses casos, o socorro de autoridade pública">Deixar de prestar assistência ao idoso, quando possível fazê-lo sem risco pessoal, em situação de iminente perigo, ou recusar, retardar ou dificultar sua assistência à saúde, sem justa causa, ou não pedir, nesses casos, o socorro de autoridade pública</option>
+<option value="Desabamento de construção">Desabamento de construção</option>
+<option value="Desabamento ou desmoronamento culposos">Desabamento ou desmoronamento culposos</option>
+<option value="Desacato">Desacato</option>
+<option value="Desdenhar, humilhar, menosprezar ou discriminar pessoa idosa, por qualquer motivo">Desdenhar, humilhar, menosprezar ou discriminar pessoa idosa, por qualquer motivo</option>
+<option value="Desobediência a decisão judicial sobre perda ou suspensão de direito">Desobediência a decisão judicial sobre perda ou suspensão de direito</option>
+<option value="Desobediência.">Desobediência.</option>
+<option value="Destruição ou dano em floresta ou vegetação de especial preservação">Destruição ou dano em floresta ou vegetação de especial preservação</option>
+<option value="Destruição ou dano em plantas ornamentais de logradouros ou propriedade privada">Destruição ou dano em plantas ornamentais de logradouros ou propriedade privada</option>
+<option value="Destruição ou remoção de sinal de perigo">Destruição ou remoção de sinal de perigo</option>
+<option value="Destruição, dano ou modificação de ninho, abrigo ou criadouro natural">Destruição, dano ou modificação de ninho, abrigo ou criadouro natural</option>
+<option value="Destruição, inutilização ou deterioração culposa de bem especialmente protegido">Destruição, inutilização ou deterioração culposa de bem especialmente protegido</option>
+<option value="Destruir ou danificar floresta considerada de preservação permanente, mesmo que em formação, ou utilizá-la com infringência das normas de proteção (culposo)">Destruir ou danificar floresta considerada de preservação permanente, mesmo que em formação, ou utilizá-la com infringência das normas de proteção (culposo)</option>
+<option value="Difamação">Difamação</option>
+<option value="Difusão culposa de doença ou praga">Difusão culposa de doença ou praga</option>
+<option value="Direção não habilitada de veículo automotor, gerando perigo">Direção não habilitada de veículo automotor, gerando perigo</option>
+<option value="Direção não licenciada de aeronave">Direção não licenciada de aeronave</option>
+<option value="Direção perigosa de veículo na via pública (de veículo não automotor)">Direção perigosa de veículo na via pública (de veículo não automotor)</option>
+<option value="Discriminar pessoa idosa, impedindo ou dificultando seu acesso a operações bancárias, aos meios de transporte, ao direito de contratar ou por qualquer outro meio ou instrumento necessário ao exercício da cidadania, por motivo de idade">Discriminar pessoa idosa, impedindo ou dificultando seu acesso a operações bancárias, aos meios de transporte, ao direito de contratar ou por qualquer outro meio ou instrumento necessário ao exercício da cidadania, por motivo de idade</option>
+<option value="Divulgação de segredo">Divulgação de segredo</option>
+<option value="durante a noite">durante a noite</option>
+<option value="em unidade de conservação">em unidade de conservação</option>
+<option value="Embriaguez">Embriaguez</option>
+<option value="Emissão de fumaça, vapor ou gás">Emissão de fumaça, vapor ou gás</option>
+<option value="Emissão de título ao portador sem permissão legal">Emissão de título ao portador sem permissão legal</option>
+<option value="Emprego irregular de verbas ou rendas públicas">Emprego irregular de verbas ou rendas públicas</option>
+<option value="Entrega de direção de veículo automotor a pessoa não habilitada ou sem condições de conduzir o veículo com segurança">Entrega de direção de veículo automotor a pessoa não habilitada ou sem condições de conduzir o veículo com segurança</option>
+<option value="Entrega de filho menor à pessoa inidônea">Entrega de filho menor à pessoa inidônea</option>
+<option value="Envenenamento culposo de água potável ou de substância alimentícia ou medicinal">Envenenamento culposo de água potável ou de substância alimentícia ou medicinal</option>
+<option value="Epidemia culposa">Epidemia culposa</option>
+<option value="Esbulho possessório">Esbulho possessório</option>
+<option value="Escrito ou objeto obsceno">Escrito ou objeto obsceno</option>
+<option value="Escrito ou objeto obsceno">Escrito ou objeto obsceno</option>
+<option value="Escrito ou objeto obsceno">Escrito ou objeto obsceno</option>
+<option value="Escrito ou objeto obsceno">Escrito ou objeto obsceno</option>
+<option value="Estabelecimentos, obras ou serviços potencialmente poluidores, sem licença ou contrariando normas legais e regulamentares">Estabelecimentos, obras ou serviços potencialmente poluidores, sem licença ou contrariando normas legais e regulamentares</option>
+<option value="Evasão mediante violência contra a pessoa">Evasão mediante violência contra a pessoa</option>
+<option value="Executar serviço de alta periculosidade, contrariando determinação de autoridade competente">Executar serviço de alta periculosidade, contrariando determinação de autoridade competente</option>
+<option value="Exercício arbitrário das próprias razões">Exercício arbitrário das próprias razões</option>
+<option value="Exercício arbitrário ou abuso de poder">Exercício arbitrário ou abuso de poder</option>
+<option value="Exercício de atividade com infração de decisão administrativa">Exercício de atividade com infração de decisão administrativa</option>
+<option value="Exercício funcional ilegalmente antecipado ou prolongado">Exercício funcional ilegalmente antecipado ou prolongado</option>
+<option value="Exercício ilegal da medicina, arte dentária ou farmacêutica (fins de lucro – aumento de pena)">Exercício ilegal da medicina, arte dentária ou farmacêutica (fins de lucro – aumento de pena)</option>
+<option value="Exercício ilegal da medicina, arte dentária ou farmacêutica">Exercício ilegal da medicina, arte dentária ou farmacêutica</option>
+<option value="Exercício ilegal de profissão ou atividade">Exercício ilegal de profissão ou atividade</option>
+<option value="Exercício ilegal do comércio de coisas antigas e obras de arte">Exercício ilegal do comércio de coisas antigas e obras de arte</option>
+<option value="Experiência dolorosa ou cruel com animal vivo">Experiência dolorosa ou cruel com animal vivo</option>
+<option value="Explosão culposa, nos demais casos">Explosão culposa, nos demais casos</option>
+<option value="Explosão culposa, se é de dinamite ou similar">Explosão culposa, se é de dinamite ou similar</option>
+<option value="Expor a perigo a integridade e a saúde, física ou psíquica, do idoso, submetendo- o a condições desumanas ou degradantes ou privando-o de alimentos e cuidados indispensáveis, quando obrigado a fazê- lo, ou sujeitando-o a trabalho excessivo ou inadequado">Expor a perigo a integridade e a saúde, física ou psíquica, do idoso, submetendo- o a condições desumanas ou degradantes ou privando-o de alimentos e cuidados indispensáveis, quando obrigado a fazê- lo, ou sujeitando-o a trabalho excessivo ou inadequado</option>
+<option value="Exposição ou abandono de recém-nascido">Exposição ou abandono de recém-nascido</option>
+<option value="Extração mineral não autorizada em florestas públicas ou de preservação">Extração mineral não autorizada em florestas públicas ou de preservação</option>
+<option value="Fabrico ou fornecimento culposo, para consumo, de substância nociva à saúde">Fabrico ou fornecimento culposo, para consumo, de substância nociva à saúde</option>
+<option value="Fabrico, fornecimento, aquisição, posse ou transporte de explosivos ou gás tóxico, ou asfixiante">Fabrico, fornecimento, aquisição, posse ou transporte de explosivos ou gás tóxico, ou asfixiante</option>
+<option value="Falsa identidade – criar">Falsa identidade – criar</option>
+<option value="Falsa identidade – usar de terceiro">Falsa identidade – usar de terceiro</option>
+<option value="Falsidade de atestado médico (fins de lucro – aumento de pena)">Falsidade de atestado médico (fins de lucro – aumento de pena)</option>
+<option value="Falsidade de atestado médico">Falsidade de atestado médico</option>
+<option value="Falsificação de papéis públicos">Falsificação de papéis públicos</option>
+<option value="Falsificação, corrupção, adulteração ou alteração de substância ou produtos alimentícios - culposo">Falsificação, corrupção, adulteração ou alteração de substância ou produtos alimentícios - culposo</option>
+<option value="Falso alarme">Falso alarme</option>
+<option value="Falta de habilitação para dirigir veículos">Falta de habilitação para dirigir veículos</option>
+<option value="Favorecimento pessoal privilegiado">Favorecimento pessoal privilegiado</option>
+<option value="Favorecimento pessoal">Favorecimento pessoal</option>
+<option value="Favorecimento real">Favorecimento real</option>
+<option value="Favorecimento real">Favorecimento real</option>
+<option value="Fazer ou promover publicidade que sabe ou deveria saber ser capaz de induzir o consumidor a se comportar de forma prejudicial ou perigosa a sua saúde">Fazer ou promover publicidade que sabe ou deveria saber ser capaz de induzir o consumidor a se comportar de forma prejudicial ou perigosa a sua saúde</option>
+<option value="Fornecimento culposo de medicamento em desacordo com receita médica">Fornecimento culposo de medicamento em desacordo com receita médica</option>
+<option value="Fraude à execução">Fraude à execução</option>
+<option value="Fraude em refeição, alojamento e transporte">Fraude em refeição, alojamento e transporte</option>
+<option value="Fraude no comércio">Fraude no comércio</option>
+<option value="Fraude no comércio">Fraude no comércio</option>
+<option value="Fraude processual">Fraude processual</option>
+<option value="Fraudes e abusos na fundação ou administração de sociedade por ações">Fraudes e abusos na fundação ou administração de sociedade por ações</option>
+<option value="Frustração de direito assegurado por lei trabalhista">Frustração de direito assegurado por lei trabalhista</option>
+<option value="Frustração de lei sobre a nacionalidade do trabalho">Frustração de lei sobre a nacionalidade do trabalho</option>
+<option value="Fuga de pessoa presa ou submetida à medida de segurança (culposa)">Fuga de pessoa presa ou submetida à medida de segurança (culposa)</option>
+<option value="Fuga de pessoa presa ou submetida a medida de segurança (dolosa)">Fuga de pessoa presa ou submetida a medida de segurança (dolosa)</option>
+<option value="Fuga do condutor do veículo do local do acidente">Fuga do condutor do veículo do local do acidente</option>
+<option value="Furto de coisa comum">Furto de coisa comum</option>
+<option value="Imitação de moeda para propaganda">Imitação de moeda para propaganda</option>
+<option value="Impedimento da regeneração de florestas ou vegetação">Impedimento da regeneração de florestas ou vegetação</option>
+<option value="Impedimento de comunicação através dos meios acima referidos">Impedimento de comunicação através dos meios acima referidos</option>
+<option value="Impedimento de procriação da fauna silvestre sem licença ou em desacordo com a obtida">Impedimento de procriação da fauna silvestre sem licença ou em desacordo com a obtida</option>
+<option value="Impedimento ou dificuldade no acesso às informações cadastrais do consumidor">Impedimento ou dificuldade no acesso às informações cadastrais do consumidor</option>
+<option value="Impedimento ou perturbação de cerimônia funerária (emprego de violência)">Impedimento ou perturbação de cerimônia funerária (emprego de violência)</option>
+<option value="Impedimento ou perturbação de cerimônia funerária">Impedimento ou perturbação de cerimônia funerária</option>
+<option value="Impedimento, perturbação ou fraude de concorrência">Impedimento, perturbação ou fraude de concorrência</option>
+<option value="Impedir ou embaraçar ato do representante do Ministério Público ou de qualquer outro agente fiscalizador">Impedir ou embaraçar ato do representante do Ministério Público ou de qualquer outro agente fiscalizador</option>
+<option value="Incêndio culposo em mata ou floresta">Incêndio culposo em mata ou floresta</option>
+<option value="Incêndio culposo">Incêndio culposo</option>
+<option value="Incide nas penas previstas neste artigo o condutor do veículo, ainda que a sua omissão seja suprida por terceiros ou que se trate de vítima com morte instantânea ou com ferimentos leves.">Incide nas penas previstas neste artigo o condutor do veículo, ainda que a sua omissão seja suprida por terceiros ou que se trate de vítima com morte instantânea ou com ferimentos leves.</option>
+<option value="Incitação ao crime">Incitação ao crime</option>
+<option value="Incorrerá nas mesmas penas quem deixar de alertar, mediante recomendações escritas ostensivas, sobre a periculosidade do serviço a ser prestado">Incorrerá nas mesmas penas quem deixar de alertar, mediante recomendações escritas ostensivas, sobre a periculosidade do serviço a ser prestado</option>
+<option value="Indevida custódia de doente mental">Indevida custódia de doente mental</option>
+<option value="Induzimento a erro essencial e ocultação de impedimento">Induzimento a erro essencial e ocultação de impedimento</option>
+<option value="Induzimento à fuga, entrega arbitrária ou sonegação de incapazes">Induzimento à fuga, entrega arbitrária ou sonegação de incapazes</option>
+<option value="Infração de medida sanitária preventiva (aumento de pena)">Infração de medida sanitária preventiva (aumento de pena)</option>
+<option value="Infração de medida sanitária preventiva">Infração de medida sanitária preventiva</option>
+<option value="Injúria qualificada (real)">Injúria qualificada (real)</option>
+<option value="Injúria">Injúria</option>
+<option value="Inscrição de despesas não empenhadas em restos a pagar">Inscrição de despesas não empenhadas em restos a pagar</option>
+<option value="Instalação ou uso ilegal de estação ou aparelho radioelétrico">Instalação ou uso ilegal de estação ou aparelho radioelétrico</option>
+<option value="Instrumento de emprego usual na prática de furto">Instrumento de emprego usual na prática de furto</option>
+<option value="Internação irregular em estabelecimento psiquiátrico">Internação irregular em estabelecimento psiquiátrico</option>
+<option value="Introdução de espécime animal no país sem licença">Introdução de espécime animal no país sem licença</option>
+<option value="Introdução/abandono de animais propriedade alheia">Introdução/abandono de animais propriedade alheia</option>
+<option value="Inumação ou exumação de cadáver">Inumação ou exumação de cadáver</option>
+<option value="Inundação culposa">Inundação culposa</option>
+<option value="Inutilização de edital ou de sinal">Inutilização de edital ou de sinal</option>
+<option value="Invasão de dispositivo informático">Invasão de dispositivo informático</option>
+<option value="Jogo de azar">Jogo de azar</option>
+<option value="Lesão corporal culposa">Lesão corporal culposa</option>
+<option value="Lesão corporal">Lesão corporal</option>
+<option value="Matrícula ou escrituração de indústria ou profissão">Matrícula ou escrituração de indústria ou profissão</option>
+<option value="Maus tratos">Maus tratos</option>
+<option value="Modificação ou alteração não autorizada de sistema de informações">Modificação ou alteração não autorizada de sistema de informações</option>
+<option value="Moeda falsa">Moeda falsa</option>
+<option value="Motim de presos">Motim de presos</option>
+<option value="Não cancelamento de restos a pagar">Não cancelamento de restos a pagar</option>
+<option value="Não colocação de sinais de perigo">Não colocação de sinais de perigo</option>
+<option value="Não correção de informação inexata em cadastro de consumidor">Não correção de informação inexata em cadastro de consumidor</option>
+<option value="Não cumprimento culposo de obrigação de relevante interesse ambiental">Não cumprimento culposo de obrigação de relevante interesse ambiental</option>
+<option value="Não entrega de termo de garantia ao consumidor">Não entrega de termo de garantia ao consumidor</option>
+<option value="Não organização de dados que dão base à publicidade">Não organização de dados que dão base à publicidade</option>
+<option value="Não recuperação de área de pesquisa ou exploração mineral">Não recuperação de área de pesquisa ou exploração mineral</option>
+<option value="Nas mesmas penas incorrem o proprietário ou diretor responsável de empresa de segurança e transporte de valores que deixarem de registrar ocorrência policial e de comunicar à Polícia Federal perda, furto, roubo ou outras formas de extravio de arma de fogo, acessório ou munição que estejam sob sua guarda, nas primeiras 24 (vinte e quatro) horas depois de ocorrido o fato">Nas mesmas penas incorrem o proprietário ou diretor responsável de empresa de segurança e transporte de valores que deixarem de registrar ocorrência policial e de comunicar à Polícia Federal perda, furto, roubo ou outras formas de extravio de arma de fogo, acessório ou munição que estejam sob sua guarda, nas primeiras 24 (vinte e quatro) horas depois de ocorrido o fato</option>
+<option value="Negar o acolhimento ou a permanência de idoso, como abrigado, por recusa deste em outorgar procuração à entidade de atendimento">Negar o acolhimento ou a permanência de idoso, como abrigado, por recusa deste em outorgar procuração à entidade de atendimento</option>
+<option value="Obstar o acesso de alguém a qualquer cargo público por motivo de idade. Negar a alguém, por motivo de idade, emprego ou trabalho. Recusar, retardar ou dificultar atendimento ou deixar de prestar assistência à saúde, sem justa causa, a pessoa idosa. Deixar de cumprir, retardar ou frustrar, sem justo motivo, a execução de ordem judicial expedida na ação civil que alude esta Lei. Recusar, retardar ou omitir dados técnicos indispensáveis à propositura da ação civil objeto desta Lei, quando requisitados pelo Ministério Público">Obstar o acesso de alguém a qualquer cargo público por motivo de idade. Negar a alguém, por motivo de idade, emprego ou trabalho. Recusar, retardar ou dificultar atendimento ou deixar de prestar assistência à saúde, sem justa causa, a pessoa idosa. Deixar de cumprir, retardar ou frustrar, sem justo motivo, a execução de ordem judicial expedida na ação civil que alude esta Lei. Recusar, retardar ou omitir dados técnicos indispensáveis à propositura da ação civil objeto desta Lei, quando requisitados pelo Ministério Público</option>
+<option value="Oferecer droga, eventualmente e sem objetivo de lucro, a pessoa de seu relacionamento, para juntos a consumirem">Oferecer droga, eventualmente e sem objetivo de lucro, a pessoa de seu relacionamento, para juntos a consumirem</option>
+<option value="Oferta de produtos e serviços com afirmação falsa, enganosa ou c/omissão de informação relevante">Oferta de produtos e serviços com afirmação falsa, enganosa ou c/omissão de informação relevante</option>
+<option value="Omissão culposa sobre nocividade ou periculosidade do produto (caput) e do serviço (§ 1º) em embalagens ou publicidade">Omissão culposa sobre nocividade ou periculosidade do produto (caput) e do serviço (§ 1º) em embalagens ou publicidade</option>
+<option value="Omissão de cautela na colocação ou suspensão perigosa de coisa">Omissão de cautela na colocação ou suspensão perigosa de coisa</option>
+<option value="Omissão de comunicação de crime">Omissão de comunicação de crime</option>
+<option value="Omissão de notificação de doença">Omissão de notificação de doença</option>
+<option value="Omissão de socorro majorada p/ resultado">Omissão de socorro majorada p/ resultado</option>
+<option value="Omissão de socorro por condutor de veículo em acidente">Omissão de socorro por condutor de veículo em acidente</option>
+<option value="Omissão de socorro">Omissão de socorro</option>
+<option value="Omissão dolosa sobre conhecimento posterior ao lançamento no mercado sobre nocividade ou periculosidade do produto, e deixar de retirá-lo do mercados (§ único)">Omissão dolosa sobre conhecimento posterior ao lançamento no mercado sobre nocividade ou periculosidade do produto, e deixar de retirá-lo do mercados (§ único)</option>
+<option value="Omissão dolosa sobre nocividade ou periculosidade do produto (caput) e do serviço (§ 1º), em embalagens ou publicidade">Omissão dolosa sobre nocividade ou periculosidade do produto (caput) e do serviço (§ 1º), em embalagens ou publicidade</option>
+<option value="Omitir cautela na guarda ou condução de animais">Omitir cautela na guarda ou condução de animais</option>
+<option value="Paralisação de trabalho de interesse coletivo">Paralisação de trabalho de interesse coletivo</option>
+<option value="Paralisação de trabalho, seguida de violência ou perturbação da ordem">Paralisação de trabalho, seguida de violência ou perturbação da ordem</option>
+<option value="Participar, na direção de veículo automotor, em via pública, de corrida, disputa ou competição automobilística não autorizada pela autoridade competente, desde que resulte dano potencial à incolumidade pública ou privada">Participar, na direção de veículo automotor, em via pública, de corrida, disputa ou competição automobilística não autorizada pela autoridade competente, desde que resulte dano potencial à incolumidade pública ou privada</option>
+<option value="Parto suposto. Supressão ou alteração de direito inerente ao estado civil de recém-nascido">Parto suposto. Supressão ou alteração de direito inerente ao estado civil de recém-nascido</option>
+<option value="Peculato culposo">Peculato culposo</option>
+<option value="Penetração em Unidade de Conservação portando instrumentos para caça ou exploração florestal, sem licença">Penetração em Unidade de Conservação portando instrumentos para caça ou exploração florestal, sem licença</option>
+<option value="Perigo de contágio venéreo">Perigo de contágio venéreo</option>
+<option value="Perigo de desabamento">Perigo de desabamento</option>
+<option value="Perigo de desastre ferroviário – culposo">Perigo de desastre ferroviário – culposo</option>
+<option value="Perigo para a vida ou saúde de outrem">Perigo para a vida ou saúde de outrem</option>
+<option value="período proibido à caça">período proibido à caça</option>
+<option value="Perturbação do trabalho ou sossego alheios">Perturbação do trabalho ou sossego alheios</option>
+<option value="Pesquisa ou extração mineral sem autorização ou em desacordo com a licença">Pesquisa ou extração mineral sem autorização ou em desacordo com a licença</option>
+<option value="Porte ilegal de arma (branca)">Porte ilegal de arma (branca)</option>
+<option value="Posse não justificada de instrumento de emprego usual na prática de furto">Posse não justificada de instrumento de emprego usual na prática de furto</option>
+<option value="Prescrever ou ministrar, culposamente, drogas, sem que delas necessite o paciente, ou fazê-lo em doses excessivas ou em desacordo com determinação legal ou regulamentar">Prescrever ou ministrar, culposamente, drogas, sem que delas necessite o paciente, ou fazê-lo em doses excessivas ou em desacordo com determinação legal ou regulamentar</option>
+<option value="Prestação de garantia graciosa">Prestação de garantia graciosa</option>
+<option value="Prevaricação">Prevaricação</option>
+<option value="Prevaricação">Prevaricação</option>
+<option value="Provocação de tumulto. Conduta inconveniente">Provocação de tumulto. Conduta inconveniente</option>
+<option value="Publicidade enganosa ou abusiva">Publicidade enganosa ou abusiva</option>
+<option value="Quem adquirir, guardar, tiver em depósito, transportar ou trouxer consigo, para consumo pessoal, drogas sem autorização ou em desacordo com determinação legal ou regulamentar">Quem adquirir, guardar, tiver em depósito, transportar ou trouxer consigo, para consumo pessoal, drogas sem autorização ou em desacordo com determinação legal ou regulamentar</option>
+<option value="Recebimento ou utilização, como dinheiro, de título ao portador emitido ilegalmente">Recebimento ou utilização, como dinheiro, de título ao portador emitido ilegalmente</option>
+<option value="Receptação culposa">Receptação culposa</option>
+<option value="Recusa de dados sobre a própria identidade">Recusa de dados sobre a própria identidade</option>
+<option value="Recusa de moeda de curso legal">Recusa de moeda de curso legal</option>
+<option value="Remoção de sinal de serviço público">Remoção de sinal de serviço público</option>
+<option value="Reparação não autorizada de produtos com peças ou componentes usados">Reparação não autorizada de produtos com peças ou componentes usados</option>
+<option value="Resistência">Resistência</option>
+<option value="Reter o cartão magnético de conta bancária relativa a benefícios, proventos ou pensão do idoso, bem como qualquer outro documento com objetivo de assegurar recebimento ou ressarcimento de dívida">Reter o cartão magnético de conta bancária relativa a benefícios, proventos ou pensão do idoso, bem como qualquer outro documento com objetivo de assegurar recebimento ou ressarcimento de dívida</option>
+<option value="Rixa qualificada (participantes)">Rixa qualificada (participantes)</option>
+<option value="Rixa">Rixa</option>
+<option value="Simulação da qualidade de funcionário">Simulação da qualidade de funcionário</option>
+<option value="Sonegação ou destruição de correspondência">Sonegação ou destruição de correspondência</option>
+<option value="Substância tóxica, perigosa ou nociva à saúde humana ou ao meio ambiente">Substância tóxica, perigosa ou nociva à saúde humana ou ao meio ambiente</option>
+<option value="Subtração de incapazes">Subtração de incapazes</option>
+<option value="Subtração, supressão ou dano à coisa própria na posse legal de terceiro">Subtração, supressão ou dano à coisa própria na posse legal de terceiro</option>
+<option value="Tráfego em velocidade incompatível com a segurança no trânsito">Tráfego em velocidade incompatível com a segurança no trânsito</option>
+<option value="Ultraje a culto e impedimento ou perturbação de ato a ele relativo (emprego de violência)">Ultraje a culto e impedimento ou perturbação de ato a ele relativo (emprego de violência)</option>
+<option value="Ultraje a culto e impedimento ou perturbação de ato a ele relativo">Ultraje a culto e impedimento ou perturbação de ato a ele relativo</option>
+<option value="Uso culposo de gás tóxico ou asfixiante">Uso culposo de gás tóxico ou asfixiante</option>
+<option value="Uso ilegítimo de uniforme ou distintivo">Uso ilegítimo de uniforme ou distintivo</option>
+<option value="Usurpação de águas">Usurpação de águas</option>
+<option value="Usurpação de função pública">Usurpação de função pública</option>
+<option value="Vadiagem">Vadiagem</option>
+<option value="Venda, depósito, transporte ou guarda de produtos de origem vegetal sem licença">Venda, depósito, transporte ou guarda de produtos de origem vegetal sem licença</option>
+<option value="Venda, exportação, aquisição ou guarda de espécimes da fauna silvestre e produtos derivados, sem licença ou provenientes de criadouros não autorizados">Venda, exportação, aquisição ou guarda de espécimes da fauna silvestre e produtos derivados, sem licença ou provenientes de criadouros não autorizados</option>
+<option value="Vias de fato">Vias de fato</option>
+<option value="Violação de comunicação telegráfica, radioelétrica ou telefônica">Violação de comunicação telegráfica, radioelétrica ou telefônica</option>
+<option value="Violação de correspondência comercial">Violação de correspondência comercial</option>
+<option value="Violação de correspondência">Violação de correspondência</option>
+<option value="Violação de domicílio qualificada">Violação de domicílio qualificada</option>
+<option value="Violação de domicílio">Violação de domicílio</option>
+<option value="Violação de lugar ou objeto">Violação de lugar ou objeto</option>
+<option value="Violação de segredo profissional">Violação de segredo profissional</option>
+<option value="Violação de sigilo funcional">Violação de sigilo funcional</option>
+<option value="Violação de sigilo funcional">Violação de sigilo funcional</option>
+<option value="Violação de sigilo funcional">Violação de sigilo funcional</option>
+<option value="Violência ou fraude em arrecadação judicial">Violência ou fraude em arrecadação judicial</option>
 
 
 </select>
@@ -70,6 +359,48 @@
 
 <label for="lei">Lei:</label>
 <input type="text" id="lei" required style="width: 550px;" readonly>
+
+<script>
+    const searchInput = document.getElementById("search");
+    const selectElement = document.getElementById("naturezaa");
+
+    // Filtra as opções com base no texto digitado
+    searchInput.addEventListener("input", function () {
+        const filtro = this.value.toLowerCase();
+        const options = selectElement.getElementsByTagName("option");
+
+        let hasMatch = false;
+        let visibleOptionsCount = 0;
+
+        // Filtra as opções do select
+        for (let i = 0; i < options.length; i++) {
+            const texto = options[i].textContent.toLowerCase();
+            if (texto.includes(filtro)) {
+                options[i].style.display = ""; // Mostra a opção se corresponder
+                visibleOptionsCount++;
+                hasMatch = true;
+            } else {
+                options[i].style.display = "none"; // Esconde a opção se não corresponder
+            }
+        }
+
+        // Ajusta o número de opções visíveis
+        if (hasMatch) {
+            selectElement.size = Math.min(visibleOptionsCount, 5); // Ajusta o número de opções visíveis
+            selectElement.style.display = "inline-block"; // Garante que o select seja mostrado
+        } else {
+            selectElement.size = 1; // Se não houver correspondência, reduz para uma linha
+            selectElement.style.display = "inline-block"; // Garante que o select seja mostrado
+        }
+    });
+
+    // Reduz a lista ao perder o foco
+    selectElement.addEventListener("blur", function () {
+        selectElement.size = 1; // Quando o campo perde o foco, a lista volta a ser uma linha
+    });
+</script>
+
+
 
 <script>
        // Declaração das variáveis globais para armazenar os textos DE MATERIAIS APREENDIDOS
@@ -89,40 +420,276 @@ let Vitima04Global = [];
 
   // Crimes de menor potencial ofensivo (pena máxima até 2 anos) incluindo crimes de trânsito
   const naturezas = {
-    "Ameaça": { artigo: "147", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
-"Violação de domicílio": { artigo: "150,caput", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
-
-
-    "Lesão corporal culposa": { artigo: "129", lei: "Código Penal - Decreto-Lei nº 2.848/40" },
-    "Difamação": { artigo: "139", lei: "Código Penal - Decreto-Lei nº 2.848/40" },
-    "Injúria": { artigo: "140", lei: "Código Penal - Decreto-Lei nº 2.848/40" },
-    "Ameaça": { artigo: "147", lei: "Código Penal - Decreto-Lei nº 2.848/40" },
-    "Violação de Domicílio": { artigo: "150", lei: "Código Penal - Decreto-Lei nº 2.848/40" },
-    "Dano Simples": { artigo: "163", lei: "Código Penal - Decreto-Lei nº 2.848/40" },
-    "Introdução ou Abandono de Animais": { artigo: "164", lei: "Código Penal - Decreto-Lei nº 2.848/40" },
-    "Descumprimento de Legítima Defesa": { artigo: "182", lei: "Código Penal - Decreto-Lei nº 2.848/40" },
-    "Resistência sem Violência": { artigo: "329", lei: "Código Penal - Decreto-Lei nº 2.848/40" },
-    "Desacato": { artigo: "331", lei: "Código Penal - Decreto-Lei nº 2.848/40" },
-    "Contrabando de Pequeno Valor": { artigo: "334-A", lei: "Código Penal - Decreto-Lei nº 2.848/40" },
-    "Dirigir Sob Influência de Álcool": { artigo: "306", lei: "Código de Trânsito Brasileiro - Lei nº 9.503/1997" },
-    "Fuga de Local de Acidente": { artigo: "307", lei: "Código de Trânsito Brasileiro - Lei nº 9.503/1997" },
-    "Uso de Documento Falso no Trânsito": { artigo: "171", lei: "Código de Trânsito Brasileiro - Lei nº 9.503/1997" },
-    
-    "Entrega de direção de veículo automotor a pessoa não habilitada ou sem condições de conduzir o veículo com segurança": { artigo: "310", lei: "Código de Trânsito Brasileiro - Lei nº 9.503/1997" },
-
-    "Direção não habilitada de veículo automotor, gerando perigo": { artigo: "309", lei: "Código de Trânsito Brasileiro - Lei nº 9.503/1997" },
-    "Tráfego em velocidade incompatível com a segurança no trânsito": { artigo: "311", lei: "Código de Trânsito Brasileiro - Lei nº 9.503/1997" },
-"Quem adquirir, guardar, tiver em depósito, transportar ou trouxer consigo, para consumo pessoal, drogas sem autorização ou em desacordo com determinação legal ou regulamentar": { artigo: "28, § 1º", lei: "Lei de Drogas (Lei nº 11.343, de 23 de agosto de 2006)" },
-
-"Às mesmas medidas submete-se quem, para seu consumo pessoal, semeia, cultiva ou colhe plantas destinadas à preparação de pequena quantidade de substância ou produto capaz de causar dependência física ou psíquica.": { artigo: "28, caput", lei: "Lei de Drogas (Lei nº 11.343, de 23 de agosto de 2006)" },
-
+    "Abandono de função": { artigo: "323,caput", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Abandono intelectual de filho": { artigo: "246", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Abandono moral de menor": { artigo: "247", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Abuso na prática de aviação": { artigo: "35", lei: "Lei das Contravenções Penais(Decreto-Lei 3.688, de 3 de outubro de 1941)" },
+"Abuso ou maus tratos em animais": { artigo: "32, caput", lei: "Meio Ambiente (Lei 9.605, de 12 de fevereiro de 1998)" },
+"Advocacia administrativa (aumento de pena)": { artigo: "321, §único", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Advocacia administrativa": { artigo: "321", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Afirmação falsa, enganosa ou omissão de informação relevante sobre produtos e serviços ofertados": { artigo: "66, caput", lei: "Código de Defesa do Consumidor (Lei 8.078, de 11 de setembro de 1990)" },
+"Alteração de limites": { artigo: "161,caput", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Alteração de local especialmente protegido": { artigo: "166", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Ameaça": { artigo: "147", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Anúncio de meio abortivo": { artigo: "20", lei: "Lei das Contravenções Penais(Decreto-Lei 3.688, de 3 de outubro de 1941)" },
+"Apologia de crime ou criminoso": { artigo: "287", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Apropriação de coisa achada": { artigo: "169, §único, II", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Apropriação de coisa havida por erro, caso fortuito ou força da natureza": { artigo: "169,caput", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Apropriação de tesouro": { artigo: "169, §único, I", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Aquisição ou recebimento de produtos vegetais sem verificação de sua extração mediante licença e desacompanhados de documento": { artigo: "46, caput", lei: "Meio Ambiente (Lei 9.605, de 12 de fevereiro de 1998)" },
+"Arremesso de projétil quando resulta lesão corporal": { artigo: "264, §único", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Arremesso de projétil": { artigo: "264,caput", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Arremesso ou colocação perigosa": { artigo: "37", lei: "Lei das Contravenções Penais(Decreto-Lei 3.688, de 3 de outubro de 1941)" },
+"Às mesmas medidas submete-se quem, para seu consumo pessoal, semeia, cultiva ou colhe plantas destinadas à preparação de pequena quantidade de substância ou produto capaz de causar dependência física ou psíquica.": { artigo: "28, § 1º", lei: "Lei de Drogas (Lei nº 11.343, de 23 de agosto de 2006)" },
+"Assédio sexual": { artigo: "216 – A", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Associação secreta": { artigo: "39,caput", lei: "Lei das Contravenções Penais(Decreto-Lei 3.688, de 3 de outubro de 1941)" },
+"Atentado contra a liberdade de associação": { artigo: "199", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Atentado contra a liberdade de contrato de trabalho e boicotagem violenta": { artigo: "198", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Atentado contra a liberdade de trabalho": { artigo: "197, I e II", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Atentado culposo contra a segurança de outro meio de transporte": { artigo: "262, § 2º", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Atentado culposo contra a segurança de transporte marítimo, fluvial e aéreo": { artigo: "261, § 3º", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Atentado doloso contra a segurança de outro meio de transporte": { artigo: "262,caput", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Ato obsceno": { artigo: "233", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Autoacusação falsa": { artigo: "341", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Bebidas alcoólicas": { artigo: "63", lei: "Lei das Contravenções Penais(Decreto-Lei 3.688, de 3 de outubro de 1941)" },
+"Caça, perseguição ou apanha de espécime da fauna silvestre sem licença ou em desacordo com a obtida": { artigo: "29, caput", lei: "Meio Ambiente (Lei 9.605, de 12 de fevereiro de 1998)" },
+"Calúnia": { artigo: "138 §1°", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Calúnia": { artigo: "138 §2°", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Calúnia": { artigo: "138", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Causação culposa de poluição danosa à saúde humana ou provocadora de mortandade de animais ou de destruição da flora": { artigo: "54, §único", lei: "Meio Ambiente (Lei 9.605, de 12 de fevereiro de 1998)" },
+"Ceder prédio para reunião de associação secreta": { artigo: "39, § 1º", lei: "Lei das Contravenções Penais(Decreto-Lei 3.688, de 3 de outubro de 1941)" },
+"Certidão e atestado ideologicamente falso": { artigo: "301", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Certidão e atestado materialmente falso": { artigo: "301, § 1º", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Charlatanismo": { artigo: "283", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"com abuso de licença": { artigo: "29, § 4º, IV", lei: "Meio Ambiente (Lei 9.605, de 12 de fevereiro de 1998)" },
+"com emprego de métodos ou instrumentos capazes de provocar destruição em massa.": { artigo: "29, § 4º, VI", lei: "Meio Ambiente (Lei 9.605, de 12 de fevereiro de 1998)" },
+"Comercialização ou uso de motosserra sem licença ou registro": { artigo: "51", lei: "Meio Ambiente (Lei 9.605, de 12 de fevereiro de 1998)" },
+"Comunicação falsa de crime ou contravenção": { artigo: "340", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Condescendência criminosa": { artigo: "320", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Condicionamento de atendimento médico-hospitalar emergencial": { artigo: "135-A", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Conhecimento prévio de impedimento matrimonial": { artigo: "237", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Conspurcação de edificação ou monumento urbano": { artigo: "65, caput", lei: "Meio Ambiente (Lei 9.605, de 12 de fevereiro de 1998)" },
+"Conspurcação de monumento ou coisa tombada": { artigo: "65, § único", lei: "Meio Ambiente (Lei 9.605, de 12 de fevereiro de 1998)" },
+"Constrangimento físico ou moral na cobrança de dívida do consumidor": { artigo: "71", lei: "Código de Defesa do Consumidor (Lei 8.078, de 11 de setembro de 1990)" },
+"Constrangimento ilegal": { artigo: "146,caput", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Construção em solo não edificável ou seu entorno, sem autorização ou em desacordo com a autorização concedida": { artigo: "64", lei: "Meio Ambiente (Lei 9.605, de 12 de fevereiro de 1998)" },
+"contra espécie rara ou considerada ameaçada de extinção, ainda que somente no local da infração": { artigo: "29, § 4º, I", lei: "Meio Ambiente (Lei 9.605, de 12 de fevereiro de 1998)" },
+"Contratação de operação de crédito": { artigo: "359-A", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Contratação de operação de crédito": { artigo: "359-A, §único, I", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Contratação de operação de crédito": { artigo: "359-A,§único, II", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Corrupção ou poluição culposa de água potável": { artigo: "271, §único", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Corrupção passiva": { artigo: "317, §2°", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Cortar ou transformar em carvão, madeira de lei, assim classificada por ato do poder público, para fins industriais, energéticos ou para outra exploração, econômica ou não, em desacordo com as determinações legais": { artigo: "45", lei: "Meio Ambiente (Lei 9.605, de 12 de fevereiro de 1998)" },
+"Curandeirismo (mediante remuneração - aumento de pena)": { artigo: "284, §único", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Curandeirismo": { artigo: "284", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Curandeirismo": { artigo: "284, I", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Curandeirismo": { artigo: "284, II", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Curandeirismo": { artigo: "284, III", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Dano em coisa de valor artístico, arqueológico ou histórico": { artigo: "165", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Dano simples": { artigo: "163,caput", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Deflagração perigosa": { artigo: "28, §único", lei: "Lei das Contravenções Penais(Decreto-Lei 3.688, de 3 de outubro de 1941)" },
+"Deixar de cumprir, retardar ou frustrar, sem justo motivo, a execução de ordem judicial expedida nas ações em que for parte ou interveniente o idoso": { artigo: "101", lei: "Estatuto do Idoso (Lei 10.471, de 1º de outubro de 2003)" },
+"Deixar de observar as cautelas necessárias para impedir que menor de 18 (dezoito) anos ou pessoa portadora de deficiência mental se apodere de arma de fogo que esteja sob sua posse ou que seja de sua propriedade.": { artigo: "13, caput", lei: "Estatuto do Desarmamento (Lei 10.826, de 22 de dezembro de 2003)" },
+"Deixar de prestar assistência ao idoso, quando possível fazê-lo sem risco pessoal, em situação de iminente perigo, ou recusar, retardar ou dificultar sua assistência à saúde, sem justa causa, ou não pedir, nesses casos, o socorro de autoridade pública": { artigo: "97, caput", lei: "Estatuto do Idoso (Lei 10.471, de 1º de outubro de 2003)" },
+"Desabamento de construção": { artigo: "29", lei: "Lei das Contravenções Penais(Decreto-Lei 3.688, de 3 de outubro de 1941)" },
+"Desabamento ou desmoronamento culposos": { artigo: "256, §único", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Desacato": { artigo: "331", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Desdenhar, humilhar, menosprezar ou discriminar pessoa idosa, por qualquer motivo": { artigo: "96, § 1º", lei: "Estatuto do Idoso (Lei 10.471, de 1º de outubro de 2003)" },
+"Desobediência a decisão judicial sobre perda ou suspensão de direito": { artigo: "359", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Desobediência.": { artigo: "330", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Destruição ou dano em floresta ou vegetação de especial preservação": { artigo: "50", lei: "Meio Ambiente (Lei 9.605, de 12 de fevereiro de 1998)" },
+"Destruição ou dano em plantas ornamentais de logradouros ou propriedade privada": { artigo: "49", lei: "Meio Ambiente (Lei 9.605, de 12 de fevereiro de 1998)" },
+"Destruição ou remoção de sinal de perigo": { artigo: "36, §único, “a”", lei: "Lei das Contravenções Penais(Decreto-Lei 3.688, de 3 de outubro de 1941)" },
+"Destruição, dano ou modificação de ninho, abrigo ou criadouro natural": { artigo: "29. § 1º, II", lei: "Meio Ambiente (Lei 9.605, de 12 de fevereiro de 1998)" },
+"Destruição, inutilização ou deterioração culposa de bem especialmente protegido": { artigo: "62, §único", lei: "Meio Ambiente (Lei 9.605, de 12 de fevereiro de 1998)" },
+"Destruir ou danificar floresta considerada de preservação permanente, mesmo que em formação, ou utilizá-la com infringência das normas de proteção (culposo)": { artigo: "38, §único", lei: "Meio Ambiente (Lei 9.605, de 12 de fevereiro de 1998)" },
+"Difamação": { artigo: "139", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Difusão culposa de doença ou praga": { artigo: "259, §único", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Direção não habilitada de veículo automotor, gerando perigo": { artigo: "309", lei: "Código de Trânsito Brasileiro (Lei 9.503, de 23 de setembro de 1997)" },
+"Direção não licenciada de aeronave": { artigo: "33", lei: "Lei das Contravenções Penais(Decreto-Lei 3.688, de 3 de outubro de 1941)" },
+"Direção perigosa de veículo na via pública (de veículo não automotor)": { artigo: "34", lei: "Lei das Contravenções Penais(Decreto-Lei 3.688, de 3 de outubro de 1941)" },
+"Discriminar pessoa idosa, impedindo ou dificultando seu acesso a operações bancárias, aos meios de transporte, ao direito de contratar ou por qualquer outro meio ou instrumento necessário ao exercício da cidadania, por motivo de idade": { artigo: "96, caput", lei: "Estatuto do Idoso (Lei 10.471, de 1º de outubro de 2003)" },
+"Divulgação de segredo": { artigo: "153", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"durante a noite": { artigo: "29, § 4º, III", lei: "Meio Ambiente (Lei 9.605, de 12 de fevereiro de 1998)" },
+"em unidade de conservação": { artigo: "29, § 4º, V", lei: "Meio Ambiente (Lei 9.605, de 12 de fevereiro de 1998)" },
+"Embriaguez": { artigo: "62", lei: "Lei das Contravenções Penais(Decreto-Lei 3.688, de 3 de outubro de 1941)" },
+"Emissão de fumaça, vapor ou gás": { artigo: "38", lei: "Lei das Contravenções Penais(Decreto-Lei 3.688, de 3 de outubro de 1941)" },
+"Emissão de título ao portador sem permissão legal": { artigo: "292,caput", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Emprego irregular de verbas ou rendas públicas": { artigo: "315", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Entrega de direção de veículo automotor a pessoa não habilitada ou sem condições de conduzir o veículo com segurança": { artigo: "310", lei: "Código de Trânsito Brasileiro (Lei 9.503, de 23 de setembro de 1997)" },
+"Entrega de filho menor à pessoa inidônea": { artigo: "245", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Envenenamento culposo de água potável ou de substância alimentícia ou medicinal": { artigo: "270, § 2º", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Epidemia culposa": { artigo: "267, § 2º", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Esbulho possessório": { artigo: "161, §1º, II", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Escrito ou objeto obsceno": { artigo: "234 I", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Escrito ou objeto obsceno": { artigo: "234 II", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Escrito ou objeto obsceno": { artigo: "234 III", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Escrito ou objeto obsceno": { artigo: "234", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Estabelecimentos, obras ou serviços potencialmente poluidores, sem licença ou contrariando normas legais e regulamentares": { artigo: "60", lei: "Meio Ambiente (Lei 9.605, de 12 de fevereiro de 1998)" },
+"Evasão mediante violência contra a pessoa": { artigo: "352", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Executar serviço de alta periculosidade, contrariando determinação de autoridade competente": { artigo: "65", lei: "Código de Defesa do Consumidor (Lei 8.078, de 11 de setembro de 1990)" },
+"Exercício arbitrário das próprias razões": { artigo: "345", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Exercício arbitrário ou abuso de poder": { artigo: "350", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Exercício de atividade com infração de decisão administrativa": { artigo: "205", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Exercício funcional ilegalmente antecipado ou prolongado": { artigo: "324", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Exercício ilegal da medicina, arte dentária ou farmacêutica (fins de lucro – aumento de pena)": { artigo: "282, §único", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Exercício ilegal da medicina, arte dentária ou farmacêutica": { artigo: "282", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Exercício ilegal de profissão ou atividade": { artigo: "47", lei: "Lei das Contravenções Penais(Decreto-Lei 3.688, de 3 de outubro de 1941)" },
+"Exercício ilegal do comércio de coisas antigas e obras de arte": { artigo: "48", lei: "Lei das Contravenções Penais(Decreto-Lei 3.688, de 3 de outubro de 1941)" },
+"Experiência dolorosa ou cruel com animal vivo": { artigo: "32, § 1º", lei: "Meio Ambiente (Lei 9.605, de 12 de fevereiro de 1998)" },
+"Explosão culposa, nos demais casos": { artigo: "251, § 3º", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Explosão culposa, se é de dinamite ou similar": { artigo: "251, § 3º", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Expor a perigo a integridade e a saúde, física ou psíquica, do idoso, submetendo- o a condições desumanas ou degradantes ou privando-o de alimentos e cuidados indispensáveis, quando obrigado a fazê- lo, ou sujeitando-o a trabalho excessivo ou inadequado": { artigo: "99, caput", lei: "Estatuto do Idoso (Lei 10.471, de 1º de outubro de 2003)" },
+"Exposição ou abandono de recém-nascido": { artigo: "134", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Extração mineral não autorizada em florestas públicas ou de preservação": { artigo: "44", lei: "Meio Ambiente (Lei 9.605, de 12 de fevereiro de 1998)" },
+"Fabrico ou fornecimento culposo, para consumo, de substância nociva à saúde": { artigo: "278, §único", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Fabrico, fornecimento, aquisição, posse ou transporte de explosivos ou gás tóxico, ou asfixiante": { artigo: "253", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Falsa identidade – criar": { artigo: "307", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Falsa identidade – usar de terceiro": { artigo: "308", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Falsidade de atestado médico (fins de lucro – aumento de pena)": { artigo: "302, §único", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Falsidade de atestado médico": { artigo: "302", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Falsificação de papéis públicos": { artigo: "293, § 4º", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Falsificação, corrupção, adulteração ou alteração de substância ou produtos alimentícios - culposo": { artigo: "272, § 2º", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Falso alarme": { artigo: "41", lei: "Lei das Contravenções Penais(Decreto-Lei 3.688, de 3 de outubro de 1941)" },
+"Falta de habilitação para dirigir veículos": { artigo: "32", lei: "Lei das Contravenções Penais(Decreto-Lei 3.688, de 3 de outubro de 1941)" },
+"Favorecimento pessoal privilegiado": { artigo: "348, § 1º", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Favorecimento pessoal": { artigo: "348,caput", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Favorecimento real": { artigo: "349", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Favorecimento real": { artigo: "349-A", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Fazer ou promover publicidade que sabe ou deveria saber ser capaz de induzir o consumidor a se comportar de forma prejudicial ou perigosa a sua saúde": { artigo: "68", lei: "Código de Defesa do Consumidor (Lei 8.078, de 11 de setembro de 1990)" },
+"Fornecimento culposo de medicamento em desacordo com receita médica": { artigo: "280, §único", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Fraude à execução": { artigo: "179", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Fraude em refeição, alojamento e transporte": { artigo: "176,caput", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Fraude no comércio": { artigo: "175, I", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Fraude no comércio": { artigo: "175, II", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Fraude processual": { artigo: "347", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Fraudes e abusos na fundação ou administração de sociedade por ações": { artigo: "177, §2°", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Frustração de direito assegurado por lei trabalhista": { artigo: "203", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Frustração de lei sobre a nacionalidade do trabalho": { artigo: "204", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Fuga de pessoa presa ou submetida à medida de segurança (culposa)": { artigo: "351, § 4º", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Fuga de pessoa presa ou submetida a medida de segurança (dolosa)": { artigo: "351,caput", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Fuga do condutor do veículo do local do acidente": { artigo: "305", lei: "Código de Trânsito Brasileiro (Lei 9.503, de 23 de setembro de 1997)" },
+"Furto de coisa comum": { artigo: "156", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Imitação de moeda para propaganda": { artigo: "44", lei: "Lei das Contravenções Penais(Decreto-Lei 3.688, de 3 de outubro de 1941)" },
+"Impedimento da regeneração de florestas ou vegetação": { artigo: "48", lei: "Meio Ambiente (Lei 9.605, de 12 de fevereiro de 1998)" },
+"Impedimento de comunicação através dos meios acima referidos": { artigo: "151, §1º, III", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Impedimento de procriação da fauna silvestre sem licença ou em desacordo com a obtida": { artigo: "29, § 1º, I", lei: "Meio Ambiente (Lei 9.605, de 12 de fevereiro de 1998)" },
+"Impedimento ou dificuldade no acesso às informações cadastrais do consumidor": { artigo: "72", lei: "Código de Defesa do Consumidor (Lei 8.078, de 11 de setembro de 1990)" },
+"Impedimento ou perturbação de cerimônia funerária (emprego de violência)": { artigo: "209 §único", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Impedimento ou perturbação de cerimônia funerária": { artigo: "209,caput", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Impedimento, perturbação ou fraude de concorrência": { artigo: "335", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Impedir ou embaraçar ato do representante do Ministério Público ou de qualquer outro agente fiscalizador": { artigo: "109", lei: "Estatuto do Idoso (Lei 10.471, de 1º de outubro de 2003)" },
+"Incêndio culposo em mata ou floresta": { artigo: "41, §único", lei: "Meio Ambiente (Lei 9.605, de 12 de fevereiro de 1998)" },
+"Incêndio culposo": { artigo: "250, § 2º", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Incide nas penas previstas neste artigo o condutor do veículo, ainda que a sua omissão seja suprida por terceiros ou que se trate de vítima com morte instantânea ou com ferimentos leves.": { artigo: "304, § 1º", lei: "Código de Trânsito Brasileiro (Lei 9.503, de 23 de setembro de 1997)" },
+"Incitação ao crime": { artigo: "286", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Incorrerá nas mesmas penas quem deixar de alertar, mediante recomendações escritas ostensivas, sobre a periculosidade do serviço a ser prestado": { artigo: "63, § 1º", lei: "Código de Defesa do Consumidor (Lei 8.078, de 11 de setembro de 1990)" },
+"Indevida custódia de doente mental": { artigo: "23", lei: "Lei das Contravenções Penais(Decreto-Lei 3.688, de 3 de outubro de 1941)" },
+"Induzimento a erro essencial e ocultação de impedimento": { artigo: "236", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Induzimento à fuga, entrega arbitrária ou sonegação de incapazes": { artigo: "248", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Infração de medida sanitária preventiva (aumento de pena)": { artigo: "268 §único", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Infração de medida sanitária preventiva": { artigo: "268,caput", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Injúria qualificada (real)": { artigo: "140, § 2º", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Injúria": { artigo: "140", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Inscrição de despesas não empenhadas em restos a pagar": { artigo: "359-B", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Instalação ou uso ilegal de estação ou aparelho radioelétrico": { artigo: "151, §1º, IV", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Instrumento de emprego usual na prática de furto": { artigo: "24", lei: "Lei das Contravenções Penais(Decreto-Lei 3.688, de 3 de outubro de 1941)" },
+"Internação irregular em estabelecimento psiquiátrico": { artigo: "22", lei: "Lei das Contravenções Penais(Decreto-Lei 3.688, de 3 de outubro de 1941)" },
+"Introdução de espécime animal no país sem licença": { artigo: "31", lei: "Meio Ambiente (Lei 9.605, de 12 de fevereiro de 1998)" },
+"Introdução/abandono de animais propriedade alheia": { artigo: "164", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Inumação ou exumação de cadáver": { artigo: "67", lei: "Lei das Contravenções Penais(Decreto-Lei 3.688, de 3 de outubro de 1941)" },
+"Inundação culposa": { artigo: "254", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Inutilização de edital ou de sinal": { artigo: "336", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Invasão de dispositivo informático": { artigo: "154-A", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Jogo de azar": { artigo: "50", lei: "Lei das Contravenções Penais(Decreto-Lei 3.688, de 3 de outubro de 1941)" },
+"Lesão corporal culposa": { artigo: "129, § 6º", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Lesão corporal": { artigo: "129,caput", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Matrícula ou escrituração de indústria ou profissão": { artigo: "49", lei: "Lei das Contravenções Penais(Decreto-Lei 3.688, de 3 de outubro de 1941)" },
+"Maus tratos": { artigo: "136,caput", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Modificação ou alteração não autorizada de sistema de informações": { artigo: "313-B", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Moeda falsa": { artigo: "289, § 2º", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Motim de presos": { artigo: "354", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Não cancelamento de restos a pagar": { artigo: "359-F", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Não colocação de sinais de perigo": { artigo: "36,caput", lei: "Lei das Contravenções Penais(Decreto-Lei 3.688, de 3 de outubro de 1941)" },
+"Não correção de informação inexata em cadastro de consumidor": { artigo: "73", lei: "Código de Defesa do Consumidor (Lei 8.078, de 11 de setembro de 1990)" },
+"Não cumprimento culposo de obrigação de relevante interesse ambiental": { artigo: "68, § único", lei: "Meio Ambiente (Lei 9.605, de 12 de fevereiro de 1998)" },
+"Não entrega de termo de garantia ao consumidor": { artigo: "74", lei: "Código de Defesa do Consumidor (Lei 8.078, de 11 de setembro de 1990)" },
+"Não organização de dados que dão base à publicidade": { artigo: "69", lei: "Código de Defesa do Consumidor (Lei 8.078, de 11 de setembro de 1990)" },
+"Não recuperação de área de pesquisa ou exploração mineral": { artigo: "55, §único", lei: "Meio Ambiente (Lei 9.605, de 12 de fevereiro de 1998)" },
+"Negar o acolhimento ou a permanência de idoso, como abrigado, por recusa deste em outorgar procuração à entidade de atendimento": { artigo: "103", lei: "Estatuto do Idoso (Lei 10.471, de 1º de outubro de 2003)" },
+"Obstar o acesso de alguém a qualquer cargo público por motivo de idade. Negar a alguém, por motivo de idade, emprego ou trabalho. Recusar, retardar ou dificultar atendimento ou deixar de prestar assistência à saúde, sem justa causa, a pessoa idosa. Deixar de cumprir, retardar ou frustrar, sem justo motivo, a execução de ordem judicial expedida na ação civil que alude esta Lei. Recusar, retardar ou omitir dados técnicos indispensáveis à propositura da ação civil objeto desta Lei, quando requisitados pelo Ministério Público": { artigo: "100", lei: "Estatuto do Idoso (Lei 10.471, de 1º de outubro de 2003)" },
 "Oferecer droga, eventualmente e sem objetivo de lucro, a pessoa de seu relacionamento, para juntos a consumirem": { artigo: "Art. 33. § 3°", lei: "Lei de Drogas (Lei nº 11.343, de 23 de agosto de 2006)" },
-
+"Oferta de produtos e serviços com afirmação falsa, enganosa ou c/omissão de informação relevante": { artigo: "66, § 1º", lei: "Código de Defesa do Consumidor (Lei 8.078, de 11 de setembro de 1990)" },
+"Omissão culposa sobre nocividade ou periculosidade do produto (caput) e do serviço (§ 1º) em embalagens ou publicidade": { artigo: "63, § 2º", lei: "Código de Defesa do Consumidor (Lei 8.078, de 11 de setembro de 1990)" },
+"Omissão de cautela na colocação ou suspensão perigosa de coisa": { artigo: "37, §único", lei: "Lei das Contravenções Penais(Decreto-Lei 3.688, de 3 de outubro de 1941)" },
+"Omissão de comunicação de crime": { artigo: "66", lei: "Lei das Contravenções Penais(Decreto-Lei 3.688, de 3 de outubro de 1941)" },
+"Omissão de notificação de doença": { artigo: "269", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Omissão de socorro majorada p/ resultado": { artigo: "135, §único", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Omissão de socorro por condutor de veículo em acidente": { artigo: "304", lei: "Código de Trânsito Brasileiro (Lei 9.503, de 23 de setembro de 1997)" },
+"Omissão de socorro": { artigo: "135,caput", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Omissão dolosa sobre conhecimento posterior ao lançamento no mercado sobre nocividade ou periculosidade do produto, e deixar de retirá-lo do mercados (§ único)": { artigo: "64", lei: "Código de Defesa do Consumidor (Lei 8.078, de 11 de setembro de 1990)" },
+"Omissão dolosa sobre nocividade ou periculosidade do produto (caput) e do serviço (§ 1º), em embalagens ou publicidade": { artigo: "63", lei: "Código de Defesa do Consumidor (Lei 8.078, de 11 de setembro de 1990)" },
+"Omitir cautela na guarda ou condução de animais": { artigo: "31", lei: "Lei das Contravenções Penais(Decreto-Lei 3.688, de 3 de outubro de 1941)" },
+"Paralisação de trabalho de interesse coletivo": { artigo: "201", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Paralisação de trabalho, seguida de violência ou perturbação da ordem": { artigo: "200,caput", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Participar, na direção de veículo automotor, em via pública, de corrida, disputa ou competição automobilística não autorizada pela autoridade competente, desde que resulte dano potencial à incolumidade pública ou privada": { artigo: "308", lei: "Código de Trânsito Brasileiro (Lei 9.503, de 23 de setembro de 1997)" },
+"Parto suposto. Supressão ou alteração de direito inerente ao estado civil de recém-nascido": { artigo: "242, §único", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Peculato culposo": { artigo: "312, §2°", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Penetração em Unidade de Conservação portando instrumentos para caça ou exploração florestal, sem licença": { artigo: "52", lei: "Meio Ambiente (Lei 9.605, de 12 de fevereiro de 1998)" },
+"Perigo de contágio venéreo": { artigo: "130,caput", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Perigo de desabamento": { artigo: "30", lei: "Lei das Contravenções Penais(Decreto-Lei 3.688, de 3 de outubro de 1941)" },
+"Perigo de desastre ferroviário – culposo": { artigo: "260, § 2º", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Perigo para a vida ou saúde de outrem": { artigo: "132", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"período proibido à caça": { artigo: "29, § 4º, II", lei: "Meio Ambiente (Lei 9.605, de 12 de fevereiro de 1998)" },
 "Perturbação do trabalho ou sossego alheios": { artigo: "42", lei: "Lei das Contravenções Penais(Decreto-Lei 3.688, de 3 de outubro de 1941)" },
+"Pesquisa ou extração mineral sem autorização ou em desacordo com a licença": { artigo: "55, caput", lei: "Meio Ambiente (Lei 9.605, de 12 de fevereiro de 1998)" },
+"Porte ilegal de arma (branca)": { artigo: "19", lei: "Lei das Contravenções Penais(Decreto-Lei 3.688, de 3 de outubro de 1941)" },
+"Posse não justificada de instrumento de emprego usual na prática de furto": { artigo: "25", lei: "Lei das Contravenções Penais(Decreto-Lei 3.688, de 3 de outubro de 1941)" },
+"Prescrever ou ministrar, culposamente, drogas, sem que delas necessite o paciente, ou fazê-lo em doses excessivas ou em desacordo com determinação legal ou regulamentar": { artigo: "Art. 38", lei: "Lei de Drogas (Lei nº 11.343, de 23 de agosto de 2006)" },
+"Prestação de garantia graciosa": { artigo: "359-E", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Prevaricação": { artigo: "319", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Prevaricação": { artigo: "319-A", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Provocação de tumulto. Conduta inconveniente": { artigo: "40", lei: "Lei das Contravenções Penais(Decreto-Lei 3.688, de 3 de outubro de 1941)" },
+"Publicidade enganosa ou abusiva": { artigo: "67", lei: "Código de Defesa do Consumidor (Lei 8.078, de 11 de setembro de 1990)" },
+"Quem adquirir, guardar, tiver em depósito, transportar ou trouxer consigo, para consumo pessoal, drogas sem autorização ou em desacordo com determinação legal ou regulamentar": { artigo: "28, caput", lei: "Lei de Drogas (Lei nº 11.343, de 23 de agosto de 2006)" },
+"Recebimento ou utilização, como dinheiro, de título ao portador emitido ilegalmente": { artigo: "292, §único", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Receptação culposa": { artigo: "180, § 3º", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Recusa de dados sobre a própria identidade": { artigo: "68", lei: "Lei das Contravenções Penais(Decreto-Lei 3.688, de 3 de outubro de 1941)" },
+"Recusa de moeda de curso legal": { artigo: "43", lei: "Lei das Contravenções Penais(Decreto-Lei 3.688, de 3 de outubro de 1941)" },
+"Remoção de sinal de serviço público": { artigo: "36,§único “b”", lei: "Lei das Contravenções Penais(Decreto-Lei 3.688, de 3 de outubro de 1941)" },
+"Reparação não autorizada de produtos com peças ou componentes usados": { artigo: "70", lei: "Código de Defesa do Consumidor (Lei 8.078, de 11 de setembro de 1990)" },
+"Resistência": { artigo: "329", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Reter o cartão magnético de conta bancária relativa a benefícios, proventos ou pensão do idoso, bem como qualquer outro documento com objetivo de assegurar recebimento ou ressarcimento de dívida": { artigo: "104", lei: "Estatuto do Idoso (Lei 10.471, de 1º de outubro de 2003)" },
+"Rixa qualificada (participantes)": { artigo: "137, §único", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Rixa": { artigo: "137,caput", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Simulação da qualidade de funcionário": { artigo: "45", lei: "Lei das Contravenções Penais(Decreto-Lei 3.688, de 3 de outubro de 1941)" },
+"Sonegação ou destruição de correspondência": { artigo: "151, §1º, I", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Substância tóxica, perigosa ou nociva à saúde humana ou ao meio ambiente": { artigo: "56, § 3º", lei: "Meio Ambiente (Lei 9.605, de 12 de fevereiro de 1998)" },
+"Subtração de incapazes": { artigo: "249", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Subtração, supressão ou dano à coisa própria na posse legal de terceiro": { artigo: "346", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Tráfego em velocidade incompatível com a segurança no trânsito": { artigo: "311", lei: "Código de Trânsito Brasileiro (Lei 9.503, de 23 de setembro de 1997)" },
+"Ultraje a culto e impedimento ou perturbação de ato a ele relativo (emprego de violência)": { artigo: "208 §único", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Ultraje a culto e impedimento ou perturbação de ato a ele relativo": { artigo: "208,caput", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Uso culposo de gás tóxico ou asfixiante": { artigo: "252, §único", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Uso ilegítimo de uniforme ou distintivo": { artigo: "46", lei: "Lei das Contravenções Penais(Decreto-Lei 3.688, de 3 de outubro de 1941)" },
+"Usurpação de águas": { artigo: "161, §1º, I", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Usurpação de função pública": { artigo: "328", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Vadiagem": { artigo: "59", lei: "Lei das Contravenções Penais(Decreto-Lei 3.688, de 3 de outubro de 1941)" },
+"Venda, depósito, transporte ou guarda de produtos de origem vegetal sem licença": { artigo: "46, §único", lei: "Meio Ambiente (Lei 9.605, de 12 de fevereiro de 1998)" },
+"Venda, exportação, aquisição ou guarda de espécimes da fauna silvestre e produtos derivados, sem licença ou provenientes de criadouros não autorizados": { artigo: "29, § 1º, III", lei: "Meio Ambiente (Lei 9.605, de 12 de fevereiro de 1998)" },
+"Vias de fato": { artigo: "21", lei: "Lei das Contravenções Penais(Decreto-Lei 3.688, de 3 de outubro de 1941)" },
+"Violação de comunicação telegráfica, radioelétrica ou telefônica": { artigo: "151, §1º, II", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Violação de correspondência comercial": { artigo: "152", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Violação de correspondência": { artigo: "151,caput", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Violação de domicílio qualificada": { artigo: "150, §1°", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Violação de domicílio": { artigo: "150,caput", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Violação de lugar ou objeto": { artigo: "26", lei: "Lei das Contravenções Penais(Decreto-Lei 3.688, de 3 de outubro de 1941)" },
+"Violação de segredo profissional": { artigo: "154", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Violação de sigilo funcional": { artigo: "325 §1°, I", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Violação de sigilo funcional": { artigo: "325 §1°, II", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Violação de sigilo funcional": { artigo: "325", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Violência ou fraude em arrecadação judicial": { artigo: "358", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
 
-"Esbulho possessório": { artigo: "161, §", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
-    
-"Perturbação do trabalho ou sossego alheios": { artigo: "42", lei: "Lei das Contravenções Penais(Decreto-Lei 3.688, de 3 de outubro de 1941)" },
     
 
 
@@ -1487,10 +2054,30 @@ const chaveBase = `${tipo.toLowerCase()}_${contador}`;
        
 <label>${tipo === 'Autor' ? 'RELATO DO AUTOR' : tipo === 'Vitima' ? 'RELATO DA VITIMA' : 'RELATO DA TESTEMUNHA'}</label>
     
+
+
 <textarea class="form-control input-save" name="relato_${tipo.toLowerCase()}[]" data-key="relato_${chaveBase}" rows="10">${tipo === 'Autor' ? 'O autor dos fatos (), cientificado de seus direitos constitucionais, inclusive o de permanecer em silencio, declarou Que... Lido e achado conforme. Nada mais disse e nem lhe foi perguntado(a).' : tipo === 'Vitima' ? 'A vítima ( ) relatou que... Lido e achado conforme. Nada mais disse e nem lhe foi perguntado(a).' : 'A testemunha ( ) compromissada na forma da lei, aos costumes respondeu negativamente se possui algum grau de parentesco ou amizade com as partes), declarou Que.... Lido e achado conforme. Nada mais disse e nem lhe foi perguntado(a). ('}</textarea>
+
 
     
     <button type="button" class="btn btn-danger mt-2" onclick="removerPessoa(this)">Remover</button>`;
+
+    function atualizarTexto() {
+            var naturezaHistorico = document.getElementById("naturezaa").value;
+            var textarea = document.getElementById("texto");
+            
+
+            var textos = {
+                "natureza1": "O autor dos fatos (), cientificado de seus direitos constitucionais, inclusive o de permanecer em silencio, declarou Que... Lido e achado conforme. Nada mais disse e nem lhe foi perguntado(a).",
+                "natureza2": "Texto relacionado à Natureza 2.",
+                "natureza3": "Texto específico para Natureza 3."
+            };
+
+           
+ textarea.value = textos[natureza] || "${tipo === 'Autor' ? 'O autor (k) dos fatos (), cientificado de seus direitos constitucionais, inclusive o de permanecer em silencio, declarou Que... Lido e achado conforme. Nada mais disse e nem lhe foi perguntado(a).' : tipo === 'Vitima' ? 'A vítima ( ) relatou que... Lido e achado conforme. Nada mais disse e nem lhe foi perguntado(a).' : 'A testemunha ( ) compromissada na forma da lei, aos costumes respondeu negativamente se possui algum grau de parentesco ou amizade com as partes), declarou Que.... Lido e achado conforme. Nada mais disse e nem lhe foi perguntado(a). ('}";
+        }
+
+
 
     container.appendChild(divPessoa);
 
@@ -3069,7 +3656,7 @@ document.getElementsByName("nome_vitima[]").forEach((input, index) => {
             const lesaoVitimaExame = document.getElementsByName("local_trabalho_vitima[]")[index]?.value || "N/A";
  
         //Lesão corporal culposa - aqui tenho que criar o termo de solicitação de exame com condição que somente quando for lesao corporal 
-if (naturezaa === "Lesão corporal culposa"){
+        if (["Lesão corporal culposa", "Lesão corporal"].includes(naturezaa)) {
     doc.addPage(); // Cria uma nova página para o termo de encerramento ...
 pageCount++; // Incrementa contador de páginas
 adicionarCabecalho()
