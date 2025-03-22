@@ -3066,7 +3066,8 @@ document.getElementsByName("nome_vitima[]").forEach((input, index) => {
             const nomeVitimaExame = input.value;
             const filiacaoVitimaExame = document.getElementsByName("filiacao_vitima[]")[index]?.value || "N/A";
 
-
+            const lesaoVitimaExame = document.getElementsByName("local_trabalho_vitima[]")[index]?.value || "N/A";
+ 
         //Lesão corporal culposa - aqui tenho que criar o termo de solicitação de exame com condição que somente quando for lesao corporal 
 if (naturezaa === "Lesão corporal culposa"){
     doc.addPage(); // Cria uma nova página para o termo de encerramento ...
@@ -3082,7 +3083,7 @@ doc.setFontSize(10);
 y += 20
 
 
-let textoExamePart1 = `Requisito a POLITEC - Perícia Oficial e Identificação Técnica, nos termos dos artigos 158 e seguintes do Código de Processo Penal e artigo 69 Caput da Lei n.º 9.099/1995, a realização de exame de corpo de delito no (a) Sr. (a) ${nomeVitimaExame},  vítima qualificado no Termo Circunstanciado de Ocorrência nº ${numero_tco}/CR07/${ano}, por ter relatado que foi atacada, onde causou uma lesão corporal. Natureza: ${naturezaa}, ocorrido no dia ${dia} de ${mesExtenso2} de ${ano}, respondendo para tal os seguintes quesitos:\n\nPara tanto, solicito que Vossa Senhoria responda aos quesitos oficiais, conforme abaixo:\n\n      1. Há ofensa à integridade corporal do paciente?\n      2. Qual o instrumento ou meio que produziu a ofensa?\n      3. Resultou incapacidade para as ocupações habituais por mais de 30 (trinta) dias?\n\n\nDESTINO DO LAUDO: Corregedoria da Policia Militar.\n\n\n\n${cidade}, ${dia} de ${mesExtenso2} de ${ano}.`;
+let textoExamePart1 = `Requisito a POLITEC - Perícia Oficial e Identificação Técnica, nos termos dos artigos 158 e seguintes do Código de Processo Penal e artigo 69 Caput da Lei n.º 9.099/1995, a realização de exame de corpo de delito no (a) Sr. (a) ${nomeVitimaExame},  vítima qualificado no Termo Circunstanciado de Ocorrência nº ${numero_tco}/CR07/${ano}, onde causou uma ${lesaoVitimaExame}. Tipificando o crime de: ${naturezaa}, ocorrido no dia ${dia} de ${mesExtenso2} de ${ano}, respondendo para tal os seguintes quesitos:\n\nPara tanto, solicito que Vossa Senhoria responda aos quesitos oficiais, conforme abaixo:\n\n      1. Há ofensa à integridade corporal do paciente?\n      2. Qual o instrumento ou meio que produziu a ofensa?\n      3. Resultou incapacidade para as ocupações habituais por mais de 30 (trinta) dias?\n\n\nDESTINO DO LAUDO: Corregedoria da Policia Militar.\n\n\n\n${cidade}, ${dia} de ${mesExtenso2} de ${ano}.`;
 
 doc.setFont("helvetica", "normal");
 doc.text(textoExamePart1, 20, y, { maxWidth: 170});
