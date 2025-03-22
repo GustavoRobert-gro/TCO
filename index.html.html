@@ -1,0 +1,3298 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">-->
+
+    <title>TCO - Cadastro</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+        
+</head>
+<body class="container mt-4">
+  
+    <h1>TERMO CIRCUNSTANCIADO DE OCORRÊNCIA - EM DESENVOLVIMENTO</h1>
+    <hr>
+
+    <!-- Formulário Dados Gerais -->
+    <h2>1º Dados Gerais</h2>
+    <form id="formDadosGerais">
+
+
+        <div class="date-group">
+        <label for="numero_tco">Nº TCO:</label>
+        <input type="text" id="numero_tco" value="0038" required style="width: 70px";>
+
+        
+           <!--inicio do preenchimento automatico-->
+           <label for="naturezaa">Natureza:</label>
+<select id="naturezaa" required style="width: 800px;">
+    <option value="" disabled selected>Selecione uma opção</option>
+    <option value="Ameaça">Ameaça</option>
+    <option value="Lesão corporal culposa">Lesão corporal culposa</option>
+    <option value="Difamação">Difamação</option>
+    <option value="Injúria">Injúria</option>
+    <option value="Ameaça">Ameaça</option>
+    <option value="Violação de Domicílio">Violação de Domicílio</option>
+    <option value="Dano Simples">Dano Simples</option>
+    <option value="Introdução ou Abandono de Animais">Introdução ou Abandono de Animais</option>
+    <option value="Descumprimento de Legítima Defesa">Descumprimento de Legítima Defesa</option>
+    <option value="Resistência sem Violência">Resistência sem Violência</option>
+    <option value="Desacato">Desacato</option>
+    <option value="Contrabando de Pequeno Valor">Contrabando de Pequeno Valor</option>
+    <option value="Dirigir Sob Influência de Álcool">Dirigir Sob Influência de Álcool</option>
+    <option value="Fuga de Local de Acidente">Fuga de Local de Acidente</option>
+    <option value="Uso de Documento Falso no Trânsito">Uso de Documento Falso no Trânsito</option>
+    <option value="Entrega de direção de veículo automotor a pessoa não habilitada ou sem condições de conduzir o veículo com segurança">Entrega de direção de veículo automotor a pessoa não habilitada ou sem condições de conduzir o veículo com segurança</option>
+    <option value="Direção não habilitada de veículo automotor, gerando perigo">Direção não habilitada de veículo automotor, gerando perigo</option>
+    <option value="Tráfego em velocidade incompatível com a segurança no trânsito">Tráfego em velocidade incompatível com a segurança no trânsito</option>
+
+    <option value="Quem adquirir, guardar, tiver em depósito, transportar ou trouxer consigo, para consumo pessoal, drogas sem autorização ou em desacordo com determinação legal ou regulamentar">Quem adquirir, guardar, tiver em depósito, transportar ou trouxer consigo, para consumo pessoal, drogas sem autorização ou em desacordo com determinação legal ou regulamentar</option>
+
+    <option value="Às mesmas medidas submete-se quem, para seu consumo pessoal, semeia, cultiva ou colhe plantas destinadas à preparação de pequena quantidade de substância ou produto capaz de causar dependência física ou psíquica.">Às mesmas medidas submete-se quem, para seu consumo pessoal, semeia, cultiva ou colhe plantas destinadas à preparação de pequena quantidade de substância ou produto capaz de causar dependência física ou psíquica.</option>
+
+    <option value="Oferecer droga, eventualmente e sem objetivo de lucro, a pessoa de seu relacionamento, para juntos a consumirem">Oferecer droga, eventualmente e sem objetivo de lucro, a pessoa de seu relacionamento, para juntos a consumirem</option>
+
+    <option value="Esbulho possessório">Esbulho possessório</option>
+    <option value="Perturbação do trabalho ou sossego alheios">Perturbação do trabalho ou sossego alheios</option>
+
+
+</select>
+        </div>
+
+<label for="artigo">Artigo:</label>
+<input type="text" id="artigo" required style="width: 120px;" readonly>
+
+<label for="lei">Lei:</label>
+<input type="text" id="lei" required style="width: 550px;" readonly>
+
+<script>
+       // Declaração das variáveis globais para armazenar os textos DE MATERIAIS APREENDIDOS
+
+let textoDrogas = [];
+let textoOutros = [];
+//let Autor01doFatoGlobal = [];
+let Autor02doFatoGlobal = [];
+let Autor03doFatoGlobal = [];
+let Autor04doFatoGlobal = [];
+let Vitima01Global = [];
+let Vitima02Global = [];
+let Vitima03Global = [];
+let Vitima04Global = [];
+
+
+
+  // Crimes de menor potencial ofensivo (pena máxima até 2 anos) incluindo crimes de trânsito
+  const naturezas = {
+    "Ameaça": { artigo: "147", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+"Violação de domicílio": { artigo: "150,caput", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+
+
+    "Lesão corporal culposa": { artigo: "129", lei: "Código Penal - Decreto-Lei nº 2.848/40" },
+    "Difamação": { artigo: "139", lei: "Código Penal - Decreto-Lei nº 2.848/40" },
+    "Injúria": { artigo: "140", lei: "Código Penal - Decreto-Lei nº 2.848/40" },
+    "Ameaça": { artigo: "147", lei: "Código Penal - Decreto-Lei nº 2.848/40" },
+    "Violação de Domicílio": { artigo: "150", lei: "Código Penal - Decreto-Lei nº 2.848/40" },
+    "Dano Simples": { artigo: "163", lei: "Código Penal - Decreto-Lei nº 2.848/40" },
+    "Introdução ou Abandono de Animais": { artigo: "164", lei: "Código Penal - Decreto-Lei nº 2.848/40" },
+    "Descumprimento de Legítima Defesa": { artigo: "182", lei: "Código Penal - Decreto-Lei nº 2.848/40" },
+    "Resistência sem Violência": { artigo: "329", lei: "Código Penal - Decreto-Lei nº 2.848/40" },
+    "Desacato": { artigo: "331", lei: "Código Penal - Decreto-Lei nº 2.848/40" },
+    "Contrabando de Pequeno Valor": { artigo: "334-A", lei: "Código Penal - Decreto-Lei nº 2.848/40" },
+    "Dirigir Sob Influência de Álcool": { artigo: "306", lei: "Código de Trânsito Brasileiro - Lei nº 9.503/1997" },
+    "Fuga de Local de Acidente": { artigo: "307", lei: "Código de Trânsito Brasileiro - Lei nº 9.503/1997" },
+    "Uso de Documento Falso no Trânsito": { artigo: "171", lei: "Código de Trânsito Brasileiro - Lei nº 9.503/1997" },
+    
+    "Entrega de direção de veículo automotor a pessoa não habilitada ou sem condições de conduzir o veículo com segurança": { artigo: "310", lei: "Código de Trânsito Brasileiro - Lei nº 9.503/1997" },
+
+    "Direção não habilitada de veículo automotor, gerando perigo": { artigo: "309", lei: "Código de Trânsito Brasileiro - Lei nº 9.503/1997" },
+    "Tráfego em velocidade incompatível com a segurança no trânsito": { artigo: "311", lei: "Código de Trânsito Brasileiro - Lei nº 9.503/1997" },
+"Quem adquirir, guardar, tiver em depósito, transportar ou trouxer consigo, para consumo pessoal, drogas sem autorização ou em desacordo com determinação legal ou regulamentar": { artigo: "28, § 1º", lei: "Lei de Drogas (Lei nº 11.343, de 23 de agosto de 2006)" },
+
+"Às mesmas medidas submete-se quem, para seu consumo pessoal, semeia, cultiva ou colhe plantas destinadas à preparação de pequena quantidade de substância ou produto capaz de causar dependência física ou psíquica.": { artigo: "28, caput", lei: "Lei de Drogas (Lei nº 11.343, de 23 de agosto de 2006)" },
+
+"Oferecer droga, eventualmente e sem objetivo de lucro, a pessoa de seu relacionamento, para juntos a consumirem": { artigo: "Art. 33. § 3°", lei: "Lei de Drogas (Lei nº 11.343, de 23 de agosto de 2006)" },
+
+"Perturbação do trabalho ou sossego alheios": { artigo: "42", lei: "Lei das Contravenções Penais(Decreto-Lei 3.688, de 3 de outubro de 1941)" },
+
+"Esbulho possessório": { artigo: "161, §", lei: "Código Penal (Decreto-Lei 2.848, de 7 de dezembro de 1940)." },
+    
+"Perturbação do trabalho ou sossego alheios": { artigo: "42", lei: "Lei das Contravenções Penais(Decreto-Lei 3.688, de 3 de outubro de 1941)" },
+    
+
+
+  };
+
+  // Atualizar os campos ao selecionar uma opção
+  document.getElementById("naturezaa").addEventListener("change", function() {
+    let valorSelecionado = this.value;
+    
+    if (naturezas[valorSelecionado]) {
+      document.getElementById("artigo").value = naturezas[valorSelecionado].artigo;
+      document.getElementById("lei").value = naturezas[valorSelecionado].lei;
+    } else {
+      document.getElementById("artigo").value = "";
+      document.getElementById("lei").value = "";
+    }
+  });
+</script>
+<br>
+<br>
+    <!--fim do preenchimento automatico-->
+       
+        <div class="date-group">
+
+            <label for="cidade">Cidade:</label>
+        <select id="cidade" required style="width: 120px";>
+            <option value="Denise-MT">Denise-MT</option>
+            <option value="Barra do Bugres-MT">Barra do Bugres-MT</option>
+            <option value="Nova Olimpia-MT">Nova Olimpia-MT</option>
+            <option value="Porto Estrela-MT">Porto Estrela-MT</option>
+            <option value="Tangara da serra-MT">Tangara da serra-MT</option>
+            <option value="Campo Novo dos Parecis-MT">Campo Novo dos Parecis-MT</option>
+            <option value="Brasnorte-MT">Brasnorte-MT</option>
+            <option value="Sapezal-MT">Sapezal-MT</option>
+        
+            </select>
+            
+            <label for="dia">Dia:</label>
+            <input type="text" id="dia" required style="width: 40px";>
+
+            <script>
+                document.getElementById("dia").value = new Date().getDate();
+              </script>
+            
+            <label for="mes">Mês:</label>
+            <input type="text" id="mes" required style="width: 40px";>
+
+            <script>
+                document.getElementById("mes").value = new Date().getMonth() + 1;
+              </script>
+            
+            <label for="ano">Ano:</label>
+            <input type="text" id="ano" value="2025" required style="width: 80px";>
+        
+            <label for="data_registro">Data do Registro:</label>
+            <input type="date" id="data_registro" required>
+
+            <script>
+                // Obter a data atual no formato YYYY-MM-DD
+                const today = new Date().toISOString().split('T')[0];
+                
+                // Definir o valor do campo como a data atual
+                document.getElementById('data_registro').value = today;
+            </script>
+
+        
+    
+            
+            <label for="hora_fato">Hr Fato:</label>
+            <input type="text" id="hora_fato" required>
+            
+            <script>
+              function formatarHoraAtual() {
+                let agora = new Date();
+                let horas = agora.getHours().toString().padStart(2, "0");
+                let minutos = agora.getMinutes().toString().padStart(2, "0");
+                
+                return `${horas}h${minutos}min`;
+              }
+            
+              document.getElementById("hora_fato").value = formatarHoraAtual();
+            </script>
+            
+
+            <br>
+            <br>
+
+        </div>
+
+    <!-----------------------------------------------------------ESCOLHA DE QUARTEL-->
+
+    <script>
+        function alterarNomeCondutor() {
+            var quartelSelecionado = document.getElementById("quartel").value;
+             // Campos de nome completo
+             var nomeSelects = [
+                document.getElementById("nome_completo"),
+                document.getElementById("nome_completo_componente2"),
+                document.getElementById("nome_completo_componente3"),
+                document.getElementById("nome_completo_componente4")
+            ];
+          // Limpar as opções existentes
+          nomeSelects.forEach(function(nomeSelect) {
+                nomeSelect.innerHTML = "<option value='' disabled selected>Selecione uma opção</option>";
+            });
+
+            // Condicional para mudar os nomes com base no quartel selecionado
+            var nomes = [];
+            
+            if (quartelSelecionado === "NPM DENISE") {
+                nomes = [
+                    "ANGELO MÁRCIO PRADO BRUNO",
+                    "SIDNEY BROLEZI DO NASCIMENTO",
+                    "WEBER DE AQUINO DA SILVA",
+                    "ALLAN CARLOS CAMPOS",
+                    "GUSTAVO ROBERT DE OLIVEIRA",
+                    "JOSIMAR PEREIRA DA COSTA",
+                    "RICARDO DA SILVA SOUZA",
+                    "GUILHERME SOUZA SILVA",
+                    "ELEILTON THIAGO SOARES DE OLIVEIRA",
+                    "BRUNA ASSIS CORREIA",
+                    "EDSON BRUNO MARTINS LOBO",
+                    "ARTHUR VALDIR VINHAS DE QUEIROZ",
+                    "DOUGLAS BEZERRA DE OLIVEIRA"
+
+                ];
+            } else if (quartelSelecionado === "12ª CIPM BARRA DO BUGRES") {
+                nomes = [
+                    "ROGÉRIO SÁVIO DA SILVA",
+"ALEXANDRE APARECIDO DE ASSIS ",
+"JOSE AUGUSTO OJEDA",
+"JULIANO MÁRCIO ANDRADE BATISTA",
+"RAIMUNDO CAPISTRANO AMORIM",
+"JEAN CARLOS QUEIROZ PIROVANO",
+"ARNALDO PEREIRA DOS SANTOS ",
+"RONEY GONÇALVES FERREIRA",
+"MALTON SOARES",
+"PAULO EDUADO DO ESPIRITO SANTO",
+"JOHNNY EVANGELISTA DE ARRUDA CAMPOS",
+"KEVELLEY ARRUDA OLIVEIRA",
+"RONIL PERON JUNIOR",
+"RODRIGO FRANÇA DE ASSIS",
+"ANDERSON DE SOUZA SCHWARTZ ",
+"HIGSON BRAGA DE SOUZA",
+"JANILSON ALVES CARDOSO",
+"UEWERTON MARCELO LIMA DE OLIVEIRA",
+"ARTHUR GABRIEL DA SILVA SIQUEIRA"
+
+                ];
+            } else if (quartelSelecionado === "1ª CIPM NOVA OLIMPIA") {
+                nomes = [
+                    "JAIR DOS SANTOS SILVA",
+"ROGÉRIO TIAGO GONÇALVES VASQUES",
+"JOSUÉ BARBOSA DOS SANTOS",
+"JORGE RECHMANN",
+"RODRIGO GONÇALVES LISBOA",
+"FABIO GLEYCIO FONSECA",
+"DIEGO PEIXOTO DA SILVA",
+"FABIO DOS SANTOS NEGRÃO",
+"ÉLLBIS RODRIGUES DA COSTA",
+"DANIEL ALMEIDA BRITO",
+"RAFAEL NUNES SOARES DA COSTA",
+"EVERLI RENATO OLIVEIRA MARTINS",
+"DENER MARCELO CORREA DE SOUZA",
+"RICHARD VIEIRA DE FREITAS",
+"CLAUDERIZE KARLA DE OLIVEIRA MAGALHÃES CARVALHO",
+
+                ];
+            } else if (quartelSelecionado === "NPM PORTO ESTRELA") {
+                nomes = [
+                    "SINESIO FRANCISCO MORAES",
+"EDNILSON ALVES MIRANDA",
+"RONILDO PEREIRA RODRIGUES",
+"JOAREIS BARBOSA LIMA",
+"MANOEL SANTOS DA SILVA",
+"FABIO DE SOUZA DIAS ",
+"ROFERSON PINHEIRO DE LIMA ",
+"KLEBERSON RIZATTI DE MORAES GONÇALVES",
+"LUIZ FERNANDO DE SOUZA ",
+"ANTONIO CASSIO FABIANO DA COSTA FARIA",
+"FERNANDO DA CRUZ COSTA",
+"WAGNER COSTA ALVES",
+"FABIANO VIEIRA DA CUNHA ",
+"CLAUDENILSON FERREIRA DOS SANTOS ",
+"DILLAN RAMOS DA LUZ",
+"RENAN CARLOS NUNES DE OLIVEIRA ",
+"JEDERSON MIRANDA ARRUDA"
+
+                ];
+
+            } else if (quartelSelecionado === "19º BPM - TANGARA") {
+                nomes = [
+                    "EDUARDO HENRIQUE SOUZA LANA",
+"EVERSON BRITO FORTES",
+"MARCIO PEREIRA DA SILVA",
+"AGNALDO LEAL DOS SANTOS",
+"CLAUDIO FERREIRA BARBOSA",
+"HILTON INÁCIO DA SILVA",
+"CLEOMAR DA SILVA OLIVEIRA",
+"ERANILSON PEREIRA DE JESUS",
+"ROBERTO HAMANN SEIDLER",
+"LEANDRO RIBEIRO DOS SANTOS",
+"ROGÉRIO MOREIRA DA SILVA",
+"MAX CARLOS DE ALBUQUERQUE ALMEIDA",
+"ATHAULFO ALVES DA LUZ",
+"JOSÉ APARECIDO VIEIRA DOS SANTOS",
+"LUCIANO DUARTE DE OLIVEIRA",
+"EDJOICE ALVES DE SOUZA",
+"MARCOS ANTÔNIO MINARI",
+"ANDERSON SALES PRADO",
+"ETIENE RODRIGUES DE ALMEIDA DA SILVA",
+"ELINILSON LEITE DE MIRANDA",
+"WELINTON FABIANO DA SILVA",
+"ELINTON LUIS FRANCIOLI DE AQUINO",
+"MARCELO ALEXANDRE AMARAL DA SILVA",
+"OSVALDINA DA SILVA SANTOS",
+"WAGNER DE ALMEIDA LEITE",
+"MARCOS DA GAMA SILVA",
+"GIL BRITO DE BARROS FIGUEIREDO",
+"VAGNER ANTUNES GONÇALVES RODRIGUES ",
+"NATHALIA APARECIDA SILVA ANTUNES ",
+"WELLIGTON LOURENÇO BARBOSA ",
+"CLEYTON RIBEIRO GRUPP ",
+"ALEXANDRE AMORIM DA SILVA",
+"WANDERLEY DE ALMEIDA LEITE ",
+"FABIANA RODRIGUES NOTARANGELI",
+"PATRICIO DA SILVA SANTOS",
+"FABIANO MARCIO DE MATOS",
+"ANTONIO HEROITO DERNER JUNIOR",
+"MARCELO FRANCISCO DE OLIVEIRA",
+"MANOEL FRANCISCO DE OLIVEIRA",
+"VALDEMAR JUNIOR DE ALMEIDA BORGES",
+"MARLON TOMAZ COSTA",
+"WAGNER DE SOUZA SILVA",
+"FABRICIO PEREIRA COELHO",
+"SIDNEI MARIO KRAUS",
+"GILMAR DIAS SANTOS",
+"BRINNER GARAY PINHO PEDROSO",
+"SERGIO MANHONI JUNIOR",
+"JONIVALDO ATANÁSIO DA SILVA MIRANDA",
+"MAYKO APARECIDO DE SOUZA ALMEIDA",
+"BRUNO ROBERTO BATISTAO",
+"THIAGO SILVA COELHO",
+"DIEGO FERNANDES DE OLIVEIRA LAGE DOS SANTOS",
+"GABRIEL MURILO FERRAZZA ARAUJO",
+"GUSTAVO HENRIQUE BECKER",
+"DUILIO ANDRÉ MORAES SOARES",
+"CLEUNICE LOURENÇO DE CRISTO",
+"MARCOS VINICIUS CERILO DA SILVA"
+
+
+];
+
+
+} else if (quartelSelecionado === "CR07 SEDE") {
+                nomes = [
+                    "MURILO FRANCO DE MIRANDA",
+"OSMÁRIO CÍCERO DE OLIVEIRA JÚNIOR ",
+"GUILHERME HENRIQUE GAMA SOUZA",
+"LUIS CARLOS DE ALMEIDA PADILHA",
+"MARIVAN CARNEIRO DE CARVALHO",
+"ENÉIAS DE OLIVEIRA",
+"JANDERSON REBECA ROCHA",
+"MARCOS ANTONIO PEREIRA CATULÉ",
+"FERNANDO SOUZA ANDRADE",
+"WENDEL DONIZETE DERMONDES DE AGUIAR",
+"VALÉRIA CUNHA DE MELLO",
+"VANDERLEY LUIS DA SILVA ESPIRITO SANTO ",
+"ANDERSON MORAES DA SILVA",
+"ANDREIA SOARES DA SILVA ANDRADE",
+"ROGERIO BORGES DE OLIVEIRA",
+"JEORGE ANDRÉ DA CUNHA",
+"WARNI ANDRADE DE PINHO",
+"RHAEL JAIME GONÇALVES",
+"VICTOR HUGO FERREIRA SILVA",
+"ADEMIR TORRES ROSA JÚNIOR"
+
+
+
+
+                    ];
+
+
+                } else if (quartelSelecionado === "6ª Cia PM Sapezal") {
+                nomes = [
+                    "GABRIEL DIJAN SCHMEING",
+"EDNIL BOSCO SOARES DE PAULA",
+"LEOCIR ANTONIO PUHL",
+"MOACYR MENDES DOS SANTOS JUNIOR",
+"FÁBIO OLIVEIRA DA SILVA ",
+"UILTON DA SILVA SOARES",
+"LEANDRO ARAUJO VIEIRA",
+"CARLOS ANTONIO DA SILVA",
+"RENATO HONORATO CARNEIRO",
+"HAGAÚ DOS SANTOS FRANCO",
+"JULIO CESAR ETIENE PEREIRA",
+"TIAGO SILVA HARTMANN",
+"REGINALDO OLIVEIRA DA SILVA",
+"FRANCISCO MAGNO PEREIRA DA SILVA",
+"ALESSANDRO HERREIRO MACEDO",
+"MAGNO SILVA PEREIRA",
+"DENIS HENRIQUE DOS SANTOS RAMOS"
+
+
+                ];
+
+
+
+            } else if (quartelSelecionado === "16ª CIPM Campo Novo do Parecis") {
+                nomes = [
+                    "MARCOS ANTONIO RODRIGUES DE AMORIM",
+"GABRIEL HENRIQUE LUNKES DE MELO",
+"VAMIL DE LUQUI NUNES",
+"GILMAR NEVES DA SILVA",
+"ROGÉRIO DA SILVA",
+"CARLOS ALBERTO FRANCISCO DE SOUZA",
+"GERSON EVANGELISTA MACHADO",
+"ARLAN SOARES RONDON",
+"JOSILDO RODRIGUES LEITE",
+"IVAN DO CARMO GOMES",
+"LEANDRO JOÃO DA ROSA",
+"EDE CARLOS DE OLIVEIRA SANTOS",
+"ROBERTO CARIELO TOMAZ",
+"MARLLON BOABAID DE MATOS PASSARELLO",
+"FRANKLIM COSTA DE URZEDO",
+"ANDRÉ LUIS ASSUNÇÃO PESTANA ROSA",
+"GLEISON RODRIGUES GODOY",
+"DIEGO SOARES DA SILVA",
+"WESLEY FERREIRA DA SILVA",
+"THIAGO SILVA JARDIM RODRIGUES",
+"BRUNO RAFAEL PINTO DA SILVA",
+"CLEOMAR COSTA FAXINA",
+"WILHAN GUIMARAES SENA",
+"ABMAEL BEZERRA DO NASCIMENTO ",
+"MICHELLE CAPPARELLI ",
+"DENIS CELESTINO DA SILVA"
+
+
+                    ];
+
+                    
+            } else if (quartelSelecionado === "1º Pel PM Brasnorte") {
+                nomes = [
+                    "CIRANO RIBAS DE PAULA RODRIGUES",
+"SÉRGIO ROBERTO",
+"GEYSON DE JESUS ALVES BATISTA",
+"ALAN CARVALHO DA SILVA",
+"ANDERSON DE AMARAL RODRIGUES",
+"ADAUTO FRANCISCO DE OLIVEIRA",
+"WILLIAN VICTOR DOS SANTOS MORAES",
+"ALEX FRANCISCO DE OLIVEIRA",
+"DUYLLIO JOSÉ DE FREITAS ALENCAR MAXIMO SILVA",
+"EVANDRO ONOFRE DA SILVA",
+"LETICIA SANTOS ROCHA"
+
+
+
+                    ];
+            }
+
+            // Adicionar as opções dinamicamente aos selects de nome
+            nomeSelects.forEach(function(nomeSelect) {
+                nomes.forEach(function(nome) {
+                    var option = document.createElement("option");
+                    option.value = nome;
+                    option.textContent = nome;
+                    nomeSelect.appendChild(option);
+                });
+            });
+        }
+    </script>
+</head>
+<body>
+
+    <!-- Campo Quartel -->
+    <label for="quartel">Quartel:</label>
+    <select id="quartel" required onchange="alterarNomeCondutor()">
+        <option value="" disabled selected>Selecione uma opção</option>
+        <option value="NPM DENISE">Nucleo de policia Militar de Denise - MT</option>
+        <option value="12ª CIPM BARRA DO BUGRES">12ª CIPM de Barra do Bugres - MT</option>
+        <option value="1ª CIPM NOVA OLIMPIA">1ª CIPM Nova Olimpia</option>
+        <option value="NPM PORTO ESTRELA">Nucleo de Policia Militar de Porto Estrela-MT</option>
+
+        <option value="19º BPM - TANGARA">19º BPM - TANGARA</option>
+        <option value="CR07 SEDE">COMANDO REGIONAL 07</option>
+        <option value="6ª Cia PM Sapezal">6ª Cia PM Sapezal</option>
+        <option value="16ª CIPM Campo Novo do Parecis">16ª CIPM Campo Novo do Parecis</option>
+        <option value="1º Pel PM Brasnorte">1º Pel PM Brasnorte</option>
+    </select>
+
+    <br><br>
+
+    <!-- Campo Nome Completo -->
+    <label for="nome_completo">Nome Completo CONDUTOR:</label>
+    <select id="nome_completo" required>
+        <option value="" disabled selected>Selecione uma opção</option>
+    </select>
+        <label for="posto_grad">Posto/Grad:</label>
+        <select id="posto_grad" required>
+            <option value="" disabled selected>Selecione uma opção</option>
+            <option value="CEL-PMMT">CEL-PMMT</option>
+            <option value="TEN Cel-PMMT">TEN Cel-PMMT</option>
+            <option value="MAJOR-PMMT">MAJOR-PMMT</option>
+            <option value="CAP-PMMT">CAP-PMMT</option>
+            <option value="TEN-PMMT">TEN-PMMT</option>
+            <option value="SUB TEN-PMMT">SUB TEN-PMMT</option>
+            <option value="1º SGT-PMMT">1º SGT-PMMT</option>
+            <option value="2º SGT-PMMT">2º SGT-PMMT</option>
+            <option value="3º SGT-PMMT">3º SGT-PMMT</option>
+            <option value="CB-PMMT">CB-PMMT</option>
+            <option value="SD-PMMT">SD-PMMT</option>
+        
+        </select>
+
+        <label for="rg">RGPM:</label>
+        <input type="text" id="rg" value="885.812" required style="width: 120px";>
+
+    </div>
+        
+ <!--quadro de componentes da gupm-->
+
+
+     <div class="date-group">
+        <label for="nome_completo_componente2">Nome Componente da GUSV:</label>
+<select id="nome_completo_componente2" required>
+    <option value="" disabled selected>Selecione uma opção</option>
+</select>
+
+        
+
+        <label for="posto_grad_componente2">Posto/Grad:</label>
+        <select id="posto_grad_componente2" required>
+            <option value="" disabled selected>Selecione uma opção</option>
+            <option value="CEL-PMMT">CEL-PMMT</option>
+            <option value="TEN Cel-PMMT">TEN Cel-PMMT</option>
+            <option value="MAJOR-PMMT">MAJOR-PMMT</option>
+            <option value="CAP-PMMT">CAP-PMMT</option>
+            <option value="TEN-PMMT">TEN-PMMT</option>
+            <option value="SUB TEN-PMMT">SUB TEN-PMMT</option>
+            <option value="1º SGT-PMMT">1º SGT-PMMT</option>
+            <option value="2º SGT-PMMT">2º SGT-PMMT</option>
+            <option value="3º SGT-PMMT">3º SGT-PMMT</option>
+            <option value="CB-PMMT">CB-PMMT</option>
+            <option value="SD-PMMT">SD-PMMT</option>
+        
+        </select>
+
+        <label for="rg_componente2">RGPM:</label>
+        <input type="text" id="rg_componente2" value="" required style="width: 120px";>
+
+    </div>
+       
+
+
+
+               <!--quadro de componentes da gupm-->
+
+
+               <div class="date-group">
+                <label for="nome_completo_componente3">Nome Componente da GUSV:</label>
+        <select id="nome_completo_componente3" required>
+            <option value="" disabled selected>Selecione uma opção</option>
+            
+        </select>
+                
+        
+                <label for="posto_grad_componente3">Posto/Grad:</label>
+                <select id="posto_grad_componente3" required>
+                    <option value="" disabled selected>Selecione uma opção</option>
+                    <option value="CEL-PMMT">CEL-PMMT</option>
+                    <option value="TEN Cel-PMMT">TEN Cel-PMMT</option>
+                    <option value="MAJOR-PMMT">MAJOR-PMMT</option>
+                    <option value="CAP-PMMT">CAP-PMMT</option>
+                    <option value="TEN-PMMT">TEN-PMMT</option>
+                    <option value="SUB TEN-PMMT">SUB TEN-PMMT</option>
+                    <option value="1º SGT-PMMT">1º SGT-PMMT</option>
+                    <option value="2º SGT-PMMT">2º SGT-PMMT</option>
+                    <option value="3º SGT-PMMT">3º SGT-PMMT</option>
+                    <option value="CB-PMMT">CB-PMMT</option>
+                    <option value="SD-PMMT">SD-PMMT</option>
+                
+                </select>
+        
+                <label for="rg_componente3">RGPM:</label>
+                <input type="text" id="rg_componente3" value="" required style="width: 120px";>
+        
+            </div>
+             
+<!--quadro de componentes da gupm-->
+
+
+<div class="date-group">
+    <label for="nome_completo_componente4">Nome Componente da GUSV:</label>
+<select id="nome_completo_componente4" required>
+<option value="" disabled selected>Selecione uma opção</option>
+</select>
+    
+
+    <label for="posto_grad_componente4">Posto/Grad:</label>
+    <select id="posto_grad_componente4" required>
+        <option value="" disabled selected>Selecione uma opção</option>
+        <option value="CEL-PMMT">CEL-PMMT</option>
+        <option value="TEN Cel-PMMT">TEN Cel-PMMT</option>
+        <option value="MAJOR-PMMT">MAJOR-PMMT</option>
+        <option value="CAP-PMMT">CAP-PMMT</option>
+        <option value="TEN-PMMT">TEN-PMMT</option>
+        <option value="SUB TEN-PMMT">SUB TEN-PMMT</option>
+        <option value="1º SGT-PMMT">1º SGT-PMMT</option>
+        <option value="2º SGT-PMMT">2º SGT-PMMT</option>
+        <option value="3º SGT-PMMT">3º SGT-PMMT</option>
+        <option value="CB-PMMT">CB-PMMT</option>
+        <option value="SD-PMMT">SD-PMMT</option>
+    
+    </select>
+
+    <label for="rg_componente4">RGPM:</label>
+    <input type="text" id="rg_componente4" value="" required style="width: 120px";>
+
+</div>
+ 
+
+
+
+
+
+    <div class="date-group">
+        <label for="cep">CEP:</label>
+        <input type="text" id="cep" value="78.380-000" required style="width: 90px";>
+
+        
+
+        
+
+        
+
+        
+
+        <label for="endereco">ENDEREÇO:</label>
+        <input type="text" id="endereco" value="endereço do local do fato" required style="width: 700px";>
+        </div>
+
+        <div class="date-group"></div>
+
+        <label for="local_fato">LOCAL DO FATO:</label>
+        <input type="text" id="local_fato" value="AVENIDA JULIO CAMPOS" required style="width: 800px";>
+    </div>
+    <div class="date-group"></div>
+        <label for="ponto_referencia">PONTO DE REFERRÊNCIA:</label>
+        <input type="text" id="ponto_referencia" value="Proximo do que ?" required style="width: 800px";>
+        
+</div>
+<div class="date-group"></div>
+        <label for="comunicante">COMUNICANTE:</label>
+        <input type="text" id="comunicante" value="" required style="width: 800px";>
+</div>
+
+        <hr>
+       
+        <label for="relato_policial_correto">RELATO DO POLICIAL:</label>
+        <!--<textarea  class="form-control" id="relato_policial_correto" value="tets" rows="10">Às h do dia , deparamos com (), e em decorrência do fato dei voz de prisão a autor do fato, conduzindo o mesmo para unidade de policia militar de Denise-MT, para adoção das providências legais.                                    </textarea>-->
+
+        <textarea class="form-control" id="relato_policial_correto" rows="10" cols="100">Às h do dia , deparamos com (), e em decorrência do fato dei voz de prisão a autor do fato, conduzindo o mesmo para unidade de policia militar de Denise-MT, para adoção das providências legais.                                    </textarea>
+
+
+        <!--inicio do reconhecimento de voz-->
+        <button type="button" onclick="startVoiceRecognition()">🎤 Falar</button>
+        
+
+        <script>
+            function inserirNoCursor(input, texto) {
+                let inicio = input.selectionStart;
+                let fim = input.selectionEnd;
+                let valor = input.value;
+                
+                input.value = valor.slice(0, inicio) + texto + valor.slice(fim);
+                input.setSelectionRange(inicio + texto.length, inicio + texto.length);
+                input.focus();
+            }
+    
+            function formatarPontuacao(texto) {
+                return texto
+                    .replace(/\bvírgula\b/gi, ",")
+                    .replace(/\bponto\b/gi, ".")
+                    .replace(/\bponto final\b/gi, ".")
+                    .replace(/\bexclamação\b/gi, "!")
+                    .replace(/\binterrogação\b/gi, "?")
+                    .replace(/\bdois pontos\b/gi, ":")
+                    .replace(/\btrês pontos\b/gi, "...");
+                   // .replace(/\bautor do fato\b/gi, "Autor do fato:"+naturezaa);
+            }
+    
+            function startVoiceRecognition() {
+                const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    
+                if (!SpeechRecognition) {
+                    alert('Reconhecimento de voz não suportado neste navegador');
+                    return;
+                }
+    
+                const recognition = new SpeechRecognition();
+                recognition.lang = 'pt-BR';
+                recognition.continuous = false;
+                recognition.interimResults = false;
+    
+                recognition.start();
+    
+                recognition.onresult = function(event) {
+                    let texto = event.results[0][0].transcript;
+                    texto = formatarPontuacao(texto);
+                    const textarea = document.getElementById('relato_policial_correto');
+                    inserirNoCursor(textarea, texto);
+                };
+    
+                recognition.onerror = function(event) {
+                    alert('Erro ao reconhecer a voz: ' + event.error);
+                };
+    
+                recognition.onend = function() {
+                    console.log('Reconhecimento de voz finalizado');
+                };
+            }
+        </script>
+    
+<!--fim do reconhecimento de voz-->
+    
+<!-- Botão para Reset -->
+<!-- Botão para Reset -->
+<button id="btnReset" onclick="resetarCampos()">Restaurar Valores Originais</button>
+
+<style>
+    /* Estilizando o botão para ficar no lado direito da tela */
+    #btnReset {
+        position: absolute ;   /* Fixa o botão na tela */
+        top: 20px;         /* Distância do topo */
+        right: 20px;       /* Distância da direita */
+        padding: 10px 20px; /* Tamanho do botão */
+        font-size: 16px;   /* Tamanho do texto */
+        background-color: red; /* Cor de fundo */
+        color: white;      /* Cor do texto */
+        border: none;      /* Sem borda */
+        cursor: pointer;   /* Cursor de mão ao passar */
+        border-radius: 5px; /* Borda arredondada */
+    }
+
+    /* Adiciona um efeito ao passar o mouse */
+    #btnReset:hover {
+        background-color: darkred;
+    }
+</style>
+
+<script>
+
+// Função para converter o número do mês para o nome do mês
+function numeroParaExtenso(mesNumero2) {
+    const meses2 = [
+        "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", 
+        "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
+    ];
+
+    return meses2[mesNumero2 - 1]; // Subtrai 1, pois o array começa no índice 0
+}
+
+const horaOcorrido = document.getElementById("hora_fato").value;
+const diaRegistro = document.getElementById("dia").value;
+const AnO = document.getElementById("ano").value;
+// Pegando o valor do mês a partir do campo com id "mes"
+const mEs = document.getElementById("mes").value;
+// Convertendo o número para o nome do mês extenso
+const mesExtenso2 = numeroParaExtenso(parseInt(mEs)); // parseInt 
+
+    // Lista de IDs dos campos e seus valores originais
+    const campos = {
+        "numero_tco": "0000",
+        "cidade": "Denise-MT",
+        
+        "endereco": "",
+        "local_fato": "",
+        "ponto_referencia": "",
+        "comunicante": "",
+        "relato_policial_correto": `Às ${horaOcorrido} do dia ${diaRegistro} de ${mesExtenso2} de ${AnO} , deparamos com autor do fato, () e em decorrência do fato dei voz de prisão a autor do fato, conduzindo o mesmo para o Nucleo de policia militar de Denise-MT, para adoção das providências legais.`
+    };
+
+    // 🔹 Carregar os valores salvos ao abrir a página
+    window.onload = function() {
+        Object.keys(campos).forEach(id => {
+            const campo = document.getElementById(id);
+            const valorSalvo = localStorage.getItem(id);
+            campo.value = valorSalvo !== null ? valorSalvo : campos[id];
+        });
+    };
+
+    // 🔹 Salvar automaticamente sempre que o usuário digitar algo
+    Object.keys(campos).forEach(id => {
+        document.getElementById(id).addEventListener("input", function() {
+            localStorage.setItem(id, this.value);
+        });
+    });
+
+    // 🔹 Resetar os campos para os valores originais e limpar o localStorage
+    function resetarCampos() {
+        Object.keys(campos).forEach(id => {
+            document.getElementById(id).value = campos[id];  // Restaurar valor original
+            localStorage.removeItem(id); // Remover do localStorage
+        });
+    }
+</script>
+
+
+
+
+
+        
+
+
+
+                
+    </form>
+    <hr>
+
+
+
+
+
+    <!-- Cadastro de Autor -->
+    <h2>2º Cadastro de Autor do Fato</h2>
+    <form id="formAutor">
+        <div id="pessoasAutor"></div>
+        <button type="button" class="btn btn-primary mt-3" onclick="adicionarPessoa('Autor')">Adicionar Autor</button>
+    </form>
+    <hr>
+
+    <!-- Cadastro de Vítima -->
+    <h2>3º Cadastro de Vítima</h2>
+    <form id="formVitima">
+        <div id="pessoasVitima"></div>
+        <button type="button" class="btn btn-primary mt-3" onclick="adicionarPessoa('Vitima')">Adicionar Vítima</button>
+        
+    <hr>
+</form>
+
+ <!-- Cadastro de testemunha -->
+ <h2>4º Cadastro de Testemunha</h2>
+ <form id="formTestemunha">
+     <div id="pessoasTestemunha"></div>
+     
+     <button type="button" class="btn btn-primary mt-3" onclick="adicionarPessoa('Testemunha')">Adicionar Testemunha</button>
+ <hr>
+</form>
+
+    
+    <!DOCTYPE html>
+    <html lang="pt">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!--<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">-->
+
+        <title>Formulário com Minimizar/Maximizar</title>
+        <style>
+            .form-container {
+                display: none; /* Inicialmente escondido */
+                border: 1px solid #ccc;
+                padding: 15px;
+                margin-top: 10px;
+            }
+            .minimized {
+                display: none; /* Esconde o conteúdo do formulário quando minimizado */
+            }
+            .header {
+                cursor: pointer;
+                background-color: #007bff;
+                color: white;
+                padding: 10px;
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+
+        <h2>5º Material Apreendido</h2>
+        <button id="toggleButton" class="btn btn-primary mt-3">Material Apreendido</button>
+        <hr>
+        
+        <div id="formContainer" class="form-container">
+            <div class="header" id="formHeader">Atenção todos materiais relacionados Apenas para o AUTOR DO FATO</div>
+            <form id="myForm">
+                <label for="tipo">Tipo:</label>
+                <select id="tipo" required onchange="atualizarOpcoes()">
+                    <option value="">Selecione uma opção</option>
+                    <option value="drogas">Drogas</option>
+                    <option value="bebidas">Aparelho de som</option>
+                    <option value="remedios">Outros</option>
+                </select>
+        
+                <br><br>
+        
+                <label for="subtipo">Subtipo:</label>
+                <select id="subtipo" onchange="verificarDescricao()">
+                    <option value="">Selecione um tipo primeiro</option>
+                </select>
+        
+                <label for="quantidade">Quantidade:</label>
+                <input type="number" id="quantidade" min="1" placeholder="Quantidade">
+        
+                <label for="unidade">Unidade:</label>
+                <select id="unidade">
+                    <option value="">Selecione um subtipo primeiro</option>
+                </select>
+        
+                <!-- Campo de descrição (aparece só para "Outro tipo de droga") -->
+                <div id="descricaoContainer" style="display: none;">
+                    <label for="descricao">Descrição:</label>
+                    <input type="text" id="descricao" placeholder="Descreva o item">
+                </div>
+        
+                <!-- Campo de observações (sempre visível) -->
+                <div>
+                    <label for="observacoes">Observações:</label>
+                    <input type="text" id="observacoes" placeholder="Informações adicionais">
+                </div>
+        
+                <button type="button" onclick="adicionarItem()">Adicionar</button>
+        
+                <h3>Itens Selecionados:</h3>
+                <ul id="listaSelecionados"></ul>
+        
+                <!-- Botão para gerar o PDF -->
+                <!--<button type="button" onclick="gerarPDF24()">CONFIRMA</button> -->
+                <button type="button" onclick="gerarPDF24()">CONFIRMAR</button>
+<span id="confirmacao" style="margin-left: 10px;"></span>
+                
+            </form>
+        </div>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+        
+        <script>
+        function atualizarOpcoes() {
+            const subtipoSelect = document.getElementById("subtipo");
+            const unidadeSelect = document.getElementById("unidade");
+        
+            subtipoSelect.innerHTML = '<option value="">Selecione uma opção</option>'; // Limpa opções anteriores
+            unidadeSelect.innerHTML = '<option value="">Selecione um subtipo primeiro</option>'; // Reseta unidade
+        
+            const tipoSelecionado = document.getElementById("tipo").value;
+            
+            // Opções de subtipos por categoria
+            const opcoesSubtipos = {
+                drogas: ["Maconha", "Cocaína", "LSD", "Ecstasy", "Outro tipo de droga"],
+                bebidas: ["Aparelho de som domestico", "Aparelho de som Portateis", "Aparelho de som Automotivo"],
+                remedios: ["Diversos"]
+            };
+        
+            if (opcoesSubtipos[tipoSelecionado]) {
+                opcoesSubtipos[tipoSelecionado].forEach(opcao => {
+                    let novaOpcao = document.createElement("option");
+                    novaOpcao.value = opcao; // Agora usa o nome exato da opção
+                    novaOpcao.textContent = opcao;
+                    subtipoSelect.appendChild(novaOpcao);
+                });
+            }
+        }
+        
+        function verificarDescricao() {
+            const unidadeSelect = document.getElementById("unidade");
+            const descricaoContainer = document.getElementById("descricaoContainer");
+            const subtipoSelecionado = document.getElementById("subtipo").value;
+            const tipoSelecionado = document.getElementById("tipo").value;
+        
+            unidadeSelect.innerHTML = ""; // Limpa unidades anteriores
+        
+            // Unidades disponíveis para cada categoria
+            const unidades = {
+                drogas: ["Papelotes", "Gramas", "Kg"],
+                bebidas: ["Unidade"],
+                remedios: ["Unidade"]
+            };
+        
+            if (unidades[tipoSelecionado]) {
+                unidades[tipoSelecionado].forEach(unidade => {
+                    let novaOpcao = document.createElement("option");
+                    novaOpcao.value = unidade.toLowerCase();
+                    novaOpcao.textContent = unidade;
+                    unidadeSelect.appendChild(novaOpcao);
+                });
+            }
+        
+            // Exibir o campo de descrição apenas se "Outro tipo de droga" for selecionado
+            if (subtipoSelecionado === "Outro tipo de droga") {
+                descricaoContainer.style.display = "block";
+            } else {
+                descricaoContainer.style.display = "none";
+            }
+        }
+        
+        function adicionarItem() {
+            const subtipoSelect = document.getElementById("subtipo");
+            const quantidadeInput = document.getElementById("quantidade");
+            const unidadeSelect = document.getElementById("unidade");
+            const descricaoInput = document.getElementById("descricao");
+            const observacoesInput = document.getElementById("observacoes");
+            const lista = document.getElementById("listaSelecionados");
+        
+            const subtipoSelecionado = subtipoSelect.options[subtipoSelect.selectedIndex]?.text || "";
+            const quantidade = quantidadeInput.value;
+            const unidade = unidadeSelect.options[unidadeSelect.selectedIndex]?.text || "";
+            const descricao = descricaoInput.value;
+            const observacoes = observacoesInput.value;
+        
+            if (subtipoSelecionado && quantidade > 0 && unidade) {
+                let item = document.createElement("li");
+        
+                let textoItem = `${subtipoSelecionado} - Quantidade: ${quantidade} ${unidade}`;
+                
+                if (subtipoSelecionado === "Outro tipo de droga") {
+                    if (!descricao) {
+                        alert("Por favor, descreva o item Outro tipo de droga.");
+                        return;
+                    }
+                    textoItem += ` (Descrição: ${descricao})`;
+                }
+        
+                if (observacoes) {
+                    textoItem += ` - Observações: ${observacoes}`;
+                }
+        
+                item.textContent = textoItem;
+                document.getElementById("confirmacao").innerHTML = "Falta a confirmação X";
+                document.getElementById("confirmacao").style.color = "red";
+                textoOutros = [];  // Zera o array criando um novo vazio de materiais apreendido
+                textoDrogas = [];  // Zera o array criando um novo vazio de drogas apreendida
+
+ // Criar botão de remover
+ let botaoRemover = document.createElement("button");
+    botaoRemover.textContent = " Remover";
+    botaoRemover.style.marginLeft = "10px";
+    botaoRemover.onclick = function () {
+        lista.removeChild(item);
+
+        document.getElementById("confirmacao").innerHTML = "Falta a confirmação X";
+                document.getElementById("confirmacao").style.color = "red";
+                textoOutros = [];  // Zera o array criando um novo vazio de materiais apreendido
+                textoDrogas = [];  // Zera o array criando um novo vazio de drogas apreendida
+
+
+
+    };
+    item.appendChild(botaoRemover);
+
+                lista.appendChild(item);
+        
+                // Limpar campos após adicionar
+                quantidadeInput.value = "";
+                unidadeSelect.innerHTML = '<option value="">Selecione um subtipo primeiro</option>';
+                descricaoInput.value = "";
+                observacoesInput.value = "";
+                document.getElementById("descricaoContainer").style.display = "none";
+            } else {
+                alert("Por favor, selecione um subtipo, informe uma quantidade válida e escolha a unidade.");
+            }
+        }
+        
+
+        
+function gerarPDF24() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    let itemsDrogas = [];
+    let itemsOutros = [];
+    const listaItems = document.getElementById("listaSelecionados").getElementsByTagName("li");
+    
+    // Separar os itens por categoria
+    for (let i = 0; i < listaItems.length; i++) {
+        let itemText = listaItems[i].textContent;
+        if (itemText.includes("Maconha") || itemText.includes("Cocaína") || itemText.includes("LSD") || itemText.includes("Ecstasy") || itemText.includes("Outro tipo de droga")) {
+            itemsDrogas.push(itemText);
+        }
+        itemsOutros.push(itemText);
+    }
+
+    // Se não houver itens apreendidos, continuar com o resto do código sem gerar PDF
+    if (itemsOutros.length === 0) {
+        console.log("Nenhum material apreendido. Continuando com os outros processos...");
+        return; // Sai da função sem gerar o PDF
+    }
+
+
+
+// Armazenando os itens de drogas em uma variável global
+if (itemsDrogas.length > 0) {
+    document.getElementById("Termo_Preliminar_de_Drogas").checked = true;
+    
+    itemsDrogas.forEach((item, index) => {
+        textoDrogas.push(` [ ${index + 1}º ${item.slice(0, -7)}]`);
+    });
+} else {document.getElementById("Termo_Preliminar_de_Drogas").checked = false;}
+
+// Armazenando os itens outros em uma variável global
+itemsOutros.forEach((item, index) => {
+    textoOutros.push(` [ ${index + 1}º ${item.slice(0, -7)}]`);
+    
+});
+    // Gerar o PDF
+    //doc.save("itens_apreendidos.pdf");
+
+
+     // Atualiza o texto ao lado do botão com um ícone de check verde
+     document.getElementById("confirmacao").innerHTML = "Confirmado! ✔️";
+    document.getElementById("confirmacao").style.color = "green";
+
+    
+
+
+document.getElementById("Termo_Apreensão_de_Materias").checked = true;
+    
+}
+
+
+
+
+
+ 
+        
+        </script>
+        
+            
+
+            </select>
+            
+
+
+
+
+            
+            
+           
+            <!--<button type="submit">Enviar</button>-->
+        
+    </div>
+    
+    <script>
+        // Toggle para abrir e fechar o formulário
+        const toggleButton = document.getElementById('toggleButton');
+        const formContainer = document.getElementById('formContainer');
+        const formHeader = document.getElementById('formHeader');
+    
+        toggleButton.addEventListener('click', () => {
+            if (formContainer.style.display === "none" || formContainer.style.display === "") {
+                formContainer.style.display = "block"; // Mostra o formulário
+            } else {
+                formContainer.style.display = "none"; // Esconde o formulário
+            }
+        });
+    
+        // Minimize and maximize functionality
+        formHeader.addEventListener('click', () => {
+            const form = document.getElementById('myForm');
+            if (form.classList.contains('minimized')) {
+                form.classList.remove('minimized'); // Exibe o formulário
+                formHeader.textContent = "Clique para Minimizar"; // Muda o texto do cabeçalho
+            } else {
+                form.classList.add('minimized'); // Minimiza o formulário
+                formHeader.textContent = "Clique para Maximizar"; // Muda o texto do cabeçalho
+            }
+        });
+    </script>
+    
+    </body>
+    </html>
+    
+
+
+
+
+    <!--inicio do anexo de fotos-->
+
+    <hr>
+   
+        <h2>6º Upload de Imagens para Termo de Anexo (Máx: 4 imagens)</h2>
+        
+        <input type="file" id="imagemInput" accept="image/*" multiple>
+        <button onclick="adicionarImagens()">Adicionar Imagens</button>
+        <!--<button onclick="limparImagens()">Limpar Imagens</button>-->
+        <button onclick="limparImagens()" style="margin-right: 30px;">Limpar Imagens</button>
+        <!--<button onclick="gerarPDF23()">Gerar Termo de Anexo</button>-->
+        <button onclick="gerarPDF23()" style="background-color: rgb(68, 128, 0); color: white; border: none;">Gerar Termo de Anexo</button>
+    
+        <p id="mensagemErro" style="color: red;"></p>
+        <div id="listaImagens"></div>
+    
+        <script>
+            let imagensSelecionadas = [];
+    
+            function adicionarImagens() {
+                const input = document.getElementById("imagemInput");
+                const lista = document.getElementById("listaImagens");
+                const mensagemErro = document.getElementById("mensagemErro");
+    
+                if (input.files.length + imagensSelecionadas.length > 4) {
+                    mensagemErro.textContent = "Você pode adicionar no máximo 4 imagens!";
+                    return;
+                } else {
+                    mensagemErro.textContent = "";
+                }
+    
+                for (let i = 0; i < input.files.length; i++) {
+                    let file = input.files[i];
+    
+                    let reader = new FileReader();
+                    reader.readAsDataURL(file);
+    
+                    reader.onload = function(event) {
+                        imagensSelecionadas.push(event.target.result);
+                        atualizarListaImagens();
+                    };
+                }
+            }
+    
+            function atualizarListaImagens() {
+                const lista = document.getElementById("listaImagens");
+                lista.innerHTML = "";
+    
+                imagensSelecionadas.forEach((imagem, index) => {
+                    let div = document.createElement("div");
+                    div.style.marginBottom = "10px";
+                    div.innerHTML = `<img src="${imagem}" width="100" height="60"> 
+                                     <button onclick="removerImagem(${index})">Remover</button>`;
+                    lista.appendChild(div);
+                });
+            }
+    
+            function removerImagem(index) {
+                imagensSelecionadas.splice(index, 1);
+                atualizarListaImagens();
+            }
+    
+            function limparImagens() {
+                imagensSelecionadas = [];
+                atualizarListaImagens();
+            }
+    
+            function gerarPDF23() {
+            if (imagensSelecionadas.length === 0) {
+                alert("Adicione pelo menos uma imagem antes de gerar o PDF!");
+                return;
+            }
+
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF("p", "mm", "a4");
+
+            const largura = 90;
+            const altura = 90;
+            const espacamentoX = 10;
+            const espacamentoY = 67;
+            
+            let x = espacamentoX;
+            let y = espacamentoY;
+            //doc.setPage(5);  // Mudar para a Página 6
+            for (let i = 0; i < imagensSelecionadas.length; i++) {
+                doc.addImage(imagensSelecionadas[i], "JPEG", x, y, largura, altura);
+
+                // Define a posição da próxima imagem
+                if (i % 2 === 0) {
+                    x = 110; // Move para a direita
+                } else {
+                    x = espacamentoX; // Volta para a esquerda
+                    y += altura + 10; // Move para baixo
+                }
+            }
+
+            // Salva o PDF
+            const img = new Image();
+            img.src = 'https://upload.wikimedia.org/wikipedia/commons/7/7f/Bras%C3%A3o_PMMT.PNG';
+            doc.addImage(img, 'PNG', 93, 5, 20, 20);
+            doc.setFont("helvetica", "bold");
+            doc.setFontSize(10);
+            doc.text("ESTADO DE MATO GROSSO", 103, 30, { align: "center" });
+            doc.text("POLÍCIA MILITAR", 103, 35, { align: "center" });
+           // doc.text("TERMO CIRCUNSTANCIADO DE OCORRÊNCIA Nº TCO/CR07/" +"/"+document.getElementById('ano').value+"."+ parseInt(document.getElementById('numero_tco').value), 103, 47, { align: "center" });
+            
+                doc.line(10, 38, 200, 38);
+
+
+
+            doc.setFontSize(12);
+doc.setFont("helvetica", "bold");
+doc.text("Referência: Termo Circunstanciado de Ocorrência de Nº TCO/CR07" +"/"+document.getElementById('ano').value+"."+ parseInt(document.getElementById('numero_tco').value), 100, 50, { align: "center" });
+
+
+//doc.text("ANEXOS"), 100, 90, { align: "center"});
+
+
+
+
+doc.text("ANEXOS:", 90, 55, { maxWidth: 175, align: 'justify'});
+doc.line(10, 58, 200, 58);
+doc.line(10, 270, 200, 270);
+
+//doc.line(105, 58, 105, 270);
+//doc.line(10, 162, 200, 162);
+document.getElementById("paginaAnexos").checked = true;
+
+
+            doc.save("termo_com_imagens.pdf");
+        }
+    </script>
+
+
+                   </script>
+    
+    </body>
+    </html>
+    
+
+
+
+
+
+    <hr>
+
+<!--fim do anexo de fotos-->
+
+
+
+
+
+
+    <h2>7º Opções de Geração de Termos</h2>
+    
+<div>
+    <!--<label><input type="checkbox" id="paginaDadosGerais"> Não gerar Dados Gerais</label><br
+    <label><input type="checkbox" id="paginaAutor"> Não gerar Cadastro de Autor</label><br>
+    <label><input type="checkbox" id="paginaVitima"> Não gerar Cadastro de Vítima/Testemunha</label><br>
+    <label><input type="checkbox" id="paginaHistorico"> Não gerar Histórico</label><br>
+    <label><input type="checkbox" id="paginaConclusao"> Não gerar Conclusão Policial</label><br>>-->
+    <label><input type="checkbox" id="paginaAnexos"> Considerar Termo Anexos</label><br>
+    <label><input type="checkbox" id="Termo_Apreensão_de_Materias"> Considerar termo de Material Apreendido</label><br>
+
+
+    
+    <label><input type="checkbox" id="Termo_Preliminar_de_Drogas"> Considerar termo preliminar de drogas</label><br>
+</div>
+
+   <!-- <button type="button" class="btn btn-success mt-3" onclick="gerarPDF()">Gerar PDF Completo</button>-->
+
+   <button type="button" class="btn btn-success mt-3" onclick="confirmarGeracaoPDF()">Gerar PDF Completo</button>
+
+   <script>
+   function confirmarGeracaoPDF() {
+       if (confirm("Tem certeza que deseja gerar o PDF completo?\nCertifique-se de ter preenchido todos os campos corretos! \n\nSe ao menos for preenchidos os campos da guarnição e a qualificação do Autor do fato o arquivo sera gerado na pasta download")) {
+           gerarPDF(); // Chama a função apenas se o usuário confirmar
+           
+       }
+   }
+   </script>
+   
+
+    
+
+    <script>
+    let contadorAutor = 1;
+let contadorVitima = 1;
+let contadorTestemunha = 1;
+
+function adicionarPessoa(tipo) {
+    let container;
+    let contador;
+
+    // Define o container e o contador com base no tipo de pessoa
+    if (tipo === 'Autor') {
+        container = document.getElementById('pessoasAutor');
+        contador = contadorAutor;
+        contadorAutor++;
+    } else if (tipo === 'Vitima') {
+        container = document.getElementById('pessoasVitima');
+        contador = contadorVitima;
+        contadorVitima++;
+    } else if (tipo === 'Testemunha') {
+        container = document.getElementById('pessoasTestemunha');
+        contador = contadorTestemunha;
+        contadorTestemunha++;
+    }
+// Cria a chave base para armazenar no localStorage
+const chaveBase = `${tipo.toLowerCase()}_${contador}`;
+    // Cria o elemento div para a pessoa
+    const divPessoa = document.createElement('div');
+    divPessoa.classList.add('pessoa', 'border', 'p-3', 'mb-3');
+    divPessoa.innerHTML = `
+        <h4>${tipo} ${contador}</h4>
+        <label>Nome</label>
+        
+        <input type="text" class="form-control input-save" name="nome_${tipo.toLowerCase()}[]" data-key="nome_${chaveBase}" value="Digite o nome">
+        
+        <label>Nome Social</label>
+        <input type="text" class="form-control input-save" name="nome_social_${tipo.toLowerCase()}[]" data-key="nome_social_${chaveBase}" placeholder="Digite o nomeSocial">
+        
+        <label>Cpf ou Passaporte</label>
+        <input type="text" class="form-control input-save" name="cpf_passaporte_${tipo.toLowerCase()}[]" data-key="cpf_passaporte_${chaveBase}" placeholder="Digite o CPF ou Passaporte">
+       
+        <label>RG/CNH Nº</label>
+        <input type="text" class="form-control input-save" name="rg_cnh_${tipo.toLowerCase()}[]" data-key="rg_cnh_${chaveBase}" placeholder="Digite o RG ou CNH">
+
+        <label>ÓRGÃO EXPEDITOR</label>
+        <input type="text" class="form-control input-save" name="rg_cnh_orgao_exp_${tipo.toLowerCase()}[]" data-key="rg_cnh_orgao_exp_${chaveBase}" placeholder="Digite o orgão expeditor">
+        
+        <label>DATA DE EXPEDIÇÃO</label>
+        <input type="text" class="form-control input-save" name="data_expedicao_${tipo.toLowerCase()}[]" data-key="data_expedicao_${chaveBase}" placeholder="Digite a data de expedição">
+
+       <label>UF</label>
+        <input type="text" class="form-control input-save" name="data_expedicao_uf_${tipo.toLowerCase()}[]" data-key="data_expedicao_uf_${chaveBase}" placeholder="Digite o estado de expedição do documento">
+
+        <label>FILIAÇÃO</label>
+        <input type="text" class="form-control input-save" name="filiacao_${tipo.toLowerCase()}[]" data-key="filiacao_${chaveBase}" placeholder="Digite a filiação">
+
+        <label>ENDEREÇO</label>
+        <input type="text" class="form-control input-save" name="endereco_${tipo.toLowerCase()}[]" data-key="endereco_${chaveBase}" placeholder="Digite o endereço">
+
+        <label>MUNICIPIO</label>
+        <input type="text" class="form-control input-save" name="municipio_${tipo.toLowerCase()}[]" data-key="municipio_${chaveBase}" value="DENISE">
+
+        <label>UF</label>
+        <input type="text" class="form-control input-save" name="uf_municipio_${tipo.toLowerCase()}[]" data-key="uf_municipio_${chaveBase}" value="MT">
+
+        <label>CEP</label>
+        <input type="text" class="form-control input-save" name="cep_municipio_${tipo.toLowerCase()}[]" data-key="cep_municipio_${chaveBase}" value="78.380-000">
+
+        <label>PONTO DE REFERÊNCIA</label>
+        <input type="text" class="form-control input-save" name="ponto_referencia_endereco_${chaveBase}" data-key="ponto_referencia_endereco_${tipo.toLowerCase()}[]" placeholder="Digite um ponto de referência do endereço">
+
+        <label>TELEFONE</label>
+        <input type="text" class="form-control input-save" name="telefone_${tipo.toLowerCase()}[]" data-key="telefone_${chaveBase}" placeholder="Digite os telefones de contato">
+       
+        <label>E-MAIL PESSOAL</label>
+        <input type="text" class="form-control input-save" name="e-mail_${tipo.toLowerCase()}[]" data-key="e-mail_${chaveBase}" placeholder="Digite o e-mail pessoal">
+       
+        <label>ESTADO CIVIL</label>
+       
+       <input type="text" class="form-control input-save" name="estado_civil_${tipo.toLowerCase()}[]" data-key="estado_civil_${chaveBase}" placeholder="Digite o estado civil">
+
+        <label>NACIONALIDADE</label>
+        <input type="text" class="form-control input-save" name="nacionalidade_${tipo.toLowerCase()}[]" data-key="nacionalidade_${chaveBase}" value="BRASILEIRA">
+       
+        <label>NATURALIDADE</label>
+        <input type="text" class="form-control input-save" name="naturalidade_${tipo.toLowerCase()}[]" data-key="naturalidade_${chaveBase}" placeholder="Digite a naturalidade">
+       
+        <label>UF</label>
+        <input type="text" class="form-control input-save" name="naturalidadeuf_${tipo.toLowerCase()}[]" data-key="naturalidadeuf_${chaveBase}" placeholder="estado naturalidade">
+       
+        <label>DATA NASC:</label>
+        <input type="text" class="form-control input-save" name="datanascimento_${tipo.toLowerCase()}[]" data-key="datanascimento_${chaveBase}" placeholder="Digite a data de nascimento">
+       
+
+        <label>SEXO</label>
+        <input type="text" class="form-control input-save" name="sexo_${tipo.toLowerCase()}[]" data-key="sexo_${chaveBase}" value="MASCULINO">
+       
+        <label>ATIVIDADE - PROFISSÃO</label>
+        <input type="text" class="form-control input-save" name="profissao_${tipo.toLowerCase()}[]" data-key="profissao_${chaveBase}" placeholder="Digite a profissão">
+       
+        <label>CONDIÇÕES FISICAS</label>
+        <input type="text" class="form-control input-save" name="local_trabalho_${tipo.toLowerCase()}[]" data-key="local_trabalho_${chaveBase}" value="sem lesão">
+       
+<label>${tipo === 'Autor' ? 'RELATO DO AUTOR' : tipo === 'Vitima' ? 'RELATO DA VITIMA' : 'RELATO DA TESTEMUNHA'}</label>
+    
+<textarea class="form-control input-save" name="relato_${tipo.toLowerCase()}[]" data-key="relato_${chaveBase}" rows="10">${tipo === 'Autor' ? 'O autor dos fatos (), cientificado de seus direitos constitucionais, inclusive o de permanecer em silencio, declarou Que... Lido e achado conforme. Nada mais disse e nem lhe foi perguntado(a).' : tipo === 'Vitima' ? 'A vítima ( ) relatou que... Lido e achado conforme. Nada mais disse e nem lhe foi perguntado(a).' : 'A testemunha ( ) compromissada na forma da lei, aos costumes respondeu negativamente se possui algum grau de parentesco ou amizade com as partes), declarou Que.... Lido e achado conforme. Nada mais disse e nem lhe foi perguntado(a). ('}</textarea>
+
+    
+    <button type="button" class="btn btn-danger mt-2" onclick="removerPessoa(this)">Remover</button>`;
+
+    container.appendChild(divPessoa);
+
+
+    // Pega todos os inputs dentro da div e adiciona eventos para salvar no localStorage
+    const inputs = divPessoa.querySelectorAll('.input-save');
+
+inputs.forEach(input => {
+    const key = input.getAttribute('data-key');
+
+    // Se houver um valor salvo no localStorage, preenche o campo
+    if (localStorage.getItem(key)) {
+        input.value = localStorage.getItem(key);
+    }
+
+    // Adiciona evento para salvar no localStorage sempre que o usuário digitar
+    input.addEventListener('input', function () {
+        localStorage.setItem(key, this.value);
+        console.log(`Valor salvo para ${key}:`, this.value);
+    });
+});
+
+       
+}
+
+        function removerPessoa(botao) {
+            botao.parentElement.remove();
+        }
+        
+
+        function gerarPDF() {
+            const { jsPDF } = window.jspdf;
+            //const doc = new jsPDF();
+            const doc = new jsPDF("p", "mm", "a4");
+
+
+
+
+            const url = "https://tjmt-teams-apps-balcao-virtual.azurefd.net/meeting-queue/NucleodeJusticaDigitaldosJuizadosEspeciais?data=eyJxdWV1ZUlkIjoiMDYzODc0NTQ2OTYyMDUxMzAxMSIsImFzc3VudG8iOiIiLCJhbmNvcmEiOiJOdWNsZW9kZUp1c3RpY2FEaWdpdGFsZG9zSnVpemFkb3NFc3BlY2lhaXMifQ==";
+
+           
+
+        
+        
+      
+
+
+
+
+            const numero_tco = parseInt(document.getElementById('numero_tco').value);
+            const naturezaa = document.getElementById('naturezaa').value;
+            const artigo = document.getElementById("artigo").value
+            const lei = document.getElementById("lei").value;
+            const dia = parseInt(document.getElementById('dia').value);
+            const mes = parseInt(document.getElementById('mes').value);
+            const ano = document.getElementById('ano').value;
+            const cidade = document.getElementById('cidade').value;
+            const quartel = document.getElementById('quartel').value;
+            const nome_completo = document.getElementById('nome_completo').value;
+            const nome_completo_componente2 = document.getElementById('nome_completo_componente2').value;
+            const nome_completo_componente3 = document.getElementById('nome_completo_componente3').value;
+            const nome_completo_componente4 = document.getElementById('nome_completo_componente4').value;
+           
+            const posto_grad = document.getElementById('posto_grad').value;
+            const posto_grad_componente2 = document.getElementById('posto_grad_componente2').value;
+            const posto_grad_componente3 = document.getElementById('posto_grad_componente3').value;
+            const posto_grad_componente4 = document.getElementById('posto_grad_componente4').value;
+
+            const rg = document.getElementById('rg').value;
+            const rg_componente2 = document.getElementById('rg_componente2').value;
+            const rg_componente3 = document.getElementById('rg_componente3').value;
+            const rg_componente4 = document.getElementById('rg_componente4').value;
+
+            const hora_fato = document.getElementById('hora_fato').value;
+            //const data_fato = document.getElementById('data_fato').value;
+            const data_registro = document.getElementById('data_registro').value;
+            const endereco = document.getElementById('endereco').value;
+            const comunicante = document.getElementById('comunicante').value;
+            const ponto_referencia = document.getElementById('ponto_referencia').value;
+            const cep = document.getElementById("cep").value;
+
+
+            const numerosPorExtenso = {
+            1: 'um', 2: 'dois', 3: 'três', 4: 'quatro', 5: 'cinco', 6: 'seis', 7: 'sete', 8: 'oito', 9: 'nove',
+            10: 'dez', 11: 'onze', 12: 'doze', 13: 'treze', 14: 'quatorze', 15: 'quinze', 16: 'dezesseis',
+            17: 'dezessete', 18: 'dezoito', 19: 'dezenove', 20: 'vinte', 21: 'vinte e um', 22: 'vinte e dois',
+            23: 'vinte e três', 24: 'vinte e quatro', 25: 'vinte e cinco', 26: 'vinte e seis', 27: 'vinte e sete',
+            28: 'vinte e oito', 29: 'vinte e nove', 30: 'trinta', 31: 'trinta e um'
+        };
+
+        const mesesPorExtenso = {
+            1: 'janeiro', 2: 'fevereiro', 3: 'março', 4: 'abril', 5: 'maio', 6: 'junho', 7: 'julho', 8: 'agosto',
+            9: 'setembro', 10: 'outubro', 11: 'novembro', 12: 'dezembro'
+        };
+
+        function converterAnoParaExtenso(ano) {
+            return ano.split('').map(num => numerosPorExtenso[parseInt(num)]).join(' ');
+        }
+
+
+     
+            function adicionarCabecalho() {
+                const img = new Image();
+            img.src = 'https://upload.wikimedia.org/wikipedia/commons/7/7f/Bras%C3%A3o_PMMT.PNG';
+            doc.addImage(img, 'PNG', 93, 5, 20, 20);
+            doc.setFont("helvetica", "bold");
+            doc.setFontSize(10);
+            doc.text("ESTADO DE MATO GROSSO", 103, 30, { align: "center" });
+            doc.text("POLÍCIA MILITAR", 103, 35, { align: "center" });
+            doc.text("TERMO CIRCUNSTANCIADO DE OCORRÊNCIA Nº TCO/CR07" +"/"+document.getElementById('ano').value+"."+ parseInt(document.getElementById('numero_tco').value), 103, 47, { align: "center" });
+            
+                doc.line(10, 38, 200, 38);
+            }
+
+            function adicionarRodape() {
+                
+
+                doc.setFontSize(8);
+            //doc.text("_______________________________________________________________________________________________________________", 105, 281, { align: "center" });
+            doc.line(10, 281, 200, 281);
+           
+            if (quartel === "NPM DENISE") {
+            doc.text("NUCLEO DE POLICIA MILITAR DE DENISE", 105, 285, { align: "center" });
+            doc.text("Rua Piaui - Bairro centro - Denise-MT - CEP 78.380-000", 105, 288, { align: "center" });
+            doc.text("Fone: (65) 98170 0447 | E-mail: npmdenise@pm.mt.gov.br", 105, 291, { align: "center" });
+            }
+            if (quartel === "1ª CIPM NOVA OLIMPIA") {
+            doc.text("QUARTEL DA 1ª COMPANHIA INDEPENDENTE DE NOVA OLIMPIA (1ª CIA-PM)", 105, 285, { align: "center" });
+            doc.text("CEP 78.370-000, RUA PARÁ, Nº1062 - W, CENTRO, NOVA OLIMPIA - MT", 105, 288, { align: "center" });
+            doc.text("Fone: (65) 98170 0447 | E-mail: @pm.mt.gov.br", 105, 291, { align: "center" });
+            }
+            if (quartel === "12ª CIPM BARRA DO BUGRES") {
+            doc.text("12ª COMPANHIA INDEPENDENTE DE BARRA DO BUGRES", 105, 285, { align: "center" });
+            doc.text("Rua  - Bairro centro - Barra do Bugres-MT - CEP 78.380-000", 105, 288, { align: "center" });
+            doc.text("Fone: (65) 98170 0447 | E-mail: @pm.mt.gov.br", 105, 291, { align: "center" });
+            }
+            if (quartel === "NPM PORTO ESTRELA") {
+            doc.text("NUCLEO DE POLICIA MILITAR DE PORTO ESTRELA", 105, 285, { align: "center" });
+            doc.text("Rua  - Bairro centro - Barra do Bugres-MT - CEP 78.380-000", 105, 288, { align: "center" });
+            doc.text("Fone: (65) 98170 0447 | E-mail: @pm.mt.gov.br", 105, 291, { align: "center" });
+            }
+            if (quartel === "19º BPM - TANGARA") {
+            doc.text("19º BATALÃO DE POLICIA MILITAR DE TANGARA DA SERRA", 105, 285, { align: "center" });
+            doc.text("Rua  - Bairro centro - Barra do Bugres-MT - CEP 78.380-000", 105, 288, { align: "center" });
+            doc.text("Fone: (65) 98170 0447 | E-mail: @pm.mt.gov.br", 105, 291, { align: "center" });
+            }
+
+
+
+        }
+
+            adicionarCabecalho();
+            adicionarRodape()
+            doc.setFontSize(12);
+            let pageCount = 1; // Contador de páginas
+            
+           // doc.text("teste numero de tco",10, y)
+
+            doc.text("AUTUAÇÃO", 105, 100, { align: "center" });
+
+const diaExtenso = numerosPorExtenso[dia];
+  const mesExtenso = mesesPorExtenso[mes];
+const anoExtenso = converterAnoParaExtenso(ano);
+doc.setFontSize(10);
+
+let texto = `Aos ${diaExtenso} dias do mês de ${mesExtenso} do ano de dois mil e vinte e cinco, nesta cidade de ${cidade}, Estado de Mato Grosso, no Quartel do ${quartel}, autuo as peças que adiante se seguem, do que para constar, lavrei este Termo. Eu, ${nome_completo} (${posto_grad}), escrevente, que o lavrei e assino.`;
+
+
+doc.setFont("helvetica", "normal");
+doc.text(texto, 20, 120, { maxWidth: 165, align: 'justify'});
+
+
+doc.setFont("helvetica", "bold");
+let texto2ass =` ______________________________________________________________ `;
+doc.text(texto2ass, 103, 195,{ align: "center" });
+
+let texto2 =` ${nome_completo} - ${posto_grad} `;
+doc.text(texto2, 103, 200,{ align: "center" });
+
+let texto3 = `RG nº ${rg} PMMT`;
+doc.text(texto3, 103, 206,{ align: "center" });
+let texto4 = `Comandante de GUPM`;
+doc.text(texto4, 103, 212,{ align: "center" });
+doc.setFontSize(10);
+doc.text("Natureza: "+ naturezaa, 20, 70, { maxWidth: 170, align: 'justify'});
+doc.text("Autor do Fato: ", 20, 80, { maxWidth: 170, align: 'justify'});
+
+
+
+//-------------------------------------------------
+ // inicio da segunda pagina
+ doc.addPage();
+ pageCount++; // Incrementa contador de páginas   
+ adicionarCabecalho()
+ adicionarRodape()
+            doc.setFontSize(14);
+doc.text("A- DADOS GERAIS:", 30, 60, { maxWidth: 170, align: 'justify' });
+doc.setFontSize(10);
+
+
+function formatarData(dataInput) {
+    let data = new Date(dataInput);
+    let dia = String(data.getDate()).padStart(2, '0');
+    let mes = String(data.getMonth() + 1).padStart(2, '0'); // Mês começa do 0, então somamos 1
+    let ano = data.getFullYear();
+    return `${dia}/${mes}/${ano}`;
+}
+let dataInput = document.getElementById("data_registro").value; // Pegando a data do input
+    let dataFormatada = formatarData(dataInput); // Formatando a data
+
+
+
+//doc.text("NATUREZA DA OCORRÊNCIA: " + naturezaa, 20, 90, { maxWidth: 170, align: 'justify' });
+// Texto em negrito
+doc.setFont("helvetica", "bold");
+doc.text("NATUREZA DA OCORRÊNCIA: ", 20, 70, { maxWidth: 170, align: 'justify' });
+doc.text("TIPIFICAÇÃO LEGAL: ", 20, 85, { maxWidth: 170, align: 'justify' });
+doc.text("DATA DO FATO: ", 20, 90, { maxWidth: 170, align: 'justify' });
+doc.text("DATA DO REGISTRO: ", 130, 90, { maxWidth: 170, align: 'justify' });
+doc.text("HORA DO FATO: ", 20, 95, { maxWidth: 170, align: 'justify' });
+doc.text("ENDEREÇO: ", 20, 100, { maxWidth: 170, align: 'justify' });
+doc.text("CEP:", 130, 105, { maxWidth: 170, align: 'justify' });
+doc.text("MUNICIPIO: ", 20, 105, { maxWidth: 170, align: 'justify' });
+doc.text("PONTO DE REFERRÊNCIA: ", 20, 110, { maxWidth: 170, align: 'justify' });
+// Texto normal (a variável `naturezaa`)
+doc.setFont("helvetica", "normal");
+//doc.text(" " + naturezaa, 20 + doc.getTextWidth("NATUREZA DA OCORRÊNCIA: "), 70, { maxWidth: 870, align: 'justify' });
+doc.text(" " + artigo + " " + lei, 20 + doc.getTextWidth("TIPIFICAÇÃO LEGAL: "), 85, { maxWidth: 170, align: 'justify' });
+doc.text(" " + dataFormatada, 10 + doc.getTextWidth("DATA DO REGISTRO: "), 90, { maxWidth: 170, align: 'justify' });
+doc.text(" " + dataFormatada, 130 + doc.getTextWidth("DATA DO REGISTRO: "), 90, { maxWidth: 170, align: 'justify' });
+doc.text(" " + hora_fato, 20 + doc.getTextWidth("HORA DO FATO: "), 95, { maxWidth: 170, align: 'justify' });
+doc.text(" " + endereco, 20 + doc.getTextWidth("ENDEREÇO: "), 100, { length:24, maxWidth: 170, align: 'justify' });
+doc.text(" " + cep, 130 + doc.getTextWidth("CEP: "), 105, { length:24, maxWidth: 170, align: 'justify' });
+doc.text(" " + cidade, 20 + doc.getTextWidth("MUNICIPIO: "), 105, { length:24, maxWidth: 170, align: 'justify' });
+doc.text(" " + ponto_referencia, 20 + doc.getTextWidth("PONTO DE REFERRÊNCIA: "), 110, { length:24, maxWidth: 170, align: 'justify' });      
+
+let natuureza = naturezaa;
+
+
+doc.setFont("helvetica", "normal");
+doc.text(natuureza, 20, 75, { maxWidth: 170, align: 'justify'});
+          
+            // fim da segundapagina
+          //------------------------------------------
+
+
+
+
+           
+
+
+        let y2 = 20; // Posição inicial na página
+       const limitePagina = 270; // Altura máxima antes de adicionar nova página
+
+
+
+
+       
+
+            
+            let y = 140;
+            doc.setFontSize(14);
+            doc.setFont("helvetica", "bold");
+            doc.text("B- ENVOLVIDOS:", 30, y);
+            y += 20;
+            doc.setFontSize(10);
+            //doc.setFont("helvetica", "bold");
+
+
+            document.getElementsByName("nome_autor[]").forEach((input, index) => {
+    const nomeAutor = input.value;
+    const nomeSocial = document.getElementsByName("nome_social_autor[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const cpfAutor = document.getElementsByName("cpf_passaporte_autor[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const rgcnhAutor = document.getElementsByName("rg_cnh_autor[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const rgcnhorgaoexpAutor = document.getElementsByName("rg_cnh_orgao_exp_autor[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const dataexpedicaoAutor = document.getElementsByName("data_expedicao_autor[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const dataexpedicaoufAutor = document.getElementsByName("data_expedicao_uf_autor[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const filiacaoAutor = document.getElementsByName("filiacao_autor[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const enderecoAutor = document.getElementsByName("endereco_autor[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const municipioAutor = document.getElementsByName("municipio_autor[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const ufmunicipioAutor = document.getElementsByName("uf_municipio_autor[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const cepmunicipioAutor = document.getElementsByName("cep_municipio_autor[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const pontoreferenciaenderecoAutor = document.getElementsByName("ponto_referencia_endereco_autor[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const telefoneAutor = document.getElementsByName("telefone_autor[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const emailAutor = document.getElementsByName("e-mail_autor[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const sexoAutor = document.getElementsByName("sexo_autor[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const estadocivillAutor = document.getElementsByName("estado_civil_autor[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const nacionalidadeAutor = document.getElementsByName("nacionalidade_autor[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+const naturalidadeAutor = document.getElementsByName("naturalidade_autor[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+const naturalidadeufAutor = document.getElementsByName("naturalidadeuf_autor[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const datanasciAutor = document.getElementsByName("datanascimento_autor[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+   const profissaoAutor = document.getElementsByName("profissao_autor[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+   const localtrabalhoAutor = document.getElementsByName("local_trabalho_autor[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+   const relatoAutor = document.getElementsByName("relato_autor[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+
+let Autor01doFatoGlobal = nomeAutor
+
+   function verificapagina() {
+    if (y > 270) {
+            doc.addPage(); // Cria uma nova página
+            adicionarCabecalho()
+            adicionarRodape()
+            doc.setFontSize(10);
+            y = 60; // Reinicia a posição no topo da nova página
+            pageCount++; // Incrementa contador de páginas
+            
+    }
+        }
+    
+
+    if (y > 270) {
+            doc.addPage(); // Cria uma nova página
+            adicionarCabecalho()
+            adicionarRodape()
+            doc.setFontSize(10);
+            y = 60; // Reinicia a posição no topo da nova página
+           // doc.setFontSize(10);
+           pageCount++; // Incrementa contador de páginas
+
+
+
+
+
+           
+    doc.text(`${index + 1}º) AUTOR DO FATO: ${nomeAutor}`, 10, y);
+    doc.line(8, y+1, 200, y+1);
+    }
+    verificapagina()
+    doc.text(`${index + 1}º) AUTOR DO FATO: ${nomeAutor}`, 10, y);   
+    doc.line(8, y+1, 200, y+1);
+    y += 6;
+    verificapagina()
+    doc.text(`   NOME SOCIAL: ${nomeSocial}`, 10, y);
+    doc.line(10, y+1, 200, y+1);
+    y += 6;
+    verificapagina()
+    doc.text(`   CPF: ${cpfAutor}`, 10, y);
+    doc.line(10, y+1, 200, y+1);
+    y += 6;
+    verificapagina()
+    doc.text(`   RG/CNH: ${rgcnhAutor}`, 10, y);
+    doc.line(10, y+1, 200, y+1);
+    
+    doc.text(`   ORGÃO EXPEDITOR: ${rgcnhorgaoexpAutor}`, 120, y);
+    doc.line(10, y+1, 200, y+1);
+    y += 6;
+    verificapagina()
+    doc.text(`   DATA DE EXPEDIÇÃO: ${dataexpedicaoAutor}`, 10, y);
+    
+    doc.text(`   UF: ${dataexpedicaoAutor}`, 120, y);
+    doc.line(10, y+1, 200, y+1);
+    y += 6;
+    verificapagina()
+    doc.text(`   FILIAÇÃO: ${filiacaoAutor}`, 10, y);
+    doc.line(10, y+1, 200, y+1);
+    y += 6;
+    verificapagina()
+    doc.text(`   ENDEREÇO: ${enderecoAutor}`, 10, y);
+    doc.line(10, y+1, 200, y+1);
+    y += 6;
+    verificapagina()
+    doc.text(`   MUNICIPIO: ${municipioAutor}`, 10, y);
+    
+    doc.text(`   UF: ${ufmunicipioAutor}`, 120, y);
+    
+    doc.text(`   CEP: ${cepmunicipioAutor}`, 140, y);
+    doc.line(10, y+1, 200, y+1);
+    y += 6;
+    verificapagina()
+    doc.text(`   PONTO DE REFERÊNCIA: ${pontoreferenciaenderecoAutor}`, 10, y);
+    doc.line(10, y+1, 200, y+1);
+    y += 6;
+    verificapagina()
+    doc.text(`   TELEFONE: ${telefoneAutor}`, 10, y);
+    doc.line(10, y+1, 200, y+1);
+    y += 6;
+    verificapagina()
+    doc.text(`   E-MAIL PESSOAL: ${emailAutor}`, 10, y);
+    doc.line(10, y+1, 200, y+1);
+    y += 6;
+    verificapagina()
+    doc.text(`   ESTADO CIVIL: ${estadocivillAutor}`, 10, y);
+    doc.line(10, y+1, 200, y+1);
+    y += 6;
+    verificapagina()
+    doc.text(`   NACIONALIDADE: ${nacionalidadeAutor}`, 10, y);
+    doc.line(10, y+1, 200, y+1);
+    doc.text(`   NATURALIDADE: ${naturalidadeAutor}`, 80, y);
+    doc.text(`   UF: ${naturalidadeufAutor}`, 180, y);
+    y += 6;
+    verificapagina()
+
+
+    doc.text(`   DATA NASC: ${datanasciAutor}`, 10, y)
+    doc.line(10, y+1, 200, y+1);
+   doc.text(`   SEXO: ${sexoAutor}`, 70, y);
+    y += 6;
+    verificapagina()
+   doc.text(`   PROFISSÃO: ${profissaoAutor}`, 10, y);
+   doc.line(10, y+1, 200, y+1);
+    y += 6;
+    verificapagina()
+    
+   doc.text(`   CONDIÇÕES FISICAS: ${localtrabalhoAutor}`, 10, y);
+   doc.line(10, y+1, 200, y+1);
+    y += 6;
+    verificapagina()
+   //doc.text(`   RELATO DO AUTOR DO FATO: ${relatoAutor}`, 20, y);
+    y += 15;
+   // doc.line(10, y, 200, y);
+    
+    
+
+});
+
+
+function verificapagina2() {
+    if (y > 270) {
+            doc.addPage(); // Cria uma nova página
+            adicionarCabecalho()
+            adicionarRodape()
+            doc.setFontSize(10);
+            y = 60; // Reinicia a posição no topo da nova página
+            pageCount++; // Incrementa contador de páginas
+    }
+        }
+
+           
+doc.setFontSize(10);
+
+            document.getElementsByName("nome_vitima[]").forEach((input, index) => {
+           // doc.text(`${index + 1}. ${input.value}`, 10, y);
+            const nomeVitima = input.value;
+            const nomeSocialVitima = document.getElementsByName("nome_social_vitima[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+            const cpfVitima = document.getElementsByName("cpf_passaporte_vitima[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const rgcnhVitima = document.getElementsByName("rg_cnh_vitima[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const rgcnhorgaoexpVitima = document.getElementsByName("rg_cnh_orgao_exp_vitima[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const dataexpedicaoVitima = document.getElementsByName("data_expedicao_vitima[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const dataexpedicaoufVitima = document.getElementsByName("data_expedicao_uf_vitima[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const filiacaoVitima = document.getElementsByName("filiacao_vitima[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const enderecoVitima = document.getElementsByName("endereco_vitima[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const municipioVitima = document.getElementsByName("municipio_vitima[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const ufmunicipioVitima = document.getElementsByName("uf_municipio_vitima[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const cepmunicipioVitima = document.getElementsByName("cep_municipio_vitima[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const pontoreferenciaenderecoVitima = document.getElementsByName("ponto_referencia_endereco_vitima[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const telefoneVitima = document.getElementsByName("telefone_vitima[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const emailVitima = document.getElementsByName("e-mail_vitima[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const sexoVitima = document.getElementsByName("sexo_vitima[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const estadocivilVitima = document.getElementsByName("estado_civil_vitima[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const nacionalidadeVitima = document.getElementsByName("nacionalidade_vitima[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+const naturalidadeVitima = document.getElementsByName("naturalidade_vitima[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+const naturalidadeufVitima = document.getElementsByName("naturalidadeuf_vitima[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const datanasciVitima = document.getElementsByName("datanascimento_vitima[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+   const profissaoVitima = document.getElementsByName("profissao_vitima[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+   const localtrabalhoVitima = document.getElementsByName("local_trabalho_vitima[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+   const relatoVitima = document.getElementsByName("relato_vitima[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+
+
+           verificapagina2()
+            doc.setFontSize(10);
+            
+            
+            doc.text(`   ${index + 1}º) VITIMA: ${nomeVitima}`, 10, y); 
+             doc.line(8, y+1, 200, y+1);
+            y += 6;   
+            verificapagina2()
+           
+            doc.text(`   NOME SOCIAL: ${nomeSocialVitima}`, 10, y); 
+             doc.line(8, y+1, 200, y+1);
+            y += 6;   
+            verificapagina2()
+            
+            
+    doc.text(`   CPF: ${cpfVitima}`, 10, y);
+    doc.line(10, y+1, 200, y+1);
+    y += 6;
+    verificapagina2()
+    doc.text(`   RG/CNH: ${rgcnhVitima}`, 10, y);
+    doc.line(10, y+1, 200, y+1);
+    
+    doc.text(`   ORGÃO EXPEDITOR: ${rgcnhorgaoexpVitima}`, 120, y);
+    doc.line(10, y+1, 200, y+1);
+    y += 6;
+    verificapagina2()
+    doc.text(`   DATA DE EXPEDIÇÃO: ${dataexpedicaoVitima}`, 10, y);
+    
+    doc.text(`   UF: ${dataexpedicaoufVitima}`, 120, y);
+    doc.line(10, y+1, 200, y+1);
+    y += 6;
+    verificapagina2()
+    doc.text(`   FILIAÇÃO: ${filiacaoVitima}`, 10, y);
+    doc.line(10, y+1, 200, y+1);
+    y += 6;
+    verificapagina2()
+    doc.text(`   ENDEREÇO: ${enderecoVitima}`, 10, y);
+    doc.line(10, y+1, 200, y+1);
+    y += 6;
+    verificapagina2()
+    doc.text(`   MUNICIPIO: ${municipioVitima}`, 10, y);
+    
+    doc.text(`   UF: ${ufmunicipioVitima}`, 120, y);
+    
+    doc.text(`   CEP: ${cepmunicipioVitima}`, 140, y);
+    doc.line(10, y+1, 200, y+1);
+    y += 6;
+    verificapagina2()
+    doc.text(`   PONTO DE REFERÊNCIA: ${pontoreferenciaenderecoVitima}`, 10, y);
+    doc.line(10, y+1, 200, y+1);
+    y += 6;
+    verificapagina2()
+    doc.text(`   TELEFONE: ${telefoneVitima}`, 10, y);
+    doc.line(10, y+1, 200, y+1);
+    y += 6;
+    verificapagina2()
+    doc.text(`   E-MAIL PESSOAL: ${emailVitima}`, 10, y);
+    doc.line(10, y+1, 200, y+1);
+    y += 6;
+    verificapagina2()
+    doc.text(`   ESTADO CIVIL: ${estadocivilVitima}`, 10, y);
+    doc.line(10, y+1, 200, y+1);
+    y += 6;
+    verificapagina2()
+    doc.text(`   NACIONALIDADE: ${nacionalidadeVitima}`, 10, y);
+    doc.line(10, y+1, 200, y+1);
+    doc.text(`   NATURALIDADE: ${naturalidadeVitima}`, 80, y);
+    doc.text(`   UF: ${naturalidadeufVitima}`, 180, y);
+    y += 6;
+    verificapagina2()
+
+
+    doc.text(`   DATA NASC: ${datanasciVitima}`, 10, y)
+    doc.line(10, y+1, 200, y+1);
+   doc.text(`   SEXO: ${sexoVitima}`, 70, y);
+    y += 6;
+    verificapagina2()
+   doc.text(`   PROFISSÃO: ${profissaoVitima}`, 10, y);
+   doc.line(10, y+1, 200, y+1);
+    y += 6;
+    verificapagina2()
+    
+   doc.text(`   LOCAL DE TRABALHO: ${profissaoVitima}`, 10, y);
+   doc.line(10, y+1, 200, y+1);
+    y += 6;
+    verificapagina2()
+   //doc.text(`   RELATO DO AUTOR DO FATO: ${relatoAutor}`, 20, y);
+    y += 15;
+
+
+            });
+
+            
+
+
+            function verificapagina3() {
+    if (y > 270) {
+            doc.addPage(); // Cria uma nova página
+            adicionarCabecalho()
+            adicionarRodape()
+            doc.setFontSize(10);
+            y = 60; // Reinicia a posição no topo da nova página
+            pageCount++; // Incrementa contador de páginas
+    }
+        }
+
+
+doc.setFontSize(10);
+            
+            document.getElementsByName("nome_testemunha[]").forEach((input, index) => {
+                const nomeTestemunha = input.value;
+            const nomeSocialTestemunha = document.getElementsByName("nome_social_testemunha[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+            const cpfTestemunha = document.getElementsByName("cpf_passaporte_testemunha[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const rgcnhTestemunha = document.getElementsByName("rg_cnh_testemunha[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const rgcnhorgaoexpTestemunha = document.getElementsByName("rg_cnh_orgao_exp_testemunha[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const dataexpedicaoTestemunha = document.getElementsByName("data_expedicao_testemunha[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const dataexpedicaoufTestemunha = document.getElementsByName("data_expedicao_uf_testemunha[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const filiacaoTestemunha = document.getElementsByName("filiacao_testemunha[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const enderecoTestemunha = document.getElementsByName("endereco_testemunha[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const municipioTestemunha = document.getElementsByName("municipio_testemunha[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const ufmunicipioTestemunha = document.getElementsByName("uf_municipio_testemunha[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const cepmunicipioTestemunha = document.getElementsByName("cep_municipio_testemunha[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const pontoreferenciaenderecoTestemunha = document.getElementsByName("ponto_referencia_endereco_testemunha[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const telefoneTestemunha = document.getElementsByName("telefone_testemunha[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const emailTestemunha = document.getElementsByName("e-mail_testemunha[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const sexoTestemunha = document.getElementsByName("sexo_testemunha[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const estadocivilTestemunha = document.getElementsByName("estado_civil_testemunha[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const nacionalidadeTestemunha = document.getElementsByName("nacionalidade_testemunha[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+const naturalidadeTestemunha = document.getElementsByName("naturalidade_testemunha[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+const naturalidadeufTestemunha = document.getElementsByName("naturalidadeuf_testemunha[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+    const datanasciTestemunha = document.getElementsByName("datanascimento_testemunha[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+   const profissaoTestemunha = document.getElementsByName("profissao_testemunha[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+   const localtrabalhoTestemunha = document.getElementsByName("local_trabalho_testemunha[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+   const relatoTestemunha = document.getElementsByName("relato_testemunha[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+
+
+
+
+   verificapagina3()
+            doc.setFontSize(10);
+            
+            
+            doc.text(`   ${index + 1}º) TESTEMUNHA: ${nomeTestemunha}`, 10, y); 
+             doc.line(8, y+1, 200, y+1);
+            y += 6;   
+            verificapagina3()
+           
+            doc.text(`   NOME SOCIAL: ${nomeSocialTestemunha}`, 10, y); 
+             doc.line(10, y+1, 200, y+1);
+            y += 6;   
+            verificapagina3()
+            
+            
+    doc.text(`   CPF: ${cpfTestemunha}`, 10, y);
+    doc.line(10, y+1, 200, y+1);
+    y += 6;
+    verificapagina3()
+    doc.text(`   RG/CNH: ${rgcnhTestemunha}`, 10, y);
+    doc.line(10, y+1, 200, y+1);
+    
+    doc.text(`   ORGÃO EXPEDITOR: ${rgcnhorgaoexpTestemunha}`, 120, y);
+   
+    y += 6;
+    verificapagina3()
+    doc.text(`   DATA DE EXPEDIÇÃO: ${dataexpedicaoTestemunha}`, 10, y);
+    doc.line(10, y+1, 200, y+1);
+    doc.text(`   UF: ${dataexpedicaoufTestemunha}`, 120, y);
+    doc.line(10, y+1, 200, y+1);
+    y += 6;
+    verificapagina3()
+    doc.text(`   FILIAÇÃO: ${filiacaoTestemunha}`, 10, y);
+    doc.line(10, y+1, 200, y+1);
+    y += 6;
+    verificapagina3()
+    doc.text(`   ENDEREÇO: ${enderecoTestemunha}`, 10, y);
+    doc.line(10, y+1, 200, y+1);
+    y += 6;
+    verificapagina3()
+    doc.text(`   MUNICIPIO: ${municipioTestemunha}`, 10, y);
+    
+    doc.text(`   UF: ${ufmunicipioTestemunha}`, 120, y);
+   
+    doc.text(`   CEP: ${cepmunicipioTestemunha}`, 140, y);
+    doc.line(10, y+1, 200, y+1);
+    y += 6;
+    verificapagina3()
+    doc.text(`   PONTO DE REFERÊNCIA: ${pontoreferenciaenderecoTestemunha}`, 10, y);
+    doc.line(10, y+1, 200, y+1);
+    y += 6;
+    verificapagina3()
+    doc.text(`   TELEFONE: ${telefoneTestemunha}`, 10, y);
+    doc.line(10, y+1, 200, y+1);
+    y += 6;
+    verificapagina3()
+    doc.text(`   E-MAIL PESSOAL: ${emailTestemunha}`, 10, y);
+    doc.line(10, y+1, 200, y+1);
+    y += 6;
+    verificapagina3()
+    doc.text(`   ESTADO CIVIL: ${estadocivilTestemunha}`, 10, y);
+    doc.line(10, y+1, 200, y+1);
+    y += 6;
+    verificapagina3()
+    doc.text(`   NACIONALIDADE: ${nacionalidadeTestemunha}`, 10, y);
+    doc.line(10, y+1, 200, y+1);
+    doc.text(`   NATURALIDADE: ${naturalidadeTestemunha}`, 80, y);
+    doc.text(`   UF: ${naturalidadeufTestemunha}`, 180, y);
+    y += 6;
+    verificapagina3()
+
+
+    doc.text(`   DATA NASC: ${datanasciTestemunha}`, 10, y)
+    doc.line(10, y+1, 200, y+1);
+   doc.text(`   SEXO: ${sexoTestemunha}`, 70, y);
+    y += 6;
+    verificapagina3()
+   doc.text(`   PROFISSÃO: ${profissaoTestemunha}`, 10, y);
+   doc.line(10, y+1, 200, y+1);
+    y += 6;
+    verificapagina3()
+    
+   doc.text(`   LOCAL DE TRABALHO: ${profissaoTestemunha}`, 10, y);
+   doc.line(10, y+1, 200, y+1);
+    y += 6;
+    verificapagina3()
+   //doc.text(`   RELATO DO AUTOR DO FATO: ${relatoTestemunha}`, 10, y);
+    y += 15;
+
+    verificapagina3()
+
+            });
+
+                 //-------------------------------------------------------
+      function verificapagina7() {
+    if (y > 260) {
+            doc.addPage(); // Cria uma nova página
+            adicionarCabecalho()
+            adicionarRodape()
+            doc.setFontSize(10);
+            y = 60; // Reinicia a posição no topo da nova página
+            pageCount++; // Incrementa contador de páginas
+    }
+        }
+verificapagina7()
+
+doc.setFont("helvetica", "bold");
+doc.setFontSize(14);
+            doc.text("C- HISTORICO:", 30, y);
+            y += 20;
+            doc.setFontSize(10);
+            verificapagina4()
+
+
+            const relatoCondutorCorreto = document.getElementById("relato_policial_correto").value;
+          const nomeCondutor = document.getElementById("nome_completo").value
+          const rgPM = document.getElementById("rg").value
+          
+          let textoRelatoCondutor = relatoCondutorCorreto
+          
+          const linhas4 = doc.splitTextToSize(textoRelatoCondutor, 175);
+          // Número de linhas geradas
+const numeroDeLinhas4 = linhas4.length;
+const numeroDeLinhasmultiplcado4 = linhas4.length * 6;
+
+          verificapagina7()
+          
+
+          if (y + numeroDeLinhasmultiplcado4 + 15 > 270) {
+            doc.addPage(); // Cria uma nova página
+            adicionarCabecalho()
+            adicionarRodape()
+            doc.setFontSize(10);
+            y = 60; // Reinicia a posição no topo da nova página
+    }
+
+
+          doc.setFont("helvetica", "bold");
+          doc.text(`Relato do Condutor da ocorrência: ${nomeCondutor} `, 100, y, { align: "center" });
+             doc.line(10, y+1, 200, y+1);
+             
+            y += 15;
+             verificapagina7()
+doc.setFont("helvetica", "normal");
+//doc.text(textoRelatoCondutor, 20, y, { maxWidth: 175, align: 'justify'});
+
+
+
+// Quebrar texto automaticamente para manter formatação no PDF
+const margemEsquerda = 20;
+const larguraTexto = 170; // Ajuste conforme necessário
+const tamanhoFonte = 12;
+const textoFormatado = doc.splitTextToSize(relatoCondutorCorreto, larguraTexto);
+
+doc.text(textoFormatado, 20, y, { maxWidth: 170, align: 'justify'});
+
+
+
+
+
+y += numeroDeLinhas4 * 5;
+y += 10;
+doc.text(`__________________________________________________`, 100, y-4, { align: "center" });
+doc.text(`   ${nomeCondutor}- ${posto_grad}`, 100, y, { align: "center" });
+y += 5;
+doc.text(`  RGPM: ${rgPM}`, 100, y, { align: "center" });
+y += 30;
+verificapagina7()
+               
+
+
+           
+
+
+            
+            function verificapagina4() {
+    if (y > 260) {
+            doc.addPage(); // Cria uma nova página
+            adicionarCabecalho()
+            adicionarRodape()
+            doc.setFontSize(10);
+            y = 60; // Reinicia a posição no topo da nova página
+            pageCount++; // Incrementa contador de páginas
+    }
+        }
+verificapagina4()
+
+
+document.getElementsByName("nome_vitima[]").forEach((input, index) => {
+                const nomeVVitima = input.value;
+            const relatoVitimacorreto = document.getElementsByName("relato_vitima[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+const cpfVVitima = document.getElementsByName("cpf_passaporte_vitima[]")[index]?.value || "N/A"; // Se não houver nome social,
+          
+          let textoRelatoVitima = relatoVitimacorreto 
+          
+          const linhas = doc.splitTextToSize(textoRelatoVitima, 170);
+          // Número de linhas geradas
+const numeroDeLinhas = linhas.length;
+const numeroDeLinhasmultiplcado = linhas.length * 6;
+
+          verificapagina4()
+          
+
+          if (y + numeroDeLinhasmultiplcado + 15 + 15> 270) {
+            doc.addPage(); // Cria uma nova página
+            adicionarCabecalho()
+            adicionarRodape()
+            doc.setFontSize(10);
+            y = 60; // Reinicia a posição no topo da nova página
+            pageCount++; // Incrementa contador de páginas
+    }
+
+
+          doc.setFont("helvetica", "bold");
+          doc.text(`    Relato da vitima (${index + 1}): ${nomeVVitima}`, 100, y, { align: "center" }); 
+             doc.line(10, y+1, 200, y+1);
+             
+            y += 15;
+             verificapagina4()
+doc.setFont("helvetica", "normal");
+doc.text(textoRelatoVitima, 20, y, { maxWidth: 170, align: 'justify'});
+
+
+
+y += numeroDeLinhas * 5;
+
+
+y += 10;
+verificapagina4()
+doc.text(`__________________________________________________`, 100, y-4, { align: "center" });
+doc.text(`   ${nomeVVitima}`, 100, y, { align: "center" });
+y += 5;
+doc.text(`  CPF: ${cpfVVitima}`, 100, y, { align: "center" });
+y += 10;
+
+           
+doc.addPage(); // Cria uma nova página
+pageCount++; // Incrementa contador de páginas
+adicionarCabecalho()
+adicionarRodape()
+y = 80 
+doc.setFont("helvetica", "bold");
+doc.setFontSize(12);
+doc.text(`TERMO DE MANIFESTAÇÃO DA VITIMA`, 100, y, { align: "center" });
+doc.setFont("helvetica", "normal");
+doc.setFontSize(12);
+
+y += 20
+
+
+
+
+//if (nomeVitimaw) {
+    //console.log("A variável é verdadeira e tem valor!");
+    if (typeof nomeVVitima === "undefined") {
+
+} else {doc.text("Eu, " + nomeVVitima +", por este instrumento, manifesto o meu interesse:", 20, y, { maxWidth: 170, align: 'justify'});}
+//} else {
+//}
+y += 10
+
+doc.line(20, y-3, 180, y-3);
+
+doc.setFontSize(10)
+doc.line(48, y-3, 48, y+57);
+doc.text("Em exercer o direito de representação ou queixa contra o autor do fato. (fica cientificada que em caso de queixa-crime, a vítima deverá constituir advogado)", 50, y+6, { maxWidth: 120, align: 'justify'});
+doc.line(20, y-3, 20, y+57);
+y += 30
+doc.line(20, y-3, 180, y-3);
+doc.text("Em decidir posteriormente, estando ciente, para os fins previstos no art. 103 do Código Penal e art. 38 Código de Processo Penal que devo exercer o direito de representação ou de queixa, no prazo de 06 (seis) meses, a contar desta data, sendo certo que meu silêncio, acarretará a extinção de punibilidade, na forma do art. 107, inc. IV, do Código Penal.", 50, y+2, { maxWidth: 120, align: 'justify'});
+doc.line(180, y-33, 180, y+27);
+y += 30
+doc.line(20, y-3, 180, y-3);
+y += 10
+doc.setFont("helvetica", "bold");
+doc.text("Notifico Vossa Senhoria para comparecer no Fórum da Comarca de Barra do Bugres, sito a avenida deputado Hitler Sansão nº1129 centro na Secretaria ou entrar em contato no Balcão Virtual do Núcleo de Justiça Digital dos Juizados Especiais pelo Whatsapp (65) 99688-0622 ou pelo QR Code:", 20, y, { maxWidth: 160, align: 'justify'});
+
+y += 25
+
+
+// Criar o QR Code
+let qrv = new QRious({
+                value: url,
+                size: 80
+            });
+
+            // Adicionar texto ao PDF
+            doc.setFontSize(16);
+            //doc.text("Acesse o link pelo QR Code abaixo:", 20, 20);
+
+            // Adicionar QR Code ao PDF
+            doc.addImage(qrv.toDataURL(), 'PNG', 155, y-16, 40, 40);
+
+          
+            doc.setFontSize(10);
+ 
+           
+      
+///fim da função qr code
+
+//assinatura da vitima
+doc.text(`__________________________________________________`, 100, y-4, { align: "center" });
+doc.text(`   ${nomeVVitima}`, 100, y, { align: "center" });
+y += 5;
+doc.text(`  CPF: ${cpfVVitima}`, 100, y, { align: "center" });
+
+
+y += 10
+doc.text("POLICIAL MILITAR", 30, y , { maxWidth: 175, align: 'justify'});
+y += 10
+
+doc.line(20, y-3, 180, y-3);
+doc.text(posto_grad + " - " + nomeCondutor + "- RGPM: " + rgPM, 30, y+2 , { maxWidth: 175, align: 'justify'});
+y += 7
+doc.line(20, y-3, 180, y-3);
+//doc.text("SD PMMT - DOUGLAS BEZERRA DE OLIVEIRA - RGPM: 887.192", 30, y+2 , { maxWidth: 175, align: 'justify'});
+//doc.text(posto_grad_componente2 + " - " + nome_completo_componente2 + "- RGPM: " + rg_componente2, 30, y+2 , { maxWidth: 175, align: 'justify'});
+y += 7
+doc.line(20, y-3, 180, y-3);
+//doc.text(posto_grad_componente3 + " - " + nome_completo_componente3 + "- RGPM: " + rg_componente3, 30, y+2 , { maxWidth: 175, align: 'justify'});
+y += 7    
+doc.line(20, y-3, 180, y-3);
+//doc.text(posto_grad_componente4 + " - " + nome_completo_componente4 + "- RGPM: " + rg_componente4, 30, y+2 , { maxWidth: 175, align: 'justify'});
+y += 7  
+doc.line(20, y-3, 180, y-3);
+y += 7  
+
+
+doc.setFontSize(12)
+// fim do manifestação da vitima
+
+
+
+///-----------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+});
+
+
+doc.addPage(); // Cria uma nova página
+pageCount++; // Incrementa contador de páginas
+
+adicionarCabecalho()
+adicionarRodape()
+y = 60
+
+
+//-------------------------------------------------------
+function verificapagina5() {
+    if (y > 260) {
+            doc.addPage(); // Cria uma nova página
+            adicionarCabecalho()
+            adicionarRodape()
+            doc.setFontSize(10);
+            y = 60; // Reinicia a posição no topo da nova página
+            pageCount++; // Incrementa contador de páginas
+    }
+        }
+verificapagina5()
+
+
+document.getElementsByName("nome_testemunha[]").forEach((input, index) => {
+                const nomeTTestemunha = input.value;
+            const relatoTestemunhaCorreto = document.getElementsByName("relato_testemunha[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+const cpfTTestemunha = document.getElementsByName("cpf_passaporte_testemunha[]")[index]?.value || "N/A"; // Se não houver nom
+          
+          let textoRelatoTestemunha = relatoTestemunhaCorreto 
+          
+          const linhas2 = doc.splitTextToSize(textoRelatoTestemunha, 170);
+          // Número de linhas geradas
+const numeroDeLinhas2 = linhas2.length;
+const numeroDeLinhasmultiplcado2 = linhas2.length * 6;
+
+          verificapagina5()
+          
+
+          if (y + numeroDeLinhasmultiplcado2 + 15 + 15 > 270) {
+            doc.addPage(); // Cria uma nova página
+            adicionarCabecalho()
+            adicionarRodape()
+            doc.setFontSize(10);
+            y = 60; // Reinicia a posição no topo da nova página
+            pageCount++; // Incrementa contador de páginas
+    }
+
+    doc.setFontSize(10);
+          doc.setFont("helvetica", "bold");
+          doc.text(`    Relato da testemunha (${index + 1}): ${nomeTTestemunha}`, 100, y, { align: "center" }); 
+          doc.setFontSize(10);
+             doc.line(10, y+1, 200, y+1);
+             
+            y += 15;
+             verificapagina5()
+doc.setFont("helvetica", "normal");
+doc.setFontSize(10);
+doc.text(textoRelatoTestemunha, 20, y, { maxWidth: 170, align: 'justify'});
+
+
+
+y += numeroDeLinhas2 * 7;
+
+
+y += 10;
+doc.text(`__________________________________________________`, 100, y-4, { align: "center" });
+doc.text(`   ${nomeTTestemunha}`, 100, y, { align: "center" });
+y += 5;
+doc.text(`  CPF: ${cpfTTestemunha}`, 100, y, { align: "center" });
+y += 30;
+
+               
+
+
+});
+
+
+
+         //-------------------------------------------------------
+function verificapagina6() {
+    if (y > 260) {
+            doc.addPage(); // Cria uma nova página
+            adicionarCabecalho()
+            adicionarRodape()
+            doc.setFontSize(10);
+            y = 60; // Reinicia a posição no topo da nova página
+            pageCount++; // Incrementa contador de páginas
+    }
+        }
+verificapagina6()
+
+
+document.getElementsByName("nome_autor[]").forEach((input, index) => {
+                const nomeAAutor = input.value;
+            const relatoAutorCorreto = document.getElementsByName("relato_autor[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+const cpfAutor = document.getElementsByName("cpf_passaporte_autor[]")[index]?.value || "N/A"; // Se não houver nome social, 
+          
+          let textoRelatoAutor = relatoAutorCorreto 
+          
+          const linhas3 = doc.splitTextToSize(textoRelatoAutor, 170);
+          // Número de linhas geradas
+const numeroDeLinhas3 = linhas3.length;
+const numeroDeLinhasmultiplcado3 = linhas3.length * 6;
+
+          verificapagina6()
+          
+
+          if (y + numeroDeLinhasmultiplcado3 + 15 +15 > 270) {
+            doc.addPage(); // Cria uma nova página
+            adicionarCabecalho()
+            adicionarRodape()
+            doc.setFontSize(10);
+            y = 60; // Reinicia a posição no topo da nova página
+            pageCount++; // Incrementa contador de páginas
+    }
+
+
+          doc.setFont("helvetica", "bold");
+          doc.text(`   Relato do Autor do fato (${index + 1}) : ${nomeAAutor}`, 100, y, { align: "center" }); 
+             doc.line(10, y+1, 200, y+1);
+             
+            y += 15;
+             verificapagina6()
+doc.setFont("helvetica", "normal");
+doc.setFontSize(10);
+doc.text(textoRelatoAutor, 20, y, { maxWidth: 170, align: 'justify'});
+
+
+
+y += numeroDeLinhas3 * 7;
+
+y += 10;
+doc.text(`__________________________________________________`, 100, y-4, { align: "center" });
+doc.text(`   ${nomeAAutor}`, 100, y, { align: "center" });
+y += 5;
+doc.text(`  CPF: ${cpfAutor}`, 100, y, { align: "center" });
+y += 10;
+verificapagina6()
+               
+
+
+});
+
+doc.setFont("helvetica", "bold");
+doc.setFont("helvetica", "normal");
+
+  //aqui começa a conclusão policial
+
+  doc.addPage(); // Cria uma nova página
+            adicionarCabecalho()
+            adicionarRodape()
+            doc.setFontSize(12);
+            const artigoo = document.getElementById("artigo").value
+           // const condicoesFisicas = document.getElementById("local_trabalho_autor").value
+           pageCount++; // Incrementa contador de páginas
+           
+y = 60    
+
+            doc.text(`  CONCLUSÃO POLICIAL`, 100, y, { align: "center" });
+            doc.setFontSize(10);
+y += 20
+            let textoconclusaopolicial = `Diante das circunstâncias e de tudo o que foi relatado, resta acrescentar que o autor infringiu o artigo n.º ${artigoo} da ${lei}, Nada mais havendo a tratar, deu-se por findo o presente termo circunstanciado de ocorrência que vai devidamente assinado por uma testemunha (se houver), pelo autor e por mim, condutor da ocorrência, que o digitei.  E pelo fato do autor ter se comprometido a comparecer ao Juizado Especial Criminal da Comarca de Barra do Bugres - MT, este foi liberado sem lesões corporais, após a assinatura do termo de compromisso.`;
+
+            
+
+
+doc.setFont("helvetica", "normal");
+doc.text(textoconclusaopolicial, 20, y, { maxWidth: 170, align: 'justify'});
+doc.setFont("helvetica", "bold");
+doc.text("D- PROVIDÊNCIAS ADOTADAS", 30, y + 40, { maxWidth: 175, align: 'justify'});
+      
+y += 40
+
+y += 10
+
+//verifica se tem vitima ou nao 
+let textoDocAnexo =[];
+ textoDocAnexo = "DOC/ANEXOS: TERMO DE COMPROMISSO DE COMPARECIMENTO"
+
+
+
+    document.getElementsByName("nome_vitima[]").forEach((input, index) => {
+        const vitimas = document.getElementsByName("nome_vitima[]");
+
+if (vitimas.length > 0) {
+    // Caso não exista vítima, execute outra lógica
+   // console.log("Nenhuma vítima cadastrada, seguir com outra ação.");
+   // textoDocAnexo = "DOC/ANEXOS: TERMO DE COMPROMISSO DE COMPARECIMENTO"
+   textoDocAnexo += "; TERMO DE MANIFESTAÇÃO DA VITIMA"}
+});
+ 
+   
+        
+if (naturezaa === "Lesão corporal culposa"){textoDocAnexo += "; TERMO DE SOLICITAÇÃO DE EXAME PERICIAL"};
+       
+if (document.getElementById("paginaAnexos").checked) {
+    textoDocAnexo += "; TERMO DE ANEXOS";}
+     
+    // Verifica se o checkbox "Termo_Preliminar_de_Drogas" está marcado
+    if (document.getElementById("Termo_Preliminar_de_Drogas").checked) {
+        textoDocAnexo += "; TERMO PRELIMINAR DE DROGAS ; REQUISIÇÃO DE EXAME EM DROGAS DE ABUSO";
+    }
+        
+    // Verifica se o checkbox "Termo_Apreensao_de_Materiais" está marcado
+    if (document.getElementById("Termo_Apreensão_de_Materias").checked) {
+        textoDocAnexo += "; TERMO DE MATERIAL APREENDIDO";
+    }
+
+    
+
+///~fim da verificação
+
+
+doc.line(20, y-3, 190, y-3);
+doc.text("PROVIDÊNCIAS: CONFECÇÃO DO TERMO CIRCUNSTANCIADO DE OCORRÊNCIA", 20, y, { maxWidth: 160, align: 'justify'});
+y += 15
+doc.line(20, y-3, 190, y-3);
+doc.text(textoDocAnexo, 20, y , { maxWidth: 160, align: 'justify'});
+y += 15
+doc.line(20, y-3, 190, y-3);
+doc.text("DESCRIÇÃO DOS OBJETOS/ DOCUMENTOS APREENDIDOS: "+ textoOutros, 20, y , { maxWidth: 160, align: 'justify'});
+y += 30
+doc.line(20, y-3, 190, y-3);
+
+
+            //const relatoAutorr = document.getElementById('relato_autor').value;
+//doc.text(`   RELATO DO AUTOR DO FATO: ${relatoAutorr}`, 20, y);
+doc.line(20, 127, 20, y-3);
+
+doc.line(190, 127, 190, y-3);
+    
+y += 10
+doc.text("E- IDENTIFICAÇÃO DA GUARNIÇÃO", 30, y , { maxWidth: 175, align: 'justify'});
+y += 10
+
+doc.line(20, y-3, 170, y-3);
+doc.text(posto_grad + " - " + nomeCondutor + "- RGPM: " + rgPM, 30, y+2 , { maxWidth: 175, align: 'justify'});
+y += 7
+doc.line(20, y-3, 170, y-3);
+//doc.text("SD PMMT - DOUGLAS BEZERRA DE OLIVEIRA - RGPM: 887.192", 30, y+2 , { maxWidth: 175, align: 'justify'});
+if (nome_completo_componente2) {
+doc.text(posto_grad_componente2 + " - " + nome_completo_componente2 + "- RGPM: " + rg_componente2, 30, y+2 , { maxWidth: 175, align: 'justify'});}
+y += 7
+doc.line(20, y-3, 170, y-3);
+if (nome_completo_componente3) {
+doc.text(posto_grad_componente3 + " - " + nome_completo_componente3 + "- RGPM: " + rg_componente3, 30, y+2 , { maxWidth: 175, align: 'justify'});}
+
+y += 7    
+doc.line(20, y-3, 170, y-3);
+if (nome_completo_componente4) {
+doc.text(posto_grad_componente4 + " - " + nome_completo_componente4 + "- RGPM: " + rg_componente4, 30, y+2 , { maxWidth: 175, align: 'justify'});}
+
+y += 7  
+doc.line(20, y-3, 170, y-3);
+y += 7 
+
+const omitirMaterialApreendido = document.getElementById("paginaAnexos").checked;
+if (!omitirMaterialApreendido) {
+                // nao gera a pagina anexo
+
+            } else {
+                
+//aqui começa a pagina anexo
+//doc.addPage(); // Cria uma nova página
+pageCount++; // Incrementa contador de páginas
+
+adicionarCabecalho()
+adicionarRodape()
+y += 7 
+//doc.text("Referência: Termo Circunstanciado de Ocorrência de nº ___/UPM/ANO", 30, y , { maxWidth: 175, align: 'justify'});
+
+
+window.onload = function() {
+    gerarPDF23(); // Função que você deseja executar automaticamente
+};
+               
+
+            }
+
+
+document.getElementsByName("nome_autor[]").forEach((input, index) => {
+                const nomeAAAutor = input.value;
+            const relatoAAAutorCorreto = document.getElementsByName("relato_autor[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+const cpfAAAutor = document.getElementsByName("cpf_passaporte_autor[]")[index]?.value || "N/A"; // Se não houver nome social, 
+
+
+
+
+//aqui começa a pagina DO TERMO DE COMPROMISSO
+doc.addPage(); // Cria uma nova página
+pageCount++; // Incrementa contador de páginas
+adicionarCabecalho()
+adicionarRodape()
+y = 80 
+
+doc.setFontSize(12);
+doc.text(`TERMO DE COMPROMISSO DE COMPARECIMENTO`, 100, y, { align: "center" });
+doc.setFontSize(10);
+
+y += 20 
+let textoTermodecompromissso = `Por este instrumento, eu ${nomeAAAutor}, assumo, nos termos do parágrafo único do Art. 69 da Lei nº 9.099/95, o compromisso de comparecer no Juizado Especial Criminal, em virtude dos fatos registrados no Termo Circunstanciado de Ocorrência acima referenciado, conforme notificado abaixo.              Fico ciente de que a concordância em comparecer ao Juizado Especial Criminal, não implica confissão de qualquer natureza, admissão de culpa ou anuência às declarações da parte contrária e o não comparecimento no dia e hora ajustados neste termo sujeitará às medidas previstas na Lei nº 9.099/95. Fico ciente também que deverei comparecer acompanhado de advogado e que na ausência deste será nomeado um defensor público.                                 `;
+
+
+
+doc.setFont("helvetica", "normal");
+doc.text(textoTermodecompromissso, 20, y, { maxWidth: 170, align: 'justify'});
+
+
+y += 40;
+
+let textTermodecompromissoContinuacao = `Notifico Vossa Senhoria para comparecer no Fórum da Comarca de Barra do Bugres, situado Av. Dep. Hitler Sansão, 1129, na Secretaria ou entrar em contato no Balcão Virtual do Núcleo de Justiça Digital dos Juizados Especiais pelo Whatsapp (65) 99688-0622 ou pelo QR Code:`;
+
+doc.setFont("helvetica", "bold");
+doc.text(textTermodecompromissoContinuacao, 20, y, { maxWidth: 170, align: 'justify'});
+
+///função qrcdoe
+
+// Criar o QR Code
+let qr = new QRious({
+                value: url,
+                size: 80
+            });
+
+            // Adicionar texto ao PDF
+            doc.setFontSize(16);
+            //doc.text("Acesse o link pelo QR Code abaixo:", 20, 20);
+
+            // Adicionar QR Code ao PDF
+            doc.addImage(qr.toDataURL(), 'PNG', 155, y+5, 40, 40);
+
+          
+            doc.setFontSize(10);
+ 
+           
+      
+///fim da função qr code
+
+
+    
+     
+y += 40;
+doc.text(`__________________________________________________`, 100, y-4, { align: "center" });
+doc.text(`   ${nomeAAAutor}`, 100, y, { align: "center" });
+y += 5;
+doc.text(`  CPF: ${cpfAAAutor}`, 100, y, { align: "center" });
+
+
+
+y += 30;
+
+doc.setFont("helvetica", "bold");
+doc.text("POLICIAL MILITAR", 20, y, { maxWidth: 175, align: 'justify'});
+y += 7;
+doc.text(posto_grad + " - " + nome_completo + " - RGPM " + rg, 20, y, { maxWidth: 170, align: 'justify'});
+//doc.text(`TERMO DE COMPROMISSO DE COMPARECIMENTO`, 100, y, { align: "center" });
+y += 40
+
+///-----------------------------------------------------------------------------------------------------------------
+/// manifestação da vitima
+
+
+});
+
+
+document.getElementsByName("nome_autor[]").forEach((input, index) => {
+                const nomeAutorDroga = input.value;
+            const relatoAutorDroga = document.getElementsByName("relato_autor[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+const cpfAutorDroga = document.getElementsByName("cpf_passaporte_autor[]")[index]?.value || "N/A"; // Se não houver nome social, 
+
+
+
+
+const omitirtermopreliminardedrogas = document.getElementById("Termo_Preliminar_de_Drogas").checked;
+if (!omitirtermopreliminardedrogas) {
+                // nao gera a pagina anexo
+
+            } else {
+
+doc.addPage(); // termo de constatação preliminar de drogas
+pageCount++; // Incrementa contador de páginas
+
+adicionarCabecalho()
+adicionarRodape()
+y = 60 
+doc.setFont("helvetica", "bold");
+doc.setFontSize(12);
+doc.text(`TERMO DE CONSTATAÇÃO PRELIMINAR DE DROGA`, 100, y, { align: "center" });
+doc.setFont("helvetica", "normal");
+doc.setFontSize(10);
+
+y += 10;
+
+
+
+
+
+let textoPart1 = `Em razão da lavratura deste Termo Circunstanciado de Ocorrência, pelo(s) delito(s) tipificado(s): ${artigo} da lei ${lei}, foi apreendido o material descrito abaixo, em poder do autor ${nomeAutorDroga} já qualificado no TCO-PM.`;
+
+doc.setFont("helvetica", "normal");
+doc.text(textoPart1, 20, y, { maxWidth: 170, align: 'justify'});
+y += 18
+
+let textoPart2 = `Após ciência das implicações legais do encargo assumido, firmou-se o compromisso legal de proceder à análise dos seguintes materiais:`;
+doc.text(textoPart2, 20, y, { maxWidth: 170, align: 'justify'});
+y += 18
+
+
+let textoPart3 = `${textoDrogas} de substância vegetal, cor, odor típico, semelhante ao entorpecente enumerado e descrito na frase;`;
+doc.text(textoPart3, 20, y, { maxWidth: 170, align: 'justify'});
+y += 12
+
+//let textoPart4 = `______ (porção/ões) de substância vegetal, cor, odor típico, semelhante ao entorpecente conhecido como _____________________________;`;
+//doc.text(textoPart4, 20, y, { maxWidth: 170, align: 'justify'});
+//y += 12
+
+let textoPart5 = `O presente relatório tem por objetivo avaliar se a(s) substância(s) em questão se trata(m) de entorpecente(s), psicotrópica(s), precursora(s) ou outras sob controle especial da Portaria 344/1998 SVS/MS.`;
+doc.text(textoPart5, 20, y, { maxWidth: 170, align: 'justify'});
+y += 12
+
+let textoPart6 = `Para verificação do exposto acima, foi realizada inspeção visual e olfativa do material.`;
+doc.text(textoPart6, 20, y, { maxWidth: 170, align: 'justify'});
+y += 18
+
+let textoPart7 = `${cidade}/MT de ${dia} de ${mesExtenso}, ${ano}.`;
+doc.text(textoPart7, 20, y, { maxWidth: 170, align: 'justify'});
+y += 18
+
+doc.setFont("helvetica", "bold");
+let textoPart8 = `TESTEMUNHA`;
+doc.text(textoPart8, 20, y, { maxWidth: 170, align: 'justify'});
+y += 7
+doc.setFont("helvetica", "normal");
+
+let textoPart9 = `NOME: ____________________________________, ASSINATURA:_______________________`;
+doc.text(textoPart9, 20, y, { maxWidth: 170, align: 'justify'});
+y += 12
+
+
+doc.setFont("helvetica", "bold");
+let textoPart10 = `POLICIAL MILITAR`;
+doc.text(textoPart10, 20, y, { maxWidth: 170, align: 'justify'});
+y += 7
+
+
+
+doc.line(20, y-3, 170, y-3);
+doc.text(posto_grad + " - " + nomeCondutor + "- RGPM: " + rgPM, 20, y+2 , { maxWidth: 175, align: 'justify'});
+y += 7
+doc.line(20, y-3, 170, y-3);
+//doc.text("SD PMMT - DOUGLAS BEZERRA DE OLIVEIRA - RGPM: 887.192", 30, y+2 , { maxWidth: 175, align: 'justify'});
+if (nome_completo_componente2) {
+doc.text(posto_grad_componente2 + " - " + nome_completo_componente2 + "- RGPM: " + rg_componente2, 20, y+2 , { maxWidth: 175, align: 'justify'});}
+y += 7
+doc.line(20, y-3, 170, y-3);
+if (nome_completo_componente3) {
+doc.text(posto_grad_componente3 + " - " + nome_completo_componente3 + "- RGPM: " + rg_componente3, 20, y+2 , { maxWidth: 175, align: 'justify'});}
+
+y += 7    
+doc.line(20, y-3, 170, y-3);
+if (nome_completo_componente4) {
+doc.text(posto_grad_componente4 + " - " + nome_completo_componente4 + "- RGPM: " + rg_componente4, 20, y+2 , { maxWidth: 175, align: 'justify'});}
+y += 7  
+doc.line(20, y-3, 170, y-3);
+y += 7 
+
+//doc.setFont("helvetica", "normal");
+
+ 
+
+
+ doc.addPage(); // termo de ABUSO
+pageCount++; // Incrementa contador de páginas
+
+adicionarCabecalho()
+adicionarRodape()
+y = 60 
+doc.setFont("helvetica", "bold");
+doc.setFontSize(12);
+doc.text(`REQUISIÇÃO DE EXAME EM DROGAS DE ABUSO`, 100, y, { align: "center" });
+doc.setFont("helvetica", "normal");
+doc.setFontSize(10);
+
+y += 10;
+
+
+let textoPart11 = `Requisito a POLITEC - Perícia Oficial e Identificação Técnica, nos termos dos artigos 159 e seguintes do Código de Processo Penal, combinado com o Artigo 69, Caput da Lei 9.099/95, combinado com Artigo 48, § 2º e Artigo 50, § 1º da Lei 11343/06, solicito a realização de exame químico na substância análoga a entorpecente apensada, encontrada em posse do (a) Sr.(a) ${nomeAutorDroga}, - autor do fato – qualificado no Termo Circunstanciado de Ocorrência nº ${numero_tco}/CR07/${ano}, de natureza ${naturezaa}, ocorrido no dia ${dia} de ${mesExtenso2} de ${ano}.`;
+
+doc.setFont("helvetica", "normal");
+doc.text(textoPart11, 20, y, { maxWidth: 170, align: 'justify'});
+y += 33
+
+
+
+let textoPart12 = `Apenso: 01 (um) saco plástico, contendo: ${textoDrogas}, de substância análoga ao entorpecente descrito.\n\nPara tanto, solicito a Vossa senhoria, que seja confeccionado o respectivo Laudo definitivo, devendo os peritos responderem aos quesitos oficiais, conforme abaixo:\n\n\n1. Qual a natureza e característica das substâncias enviadas a exame?\n2. Podem as mesmas causar dependência física ou psíquica?\n3. Qual o peso das substâncias enviadas a exame?`;
+
+doc.setFont("helvetica", "normal");
+
+// Quebrar texto automaticamente para manter formatação no PDF
+const margemEsquerda2 = 20;
+const larguraTexto2 = 170; // Ajuste conforme necessário
+const tamanhoFonte2 = 12;
+const textoFormatado2 = doc.splitTextToSize(textoPart12, larguraTexto);
+
+doc.text(textoFormatado2, 20, y, { maxWidth: 170});
+y += 70
+
+doc.text(`${cidade}, ${dia} de ${mesExtenso2} de ${ano}. `, 20, y, { maxWidth: 170, align: 'justify'});
+
+
+
+doc.setFont("helvetica", "bold");
+let texto3ass =` ______________________________________________________________ `;
+doc.text(texto3ass, 103, 195,{ align: "center" });
+
+let textoo2 =` ${nome_completo} - ${posto_grad} `;
+doc.text(textoo2, 103, 200,{ align: "center" });
+
+let textoo3 = `RG nº ${rg} PMMT`;
+doc.text(textoo3, 103, 206,{ align: "center" });
+let textoo4 = `Comandante de GUPM`;
+doc.text(textoo4, 103, 212,{ align: "center" });
+
+
+doc.text("DATA:                    SERVIDOR DA POLITEC:                                         ASSINATURA:", 20, 268, { maxWidth: 170, align: 'justify'});
+}
+});
+
+// FIM DO TERMO PRELIMINAR DE DROGAS
+
+        
+
+
+
+
+document.getElementsByName("nome_autor[]").forEach((input, index) => {
+                const nomeAutorApreensao = input.value;
+            const relatoAutorApreensao = document.getElementsByName("relato_autor[]")[index]?.value || "N/A"; // Se não houver nome social, exibe "N/A"
+const cpfAutorApreensao = document.getElementsByName("cpf_passaporte_autor[]")[index]?.value || "N/A"; // Se não houver nome social, 
+const filicaoAutorApreensao = document.getElementsByName("filiacao_autor[]")[index]?.value || "N/A"; // Se não houver nome social, 
+const naturalidadeAutorApreensao = document.getElementsByName("naturalidade_autor[]")[index]?.value || "N/A"; // Se não houver nome social, 
+const rgAutorApreensao = document.getElementsByName("rg_cnh_autor[]")[index]?.value || "N/A"; // Se não houver nome social, 
+
+const enderecoAutorApreensao = document.getElementsByName("endereco_autor[]")[index]?.value || "N/A"; // Se não houver nome social, 
+const municipioAutorApreensao = document.getElementsByName("municipio_autor[]")[index]?.value || "N/A"; // Se não houver nome social, 
+const cepAutorApreensao = document.getElementsByName("cep_municipio_autor[]")[index]?.value || "N/A"; // Se não houver nome social, 
+const telefoneAutorApreensao = document.getElementsByName("telefone_autor[]")[index]?.value || "N/A"; // Se não houver nome social, 
+//const materialAutorApreensao = document.getElementsByName("material_apreendido_autor[]")[index]?.value || "N/A"; // Se não houver nome social, 
+
+const omitirTermodeapreensao = document.getElementById("Termo_Apreensão_de_Materias").checked;
+// Se NÃO estiver marcado, inclui a seção de Material Apreendido
+if (!omitirTermodeapreensao) {
+                
+            } else {
+
+//---------------
+
+                //---------------------
+
+
+doc.addPage(); // TERMO DE APREENSAO...
+pageCount++; // Incrementa contador de páginas
+
+adicionarCabecalho()
+adicionarRodape()
+y = 60
+doc.setFont("helvetica", "bold");
+doc.setFontSize(12);
+doc.text(`TERMO DE APREENSÃO`, 100, y, { align: "center" });
+doc.setFont("helvetica", "normal");
+doc.setFontSize(10);
+y += 20
+
+doc.line(20, y, 185, y);
+doc.text("DATA: " + data_registro, 21, y+4, { maxWidth: 170, align: 'justify'});
+doc.text("HORA: " + hora_fato, 55, y+4, { maxWidth: 170, align: 'justify'});
+doc.text("LOCAL: ", 90, y+4, { maxWidth: 170, align: 'justify'});
+y += 3
+doc.line(20, y+3, 185, y+3);
+doc.text("NOME: " +nomeAutorApreensao, 21, y+7, { maxWidth: 170, align: 'justify'});
+y += 6
+doc.line(20, y+3, 185, y+3);
+doc.text("FILIAÇÃO: " + filicaoAutorApreensao, 21, y+7, { maxWidth: 170, align: 'justify'});
+y += 6
+doc.line(20, y+3, 185, y+3);
+doc.text("NATURALIDADE: " + naturalidadeAutorApreensao, 21, y+7, { maxWidth: 170, align: 'justify'});
+y += 6
+doc.line(20, y+3, 185, y+3);
+doc.text("RG: "+ rgAutorApreensao, 21, y+7, { maxWidth: 170, align: 'justify'});
+doc.text("CPF: "+ cpfAutorApreensao , 60, y+7, { maxWidth: 170, align: 'justify'});
+y += 6
+doc.line(20, y+3, 185, y+3);
+doc.text("ENDEREÇO: "+enderecoAutorApreensao, 21, y+7, { maxWidth: 170, align: 'justify'});
+y += 6
+doc.line(20, y+3, 185, y+3);
+doc.text("MUNICIPIO: "+municipioAutorApreensao, 21, y+7, { maxWidth: 170, align: 'justify'});
+doc.text("UF: ", 120, y+7, { maxWidth: 170, align: 'justify'});
+y += 6
+doc.line(20, y+3, 185, y+3);
+doc.text("CEP: "+ cepAutorApreensao, 21, y+7, { maxWidth: 170, align: 'justify'});
+doc.text("TELEFONE: " + telefoneAutorApreensao, 60, y+7, { maxWidth: 170, align: 'justify'});
+y += 6
+doc.line(20, y+3, 185, y+3);
+doc.text("FICA APREENDIDO O ABAIXO DESCRITO: ", 21, y+7, { maxWidth: 170, align: 'justify'});
+y += 6
+doc.line(20, y+3, 185, y+3);
+doc.text(""+textoOutros, 21, y+7, { maxWidth: 160, align: 'justify'});
+y += 30
+doc.line(20, y+3, 185, y+3);
+doc.text("O presente termo de Apreensão foi lavrado com base no art. 6º, II, do CPP, e Art. 92 da lei 9.099/1995 ", 21, y+7, { maxWidth: 170, align: 'justify'});
+y += 6
+doc.line(20, y+3, 185, y+3);
+
+y += 30
+
+doc.text(`__________________________________________________`, 100, y-4, { align: "center" });
+doc.text(`   ${nomeAutorApreensao}`, 100, y, { align: "center" });
+y += 5;
+doc.text(`  CPF: ${cpfAutorApreensao}`, 100, y, { align: "center" });
+y += 20;
+
+doc.setFont("helvetica", "bold");
+doc.text("POLICIAL MILITAR: ", 20, y, { maxWidth: 170, align: 'justify'});
+doc.text(posto_grad + " - " + nomeCondutor + "- RGPM: " + rgPM, 20, y+10 , { maxWidth: 175, align: 'justify'});
+doc.setFont("helvetica", "normal");
+
+            }
+});
+/// FIM DO TERMO DE APREENSAO
+
+
+
+document.getElementsByName("nome_vitima[]").forEach((input, index) => {
+           // doc.text(`${index + 1}. ${input.value}`, 10, y);
+            const nomeVitimaExame = input.value;
+            const filiacaoVitimaExame = document.getElementsByName("filiacao_vitima[]")[index]?.value || "N/A";
+
+            const lesaoVitimaExame = document.getElementsByName("local_trabalho_vitima[]")[index]?.value || "N/A";
+ 
+        //Lesão corporal culposa - aqui tenho que criar o termo de solicitação de exame com condição que somente quando for lesao corporal 
+if (naturezaa === "Lesão corporal culposa"){
+    doc.addPage(); // Cria uma nova página para o termo de encerramento ...
+pageCount++; // Incrementa contador de páginas
+adicionarCabecalho()
+adicionarRodape()
+y = 60
+doc.setFont("helvetica", "bold");
+doc.setFontSize(12);
+doc.text(`TERMO DE SOLICITAÇÃO DE EXAME DE LESÃO CORPORAL`, 100, y, { align: "center" });
+doc.setFont("helvetica", "normal");
+doc.setFontSize(10);
+y += 20
+
+
+let textoExamePart1 = `Requisito a POLITEC - Perícia Oficial e Identificação Técnica, nos termos dos artigos 158 e seguintes do Código de Processo Penal e artigo 69 Caput da Lei n.º 9.099/1995, a realização de exame de corpo de delito no (a) Sr. (a) ${nomeVitimaExame},  vítima qualificado no Termo Circunstanciado de Ocorrência nº ${numero_tco}/CR07/${ano}, onde causou uma ${lesaoVitimaExame}. Tipificando o crime de: ${naturezaa}, ocorrido no dia ${dia} de ${mesExtenso2} de ${ano}, respondendo para tal os seguintes quesitos:\n\nPara tanto, solicito que Vossa Senhoria responda aos quesitos oficiais, conforme abaixo:\n\n      1. Há ofensa à integridade corporal do paciente?\n      2. Qual o instrumento ou meio que produziu a ofensa?\n      3. Resultou incapacidade para as ocupações habituais por mais de 30 (trinta) dias?\n\n\nDESTINO DO LAUDO: Corregedoria da Policia Militar.\n\n\n\n${cidade}, ${dia} de ${mesExtenso2} de ${ano}.`;
+
+doc.setFont("helvetica", "normal");
+doc.text(textoExamePart1, 20, y, { maxWidth: 170});
+y += 33
+
+
+doc.setFont("helvetica", "bold");
+let textoo3ass =` ______________________________________________________________ `;
+doc.text(textoo3ass, 103, 195,{ align: "center" });
+
+let textoo4 =` ${nome_completo} - ${posto_grad} `;
+doc.text(textoo4, 103, 200,{ align: "center" });
+
+let textoo5 = `RG nº ${rg} PMMT`;
+doc.text(textoo5, 103, 206,{ align: "center" });
+let textoo6 = `Comandante de GUPM`;
+doc.text(textoo6, 103, 212,{ align: "center" });
+
+doc.text(`VITIMA: ${nomeVitimaExame}`, 103, 240,{ align: "center" });
+doc.text(`FILIAÇÃO: ${filiacaoVitimaExame}`, 103, 248,{ align: "center" });
+}
+});
+//// fim do termo de exame pericia
+
+// termo de encerramento e remessa
+let nomesAutores = [];
+
+// Coletando os nomes dos autores
+document.querySelectorAll("input[name='nome_autor[]']").forEach((input) => {
+    const nomeAAAAutor = input.value;
+    if (nomeAAAAutor) {  // Verifica se o campo não está vazio
+        nomesAutores.push(nomeAAAAutor); // Adiciona o nome à lista de autores
+    }
+});
+// Concatenando todos os nomes com vírgula e espaço
+const nomesConcatenados = nomesAutores.join(', ');
+
+// Agora o texto de encerramento com todos os nomes concatenados
+const relatoAAAAutorCorreto = document.getElementsByName("relato_autor[]")[0]?.value || "N/A"; // O primeiro relato, caso haja mais, poderá ser ajustado
+const cpfAAAAutor = document.getElementsByName("cpf_passaporte_autor[]")[0]?.value || "N/A"; // O primeiro CPF
+
+doc.addPage(); // Cria uma nova página para o termo de encerramento ...
+pageCount++; // Incrementa contador de páginas
+adicionarCabecalho()
+adicionarRodape()
+y = 80 
+doc.setFont("helvetica", "bold");
+doc.setFontSize(12);
+doc.text(`TERMO DE ENCERRAMENTO E REMESSA`, 100, y, { align: "center" });
+doc.setFont("helvetica", "normal");
+doc.setFontSize(10);
+
+function verificarCheckbox() {
+    let checkbox = document.getElementById("paginaAnexos");
+
+    if (checkbox.checked) {
+        //console.log("Checkbox selecionado! Fazer algo aqui...");
+        // Coloque a ação que deseja realizar quando estiver selecionado
+        pageCount++;
+    } else {
+        //console.log("Checkbox NÃO está selecionado!");
+        // Coloque a ação caso não esteja selecionado
+    }
+}
+
+
+let textTermodeencerramento = `Aos ${diaExtenso} dias do mês de ${mesExtenso} do ano de dois mil e vinte e cinco, por determinação da Autoridade Policial Militar, dou por encerrado a lavratura do presente Termo Circunstanciado de Ocorrência n° - ${numero_tco}/CRO7/2025, contendo ${pageCount} laudas paginadas e rubricadas, em desfavor do senhor(a) ${nomesConcatenados}, para as providências de remessa dos autos para apreciação do Núcleo de Resoluções de Conflitos e Justiça Restaurativa, da Vara do Juizado Especial da Comarca de Barra do Bugres-MT, a quem compete deliberar sobre o suposto delito.`;
+
+
+y += 30
+doc.setFont("helvetica", "normal");
+
+
+
+doc.text(textTermodeencerramento, 20, y, { maxWidth: 170, align: 'justify'});
+
+y += 60
+doc.text("Quartel em " + cidade +", "+ dia + " de "+ mesExtenso + " 2025.", 20, y, { maxWidth: 170, align: 'justify'});
+
+y += 70;
+doc.text(`__________________________________________________`, 100, y-4, { align: "center" });
+doc.text(`   ${nomeCondutor}- ${posto_grad}`, 100, y, { align: "center" });
+y += 5;
+doc.text(`  RGPM: ${rgPM}`, 100, y, { align: "center" });
+y += 10;
+
+
+
+//gerarPDF24(doc);
+
+doc.save("tco.pdf");
+
+
+ 
+        
+}
+
+
+
+    </script>
+    <hr>
+    <hr>
+    <hr>
+    <hr>
+    <h2> COMBINAÇÃO DE ARQUIVOS: TCO + Termo de Anexos.</h2>
+    <hr>
+    <hr>
+ <!DOCTYPE html>
+ <html lang="pt-br">
+ <head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <!--<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">-->
+
+   <title>Juntar PDFs e Manipular Páginas</title>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+ </head>
+ <body>
+ 
+ <h2>Selecione 2 ou 3 arquivos PDF para juntar</h2>
+ 
+ <input type="file" id="file1" accept=".pdf" />
+ <br><br>
+ <input type="file" id="file2" accept=".pdf" />
+ <br><br>
+ <input type="file" id="file3" accept=".pdf" />
+ <br><br>
+ <br><br>
+ <button onclick="combinePDFs()">Juntar PDFs</button>
+ <br><br>
+ <hr>
+ <br><br>
+ <hr>
+ <script>
+   async function combinePDFs() {
+     // Coleta os arquivos selecionados e filtra os que não foram escolhidos
+     const fileInputs = [
+       document.getElementById('file1').files[0],
+       document.getElementById('file2').files[0],
+       document.getElementById('file3').files[0]
+     ];
+     const files = fileInputs.filter(file => file != null);
+ 
+     if (files.length < 2) {
+       alert("Selecione pelo menos dois arquivos PDF.");
+       return;
+     }
+ 
+     // Carrega os arquivos selecionados
+     const pdfBytesList = await Promise.all(files.map(file => file.arrayBuffer()));
+     const { PDFDocument, StandardFonts } = PDFLib;
+     const newPdf = await PDFDocument.create();
+ 
+     // Carrega o primeiro PDF
+     const pdfDoc1 = await PDFDocument.load(pdfBytesList[0]);
+     const numPages1 = pdfDoc1.getPages().length;
+ 
+     // Copia todas as páginas do primeiro PDF, exceto a última
+     const pages1Indices = pdfDoc1.getPages().map((_, i) => i).filter(i => i < numPages1 - 1);
+     const pages1 = await newPdf.copyPages(pdfDoc1, pages1Indices);
+     
+     // Copia a última página do primeiro PDF
+     const lastPage1 = await newPdf.copyPages(pdfDoc1, [numPages1 - 1]);
+ 
+     // Adiciona as páginas do primeiro arquivo, exceto a última
+     pages1.forEach(page => newPdf.addPage(page));
+ 
+     // Se houver 2 arquivos, adiciona as páginas do segundo PDF
+     if (files.length === 2) {
+       const pdfDoc2 = await PDFDocument.load(pdfBytesList[1]);
+       const pages2 = await newPdf.copyPages(pdfDoc2, pdfDoc2.getPages().map((_, i) => i));
+       pages2.forEach(page => newPdf.addPage(page));
+     }
+     // Se houver 3 arquivos, adiciona as páginas do segundo e terceiro PDFs
+     else if (files.length === 3) {
+       const pdfDoc2 = await PDFDocument.load(pdfBytesList[1]);
+       const pdfDoc3 = await PDFDocument.load(pdfBytesList[2]);
+       
+       const pages2 = await newPdf.copyPages(pdfDoc2, pdfDoc2.getPages().map((_, i) => i));
+       pages2.forEach(page => newPdf.addPage(page));
+       
+       const pages3 = await newPdf.copyPages(pdfDoc3, pdfDoc3.getPages().map((_, i) => i));
+       pages3.forEach(page => newPdf.addPage(page));
+     }
+ 
+     // Adiciona a última página do primeiro arquivo no final
+     newPdf.addPage(lastPage1[0]);
+ 
+     // Contabiliza o número total de páginas
+     const totalPages = newPdf.getPages().length;
+     console.log(`Total de páginas no documento combinado: ${totalPages}`);
+ 
+    
+ 
+     // Salva o novo PDF
+     const newPdfBytes = await newPdf.save();
+     const link = document.createElement('a');
+     link.href = URL.createObjectURL(new Blob([newPdfBytes], { type: 'application/pdf' }));
+     link.download = 'TCO.COMPLETO.pdf';
+     link.click();
+ 
+     alert(`Documento combinado com sucesso! Total de páginas: ${totalPages}`);
+   }
+ </script>
+  
+    </body>
+    </html>
+    
+
+</body>
+
+</html>
