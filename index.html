@@ -2232,12 +2232,17 @@ inputs.forEach(input => {
             doc.text("END.: AV. JOSE ANTONIO DE FARIA, S/N, BAIROO CENTRO - CEP 78.398-000", 105, 288, { align: "center" });
             //doc.text("Fone: (65) 98170 0447 | E-mail: @pm.mt.gov.br", 105, 291, { align: "center" });
             }
-            if (quartel === "19º BPM -> TANGARA") {
-            doc.text("19º BATALÃO DE POLICIA MILITAR DE TANGARA DA SERRA", 105, 285, { align: "center" });
-            doc.text("Rua  - Bairro centro - Barra do Bugres-MT - CEP 78.380-000", 105, 288, { align: "center" });
-            doc.text("Fone: (65) 98170 0447 | E-mail: @pm.mt.gov.br", 105, 291, { align: "center" });
+            if (quartel === "19º BPM - TANGARA") {
+            doc.text("19º BATALHÃO DE POLICIA MILITAR", 105, 285, { align: "center" });
+            doc.text("End.: Rua José Corsino nº862-W - Bairro Parque das Mansões - Tangara da Serra-MT", 105, 288, { align: "center" });
+            doc.text("Fone: (65) 3326-2990 | E-mail: 19bpm@pm.mt.gov.br", 105, 291, { align: "center" });
             }
 
+            if (quartel === "CR07 SEDE") {
+            doc.text("7º COMANDO REGIONAL - SEDE", 105, 285, { align: "center" });
+            doc.text("Rua Antonio Alves Aeroporto, CEP 78.301-512 - Tangara da Serra-MT", 105, 288, { align: "center" });
+            doc.text("Fone: (65) 3326-5885 | E-mail: cr07@pm.mt.gov.br", 105, 291, { align: "center" });
+            }
 
 
         }
@@ -3338,10 +3343,27 @@ let textoTermodecompromissso = `Por este instrumento, eu ${nomeAAAutor}, assumo,
 doc.setFont("helvetica", "normal");
 doc.text(textoTermodecompromissso, 20, y, { maxWidth: 170, align: 'justify'});
 
+let cOmarca
+ // Verifica as condições para a cidade
+ if (cidade === "Barra do Bugres-MT" || cidade === "Nova Olimpia-MT" || cidade === "Porto Estrela-MT" || cidade === "Denise-MT") {
+                //resultado.innerHTML = "Ação para Barra do Bugres, Nova Olímpia, Porto Estrela ou Denise";
+                cOmarca = "Barra do Bugres";
+            } else if (cidade === "Tangara da serra-MT") {
+                //resultado.innerHTML = "Ação para Tangará";
+                cOmarca = "Tangara da serra-MT";
+            } else if (cidade === "Campo Novo dos Parecis-MT" || cidade === "Brasnorte-MT" || cidade === "Sapezal-MT") {
+                //resultado.innerHTML = "Ação para Camp Novo, Branortes ou Sapezal";
+                cOmarca = "Campo Novo dos Parecis-MT";
+            } else {
+              //  resultado.innerHTML = "Cidade não reconhecida!";
+            }
+
+
+
 
 y += 40;
 
-let textTermodecompromissoContinuacao = `Notifico Vossa Senhoria para comparecer no Fórum da Comarca de Barra do Bugres, situado Av. Dep. Hitler Sansão, 1129, na Secretaria ou entrar em contato no Balcão Virtual do Núcleo de Justiça Digital dos Juizados Especiais pelo Whatsapp (65) 99688-0622 ou pelo QR Code:`;
+let textTermodecompromissoContinuacao = `Notifico Vossa Senhoria para comparecer no Fórum da Comarca de ${cOmarca}, situado Av. Dep. Hitler Sansão, 1129, na Secretaria ou entrar em contato no Balcão Virtual do Núcleo de Justiça Digital dos Juizados Especiais pelo Whatsapp (65) 99688-0622 ou pelo QR Code:`;
 
 doc.setFont("helvetica", "bold");
 doc.text(textTermodecompromissoContinuacao, 20, y, { maxWidth: 170, align: 'justify'});
